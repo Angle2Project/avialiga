@@ -1,0 +1,291 @@
+header {
+  height: 130px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  left: 0;
+  padding: 0 90px;
+  z-index: 10;
+  transition: background-color 600ms ease;
+  font: 300 16px/1 $futura;
+  
+  .header__left,
+  .header__right {
+    display: flex;
+    align-items: center;
+  }
+  .header__logo {
+    width: 95px;
+    height: 50px;
+    margin-right: 65px;
+    background: url('../img/logo_avialiga-w.svg') no-repeat center / cover;
+    position: relative;
+    z-index: 1;
+    transition: all 600ms ease;
+    a {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  .header__nav {
+    display: flex;
+    margin-top: 37px;
+    .header__nav_link {
+      margin-right: 55px;            
+      &>a {
+        transition: all 600ms ease;
+        .icon {
+          transition: all 600ms ease;
+        }
+        &:after {
+          transition: all 600ms ease;
+        }
+      }
+      &:hover {
+        position: relative;
+      &::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 50px;
+        left: 0;
+        top: 100%;        
+        position: absolute;
+      }
+        &>a {
+          color: $red;
+          &::after {
+            width: 100%;
+            left: 0;
+            right: initial;
+          }
+          .icon {
+            fill: $red;
+            transform: rotate(180deg);
+          }
+        }
+        .submenu {
+          visibility: visible;
+          opacity: 1;
+          z-index: 0;
+        }  
+      }      
+      .submenu {
+        position: fixed;
+        opacity: 0;
+        visibility: hidden;
+        width: 100%;                
+        left: 0;
+        top: 130px;
+        padding: 60px 90px 30px 90px;
+        transition: all 600ms ease;
+        // &::before {
+        //   content: "";
+        //   display: block;
+        //   height: 130px;
+        //   background-color: $white;
+        //   margin-bottom: 60px;
+        // }
+        &.leisure {          
+          background-color: $rose;          
+        }
+        &.business {          
+          background-color: $swans;
+        }
+        &.more {          
+          background-color: $white;
+          padding: 90px;
+          .row {
+            margin-bottom: 0;
+            justify-content: space-between;
+            section {
+              width: auto;  
+            }
+          }
+        }
+        .row {
+          display: flex;          
+          margin-bottom: 60px;          
+          section {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            a {
+              margin-bottom: 25px;
+              color: $black;
+              display: inline-flex;
+              align-items: center;
+              position: relative;      
+              transition: all 250ms ease;
+              z-index: 1;
+              &::after {
+                content: "";
+                width: 0%;
+                height: 2px;
+                background: $red;
+                position: absolute;
+                left: initial;
+                right: 0;
+                bottom: -8px;
+                transition: all 250ms ease;
+              }
+              &:hover {
+                &::after {
+                  background-color: $black;
+                  height: 1px;
+                  width: 100%; 
+                  left: 0;
+                  right: initial;
+                  z-index: 1;
+                }
+              }
+              &.more {
+                &::after {
+                  background-color: $black;
+                  height: 1px;
+                  width: 100%; 
+                  left: 0;
+                  right: initial;
+                  z-index: 1;
+                }
+                &:hover {
+                  &::after {                   
+                    width: 0%;
+                    right: 0;
+                    left: initial;
+                  } 
+                }
+              }
+              &:last-child {
+                margin-bottom: 0;
+              }
+              &::after {
+                background-color: $black;
+                height: 1px;
+              }
+            }
+          }
+        }
+      }      
+    }
+    a {
+      display: inline-flex;
+      align-items: center;
+      position: relative;      
+      transition: all 250ms ease;
+      z-index: 1;
+      &::after {
+        content: "";
+        width: 0%;
+        height: 2px;
+        background: $red;
+        position: absolute;
+        left: initial;
+        right: 0;
+        bottom: -8px;
+        transition: all 250ms ease;
+      }
+      &:hover {
+        
+      }      
+      &:last-child {
+        margin-right: 0;
+      }
+      .icon {
+        width: 12px;
+        height: 6px;
+        fill: $white;
+        margin-left: 10px;
+        transition: all 250ms ease;
+      }
+    }
+  }
+  .header__sub_nav {
+    margin-top: 37px;
+    a {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 55px;
+      &:last-child {
+        margin-right: 0;
+      }
+      .icon {
+        width: 12px;
+        height: 6px;
+        fill: $white;
+        margin-left: 10px;
+      }
+    }
+    .take-button {
+      height: 40px;
+      padding: 0 25px;
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      span {
+        position: relative;
+        z-index: 1;
+      }
+      &::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: $red;
+        position: absolute;
+        left: 0;
+        bottom: 5px;
+        transition: all 250ms ease;
+      }
+      &:hover {
+        &::before {
+          content: "";          
+          height: 100%;                    
+          bottom: 0;          
+        } 
+      }
+    }
+  }
+  &.fixed {
+    background-color: $white;
+    a {
+      color: $black;
+    }
+    .header__logo {     
+      background: url('../img/logo_avialiga-b.svg') no-repeat center / cover;      
+    }
+    .icon {
+      fill: $black!important;
+    }
+  }
+  &.sub-active {
+    background-color: $white;
+    .header__logo {      
+      background: url('../img/logo_avialiga-b.svg') no-repeat center / cover;      
+    } 
+    .header__nav_link>a {
+      color: $black;
+      .icon {
+        fill: $black;
+      }
+    }
+    .header__sub_nav {
+      position: relative;      
+      &>a {
+        color: $black;
+        .icon {
+          fill: $black;
+        } 
+      }
+    }
+  }
+}

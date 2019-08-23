@@ -1,0 +1,239 @@
+---
+title: Index page,
+class: homepage
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}		
+
+	<article class="homepage__hero">
+		<div class="wrapper">
+			<div class="button-circle play" data-action="homepage-hero-play" data-text="play video">
+				{{mixins.icon('icon_play')}}
+			</div>
+			<h1>								
+				<span>Smart</span>
+				<span>choise</span>
+				<span>save</span>
+				<span>time</span>
+			</h1>
+			<div class="homepage__hero_footer">
+				<div class="hero--social">
+					<a href="">Instagram</a>
+					<a href="">Facebook</a>					             
+				</div>
+				<div class="hero--scroll animation">
+					<span>Sroll Down</span>
+					<div class="hero--scroll-line"></div>
+				</div>
+			</div>
+		</div>
+	</article>
+
+	<article class="homepage__description">
+		<p>Specializes in organizing events, group trips and individual tours. While you are developing your business and concentrating on the tasks that are important to you, Avialiga takes care of all the arrangements for the tour.</p>			
+	</article>
+
+	<article class="homepage__drag" data-img-left="hone-leisure.jpg" data-img-right="home-business.jpg" data-pat-left="pat1.png"  data-pat-right="pat2.png">
+		<div class="wrapper">
+			<div class="button-circle drag" data-action="homepage-drag" data-text="learn more" data-hover="drag my">
+				{{mixins.icon('icon_arrows')}}
+			</div>
+			<div class="homepage__drag_dots">
+				{% for i in range(0, 10) %}
+					<i></i>
+				{% endfor %}
+			</div>				
+			<h2 class="leisure">
+				<a href="">Leisure</a>
+			</h2>
+			<h2 class="business">
+				<a href="">Business</a>
+			</h2>
+		</div>
+	</article>
+
+	<article class="homepage__feedback">
+		<section class="leisure">
+			<h2>Leisure Feedback</h2>
+			<!-- Slider main container -->
+			<div class="swiper-container">
+				<!-- Additional required wrapper -->
+				<div class="swiper-wrapper">
+						<!-- Slides -->
+						{% for i in range(0, 3) %}
+						<div class="swiper-slide">
+							<div class="slide--text">
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>									
+							</div>
+							<div class="slide--photo">
+								<img src="./img/feedback-img-{{i+1}}.jpg" alt="">
+							</div>
+						</div>
+						{% endfor %}
+				</div>
+				<div class="slider-control">
+					<div class="slider-button-prev">
+						{{mixins.icon('icon_arrow_menu')}}
+					</div>
+					<div class="slider-pagination"></div>
+					<div class="slider-button-next">
+						{{mixins.icon('icon_arrow_menu')}}
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="business">
+			<h2>Business Cases</h2>
+			<!-- Slider main container -->
+			<div class="swiper-container">
+				<!-- Additional required wrapper -->
+				<div class="swiper-wrapper">
+						<!-- Slides -->
+						{% for i in range(0, 3) %}
+						<div class="swiper-slide">
+							<div class="slide--text">
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>									
+							</div>
+							<div class="slide--photo">
+								<img src="./img/feedback-img-{{i+1}}.jpg" alt="">
+							</div>
+						</div>
+						{% endfor %}
+				</div>
+				<div class="slider-control">
+					<div class="slider-button-prev">
+						{{mixins.icon('icon_arrow_menu')}}
+					</div>
+					<div class="slider-pagination"></div>
+					<div class="slider-button-next">
+						{{mixins.icon('icon_arrow_menu')}}
+					</div>
+				</div>
+			</div>
+		</section>
+	</article>
+
+	<article class="homepage__services">
+		<div class="wrapper">
+			<section class="leisure">
+				<h2>Leisure Destinations</h2>
+				<!-- Slider main container -->
+				<div class="swiper-container">
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper">
+							<!-- Slides -->
+							{% for i in range(0, 3) %}
+							<div class="swiper-slide">
+								<h3>
+									<a href="">Some place - {{i+1}}</a>
+								</h3>
+								<div class="slide--photo">
+									<img src="./img/services-leisure-{{i+1}}.jpg" alt="">
+								</div>
+							</div>
+							{% endfor %}
+					</div>
+					
+					<div class="slider-control">
+						<div class="slider-button-prev">
+							{{mixins.icon('icon_arrow_menu')}}
+						</div>
+						<div class="slider-pagination"></div>
+						<div class="slider-button-next">
+							{{mixins.icon('icon_arrow_menu')}}
+						</div>
+					</div>
+					
+					
+				</div>
+			</section>
+			<section class="business">
+				<h2>Business Sevices</h2>
+				<!-- Slider main container -->
+				<div class="swiper-container">
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper">
+							<!-- Slides -->
+							{% for i in range(0, 3) %}
+							<div class="swiper-slide">
+								<h3>
+									<a href="">Some service - {{i+1}}</a>
+								</h3>
+								<div class="slide--photo">
+									<img src="./img/services-business-{{i+1}}.jpg" alt="">
+								</div>
+							</div>
+							{% endfor %}
+					</div>
+					<div class="slider-control">
+						<div class="slider-button-prev">
+							{{mixins.icon('icon_arrow_menu')}}
+						</div>
+						<div class="slider-pagination"></div>
+						<div class="slider-button-next">
+							{{mixins.icon('icon_arrow_menu')}}
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</article>
+
+	<article class="homepage__insta">
+		<section class="leisure">
+			<div class="homepage__insta_title">
+				<h2>Leisure insta</h2>
+				<a href="">@avialiga_leisure</a>
+			</div>
+			<div class="homepage__insta_gallery">
+				<img src="./img/insta-leisure-1.jpg" alt="">
+				<img src="./img/insta-leisure-2.jpg" alt="">
+				<img src="./img/insta-leisure-3.jpg" alt="">
+			</div>
+		</section>
+		<section class="business">
+			<div class="homepage__insta_title">
+				<h2>Business insta</h2>
+				<a href="">@avialiga_business</a>
+			</div>
+			<div class="homepage__insta_gallery">
+				<img src="./img/insta-business-1.jpg" alt="">
+				<img src="./img/insta-business-2.jpg" alt="">
+				<img src="./img/insta-business-3.jpg" alt="">
+			</div>
+		</section>
+	</article>
+
+	<article class="homepage__form">
+		<div class="homepage__form_title">
+			<h2>Your travel expert</h2>
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+		</div>
+		<div class="homepage__form_body">
+			<form action="">
+				<div class="form">
+					<div class="form-control name">
+						<input type="text" placeholder="Your Name">
+					</div>
+					<div class="form-control phone">
+						<input type="text" placeholder="Your Phone">
+					</div>
+					<div class="form-control comment">
+						<textarea name="" placeholder="Your comment"></textarea>
+					</div>
+				</div>
+				<div class="form--submit">
+					<button>
+						<span>Submit</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</article>
+
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+<footer>
+  <div class="footer__links">
+    <div class="footer__links_left">
+      <section class="links--category">
+        <h5>Leisure</h5>        
+        {% for i in ['RELUX', 'ADVENTURES', 'DISCOVER', 'COUNTRIES', 'TOURS', 'HOTELS', 'CALENDAR OF EVENTS'] %}
+        <a href="">{{i}}</a>
+        {% endfor %}
+      </section>
+      <section class="links--category">          
+        <h5>Business</h5>        
+        {% for i in [
+          'MICE',
+          'MEETINGS',
+          'INCENTIVES',
+          'CONFERENCES',
+          'EXHIBITIONS',
+          'CONSTRUCTOR',
+          'CASES'
+        ] %}
+        <a href="">{{i}}</a>
+        {% endfor %}
+      </section>
+      <section class="links--category">         
+        <h5>More</h5>        
+        {% for i in [
+          'AVIA',
+          'AGENTS',
+          'ABOUT US',
+          'NEWS',
+          'CONTACTS'
+        ] %}
+        <a href="">{{i}}</a>
+        {% endfor %}
+      </section>
+    </div>
+    <div class="footer__links_right">
+      <section class="footer--contacts">
+        <h5>Contact Us</h5>
+        <a href="mailto:hello@avialiga.ua" class="mail">hello@avialiga.ua</a>
+        <a href="tel:+38 (044) 303 95 53">+38 (044) 303 95 53</a>
+        <p>Украина, Киев, 01135 </p>
+        <p>ул. Павловская 29, 2 этаж</p>
+      </section>
+      <section class="footer--social">
+        <h5>Subscribe </h5>
+        <div class="subscribe">
+          <div class="form-control">
+            <input type="text" placeholder="Your e-mail">
+          </div>
+          <button>
+            {{mixins.icon('icon_arrow_menu')}}              
+          </button>
+        </div>        
+        <h5>Follow Us</h5>
+        <a href="">Facebook</a>
+        <a href="">Instagram</a>
+        <a href="">Telegram</a>
+      </section>
+    </div>
+  </div>
+  <ul class="footer__copyright">
+    <li>© AviaLiga. All rights reserved 2019</li>
+    <li>Complaints and suggestions</li>
+    <li>
+      <span>by</span>
+      <img src="./img/icon_l2.svg" alt="">
+    </li>
+  </ul>
+</footer>

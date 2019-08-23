@@ -1,0 +1,129 @@
+// done by riverco.de
+@import 'helpers/index';
+@import 'generated/sprite-svg';
+@import 'generated/index';
+@import 'base/index';
+@import 'lib/index';
+@import 'common';
+@import 'components/index';
+@import 'pages/index';
+
+
+.button-circle {
+  width: 100px;
+  height: 100px;
+  color: $white;
+  font: 300 16px/1 $futura;
+  letter-spacing: -1px;
+  text-transform: uppercase;  
+  .icon {    
+    position: absolute;    
+    transition: all 200ms ease;
+    z-index: 1;
+  }  
+  &.play {
+    .icon {
+      width: 17px;
+      height: 18px;
+      fill: $red;      
+      top: 50%;
+      left: 50%;
+      transform: translate(-40%, -50%);    
+    }    
+  }
+  &.drag {
+    .icon {
+      width: 58px;  
+      height: 24px;    
+      fill: $red;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);    
+    }    
+    &::after {      
+      background-color: $white;      
+    }
+  }
+  &::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: $red;
+    border-radius: 50%;    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: all 200ms ease;
+  }
+  &:hover {
+    .icon {
+      fill: #fff;
+    }
+    &::after {      
+      transform: translate(-50%, -50%) scale(1);      
+    }
+    &.drag {
+      .icon {
+        fill: $red;
+      }
+    }
+  }
+  .text,
+  .hover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform-origin: center;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+    animation: buttonText 15s infinite linear;
+    .top {
+      div {
+        transform-origin: 0 100%;
+        position: absolute!important;
+        bottom: 50%;
+        left: 50%;
+        letter-spacing: 0;        
+      }    
+    }    
+    .bot {
+      div {
+        transform-origin: 0 100%;
+        position: absolute!important;
+        bottom: 50%;
+        left: 50%;
+        letter-spacing: 0;        
+      }    
+    }    
+  }
+  .hover {
+    opacity: 0;
+  }
+
+  &.drag {
+    &:active {
+      .text {
+        opacity: 0;
+      }
+      .hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@keyframes buttonText {
+  from {transform: rotate(0deg);}  
+  to {transform: rotate(360deg);}
+}
+
+
+.swiper-wrapper {
+  transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
+}

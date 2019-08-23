@@ -1,0 +1,122 @@
+footer {
+  margin: 100px 90px 0 90px;
+  color: $black;
+  font: 300 14px/1 $futura;
+  border-top: 1px solid #e5e5e5;
+  letter-spacing: 0.5px;
+  a {
+    color: $black;
+  }
+  .footer__links {
+    display: flex;
+    margin-top: 90px;
+    h5 {
+      margin-bottom: 47px;
+      font-size: 15px;
+    }
+    a {
+      margin-bottom: 17px;
+      text-transform: uppercase;
+      &.mail {
+        color: $red;
+        text-transform: lowercase;
+      }
+    }
+    .footer__links_left {
+      width: 50%;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      .links--category {
+        display: flex;
+        flex-direction: column;
+        width: 33.3333%;
+        align-items: flex-start;
+        
+      }
+    }
+    .footer__links_right {
+      display: flex;
+      justify-content: space-between;
+      width: 50%;
+      .footer--contacts {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        p {
+          margin-bottom: 17px;
+        }
+      }
+      .footer--social {
+        width: 320px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        a {
+          text-transform: capitalize;
+          margin-bottom: 15px;
+        }
+        .subscribe {
+          position: relative;
+          margin-top: -47px;
+          margin-bottom: 40px;
+          width: 320px;
+          flex-shrink: 0;
+          button {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;            
+            &::before {
+              content: "";
+              display: block;
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              background-color: $red;
+              transform: scale(0);
+              transition: all 250ms ease;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+            .icon {
+              width: 22px;
+              height: 11px;
+              fill: $red;
+              transform: rotate(-90deg);
+              position: relative;
+              z-index: 1;
+              transition: all 250ms ease;
+            }
+            &:hover {
+              &::before {                
+                transform: scale(1);                
+              }
+              .icon {
+                fill: #fff;
+              }
+            }
+          }          
+        }
+
+      }
+    }
+  }
+  .footer__copyright {
+    display: flex;
+    margin: 120px 0 400px 0;
+    justify-content: space-between;
+    img {
+      width: 36px;
+      height: 16px; 
+    }
+  }
+}

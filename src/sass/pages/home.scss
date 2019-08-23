@@ -1,0 +1,599 @@
+.homepage {
+  .homepage__hero {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    .wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    .button-circle {
+      position: absolute;
+      left: 350px;
+      top: 325px;
+    }
+    h1 {
+      font: normal 9.9vw/1 $futura;
+      color: $white;
+      margin-left: 42%;
+      margin-top: 140px;
+      span {
+        display: block;
+        &:nth-child(2) {
+          margin-left: 6vw;
+        }
+        &:nth-child(3) {
+          margin-left: 12vw;
+        }
+        &:nth-child(4) {
+          margin-left: 18vw;
+        }
+        &:nth-child(5) {
+          margin-left: 24vw;
+        }
+        &:nth-child(6) {
+          margin-left: 30vw;
+        }
+      }
+    }
+    .homepage__hero_footer {
+      position: absolute;
+      right: 90px;
+      bottom: 86px;
+      left: 86px;
+      display: flex;
+      justify-content: space-between;
+      color: $white;
+      font: 300 16px/1 $futura;
+      a {        
+        margin-right: 60px;
+        &:last-child {
+          margin-right: 0;
+        }        
+      }
+      @keyframes scrollDown {
+        from {
+          transform: translateY(-100%);
+        }
+        50% {
+          transform: translateY(0%);
+        }  
+        to {
+          transform: translateY(100%);
+        }
+      }
+      .hero--scroll {
+        position: relative;
+        padding-right: 20px;
+        &.animation {
+          .hero--scroll-line {
+            &::before {
+              animation: scrollDown 2s infinite ease;
+            }            
+          }          
+        }
+        .hero--scroll-line {
+          width: 2px;
+          height: 80px;          
+          position: absolute;
+          right: 0;
+          bottom: -30px;
+          overflow: hidden;
+          &::before {
+            content: "";
+            display: block;
+            width: 2px;
+            height: 80px;
+            background-color: #fff;
+            position: absolute;
+            left: 0;
+            bottom: 0;            
+          }          
+        }        
+      }
+    }
+  }
+
+  .homepage__description {
+    font: 300 36px/48px $futura;
+    padding: 160px 0;
+    color: $black;
+    background: url('../img/bg-home-descr.png') no-repeat center;
+    p {
+      max-width: 810px;
+      margin: auto;
+    }
+  }
+  .homepage__drag {
+    overflow: hidden;
+    width: 100%;
+    height: calc(100vw / 2.08);
+    position: relative;
+    .wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    .homepage__drag_dots {
+      display: flex;
+      justify-content: space-between;      
+      width: calc(((100% / 2) / 3) * 2);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scaleX(0);
+      transition: all 250ms ease;
+      z-index: 0;
+      i {
+        display: block;
+        width: 8px;
+        height: 8px;
+        background-color: $red;
+        border-radius: 50%;
+      }
+      &.active {
+        transform: translate(-50%, -50%) scaleX(1);
+      }
+    }
+    .button-circle {
+      position: absolute;
+      top: calc(50% - 50px);
+      left: calc(50% - 50px);
+      z-index: 1;
+    }
+    h2 {
+      -webkit-user-select: none;  /* Chrome all / Safari all */
+      -moz-user-select: none;     /* Firefox all */
+      -ms-user-select: none;      /* IE 10+ */
+      user-select: none;
+      font: normal 9.9vw/1 $futura;
+      position: absolute;
+      &.leisure {
+        top: 60px;
+        left: 90px;
+      }
+      &.business {
+        bottom: 70px;
+        right: 90px;
+      }
+      a {
+        display: block;
+        position: relative;
+        &::after {
+          content: "";
+          width: 100%;
+          height: 2px;
+          background: $red;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }
+        &:hover {
+          &::after {
+            animation: linkHover 1.5s ease;
+          }
+        }
+      }
+    }
+    @keyframes linkHover {
+      from {
+        left: initial;
+        right: 0;
+      }
+      49% {
+        width: 0;
+        left: initial;
+        right: 0;
+      }  
+      51% {
+        left: 0;
+        right: initial;
+        width: 0;
+      }  
+      to {
+        width: 100%;
+      }    
+    }
+  }
+
+  .homepage__insta {
+    margin: 80px 90px 0 90px;
+    section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .homepage__insta_title {
+        width: 260px;
+        h2 {
+          font: normal 72px/60px $futura;
+          color: $green;
+        }
+        a {
+          font: 300 24px/60px $futura;
+          color: $red;
+          display: inline-block;
+          margin-top: 30px;
+          margin-left: 7px;
+        }
+      }
+      .homepage__insta_gallery {
+        width: 70%;
+        flex-shrink: 0;
+        display: flex;
+        img {
+          width: 33.33333333333333333333333%;
+        }
+      }
+      &.business {
+        margin-top: 120px;
+        .homepage__insta_title {
+          order: 2;
+          h2 {
+            color: $bud;
+          }          
+        }
+      }
+    }
+  }
+  .homepage__form {
+    margin: 130px 90px 0 90px;
+    display: flex;
+    justify-content: space-between;
+    .homepage__form_title {
+      margin-right: 100px;
+      h2 {
+        font: normal 72px/60px $futura;
+        color: $black;
+      }
+      p {
+        margin: 40px 0 0 90px;
+        font: 300 18px/30px $futura;
+      }
+    }
+    .homepage__form_body {
+      width: 56%;
+      flex-shrink: 0;
+      .form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .form-control {
+          input,
+          textarea {
+            font: normal 14px/18px $futura;
+          }          
+          &.name,
+          &.phone {
+            width: calc(50% - 22px);
+          }
+          &.comment {
+            width: 100%;
+            height: initial;
+            line-height: 1;
+            textarea {
+              height: 70px;
+              padding: 28px 0 0 0;
+              font-size: 14px;
+              transition: all 250ms ease;
+              &:focus {
+                height: 90px;
+              }
+            }
+          }
+        }           
+      }
+      .form--submit {        
+        margin-top: 35px;
+        button {
+          width: 320px;
+          height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font: normal 14px/1 $futura;
+          text-transform: uppercase;
+          color: $red;
+          margin: auto;
+          position: relative;
+          transition: all 250ms ease;
+          span {
+            position: relative;
+            z-index: 1;
+          }
+          &:hover {
+            color: $white;
+            &::before {
+              bottom: 0;
+              height: 100%;
+            }
+          }
+          &::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: $red;
+            position: absolute;
+            left: 0;
+            bottom: 14px;
+            transition: all 250ms ease;
+            z-index: 0;
+          }
+        }
+      }     
+    }
+  }
+  .homepage__services {
+    margin-top: 160px;
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+      section {
+        width: 50%;
+        flex-shrink: 0;
+        position: relative;        
+        h2 {
+          font: 300 30px/1 $futura;
+          color: $white;
+          position: absolute;
+          top: 45%;
+          left: 90px;
+          z-index: 2;
+        }
+        .swiper-slide {
+          position: relative;
+          &::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #000;
+            opacity: 0.15;
+          }
+          h3 {
+            font: normal 5.1vw/60px $futura;
+            color: $white;
+            position: absolute;
+            top: 0;
+            left: 90px;
+            top: 55%;  
+            a {
+              display: block;
+              position: relative;
+              &::after {
+                content: "";
+                width: 100%;
+                height: 2px;
+                background: $red;
+                position: absolute;
+                left: 0;
+                bottom: -10px;
+              }
+              &:hover {
+                &::after {
+                  animation: linkHover 1.5s ease;
+                }
+              }
+            }
+          }
+          .slide--photo {
+            font-size: 0;
+            line-height: 1;
+            img {
+              width: 100%;
+            }
+          }          
+        }
+        .slider-control {          
+          display: flex;
+          position: absolute;
+          top: 75%;
+          left: 90px;
+          align-items: center;
+          .slider-pagination {
+            position: relative;
+            z-index: 1;
+            margin: 0 25px;
+            width: initial;
+            font: 500 14px/1 $futura;
+            color: $white;
+            bottom: initial;
+            left: initial;
+          }
+          .slider-button-prev,
+          .slider-button-next {
+            width: 80px;
+            height: 80px;
+            border: 1px solid $white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            z-index: 3;
+            cursor: pointer;
+            position: relative;            
+            transition: all 250ms ease;
+            &.swiper-button-disabled {
+              opacity: 0.3;
+              .icon {
+                fill: $white;
+              }
+            }
+            &::before {
+              content: "";
+              display: block;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              background-color: $white;
+              transform: scale(0);
+              transition: all 250ms ease;
+              border-radius: 50%;
+            }
+            &:not(.swiper-button-disabled):hover {              
+              &::before {                
+                transform: scale(1);                
+              }              
+            }            
+            .icon {
+              fill: $red;
+              transition: all 250ms ease;
+              width: 22px;
+              height: 11px;
+            }
+          }
+          .slider-button-prev {
+            .icon {
+              transform: rotate(90deg);
+            }
+          }
+          .slider-button-next {
+            .icon {
+              transform: rotate(-90deg);
+            }
+          }
+        }
+      }
+    }
+  }
+  .homepage__feedback {
+    margin-top: 140px;
+    section {
+      position: relative;
+      margin-bottom: 100px;
+      &.business {
+        h2 {
+          color: $bud;
+          left: calc(50% + 90px);
+        }
+        .slide--text {
+          left: calc(50% + 90px)!important;
+        }
+        .slide--photo {
+          margin-left: 0!important;
+          margin-right: auto;
+        }
+        .slider-control {
+          left: calc(50% + 180px);
+        }
+      }
+      &:last-child {
+        margin-bottom: 10px;
+      }
+      h2 {
+        font: normal 72px/60px "Futura";
+        color: #5ac0b0;
+        position: absolute;
+        top: 15%;
+        left: 90px;
+        z-index: 2;
+      }
+      .swiper-slide {        
+        padding: 0 90px;
+        position: relative;        
+        .slide--text {
+          width: calc(50% - 180px);
+          font: 300 24px/36px $futura;
+          color: $black;   
+          position: absolute;
+          top: 38%;
+          left: 90px;
+          padding-left: 90px;
+        }
+        .slide--photo {
+          width: 50%;
+          margin-left: auto;          
+          img {
+            width: 100%;
+          }
+        }
+      }
+      .slider-control {
+        display: flex;
+        position: absolute;
+        top: 75%;
+        left: 180px;
+        align-items: center;
+        .slider-pagination {
+          position: relative;
+          z-index: 1;
+          margin: 0 25px;
+          width: initial;
+          font: 500 14px/1 $futura;
+          color: $green;
+          bottom: initial;
+          left: initial;
+        }
+        .slider-button-prev,
+        .slider-button-next {
+          width: 80px;
+          height: 80px;
+          border: 1px solid $green;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center; 
+          z-index: 3;
+          cursor: pointer;
+          position: relative;            
+          transition: all 250ms ease;
+          &.swiper-button-disabled {
+            opacity: 0.3;
+            .icon {
+              fill: $green;
+            }
+          }
+          &::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $green;
+            transform: scale(0);
+            transition: all 250ms ease;
+            border-radius: 50%;
+          }
+          &:not(.swiper-button-disabled):hover {              
+            &::before {                
+              transform: scale(1);                
+            }
+            .icon {
+              fill: $white;
+            }
+          }            
+          .icon {
+            fill: $red;
+            transition: all 250ms ease;
+            width: 22px;
+            height: 11px;
+          }
+        }
+        .slider-button-prev {
+          .icon {
+            transform: rotate(90deg);
+          }
+        }
+        .slider-button-next {
+          .icon {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+    }
+  }
+}
+

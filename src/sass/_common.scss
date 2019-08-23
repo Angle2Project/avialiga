@@ -1,0 +1,151 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;	
+	background: $white;
+	// position: fixed;
+	// top: 0;
+	// left: 0;
+	// width: 100%;
+	// height: 100%;
+}
+
+main {
+	// position: fixed;
+	// top: 0;	
+	// left: 0;
+	// height: 100%;
+	// overflow: auto;
+}
+
+a {
+	text-decoration: none;
+	color: $white;
+}
+
+input, button {
+	border: none;
+	background: transparent;
+} 
+
+.form-control {
+	height: 70px;
+	position: relative;
+	input {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		z-index: 1;
+		background-color: transparent;
+		color: $black;
+		opacity: 0.6;
+		transition: all 250ms ease;
+		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			color: $black;
+			opacity: 1;
+			transition: all 250ms ease;
+		}
+		&::-moz-placeholder { /* Firefox 19+ */
+			color: $black;
+			opacity: 1;
+			transition: all 250ms ease;
+		}
+		&:-ms-input-placeholder { /* IE 10+ */
+			color: $black;
+			opacity: 1;
+			transition: all 250ms ease;
+		}
+		&:-moz-placeholder { /* Firefox 18- */
+			color: $black;
+			opacity: 1;
+			transition: all 250ms ease;
+		}
+	}	
+	
+	i {
+		display: block;
+		width: 100%;
+		height: 1px;
+		background-color: #d1d1d1;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		overflow: hidden;
+		z-index: 2;
+		&::before {
+			content: "";
+			display: block;
+			width: 0%;
+			height: 1px;
+			background-color: $black;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			transition: all 250ms ease;
+		}
+	}
+	span {
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 0;
+		transition: all 250ms ease;
+	}	
+	input:focus,
+	textarea:focus {
+		opacity: 1;
+		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			color: transparent;
+		}
+		&::-moz-placeholder { /* Firefox 19+ */
+			color: transparent;
+		}
+		&:-ms-input-placeholder { /* IE 10+ */
+			color: transparent;
+		}
+		&:-moz-placeholder { /* Firefox 18- */
+			color: transparent;
+		}
+	}
+	input:focus+i,
+	textarea:focus+i {
+		
+		&::before {
+			width: 100%;
+		}
+	}
+	textarea {
+		width: 100%;
+		background: transparent;
+		border: none;
+		resize: none;
+		height: 100%;
+		padding: 0;
+		opacity: 0.6;
+		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			color: $black;
+			opacity: 1;
+			transition: all 250ms ease;
+		}
+		&::-moz-placeholder { /* Firefox 19+ */
+			color: $black;
+			opacity: 1;
+			transition: all 250ms ease;
+		}
+		&:-ms-input-placeholder { /* IE 10+ */
+			color: $black;
+			opacity: 1;
+			transition: all 250ms ease;
+		}
+		&:-moz-placeholder { /* Firefox 18- */
+			color: $black;
+			opacity: 1;
+			transition: all 250ms ease;
+		}
+	}
+}
