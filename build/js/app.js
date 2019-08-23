@@ -119,7 +119,7 @@ const _homepage = function(page){
     }  
     this.hero.stage
       .on('mousemove', onPointerMove)
-      .on('touchmove', onPointerMove);      
+      .on('touchmove', onPointerMove);
   }    
   // End Hero background
 
