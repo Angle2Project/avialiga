@@ -3,6 +3,8 @@
 </symbol><symbol id="icon-icon_arrows" viewBox="0 0 56 20">
     <path d="M46 20l10-10L46 0l5 10z"/>
     <path d="M10 20L0 10 10 0 5 10z"/>
+</symbol><symbol id="icon-icon_close" viewBox="0 0 14 14">
+    <path d="M13.946 1.561L12.532.147 7.047 5.633 1.56.147.147 1.561l5.486 5.486-5.486 5.485 1.414 1.414 5.486-5.485 5.485 5.485 1.414-1.414-5.485-5.485z"/>
 </symbol><symbol id="icon-icon_l2" viewBox="0 0 455999985 205">
     <style>
         .st0{fill:#212121}

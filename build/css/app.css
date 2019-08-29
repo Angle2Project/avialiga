@@ -10,6 +10,12 @@
   fill: initial;
 }
 
+.icon-icon_close {
+  width: 1em;
+  height: 1em;
+  fill: initial;
+}
+
 .icon-icon_l2 {
   width: 2224390.17em;
   height: 1em;
@@ -30,6 +36,12 @@
 
 .icon-icon_arrows {
   width: 2.8em;
+  height: 1em;
+  fill: initial;
+}
+
+.icon-icon_close {
+  width: 1em;
   height: 1em;
   fill: initial;
 }
@@ -1068,6 +1080,17 @@ input, button {
   transition: all 250ms ease;
 }
 
+.header__bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  position: absolute;
+  background-color: #fff;
+  opacity: 0;
+  z-index: 1;
+}
+
 header {
   height: 130px;
   display: -webkit-box;
@@ -1088,9 +1111,6 @@ header {
   left: 0;
   padding: 0 90px;
   z-index: 10;
-  -webkit-transition: background-color 600ms ease;
-  -o-transition: background-color 600ms ease;
-  transition: background-color 600ms ease;
   font: 300 16px/1 "Futura";
 }
 
@@ -1111,15 +1131,23 @@ header .header__logo {
   background: url("../img/logo_avialiga-w.svg") no-repeat center/cover;
   position: relative;
   z-index: 1;
-  -webkit-transition: all 600ms ease;
-  -o-transition: all 600ms ease;
-  transition: all 600ms ease;
 }
 
 header .header__logo a {
   width: 100%;
   height: 100%;
   display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+header .header__logo a.logo--white {
+  opacity: 1;
+}
+
+header .header__logo a.logo--black {
+  opacity: 0;
 }
 
 header .header__logo img {
@@ -1138,25 +1166,13 @@ header .header__nav .header__nav_link {
 }
 
 header .header__nav .header__nav_link > a {
-  -webkit-transition: all 600ms ease;
-  -o-transition: all 600ms ease;
-  transition: all 600ms ease;
-}
-
-header .header__nav .header__nav_link > a .icon {
-  -webkit-transition: all 600ms ease;
-  -o-transition: all 600ms ease;
-  transition: all 600ms ease;
-}
-
-header .header__nav .header__nav_link > a:after {
-  -webkit-transition: all 600ms ease;
-  -o-transition: all 600ms ease;
-  transition: all 600ms ease;
-}
-
-header .header__nav .header__nav_link:hover {
   position: relative;
+}
+
+header .header__nav .header__nav_link > a::after {
+  -webkit-transition: all 600ms ease;
+  -o-transition: all 600ms ease;
+  transition: all 600ms ease;
 }
 
 header .header__nav .header__nav_link:hover::after {
@@ -1169,40 +1185,29 @@ header .header__nav .header__nav_link:hover::after {
   position: absolute;
 }
 
-header .header__nav .header__nav_link:hover > a {
-  color: #ee412a;
-}
-
 header .header__nav .header__nav_link:hover > a::after {
   width: 100%;
   left: 0;
   right: initial;
 }
 
-header .header__nav .header__nav_link:hover > a .icon {
-  fill: #ee412a;
-  -webkit-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-
-header .header__nav .header__nav_link:hover .submenu {
-  visibility: visible;
-  opacity: 1;
-  z-index: 0;
-}
-
 header .header__nav .header__nav_link .submenu {
-  position: fixed;
-  opacity: 0;
+  position: absolute;
   visibility: hidden;
   width: 100%;
   left: 0;
   top: 130px;
   padding: 60px 90px 30px 90px;
-  -webkit-transition: all 600ms ease;
-  -o-transition: all 600ms ease;
-  transition: all 600ms ease;
+}
+
+header .header__nav .header__nav_link .submenu::before {
+  content: "";
+  display: block;
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: -50px;
 }
 
 header .header__nav .header__nav_link .submenu.leisure {
@@ -1210,7 +1215,7 @@ header .header__nav .header__nav_link .submenu.leisure {
 }
 
 header .header__nav .header__nav_link .submenu.business {
-  background-color: #d7ebe7;
+  background-color: #d7ebe6;
 }
 
 header .header__nav .header__nav_link .submenu.more {
@@ -1321,9 +1326,6 @@ header .header__nav a {
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  -webkit-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
   z-index: 1;
 }
 
@@ -1350,13 +1352,11 @@ header .header__nav a .icon {
   height: 6px;
   fill: #ffffff;
   margin-left: 10px;
-  -webkit-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
 }
 
 header .header__sub_nav {
   margin-top: 37px;
+  position: relative;
 }
 
 header .header__sub_nav a {
@@ -1397,8 +1397,7 @@ header .header__sub_nav .take-button span {
   z-index: 1;
 }
 
-header .header__sub_nav .take-button::before {
-  content: "";
+header .header__sub_nav .take-button i {
   display: block;
   width: 100%;
   height: 2px;
@@ -1406,47 +1405,44 @@ header .header__sub_nav .take-button::before {
   position: absolute;
   left: 0;
   bottom: 5px;
-  -webkit-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
-}
-
-header .header__sub_nav .take-button:hover::before {
-  content: "";
-  height: 100%;
-  bottom: 0;
 }
 
 header.fixed {
+  position: fixed;
   background-color: #ffffff;
+  height: 100px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  top: -100px;
 }
 
-header.fixed a {
+header.fixed .header__logo .logo--white {
+  opacity: 0 !important;
+}
+
+header.fixed .header__logo .logo--black {
+  opacity: 1 !important;
+}
+
+header.fixed .header__nav,
+header.fixed .header__sub_nav {
+  margin-top: 0;
+}
+
+header.fixed .header__nav_link > a,
+header.fixed .header__sub_nav > a {
   color: #2f2f2f;
 }
 
-header.fixed .header__logo {
-  background: url("../img/logo_avialiga-b.svg") no-repeat center/cover;
-}
-
-header.fixed .icon {
-  fill: #2f2f2f !important;
-}
-
-header.sub-active {
-  background-color: #ffffff;
-}
-
-header.sub-active .header__logo {
-  background: url("../img/logo_avialiga-b.svg") no-repeat center/cover;
-}
-
-header.sub-active .header__nav_link > a {
-  color: #2f2f2f;
-}
-
-header.sub-active .header__nav_link > a .icon {
+header.fixed .header__nav_link > a .icon,
+header.fixed .header__sub_nav > a .icon {
   fill: #2f2f2f;
+}
+
+header.fixed .header__nav_link .submenu,
+header.fixed .header__sub_nav .submenu {
+  top: 100px;
 }
 
 header.sub-active .header__sub_nav {
@@ -1656,6 +1652,12 @@ footer .footer__copyright img {
   height: 16px;
 }
 
+.homepage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .homepage .homepage__hero {
   width: 100%;
   height: 100vh;
@@ -1671,10 +1673,16 @@ footer .footer__copyright img {
   left: 0;
 }
 
-.homepage .homepage__hero .button-circle {
+.homepage .homepage__hero .button-circle.play {
   position: absolute;
   left: 350px;
   top: 325px;
+}
+
+.homepage .homepage__hero .button-circle.close {
+  position: absolute;
+  top: 50px;
+  right: 50px;
 }
 
 .homepage .homepage__hero h1 {
@@ -1791,6 +1799,73 @@ footer .footer__copyright img {
   bottom: 0;
 }
 
+.homepage .homepage__hero .hero--player {
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #2f2f2f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.homepage .homepage__hero .hero--player video {
+  width: 100%;
+}
+
+.homepage .homepage__hero .hero--player .player--controls {
+  position: absolute;
+  bottom: 85px;
+  left: 0;
+  padding: 0 90px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.homepage .homepage__hero .hero--player .player--controls .controls--time {
+  font: normal 16px/1 "Futura";
+  color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 40px;
+}
+
+.homepage .homepage__hero .hero--player .player--controls .controls--time i {
+  margin: 0 10px;
+  font-style: normal;
+}
+
+.homepage .homepage__hero .hero--player .player--controls .controls--bar {
+  height: 1px;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  background-color: #ffffff;
+}
+
+.homepage .homepage__hero .hero--player .player--controls .controls--bar i {
+  display: block;
+  width: 0%;
+  background-color: #ee412a;
+  height: 1px;
+  -webkit-transition: width 500ms linear;
+  -o-transition: width 500ms linear;
+  transition: width 500ms linear;
+}
+
 .homepage .homepage__description {
   font: 300 36px/48px "Futura";
   padding: 160px 0;
@@ -1832,9 +1907,6 @@ footer .footer__copyright img {
   -webkit-transform: translate(-50%, -50%) scaleX(0);
   -ms-transform: translate(-50%, -50%) scaleX(0);
   transform: translate(-50%, -50%) scaleX(0);
-  -webkit-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
   z-index: 0;
 }
 
@@ -1981,6 +2053,9 @@ footer .footer__copyright img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .homepage .homepage__insta section .homepage__insta_gallery img {
@@ -2191,7 +2266,7 @@ footer .footer__copyright img {
   background: #ee412a;
   position: absolute;
   left: 0;
-  bottom: -10px;
+  bottom: -13px;
 }
 
 .homepage .homepage__services .wrapper section .swiper-slide h3 a:hover::after {
@@ -2314,6 +2389,7 @@ footer .footer__copyright img {
 
 .homepage .homepage__feedback {
   margin-top: 140px;
+  position: relative;
 }
 
 .homepage .homepage__feedback section {
@@ -2485,6 +2561,180 @@ footer .footer__copyright img {
   transform: rotate(-90deg);
 }
 
+.homepage .homepage__feedback .button-circle.more {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%, 50%);
+  -ms-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%);
+  z-index: 1;
+}
+
+.homepage .homepage__tabs {
+  height: 820px;
+  position: relative;
+  overflow: hidden;
+}
+
+.homepage .homepage__tabs .homepage__tabs_disk {
+  width: 640px;
+  height: 640px;
+  position: absolute;
+  top: 100px;
+  left: -80px;
+}
+
+.homepage .homepage__tabs .homepage__tabs_disk .disk--text {
+  font: 300 20px/1 "Futura";
+  color: #9BCAD6;
+  text-transform: uppercase;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.homepage .homepage__tabs .homepage__tabs_disk .disk--text .text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.homepage .homepage__tabs .homepage__tabs_disk .disk--text .text div {
+  -webkit-transform-origin: 0 100%;
+  -ms-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  position: absolute !important;
+  bottom: 50%;
+  left: 50%;
+  width: 20px;
+  text-align: center;
+}
+
+.homepage .homepage__tabs .homepage__tabs_disk .disk--arrow-1 {
+  width: 80px;
+  position: absolute;
+  top: 280px;
+  left: 254px;
+  -webkit-transform-origin: 85% 84%;
+  -ms-transform-origin: 85% 84%;
+  transform-origin: 85% 84%;
+}
+
+.homepage .homepage__tabs .homepage__tabs_disk .disk--arrow-2 {
+  width: 160px;
+  position: absolute;
+  top: 180px;
+  left: 312px;
+  -webkit-transform-origin: 7% 93%;
+  -ms-transform-origin: 7% 93%;
+  transform-origin: 7% 93%;
+}
+
+.homepage .homepage__tabs .wrapper {
+  margin: 200px 90px 0 448px;
+  position: relative;
+  z-index: 1;
+}
+
+.homepage .homepage__tabs .wrapper h3 {
+  font: 300 30px/1 "Futura";
+  color: #2f2f2f;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_list {
+  margin-top: 45px;
+  font: 300 72px/60px "Futura";
+  color: #ee412a;
+  position: relative;
+  z-index: 1;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_list span {
+  -webkit-transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  transform-origin: bottom;
+  cursor: pointer;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_list span.active {
+  position: relative;
+  z-index: 1;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_list span::after {
+  content: " +";
+  padding: 0 0.3em;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_content {
+  position: absolute;
+  top: 75px;
+  left: 0;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_content .tab--body {
+  display: none;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_content .tab--body h3 {
+  color: #ee412a;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-perspective: 300px;
+  perspective: 300px;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_content .tab--body h3 .title {
+  -webkit-transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  transform-origin: bottom;
+  font: 300 72px/60px "Futura";
+  text-transform: uppercase;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_content .tab--body h3 .title div:last-child {
+  white-space: nowrap;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_content .tab--body h3 .title i {
+  font-style: normal;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 76px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.homepage .homepage__tabs .wrapper .homepage__tabs_content .tab--body p {
+  font: 300 24px/36px "Futura";
+  color: #2f2f2f;
+  margin-top: 30px;
+}
+
 .button-circle {
   width: 100px;
   height: 100px;
@@ -2496,9 +2746,6 @@ footer .footer__copyright img {
 
 .button-circle .icon {
   position: absolute;
-  -webkit-transition: all 200ms ease;
-  -o-transition: all 200ms ease;
-  transition: all 200ms ease;
   z-index: 1;
 }
 
@@ -2513,6 +2760,21 @@ footer .footer__copyright img {
   transform: translate(-40%, -50%);
 }
 
+.button-circle.close .icon {
+  width: 16px;
+  height: 16px;
+  fill: #ee412a;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.button-circle.more {
+  color: #ee412a;
+}
+
 .button-circle.drag .icon {
   width: 58px;
   height: 24px;
@@ -2524,12 +2786,11 @@ footer .footer__copyright img {
   transform: translate(-50%, -50%);
 }
 
-.button-circle.drag::after {
+.button-circle.drag i {
   background-color: #ffffff;
 }
 
-.button-circle::after {
-  content: "";
+.button-circle i {
   display: block;
   width: 100px;
   height: 100px;
@@ -2541,9 +2802,6 @@ footer .footer__copyright img {
   -webkit-transform: translate(-50%, -50%) scale(0);
   -ms-transform: translate(-50%, -50%) scale(0);
   transform: translate(-50%, -50%) scale(0);
-  -webkit-transition: all 200ms ease;
-  -o-transition: all 200ms ease;
-  transition: all 200ms ease;
 }
 
 .button-circle:hover .icon {
@@ -2589,7 +2847,8 @@ footer .footer__copyright img {
   position: absolute !important;
   bottom: 50%;
   left: 50%;
-  letter-spacing: 0;
+  width: 12px;
+  text-align: center;
 }
 
 .button-circle .text .bot div,
@@ -2600,7 +2859,8 @@ footer .footer__copyright img {
   position: absolute !important;
   bottom: 50%;
   left: 50%;
-  letter-spacing: 0;
+  width: 12px;
+  text-align: center;
 }
 
 .button-circle .hover {
@@ -2641,6 +2901,64 @@ footer .footer__copyright img {
   -webkit-transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
   -o-transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
   transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.loader .blind-left {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 49%;
+  background-color: #ffffff;
+  -webkit-transform: skewX(-35deg);
+  -ms-transform: skewX(-35deg);
+  transform: skewX(-35deg);
+}
+
+.loader .blind-right {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 49%;
+  background-color: #ffffff;
+  -webkit-transform: skewX(-35deg);
+  -ms-transform: skewX(-35deg);
+  transform: skewX(-35deg);
+}
+
+.loader #m1,
+.loader #m2 {
+  visibility: hidden;
+}
+
+.loader .progress {
+  z-index: 1;
+  font: 16px/1 "Futura";
+  color: #2f2f2f;
 }
 
 /*# sourceMappingURL=app.css.map */

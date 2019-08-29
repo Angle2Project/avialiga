@@ -1,4 +1,7 @@
 .homepage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   .homepage__hero {
     width: 100%;
     height: 100vh;
@@ -12,9 +15,16 @@
       left: 0;
     }
     .button-circle {
-      position: absolute;
-      left: 350px;
-      top: 325px;
+      &.play {
+        position: absolute;
+        left: 350px;
+        top: 325px;
+      }
+      &.close {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+      }      
     }
     h1 {
       font: normal 9.9vw/1 $futura;
@@ -96,6 +106,52 @@
         }        
       }
     }
+    .hero--player {
+      visibility: hidden;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $black;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+      video {
+        width: 100%;
+      }
+      .player--controls {
+        position: absolute;
+        bottom: 85px;
+        left: 0;
+        padding: 0 90px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        .controls--time {
+          font: normal 16px/1 $futura;
+          color: $white;
+          display: flex;
+          margin-right: 40px;  
+          i {
+            margin: 0 10px;
+            font-style: normal;
+          }  
+        }
+        .controls--bar {
+          height: 1px;
+          flex-grow: 1;
+          background-color: $white;
+          i {
+            display: block;
+            width: 0%;
+            background-color: $red;
+            height: 1px;
+            transition: width 500ms linear;
+          }
+        }
+      }
+    }
   }
 
   .homepage__description {
@@ -127,8 +183,7 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) scaleX(0);
-      transition: all 250ms ease;
+      transform: translate(-50%, -50%) scaleX(0);      
       z-index: 0;
       i {
         display: block;
@@ -226,6 +281,7 @@
         width: 70%;
         flex-shrink: 0;
         display: flex;
+        align-items: center;
         img {
           width: 33.33333333333333333333333%;
         }
@@ -347,7 +403,7 @@
           z-index: 2;
         }
         .swiper-slide {
-          position: relative;
+          position: relative;          
           &::before {
             content: "";
             display: block;
@@ -365,7 +421,7 @@
             position: absolute;
             top: 0;
             left: 90px;
-            top: 55%;  
+            top: 55%;            
             a {
               display: block;
               position: relative;
@@ -376,7 +432,7 @@
                 background: $red;
                 position: absolute;
                 left: 0;
-                bottom: -10px;
+                bottom: -13px;
               }
               &:hover {
                 &::after {
@@ -469,6 +525,7 @@
   }
   .homepage__feedback {
     margin-top: 140px;
+    position: relative;
     section {
       position: relative;
       margin-bottom: 100px;
@@ -594,6 +651,153 @@
         }
       }
     }
+    .button-circle.more {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      z-index: 1;
+    }
   }
+  .homepage__tabs {
+    height: 820px;
+    position: relative;
+    overflow: hidden;
+    .homepage__tabs_disk {
+      width: 640px;
+      height: 640px;
+      position: absolute;
+      top: 100px;
+      left: -80px;      
+      // &::before {
+      //   content: "";
+      //   display: block;
+      //   width: 100%;
+      //   height: 2px;
+      //   background: red;
+      //   position: absolute;
+      //   top: 50%;
+      //   left: 50%;
+      //   transform: translate(-50%, -50%);
+      // }
+      // &::after {
+      //   content: "";
+      //   display: block;
+      //   width: 2px;
+      //   height: 100%;
+      //   background: red;
+      //   position: absolute;
+      //   top: 50%;
+      //   left: 50%;
+      //   transform: translate(-50%, -50%);
+      // }
+      .disk--text {
+        font: 300 20px/1 $futura;
+        color: $sinbad;
+        text-transform: uppercase;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        .text {        
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;                
+          transform-origin: center;        
+          user-select: none;
+          div {          
+            transform-origin: 0 100%;
+            position: absolute !important;
+            bottom: 50%;
+            left: 50%;
+            width: 20px;
+            text-align: center;
+          }        
+        }
+      }
+      .disk--arrow-1 {
+        width: 80px;        
+        position: absolute;
+        top: 280px;
+        left: 254px;
+        transform-origin: 85% 84%;
+      }
+      .disk--arrow-2 {
+        width: 160px;        
+        position: absolute;
+        top: 180px;
+        left: 312px;
+        transform-origin: 7% 93%;
+      }
+    }    
+    .wrapper {
+      margin: 200px 90px 0 448px;      
+      position: relative;
+      z-index: 1;
+      h3 {
+        font: 300 30px/1 $futura;
+        color: $black;
+      }      
+      .homepage__tabs_list {
+        margin-top: 45px;
+        font: 300 72px/60px $futura;
+        color: $red;
+        position: relative;
+        z-index: 1;
+        span {
+          transform-origin: bottom;          
+          cursor: pointer;
+          &.active {
+            position: relative;
+            z-index: 1;
+          }
+          &::after {
+            content: " +";
+            padding: 0 0.3em;
+          }
+        }        
+      }
+      .homepage__tabs_content {
+        position: absolute;
+        top: 75px;
+        left: 0;
+        .tab--body {
+          display: none;
+          h3 {            
+            color: $red;
+            display: inline-flex;
+            perspective: 300px;
+            .title {              
+              transform-origin: bottom;
+              font: 300 72px/60px $futura;
+              text-transform: uppercase;
+              div:last-child {
+                white-space: nowrap;
+              }
+              i {
+                font-style: normal;
+                display: inline-block;
+                width: 60px;
+                height: 60px; 
+                transform: rotate(45deg);
+                margin-left: 20px;
+                cursor: pointer;  
+                font-size: 76px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }                        
+          }
+          p {
+            font: 300 24px/36px $futura;
+            color: $black;
+            margin-top: 30px;  
+          }
+        }
+      }
+    }    
+  }  
 }
 

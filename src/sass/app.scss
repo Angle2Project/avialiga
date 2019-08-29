@@ -15,10 +15,9 @@
   color: $white;
   font: 300 16px/1 $futura;
   letter-spacing: -1px;
-  text-transform: uppercase;  
+  text-transform: uppercase;
   .icon {    
-    position: absolute;    
-    transition: all 200ms ease;
+    position: absolute;
     z-index: 1;
   }  
   &.play {
@@ -31,6 +30,19 @@
       transform: translate(-40%, -50%);    
     }    
   }
+  &.close {
+    .icon {
+      width: 16px;
+      height: 16px;
+      fill: $red;      
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);    
+    }    
+  }
+  &.more {
+    color: $red;    
+  }
   &.drag {
     .icon {
       width: 58px;  
@@ -40,12 +52,11 @@
       left: 50%;
       transform: translate(-50%, -50%);    
     }    
-    &::after {      
+    i {
       background-color: $white;      
     }
   }
-  &::after {
-    content: "";
+  i {    
     display: block;
     width: 100px;
     height: 100px;
@@ -54,8 +65,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: all 200ms ease;
+    transform: translate(-50%, -50%) scale(0);    
   }
   &:hover {
     .icon {
@@ -88,8 +98,9 @@
         transform-origin: 0 100%;
         position: absolute!important;
         bottom: 50%;
-        left: 50%;
-        letter-spacing: 0;        
+        left: 50%;        
+        width: 12px;
+        text-align: center;
       }    
     }    
     .bot {
@@ -97,8 +108,9 @@
         transform-origin: 0 100%;
         position: absolute!important;
         bottom: 50%;
-        left: 50%;
-        letter-spacing: 0;        
+        left: 50%;        
+        width: 12px;
+        text-align: center;     
       }    
     }    
   }
@@ -126,4 +138,45 @@
 
 .swiper-wrapper {
   transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;  
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  .blind-left {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 49%;
+    background-color: $white;
+    transform: skewX(-35deg);
+  }
+  .blind-right {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 49%;
+    background-color: $white;
+    transform: skewX(-35deg);
+  }
+  #m1,
+  #m2 {
+    visibility: hidden;
+  }
+  .progress {
+    z-index: 1;
+    font: 16px/1 $futura;
+    color: $black;
+  }
 }

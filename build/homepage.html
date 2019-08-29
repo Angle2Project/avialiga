@@ -15,7 +15,12 @@
       <header>
         <div class="header__left">
           <div class="header__logo">
-            <a href=""></a>
+            <a href="" class="logo--white">
+              <img src="./img/logo_avialiga-w.svg" alt="">
+            </a>
+            <a href="" class="logo--black">
+              <img src="./img/logo_avialiga-b.svg" alt="">
+            </a>
           </div>
           <nav class="header__nav">
             <div class="header__nav_link" data-action="submenu">
@@ -173,11 +178,27 @@
             </a>
             <a href="" class="take-button">
               <span>TAKE THE TOUR</span>
+              <i></i>
             </a>
           </section>
         </div>
       </header>
-      <article class="homepage__hero">
+      <div class="header__bg"></div>
+      <!-- LOADER -->
+      <div class="loader">
+        <div class="progress">0</div>
+        <div class="logo">
+          <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+            <g>
+              <path id="morph" d="M95.5,24.25L35.9011612,72.5523224L11.75,55.4127922l23.3720932,10.9069786L95.5,24.25z" />
+            </g>
+          </svg>
+        </div>
+        <div class="blind-left"></div>
+        <div class="blind-right"></div>
+      </div>
+      <!-- /LOADER -->
+      <article class="homepage__hero" data-background="./img/home.mp4" data-displacement="./img/displacement.png">
         <div class="wrapper">
           <div class="button-circle play" data-action="homepage-hero-play" data-text="play video">
             <svg class="icon icon-icon_play">
@@ -201,11 +222,31 @@
             </div>
           </div>
         </div>
+        <div class="hero--player">
+          <video>
+            <source src="./img/installation-video.mp4" type="video/mp4">
+          </video>
+          <div class="player--controls">
+            <div class="controls--time">
+              <span data-time="current">00:00</span>
+              <i>/</i>
+              <span data-time="all">00:00</span>
+            </div>
+            <div class="controls--bar">
+              <i></i>
+            </div>
+          </div>
+          <div class="button-circle close" data-action="homepage-close-video" data-text="close video">
+            <svg class="icon icon-icon_close">
+              <use xlink:href="img/sprite.svg#icon-icon_close"></use>
+            </svg>
+          </div>
+        </div>
       </article>
       <article class="homepage__description">
         <p>Specializes in organizing events, group trips and individual tours. While you are developing your business and concentrating on the tasks that are important to you, Avialiga takes care of all the arrangements for the tour.</p>
       </article>
-      <article class="homepage__drag" data-img-left="hone-leisure.jpg" data-img-right="home-business.jpg" data-pat-left="pat1.png" data-pat-right="pat2.png">
+      <article class="homepage__drag" data-img-left="./img/hone-leisure.jpg" data-img-right="./img/home-business.jpg" data-pat-left="./img/pat1.png" data-pat-right="./img/pat2.png">
         <div class="wrapper">
           <div class="button-circle drag" data-action="homepage-drag" data-text="learn more" data-hover="drag my">
             <svg class="icon icon-icon_arrows">
@@ -333,6 +374,7 @@
             </div>
           </div>
         </section>
+        <div class="button-circle more" data-action="learn-more" data-text="learn more"></div>
       </article>
       <article class="homepage__services">
         <div class="wrapper">
@@ -430,6 +472,69 @@
               </div>
             </div>
           </section>
+        </div>
+      </article>
+      <article class="homepage__tabs">
+        <div class="homepage__tabs_disk">
+          <div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>
+          <img src="./img/advantages-1.svg" class="disk--arrow-1" alt="">
+          <img src="./img/advantages-2.svg" class="disk--arrow-2" alt="">
+        </div>
+        <div class="wrapper">
+          <h3>Get with us</h3>
+          <div class="homepage__tabs_list">
+            <span data-target="time-saving">TIME SAVING</span>
+            <span data-target="cost-saving">COST SAVINGS</span>
+            <span data-target="risk-minimization">RISK MINIMAZATION</span>
+            <span data-target="legal-support">LEGAL SUPPORT</span>
+            <span data-target="experience">EXPERIENCE</span>
+            <span data-target="development">DEVELOPMENT</span>
+            <span data-target="real-expectation">REAL EXPECTATIONS</span>
+          </div>
+          <div class="homepage__tabs_content">
+            <section class="tab--body" data-tab="time-saving">
+              <h3>
+                <div class="title">TIME SAVING</div>
+              </h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </section>
+            <section class="tab--body" data-tab="cost-saving">
+              <h3>
+                <div class="title">COST SAVINGS</div>
+              </h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </section>
+            <section class="tab--body" data-tab="risk-minimization">
+              <h3>
+                <div class="title">RISK MINIMAZATION</div>
+              </h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </section>
+            <section class="tab--body" data-tab="legal-support">
+              <h3>
+                <div class="title">LEGAL SUPPORT</div>
+              </h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </section>
+            <section class="tab--body" data-tab="experience">
+              <h3>
+                <div class="title">EXPERIENCE</div>
+              </h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </section>
+            <section class="tab--body" data-tab="development">
+              <h3>
+                <div class="title">DEVELOPMENT</div>
+              </h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </section>
+            <section class="tab--body" data-tab="real-expectation">
+              <h3>
+                <div class="title">REAL EXPECTATIONS</div>
+              </h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </section>
+          </div>
         </div>
       </article>
       <article class="homepage__insta">
@@ -553,12 +658,11 @@
     </main>
     <!-- END content -->
     <!-- BEGIN scripts -->
-    <script type="text/javascript" src="js/lib/pixi.min.js"></script>
+    <script type="text/javascript" data-src="js/lib/pixi.min.js"></script>
+    <script type="text/javascript" data-src="js/lib/SplitText.min.js"></script>
+    <script type="text/javascript" data-src="js/lib/MorphSVGPlugin.min.js"></script>
+    <script type="text/javascript" data-src="js/lib/swiper.min.js"></script>
     <script type="text/javascript" src="js/lib/TweenMax.min.js"></script>
-    <script type="text/javascript" src="js/lib/SplitText.min.js"></script>
-    <script type="text/javascript" src="js/lib/MorphSVGPlugin.min.js"></script>
-    <script type="text/javascript" src="js/lib/swiper.min.js"></script>
-    <script type="text/javascript" src="js/lib/smooth-scrollbar.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <!-- END scripts -->
   </body>
