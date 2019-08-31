@@ -239,7 +239,7 @@ const _homepage = function(page){
       let tl = new TimelineMax();
       tl.to('.loader .progress', 0.5, {opacity: 0})
       .to('.loader .logo', 0.5, {opacity: 0, onComplete: function(){
-        app.homepage.hero.bgResours.source.play();
+        //app.homepage.hero.bgResours.source.play();
       }}, '-=0.25')      
       .to('.blind-left', 2, {x: '-90%', ease: Power4.easeInOut}, 'open')
       .to('.blind-right', 2, {x: '90%', ease: Power4.easeInOut, onComplete: function(){
@@ -332,18 +332,19 @@ const _homepage = function(page){
       autoPlay: false,
       updateFPS: 30
     });
-    this.bgResours.source.autoplay = false;
+    this.bgResours.source.autoplay = true;
     this.bgResours.source.loop = true;
     this.bgResours.source.mute = true;
     console.log(this.bgResours);
     this.bgBaseTexture = new PIXI.BaseTexture(this.bgResours);    
     this.bgTexture = new PIXI.Texture(this.bgBaseTexture);
     this.bg = new PIXI.Sprite(this.bgTexture);
-    this.bg.width = this.heroBgWidth;
-    this.bg.height = this.heroBgHeight;
-    this.bg.x  = this.heroBgLeft;
-    this.bg.y  = this.heroBgTop;
+    // this.bg.width = this.heroBgWidth;
+    // this.bg.height = this.heroBgHeight;
+    // this.bg.x  = this.heroBgLeft;
+    // this.bg.y  = this.heroBgTop;
     this.hero.stage.addChild(this.bg);
+    this.bgResours.source.play();
 
 
     
