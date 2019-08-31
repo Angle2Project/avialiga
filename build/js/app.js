@@ -328,23 +328,20 @@ const _homepage = function(page){
     this.hero.stage.interactive = true;  
 
     
-    this.bgResours = new PIXI.resources.VideoResource(this.el.getAttribute('data-background'), {
+    this.resours = new PIXI.resources.VideoResource(this.el.getAttribute('data-background'), {
       autoPlay: false,
       updateFPS: 30
     });
-    this.bgResours.source.autoplay = true;
-    this.bgResours.source.loop = true;
-    this.bgResours.source.mute = true;
-    console.log(this.bgResours);
-    this.bgBaseTexture = new PIXI.BaseTexture(this.bgResours);    
-    this.bgTexture = new PIXI.Texture(this.bgBaseTexture);
-    this.bg = new PIXI.Sprite(this.bgTexture);
-    // this.bg.width = this.heroBgWidth;
-    // this.bg.height = this.heroBgHeight;
-    // this.bg.x  = this.heroBgLeft;
-    // this.bg.y  = this.heroBgTop;
+    this.resours.source.loop = true;
+    this.resours.source.autoplay = true;
+    this.resours.source.muted = true;
+    this.baseTexture = new PIXI.BaseTexture(this.resours);
+    this.ratio = this.baseTexture.realWidth / this.baseTexture.realWidth;
+    this.texture = new PIXI.Texture(this.baseTexture);
+    this.bg = new PIXI.Sprite(this.texture);
+    console.log(this.texture);
     this.hero.stage.addChild(this.bg);
-    this.bgResours.source.play();
+    this.resours.source.play();
 
 
     
