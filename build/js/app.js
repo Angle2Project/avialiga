@@ -236,10 +236,10 @@ const _homepage = function(page){
       app.homepage.hero = new heroRender();
       app.homepage.drag = new dragRender();
       app.homepage.eventsInit();
-      let tl = new TimelineMax({delay: 1});
+      let tl = new TimelineMax();
       tl.to('.loader .progress', 0.5, {opacity: 0})
       .to('.loader .logo', 0.5, {opacity: 0, onComplete: function(){
-        app.homepage.hero.video.baseTexture.source.play();
+        app.homepage.hero.bgResours.source.play();
       }}, '-=0.25')      
       .to('.blind-left', 2, {x: '-90%', ease: Power4.easeInOut}, 'open')
       .to('.blind-right', 2, {x: '90%', ease: Power4.easeInOut, onComplete: function(){
@@ -324,50 +324,57 @@ const _homepage = function(page){
       height: this.el.clientHeight,
       clearBeforeRender: false      
     });
-    //this.hero._ticker.FPS = 5;
-    console.log(this.hero.ticker.shared);
     this.el.appendChild(this.hero.view);
-    this.hero.stage.interactive = true;
+    this.hero.stage.interactive = true;  
 
-    this.video = PIXI.Texture.from(this.el.getAttribute('data-background'));
-    this.video.baseTexture.source.loop = true;
-    this.video.baseTexture.autoPlay = false;
-    this.video.baseTexture.source.autoplay = true;
-    this.video.baseTexture.source.muted = true;    
-
-    this.heroPlay = false;
     
-    this.el.addEventListener('click', function(e){
-      if(that.heroPlay){
-        that.video.baseTexture.source.pause();
-        that.heroPlay = false;
-      }else{        
-        that.video.baseTexture.source.play();
-        that.heroPlay = true;
-      }      
+    this.bgResours = new PIXI.resources.VideoResource(this.el.getAttribute('data-background'), {
+      autoPlay: false,
+      updateFPS: 30
     });
-    
-    this.bg = new PIXI.Sprite(this.video);
+    this.bgResours.source.autoplay = false;
+    this.bgResours.source.loop = true;
+    this.bgResours.source.mute = true;
+    console.log(this.bgResours);
+    this.bgBaseTexture = new PIXI.BaseTexture(this.bgResours);    
+    this.bgTexture = new PIXI.Texture(this.bgBaseTexture);
+    this.bg = new PIXI.Sprite(this.bgTexture);
     this.bg.width = this.heroBgWidth;
     this.bg.height = this.heroBgHeight;
     this.bg.x  = this.heroBgLeft;
     this.bg.y  = this.heroBgTop;
     this.hero.stage.addChild(this.bg);
 
-    this.displacementSprite = PIXI.Sprite.from('./img/displacement.png');
-    this.displacementSprite.width = document.body.clientWidth / 2;
-    this.displacementSprite.height = document.body.clientWidth / 2;
-    this.displacementSprite.anchor.set(0.5);
-    this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
-    this.displacementFilter.scale.x = 50;
-    this.displacementFilter.scale.y = 50;
-    this.hero.stage.addChild(this.displacementSprite);  
-    this.bg.filters = [this.displacementFilter];
-    function onPointerMove(e) {      
-      TweenMax.to(that.displacementSprite, 1.5, {x:e.clientX - 25, y: e.clientY});
-    }  
-    this.el.addEventListener('mousemove', onPointerMove);
-    TweenMax.to(that.displacementSprite, 12, {rotation: 6.28319, ease: Power0.easeNone, repeat: -1});    
+
+    
+    // this.heroPlay = false;
+    
+    // this.el.addEventListener('click', function(e){
+    //   if(that.heroPlay){
+    //     that.video.baseTexture.source.pause();
+    //     that.heroPlay = false;
+    //   }else{        
+    //     that.video.baseTexture.source.play();
+    //     that.heroPlay = true;
+    //   }      
+    // });
+    
+    
+
+    // this.displacementSprite = PIXI.Sprite.from('./img/displacement.png');
+    // this.displacementSprite.width = document.body.clientWidth / 2;
+    // this.displacementSprite.height = document.body.clientWidth / 2;
+    // this.displacementSprite.anchor.set(0.5);
+    // this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
+    // this.displacementFilter.scale.x = 50;
+    // this.displacementFilter.scale.y = 50;
+    // this.hero.stage.addChild(this.displacementSprite);  
+    // this.bg.filters = [this.displacementFilter];
+    // function onPointerMove(e) {      
+    //   TweenMax.to(that.displacementSprite, 1.5, {x:e.clientX - 25, y: e.clientY});
+    // }  
+    // this.el.addEventListener('mousemove', onPointerMove);
+    // TweenMax.to(that.displacementSprite, 12, {rotation: 6.28319, ease: Power0.easeNone, repeat: -1});    
   }    
   // End Hero background
 
