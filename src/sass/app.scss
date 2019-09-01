@@ -160,6 +160,7 @@
     right: 49%;
     background-color: $white;
     transform: skewX(-35deg);
+    transform-origin: left;
   }
   .blind-right {
     width: 100%;
@@ -169,14 +170,15 @@
     left: 49%;
     background-color: $white;
     transform: skewX(-35deg);
-  }
-  #m1,
-  #m2 {
-    visibility: hidden;
-  }
+    transform-origin: right;
+  }  
   .progress {
     z-index: 1;
     font: 16px/1 $futura;
     color: $black;
+    position: relative;
+  }
+  .logo {
+    z-index: 1;
   }
 }

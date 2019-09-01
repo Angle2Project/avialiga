@@ -894,6 +894,7 @@ body {
   margin: 0;
   padding: 0;
   background: #ffffff;
+  color: #2f2f2f;
 }
 
 a {
@@ -2936,6 +2937,9 @@ footer .footer__copyright img {
   -webkit-transform: skewX(-35deg);
   -ms-transform: skewX(-35deg);
   transform: skewX(-35deg);
+  -webkit-transform-origin: left;
+  -ms-transform-origin: left;
+  transform-origin: left;
 }
 
 .loader .blind-right {
@@ -2948,17 +2952,20 @@ footer .footer__copyright img {
   -webkit-transform: skewX(-35deg);
   -ms-transform: skewX(-35deg);
   transform: skewX(-35deg);
-}
-
-.loader #m1,
-.loader #m2 {
-  visibility: hidden;
+  -webkit-transform-origin: right;
+  -ms-transform-origin: right;
+  transform-origin: right;
 }
 
 .loader .progress {
   z-index: 1;
   font: 16px/1 "Futura";
   color: #2f2f2f;
+  position: relative;
+}
+
+.loader .logo {
+  z-index: 1;
 }
 
 /*# sourceMappingURL=app.css.map */
