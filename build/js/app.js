@@ -840,7 +840,9 @@ const _homepage = function(page){
 
 
 window.onload = function(){
-  app.homepage = new _homepage();  
+  setTimeout(function(){
+    app.homepage = new _homepage();
+  }, 100);
 }
 
 
