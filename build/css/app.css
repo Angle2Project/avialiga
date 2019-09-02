@@ -1691,10 +1691,15 @@ footer .footer__copyright img {
   color: #ffffff;
   margin-left: 42%;
   margin-top: 140px;
+  -webkit-perspective: 400px;
+  perspective: 400px;
 }
 
 .homepage .homepage__hero h1 span {
   display: block;
+  -webkit-transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  transform-origin: bottom;
 }
 
 .homepage .homepage__hero h1 span:nth-child(2) {
@@ -2734,6 +2739,36 @@ footer .footer__copyright img {
   font: 300 24px/36px "Futura";
   color: #2f2f2f;
   margin-top: 30px;
+}
+
+.cursor {
+  width: 70px;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 1px solid #ee412a;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.cursor::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #ffffff;
+  border-radius: 50%;
 }
 
 .button-circle {

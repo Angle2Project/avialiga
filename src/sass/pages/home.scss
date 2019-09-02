@@ -31,8 +31,10 @@
       color: $white;
       margin-left: 42%;
       margin-top: 140px;
+      perspective: 400px;
       span {
         display: block;
+        transform-origin: bottom;
         &:nth-child(2) {
           margin-left: 6vw;
         }

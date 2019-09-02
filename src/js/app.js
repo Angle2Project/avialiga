@@ -98,22 +98,7 @@ function header(e){
 
 // Homepage init
 const _homepage = function(page){
-  let that = this;
-  // this.mySwiper = new Swiper ('.swiper-container', {
-  //   // Optional parameters    
-  //   speed: 800,
-  //   // If we need pagination
-  //   pagination: {
-  //     el: '.slider-pagination',
-  //     type: 'fraction'
-  //   },
-
-  //   // Navigation arrows
-  //   navigation: {
-  //     nextEl: '.slider-button-next',
-  //     prevEl: '.slider-button-prev',
-  //   }    
-  // });
+  let that = this;  
 
 
   // Loader
@@ -233,7 +218,7 @@ const _homepage = function(page){
         app.homepage.tabs.init();
         app.homepage.hero = new heroRender();
         app.homepage.drag = new dragRender();
-        app.homepage.eventsInit();        
+        app.homepage.eventsInit();
         TweenMax.to(this, 1, {progress: 100, onUpdate: function(){
           document.querySelector('.loader .progress').innerHTML = that.progress.toFixed()+'%';
         }, ease: Power3.easeOut, onComplete: function(){
@@ -244,7 +229,24 @@ const _homepage = function(page){
           app.homepage.hero.bg.x  = app.homepage.hero.heroBgLeft;
           app.homepage.hero.bg.y  = app.homepage.hero.heroBgTop;
           app.homepage.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 2;
-          app.homepage.hero.displacementSprite.height = app.homepage.hero.hero.renderer.height / 2;
+          app.homepage.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 2;
+          app.homepage.hero.displacementSprite.x = app.homepage.hero.hero.renderer.width / 2;
+          app.homepage.hero.displacementSprite.y = app.homepage.hero.hero.renderer.height / 2;
+          this.mySwiper = new Swiper ('.swiper-container', {
+            // Optional parameters    
+            speed: 800,
+            // If we need pagination
+            pagination: {
+              el: '.slider-pagination',
+              type: 'fraction'
+            },
+
+            // Navigation arrows
+            navigation: {
+              nextEl: '.slider-button-next',
+              prevEl: '.slider-button-prev',
+            }    
+          });
           that.loaded();
         }});
       }else{
@@ -269,16 +271,20 @@ const _homepage = function(page){
       // }
     },
     loaded: function(){      
-      
+      window.scroll(0, 0);
       let tl = new TimelineMax({});
       tl.to('.loader .progress', 0.7, {opacity: 0})
         .to('.loader .logo', 0.7, {opacity: 0, onComplete: function(){          
           app.homepage.hero.resours.source.play();          
         }}, '-=1')              
-        .to(['.blind-left', '.blind-right'], 1, {scaleX: 0, ease: Power4.easeIn, onComplete: function(){
+        .to(['.blind-left', '.blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn, onComplete: function(){
           document.querySelector('.loader').remove();
           TweenMax.set('body', {overflow: 'auto'});
-        }});
+        }})
+        .staggerFrom(document.querySelectorAll('.homepage__hero h1 span'), 1, {rotationX: 90, opacity: 0, ease: Power2.easeOut}, 0.1, '+=0.3')
+        .from('header', 0.8, {opacity: 0})
+        .from('.homepage__hero_footer', 0.8, {opacity: 0})
+        
     }
   }
   // /.Loader
@@ -364,7 +370,7 @@ const _homepage = function(page){
     
     this.resours = new PIXI.resources.VideoResource(this.el.getAttribute('data-background'), {
       autoPlay: false,
-      updateFPS: 30
+      updateFPS: 25
     });
     this.resours.source.loop = true;
     this.resours.source.autoplay = true;
@@ -577,12 +583,31 @@ const _homepage = function(page){
 
   this.eventsInit = function(){
     window.addEventListener('scroll', function(e){
+      let scrollTop = window.pageYOffset;
       header(e);
+      if(scrollTop > (window.innerHeight)){
+        app.homepage.hero.resours.source.pause();
+      }else{
+        app.homepage.hero.resours.source.play();
+      }
     });
+    // document.body.addEventListener('mousemove', function(e){
+    //   TweenMax.set('.cursor', {x : (e.clientX - 35), y : (e.clientY - 35)});
+    // });
     document.querySelectorAll('[data-action="submenu"]').forEach(function(el, i){
       el.addEventListener('mouseenter', header);
       el.addEventListener('mouseleave', header);      
-    });    
+    });
+    document.querySelector('.take-button').addEventListener('mouseenter', function(e){
+      TweenMax.to(this, 0.5, {color: '#fff', ease: Power2.easeOut});
+      TweenMax.to(this.querySelector('i'), 0.5, {y:5, height: '40px', ease: Power2.easeOut});
+    });
+    document.querySelector('.take-button').addEventListener('mouseleave', function(e){
+      TweenMax.to(this, 0.5, {color: function(){
+        return document.querySelector('header').classList.contains('fixed') ? '#2f2f2f':'#ffffff';
+      }, ease: Power2.easeOut});
+      TweenMax.to(this.querySelector('i'), 0.5, {y:0, height: '1px', ease: Power2.easeOut});
+    });
     window.addEventListener('resize', this.resizeHomepage);
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mousedown', function (e) {
       that.drag.dragMove = true;

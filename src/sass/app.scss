@@ -8,6 +8,28 @@
 @import 'components/index';
 @import 'pages/index';
 
+.cursor {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $red;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  &::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: $white;
+    border-radius: 50%;
+  }
+}
 
 .button-circle {
   width: 100px;
