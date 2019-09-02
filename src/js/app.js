@@ -838,9 +838,10 @@ const _homepage = function(page){
 
 //app.init();
 
-document.addEventListener('DOMContentLoaded', function(){
+
+window.onload = function(){
   app.homepage = new _homepage();  
-});
+}
 
 
 
