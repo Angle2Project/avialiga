@@ -2172,9 +2172,6 @@ footer .footer__copyright img {
   color: #ee412a;
   margin: auto;
   position: relative;
-  -webkit-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
 }
 
 .homepage .homepage__form .homepage__form_body .form--submit button span {
@@ -2182,17 +2179,7 @@ footer .footer__copyright img {
   z-index: 1;
 }
 
-.homepage .homepage__form .homepage__form_body .form--submit button:hover {
-  color: #ffffff;
-}
-
-.homepage .homepage__form .homepage__form_body .form--submit button:hover::before {
-  bottom: 0;
-  height: 100%;
-}
-
-.homepage .homepage__form .homepage__form_body .form--submit button::before {
-  content: "";
+.homepage .homepage__form .homepage__form_body .form--submit button i {
   display: block;
   width: 100%;
   height: 2px;
@@ -2200,9 +2187,6 @@ footer .footer__copyright img {
   position: absolute;
   left: 0;
   bottom: 14px;
-  -webkit-transition: all 250ms ease;
-  -o-transition: all 250ms ease;
-  transition: all 250ms ease;
   z-index: 0;
 }
 
