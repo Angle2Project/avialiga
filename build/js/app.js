@@ -352,8 +352,8 @@ const _homepage = function(page){
         buttonsRender();        
         app.homepage.tabs.init();
         app.homepage.hero = new heroRender();
-        app.homepage.drag = new dragRender();
-        app.homepage.eventsInit();
+        //app.homepage.drag = new dragRender();
+        //app.homepage.eventsInit();
         TweenMax.to(this, 1, {progress: 100, onUpdate: function(){
           document.querySelector('.loader .progress').innerHTML = that.progress.toFixed()+'%';
         }, ease: Power3.easeOut, onComplete: function(){
