@@ -177,6 +177,7 @@
       right: 0;
       bottom: 0;
       left: 0;
+      z-index: 1;
     }
     .homepage__drag_dots {
       display: flex;
@@ -203,6 +204,14 @@
       top: calc(50% - 50px);
       left: calc(50% - 50px);
       z-index: 1;
+    }
+    canvas {
+      &.leisure,
+      &.business {
+        position: absolute;
+        top: 0;
+        left: 0;  
+      }
     }
     h2 {
       -webkit-user-select: none;  /* Chrome all / Safari all */

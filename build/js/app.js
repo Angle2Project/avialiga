@@ -292,7 +292,7 @@ const _homepage = function(page){
         }
       });
       document.querySelectorAll('[data-pat-right]').forEach(function(el, i){
-        let src = el.getAttribute('data-pat-left');        
+        let src = el.getAttribute('data-pat-right');        
         var img = new Image();
         img.src = src;        
         img.onload = function() {            
@@ -301,16 +301,16 @@ const _homepage = function(page){
         }
       });
       document.querySelectorAll('[data-img-left]').forEach(function(el, i){
-        let src = el.getAttribute('data-pat-left');        
+        let src = el.getAttribute('data-img-left');        
         var img = new Image();
         img.src = src;        
-        img.onload = function() {            
+        img.onload = function() {
           that.resourcesDone++;
           that.loading();
         }
       });
       document.querySelectorAll('[data-img-right]').forEach(function(el, i){
-        let src = el.getAttribute('data-pat-left');        
+        let src = el.getAttribute('data-img-right');        
         var img = new Image();
         img.src = src;        
         img.onload = function() {            
@@ -352,8 +352,8 @@ const _homepage = function(page){
         buttonsRender();        
         app.homepage.tabs.init();
         app.homepage.hero = new heroRender();
-        //app.homepage.drag = new dragRender();
-        //app.homepage.eventsInit();
+        app.homepage.drag = new dragRender();
+        app.homepage.eventsInit();
         TweenMax.to(this, 1, {progress: 100, onUpdate: function(){
           document.querySelector('.loader .progress').innerHTML = that.progress.toFixed()+'%';
         }, ease: Power3.easeOut, onComplete: function(){
@@ -458,9 +458,9 @@ const _homepage = function(page){
     this.el = document.querySelector('.homepage__hero');
     this.hero = new PIXI.Application({
       width: this.el.clientWidth,
-      height: this.el.clientHeight,
-      preserveDrawingBuffer: true,
-      forceFXAA: true
+      height: this.el.clientHeight,      
+      forceFXAA: true,
+      clearBeforeRender: false
     });
     this.el.appendChild(this.hero.view);
     this.hero.stage.interactive = true;  
@@ -516,7 +516,181 @@ const _homepage = function(page){
   // End Hero background
 
   // Start Drag Slider
-  function dragRender(){    
+  function dragRender(){
+    let that = this;
+    let ratio;
+
+    this.el = document.querySelector('.homepage__drag');
+    this.canv1 = document.createElement('canvas');
+    this.canv1.className = 'pats';    
+    this.ctx1 = this.canv1.getContext('2d');
+    this.canv2 = document.createElement('canvas');
+    this.canv2.className = 'leisure';
+    this.ctx2 = this.canv2.getContext('2d');
+    this.canv3 = document.createElement('canvas');
+    this.canv3.className = 'business';
+    this.ctx3 = this.canv3.getContext('2d');
+    // this.canvas.width = this.el.clientWidth;
+    // this.canvas.height = this.el.clientHeight;
+    this.el.appendChild(this.canv1);
+    this.el.appendChild(this.canv2);
+    this.el.appendChild(this.canv3);
+    
+    this.pat1 = new Image();
+    this.pat1.src = this.el.getAttribute('data-pat-left');    
+    this.pat1.onload = function(){
+      ratio = this.width/this.height;
+      that.canv1.width = that.el.clientWidth;
+      that.canv1.height = that.el.clientWidth/ratio;
+      that.ctx1.save();
+      that.ctx1.beginPath();
+      that.ctx1.moveTo(0, 0);
+      that.ctx1.lineTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);
+      that.ctx1.lineTo(((that.el.clientWidth / 2) - (that.el.clientWidth / 2)/2.92), that.el.clientHeight);
+      that.ctx1.lineTo(0, that.el.clientHeight);      
+      that.ctx1.lineTo(0, 0);      
+      that.ctx1.closePath();
+      // Clip to the current path
+      that.ctx1.clip();
+      that.ctx1.drawImage(that.pat1, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      that.ctx1.restore();
+    }
+    this.pat2 = new Image();
+    this.pat2.src = this.el.getAttribute('data-pat-right');
+    this.pat2.onload = function(){      
+      that.ctx1.save();
+      that.ctx1.beginPath();
+      that.ctx1.moveTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);
+      that.ctx1.lineTo(that.el.clientWidth, 0);
+      that.ctx1.lineTo(that.el.clientWidth, that.el.clientHeight);
+      that.ctx1.lineTo(((that.el.clientWidth / 2) - (that.el.clientWidth / 2)/2.92), that.el.clientHeight);      
+      that.ctx1.lineTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);    
+      that.ctx1.closePath();
+      // Clip to the current path
+      that.ctx1.clip();
+      that.ctx1.drawImage(that.pat2, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      that.ctx1.restore();
+    }
+
+    this.img1 = new Image();
+    this.img1.src = this.el.getAttribute('data-img-left');
+    this.img1.onload = function(){
+      ratio = this.width/this.height;
+      that.canv2.width = that.el.clientWidth;
+      that.canv2.height = that.el.clientWidth/ratio;
+      that.ctx2.save();
+      that.ctx2.beginPath();
+      that.ctx2.moveTo(0, 0);
+      that.ctx2.lineTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);
+      that.ctx2.lineTo(((that.el.clientWidth / 2) - (that.el.clientWidth / 2)/2.92), that.el.clientHeight);
+      that.ctx2.lineTo(0, that.el.clientHeight);      
+      that.ctx2.lineTo(0, 0);
+      that.ctx2.closePath();
+      // Clip to the current path
+      that.ctx2.clip();
+      that.ctx2.drawImage(that.img1, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      that.ctx2.restore();
+    }
+    this.img2 = new Image();
+    this.img2.src = this.el.getAttribute('data-img-right');
+    this.img2.onload = function(){
+      ratio = this.width/this.height;
+      that.canv3.width = that.el.clientWidth;
+      that.canv3.height = that.el.clientWidth/ratio;
+      that.ctx3.save();
+      that.ctx3.beginPath();
+      that.ctx3.moveTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);
+      that.ctx3.lineTo(that.el.clientWidth, 0);
+      that.ctx3.lineTo(that.el.clientWidth, that.el.clientHeight);
+      that.ctx3.lineTo(((that.el.clientWidth / 2) - (that.el.clientWidth / 2)/2.92), that.el.clientHeight);      
+      that.ctx3.lineTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);      
+      that.ctx3.closePath();
+      // Clip to the current path
+      that.ctx3.clip();
+      that.ctx3.drawImage(that.img2, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      that.ctx3.restore();
+    }
+
+
+    this.dragMove = false;
+    this.dragx = 0;
+    this.dragDone = false;
+
+    this.dragControl = function(e){
+      if(that.dragMove){
+        let limit = (that.el.clientWidth / 2) / 3;        
+        let x = e.clientX - that.dragx;
+        if(x < 0 && x > -limit){
+          TweenMax.to(document.querySelector('canvas.leisure'), 0, {x:x});
+          TweenMax.to(document.querySelector('canvas.business'), 0, {x:0});
+          TweenMax.to('[data-action="homepage-drag"]', 0, {x:x});
+        }else if(x > 0 && x < limit){
+          TweenMax.to(document.querySelector('canvas.leisure'), 0, {x:0});
+          TweenMax.to(document.querySelector('canvas.business'), 0, {x:x});
+          TweenMax.to('[data-action="homepage-drag"]', 0, {x:x});
+        }else if(x < -limit || x > limit){
+          that.dragMove = false;
+          that.dragDone = true;          
+          if(x < -limit){            
+            TweenMax.to(document.querySelector('canvas.leisure'), 1.2, {x:- that.el.clientWidth, ease: Power2.easeInOut});
+            TweenMax.to(document.querySelector('canvas.business'), 0, {x:0});
+          }else if(x > limit){
+            TweenMax.to(document.querySelector('canvas.leisure'), 0, {x:0});
+            TweenMax.to(document.querySelector('canvas.business'), 1.2, {x: that.el.clientWidth, ease: Power2.easeInOut});
+            
+          }
+        }
+      }
+    }
+    
+      
+    
+    return;
+    
+    this.img1 = new Image();
+    this.img1.src = this.el.getAttribute('data-img-left');
+    this.img1.onload = function(){
+      that.ctx.save();
+      that.ctx.beginPath();
+      that.ctx.moveTo(-200, 0);
+      that.ctx.lineTo(((that.el.clientWidth / 2) - 200 + (that.el.clientWidth / 2)/2.92), 0);
+      that.ctx.lineTo(((that.el.clientWidth / 2) - 200 - (that.el.clientWidth / 2)/2.92), that.el.clientHeight);
+      that.ctx.lineTo(-200, that.el.clientHeight);      
+      that.ctx.lineTo(-200, 0);      
+      that.ctx.closePath();
+      // Clip to the current path
+      that.ctx.clip();
+      that.ctx.drawImage(that.img1, -200, 0, that.el.clientWidth, that.el.clientHeight);
+      that.ctx.restore();
+    }    
+    this.img2 = new Image();
+    this.img2.src = this.el.getAttribute('data-img-right');
+    this.img2.onload = function(){
+      that.ctx.save();
+      that.ctx.beginPath();
+      that.ctx.moveTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);
+      that.ctx.lineTo(that.el.clientWidth, 0);
+      that.ctx.lineTo(that.el.clientWidth, that.el.clientHeight);
+      that.ctx.lineTo(((that.el.clientWidth / 2) - (that.el.clientWidth / 2)/2.92), that.el.clientHeight);      
+      that.ctx.lineTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);      
+      that.ctx.closePath();
+      // Clip to the current path
+      that.ctx.clip();
+      that.ctx.drawImage(that.img2, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      that.ctx.restore();
+    }
+
+
+    
+    // this.img2 = new Image();
+    // this.img2.src = this.el.getAttribute('data-img-right');    
+    // this.img2.onload = function(){
+    //   that.ctx.drawImage(that.img2, 50, 50, 200, 100);
+    // }
+    
+    
+
+    return
     this.el = document.querySelector('.homepage__drag');
     this.drag = new PIXI.Application({
       width: this.el.clientWidth,
@@ -692,7 +866,7 @@ const _homepage = function(page){
     });
     // document.body.addEventListener('mousemove', function(e){
     //   TweenMax.set('.cursor', {x : (e.clientX - 35), y : (e.clientY - 35)});
-    // });
+    // });    
     document.querySelectorAll('[data-action="submenu"]').forEach(function(el, i){
       el.addEventListener('mouseenter', header);
       el.addEventListener('mouseleave', header);      
@@ -712,7 +886,7 @@ const _homepage = function(page){
         TweenMax.to(this.querySelector('i'), 0.5, {y:0, height: '1px', ease: Power2.easeOut});
       });
     });
-    window.addEventListener('resize', this.resizeHomepage);
+    
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mousedown', function (e) {
       that.drag.dragMove = true;
       that.drag.dragx = e.clientX;    
@@ -722,9 +896,9 @@ const _homepage = function(page){
         that.drag.dragMove = false;
         that.drag.dragx = 0;
         TweenMax.to('[data-action="homepage-drag"]', 0.5, {x:0, ease: Power2.easeOut});
-        TweenMax.to([that.drag.container1, that.drag.container2], 0.5, {x:0, ease: Power2.easeOut});
+        TweenMax.to([document.querySelector('canvas.leisure'), document.querySelector('canvas.business')], 0.5, {x:0, ease: Power2.easeOut});
       }
-    });  
+    });
     document.querySelector('.homepage__drag').addEventListener('mousemove', that.drag.dragControl);
     document.querySelector('[data-action="homepage-hero-play"]').addEventListener('mouseenter', function(e){
       TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
@@ -753,11 +927,14 @@ const _homepage = function(page){
         that.drag.dragMove = false;
         that.drag.dragx = 0;
         TweenMax.to('[data-action="homepage-drag"]', 0.5, {x:0, ease: Power2.easeOut});
-        TweenMax.to([that.drag.container1, that.drag.container2], 0.5, {x:0, ease: Power2.easeOut});
+        TweenMax.to([document.querySelector('canvas.leisure'), document.querySelector('canvas.business')], 0.5, {x:0, ease: Power2.easeOut});
       }
       TweenMax.to(this.querySelector('i'), 0.6, {scale: 0, ease: Power4.easeIn});
       TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.4, {scaleX: 0, ease: Power3.easeIn});          
     });
+    return;
+    window.addEventListener('resize', this.resizeHomepage);
+    
     document.querySelector('[data-action="learn-more"]').addEventListener('mouseenter', function(e){
       TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});      
     });
