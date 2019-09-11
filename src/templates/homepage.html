@@ -5,6 +5,15 @@ class: homepage
 {% extends "layouts/_layout.html" %}
 
 {% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
 	<!-- LOADER -->
 	<div class="loader">
 			<div class="progress">0%</div>
@@ -43,7 +52,7 @@ class: homepage
 			</div>
 		</div>
 		<div class="hero--player">
-			<video data-src="./img/installation-video.mp4"></video>
+			<video data-src="./img/installation-video.mp4" playsinline></video>
 			<div class="player--controls">
 				<div class="controls--time">
 					<span data-time="current">00:00</span>
@@ -64,7 +73,9 @@ class: homepage
 		<p>Specializes in organizing events, group trips and individual tours. While you are developing your business and concentrating on the tasks that are important to you, Avialiga takes care of all the arrangements for the tour.</p>			
 	</article>
 
-	<article class="homepage__drag" data-img-left="./img/hone-leisure.jpg" data-img-right="./img/home-business.jpg" data-pat-left="./img/pat1.png"  data-pat-right="./img/pat2.png">
+	<article class="homepage__drag" data-aos="fade-up" data-img-left="./img/hone-leisure.jpg" data-img-right="./img/home-business.jpg" data-pat-left="./img/pat1.png"  data-pat-right="./img/pat2.png">
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
 		<div class="wrapper">
 			<div class="button-circle drag" data-action="homepage-drag" data-text="learn more" data-hover="drag my">
 				{{mixins.icon('icon_arrows')}}
@@ -84,8 +95,10 @@ class: homepage
 	</article>
 
 	<article class="homepage__feedback">
-		<section class="leisure">
-			<h2>Leisure Feedback</h2>
+		<section class="homepage__feedback_slider leisure" data-aos="fade-up">
+			<h2>
+				<span>Leisure Feedback</span>
+			</h2>
 			<!-- Slider main container -->
 			<div class="swiper-container">
 				<!-- Additional required wrapper -->
@@ -106,16 +119,20 @@ class: homepage
 				<div class="slider-control">
 					<div class="slider-button-prev">
 						{{mixins.icon('icon_arrow_menu')}}
+						<i></i>
 					</div>
 					<div class="slider-pagination"></div>
 					<div class="slider-button-next">
 						{{mixins.icon('icon_arrow_menu')}}
+						<i></i>
 					</div>
 				</div>
 			</div>
 		</section>
-		<section class="business">
-			<h2>Business Cases</h2>
+		<section class="homepage__feedback_slider business" data-aos="fade-up">
+			<h2>
+				<span>Business Cases</span>
+			</h2>
 			<!-- Slider main container -->
 			<div class="swiper-container">
 				<!-- Additional required wrapper -->
@@ -136,10 +153,12 @@ class: homepage
 				<div class="slider-control">
 					<div class="slider-button-prev">
 						{{mixins.icon('icon_arrow_menu')}}
+						<i></i>
 					</div>
 					<div class="slider-pagination"></div>
 					<div class="slider-button-next">
 						{{mixins.icon('icon_arrow_menu')}}
+						<i></i>
 					</div>
 				</div>
 			</div>
@@ -147,7 +166,7 @@ class: homepage
 		<div class="button-circle more" data-action="learn-more" data-text="learn more"></div>
 	</article>
 
-	<article class="homepage__services">
+	<article class="homepage__services" data-aos="fade-up">
 		<div class="wrapper">
 			<section class="leisure">
 				<h2>Leisure Destinations</h2>
@@ -171,10 +190,12 @@ class: homepage
 					<div class="slider-control">
 						<div class="slider-button-prev">
 							{{mixins.icon('icon_arrow_menu')}}
+							<i></i>
 						</div>
 						<div class="slider-pagination"></div>
 						<div class="slider-button-next">
 							{{mixins.icon('icon_arrow_menu')}}
+							<i></i>
 						</div>
 					</div>
 					
@@ -202,10 +223,12 @@ class: homepage
 					<div class="slider-control">
 						<div class="slider-button-prev">
 							{{mixins.icon('icon_arrow_menu')}}
+							<i></i>
 						</div>
 						<div class="slider-pagination"></div>
 						<div class="slider-button-next">
 							{{mixins.icon('icon_arrow_menu')}}
+							<i></i>
 						</div>
 					</div>
 				</div>
@@ -213,7 +236,7 @@ class: homepage
 		</div>
 	</article>
 
-	<article class="homepage__tabs">
+	<article class="homepage__tabs" data-aos="fade-up">
 		<div class="homepage__tabs_disk">
 				<div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>				
 				<img src="./img/advantages-1.svg" class="disk--arrow-1" alt="">
@@ -273,9 +296,11 @@ class: homepage
 	</article>
 
 	<article class="homepage__insta">
-		<section class="leisure">
+		<section class="leisure" data-aos="fade-up">
 			<div class="homepage__insta_title">
-				<h2>Leisure insta</h2>
+				<h2>
+					<span>Leisure insta</span>
+				</h2>
 				<a href="">@avialiga_leisure</a>
 			</div>
 			<div class="homepage__insta_gallery">
@@ -284,9 +309,11 @@ class: homepage
 				<img src="./img/insta-leisure-3.jpg" alt="">
 			</div>
 		</section>
-		<section class="business">
+		<section class="business" data-aos="fade-up">
 			<div class="homepage__insta_title">
-				<h2>Business insta</h2>
+				<h2>
+					<span>Business insta</span>
+				</h2>
 				<a href="">@avialiga_business</a>
 			</div>
 			<div class="homepage__insta_gallery">
@@ -297,9 +324,11 @@ class: homepage
 		</section>
 	</article>
 
-	<article class="homepage__form">
+	<article class="homepage__form" data-aos="fade-up">
 		<div class="homepage__form_title">
-			<h2>Your travel expert</h2>
+			<h2>
+				<span>Your travel expert</span>
+			</h2>
 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 		</div>
 		<div class="homepage__form_body">

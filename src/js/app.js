@@ -99,6 +99,7 @@ function header(e){
 // Homepage init
 const _homepage = function(page){
   let that = this;
+  this.play = true;
 
   this.blobs = {
     heroBg: null,
@@ -135,29 +136,33 @@ const _homepage = function(page){
     init: function(){
       let video = this
       let src = document.querySelector('.hero--player video').getAttribute('data-src');      
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', src, true);
-      xhr.responseType = 'blob';      
-      xhr.onload = function(e) {
-        if (this.status == 200) {          
-          var myBlob = this.response;
-          var vid = (window.webkitURL || window.URL).createObjectURL(myBlob);          
-          app.homepage.blobs.heroVideo = vid;
-          //document.querySelector('.hero--player video').src = app.homepage.blobs.heroVideo;
-          //console.log(app.homepage.video)
-          //app.homepage.video.loaded = true;
-        }
-      }
-      xhr.send();
+      // var xhr = new XMLHttpRequest();
+      // xhr.open('GET', src, true);
+      // xhr.responseType = 'blob';      
+      // xhr.onload = function(e) {
+      //   if (this.status == 200) {          
+      //     var myBlob = this.response;
+      //     var vid = (window.webkitURL || window.URL).createObjectURL(myBlob);          
+      //     app.homepage.blobs.heroVideo = vid;
+      //     //document.querySelector('.hero--player video').src = app.homepage.blobs.heroVideo;
+      //     //console.log(app.homepage.video)
+      //     //app.homepage.video.loaded = true;
+      //   }
+      // }
+      // xhr.send();
       document.querySelector('.hero--player video').src = app.homepage.blobs.heroVideo || src;
       
       
       //this.controls.querySelector('[data-time="all"]').innerText = this.time().duration;      
-      this.video.addEventListener('click', function(e){        
+      this.video.addEventListener('click', function(e){
         if(this.paused){
           video.play();
+          TweenMax.to('.cursor i.pause', 0.3, {scale: 1, ease: Power2.easeInOut});
+          TweenMax.to('.cursor i.play', 0.3, {scale: 0, ease: Power2.easeInOut});
         }else{
           video.pause();
+          TweenMax.to('.cursor i.pause', 0.3, {scale: 0, ease: Power2.easeInOut});
+          TweenMax.to('.cursor i.play', 0.3, {scale: 1, ease: Power2.easeInOut});
         }    
       });
       this.video.addEventListener('loadedmetadata', function(e){        
@@ -167,10 +172,14 @@ const _homepage = function(page){
         TweenMax.set('.player--controls .controls--bar i', {width: video.bar()+'%'});
       });
       document.querySelector('[data-action="homepage-hero-play"]').addEventListener('click', function(e){        
-        video.video.play();        
+        video.video.play();
+        app.homepage.heroVideo.active = true;        
         let tl = new TimelineMax();        
         let h1 = [].slice.call(document.querySelectorAll('.homepage__hero h1 span'), 0).reverse();          
-        tl.to('[data-action="homepage-hero-play"]', 0.3, {scale: 0, ease: Power2.easeIn})
+        tl.to('[data-action="homepage-hero-play"]', 0.3, {scale: 0, ease: Power2.easeIn}, 'cursor')
+          .to('.cursor span', 0.6, {scale: 1.4}, 'cursor')
+          .to('.cursor i.circle', 0.6, {scale: 0}, 'cursor')
+          .to('.cursor i.pause', 0.6, {scale: 1}, 'cursor')
           .staggerTo(h1, 0.5, {rotationX: 90, opacity: 0, ease: Power2.easeIn}, 0.05, '-=0.3')
           .to('header', 0.5, {opacity: 0}, '-=0.3')
           .to('.homepage__hero_footer', 0.5, {opacity: 0}, '-=0.3')
@@ -185,28 +194,35 @@ const _homepage = function(page){
             //   video.video.autoplay = false;
             //   video.loaded = true;
             // }            
+            //video.video.src = src;
           })
           .set('body', {overflow: 'hidden'})
           .to('.hero--player', 0.5, {autoAlpha: 1})
-          .fromTo('[data-action="homepage-close-video"]', 0.5, {scale: 0}, {scale: 1, ease: Power2.easeInOut})
+          .fromTo('[data-action="homepage-close-video"]', 0.5, {scale: 1.4, opacity:0}, {scale: 1, opacity: 1})          
           .add(function(){
-            app.homepage.hero.resours.source.pause();
-            //video.video.play();
+            app.homepage.hero.resours.source.pause();            
           })
-      });
+      });      
       document.querySelector('[data-action="homepage-close-video"]').addEventListener('click', function(e){
+        app.homepage.heroVideo.active = false;
         let tl = new TimelineMax();        
         let h1 = [].slice.call(document.querySelectorAll('.homepage__hero h1 span'), 0).reverse();
-        video.video.pause();        
-        app.homepage.hero.resours.source.play();
-        video.video.currentTime = 0;
-        tl.to('[data-action="homepage-close-video"]', 0.5, {scale: 0, ease: Power2.easeIn})
+        video.video.pause();
+        app.homepage.hero.resours.source.play();        
+        tl.to('.cursor span', 0.6, {scale: 1}, 'cursor')
+        .to('.cursor i.circle', 0.6, {scale: 1}, 'cursor')
+        .to('.cursor i.pause', 0.6, {scale: 0}, 'cursor')
+        .to('.cursor i.play', 0.6, {scale: 0}, 'cursor')
+        .to('[data-action="homepage-close-video"]', 0.5, {scale: 0, ease: Power2.easeIn}, 'cursor')
         .to('.hero--player', 0.5, {autoAlpha: 0})
         .set('body', {overflow: 'auto'})
         .staggerFromTo(document.querySelectorAll('.homepage__hero h1 span'), 0.8, {rotationX: 90, opacity: 0}, {rotationX: 0, opacity: 1, ease: Power2.easeOut}, 0.1, '-=0.3')
         .to('header', 0.5, {opacity: 1}, '-=0.3')
         .to('.homepage__hero_footer', 0.5, {opacity: 1}, '-=0.3')
         .to('[data-action="homepage-hero-play"]', 0.3, {scale: 1}, '-=0.3')
+        .add(function(){
+          video.video.currentTime = 0;
+        })
 
         // tl.to('[data-action="homepage-hero-play"]', 0.3, {scale: 0})
         //   .staggerTo(h1, 0.5, {rotationX: 90, opacity: 0, ease: Power2.easeIn}, 0.05, '-=0.3')
@@ -351,77 +367,112 @@ const _homepage = function(page){
         formRender();
         buttonsRender();        
         app.homepage.tabs.init();
+        app.homepage.cursor.init();
         app.homepage.hero = new heroRender();
         app.homepage.drag = new dragRender();
         app.homepage.eventsInit();
         TweenMax.to(this, 1, {progress: 100, onUpdate: function(){
           document.querySelector('.loader .progress').innerHTML = that.progress.toFixed()+'%';
         }, ease: Power3.easeOut, onComplete: function(){
-          app.homepage.hero.heroBgCover();
-          app.homepage.hero.hero.renderer.resize(app.homepage.hero.el.clientWidth, app.homepage.hero.el.clientHeight);
-          app.homepage.hero.bg.width = app.homepage.hero.heroBgWidth;
-          app.homepage.hero.bg.height = app.homepage.hero.heroBgHeight;
-          app.homepage.hero.bg.x  = app.homepage.hero.heroBgLeft;
-          app.homepage.hero.bg.y  = app.homepage.hero.heroBgTop;
-          app.homepage.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 2;
-          app.homepage.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 2;
-          app.homepage.hero.displacementSprite.x = app.homepage.hero.hero.renderer.width / 2;
-          app.homepage.hero.displacementSprite.y = app.homepage.hero.hero.renderer.height / 2;
           this.mySwiper = new Swiper ('.swiper-container', {
             // Optional parameters    
             speed: 800,
+            simulateTouch: false,
             // If we need pagination
             pagination: {
               el: '.slider-pagination',
               type: 'fraction'
             },
-
             // Navigation arrows
             navigation: {
               nextEl: '.slider-button-next',
               prevEl: '.slider-button-prev',
-            }    
+            }
           });
-          that.loaded();
+          console.log(this.mySwiper);
+          this.mySwiper.forEach(function(el, i){
+            if(el.el.closest('.homepage__services')){
+              TweenMax.set(el.el.querySelector('.swiper-slide-active .slide--photo'), {scale: 1.4});
+            }
+            el.on('slideChangeTransitionStart', function(){
+              if(this.realIndex > this.previousIndex){
+                let tl = new TimelineMax();
+                tl//.to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 0.7, {opacity: 0}, 'start')
+                .to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 1.4, {scale: 1.5}, 'start')
+                .to(this.el.querySelector('.swiper-slide-prev'), 0.4, {skewX: -30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+                //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
+                .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
+                .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: -30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+              }else{
+                let tl = new TimelineMax();
+                tl//.to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 0.7, {opacity: 0}, 'start')
+                .to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 1.4, {scale: 1.5}, 'start')
+                .to(this.el.querySelector('.swiper-slide-next'), 0.4, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+                //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
+                .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
+                .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+              }
+              console.log(this.el.classList)
+            });            
+          });
+          // this.mySwiper.on('slideChange', function(a, b){
+          //   console.log(a);
+          //   console.log(b);
+          // });
+          let interval = setInterval(function(){            
+            if(app.homepage.hero.resours && app.homepage.hero.resours.width > 0){
+              clearInterval(interval);              
+              app.homepage.hero.heroBgCover();
+              app.homepage.hero.hero.renderer.resize(app.homepage.hero.el.clientWidth, app.homepage.hero.el.clientHeight);
+              app.homepage.hero.bg.width = app.homepage.hero.heroBgWidth;
+              app.homepage.hero.bg.height = app.homepage.hero.heroBgHeight;
+              app.homepage.hero.bg.x  = app.homepage.hero.heroBgLeft;
+              app.homepage.hero.bg.y  = app.homepage.hero.heroBgTop;
+              app.homepage.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 2;
+              app.homepage.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 2;
+              app.homepage.hero.displacementSprite.x = app.homepage.hero.hero.renderer.width / 2;
+              app.homepage.hero.displacementSprite.y = app.homepage.hero.hero.renderer.height / 2;              
+
+              var promise = app.homepage.hero.resours.source.play();
+
+              if (promise !== undefined) {
+                  promise.catch(error => {
+                    console.log('error');
+                  }).then(() => {
+                    app.homepage.hero.resours.source.play(); 
+                    console.log('Ok');
+                  });
+              }
+              
+              that.loaded();
+              aosInit();
+            }
+          }, 100)
         }});
       }else{
         TweenMax.to(this, 1, {progress: p, onUpdate: function(){
           document.querySelector('.loader .progress').innerHTML = that.progress.toFixed()+'%';
         }});
-      }      
-      //console.log(Number(p), this.next);
-      
-      
-      
-      //console.log(ratio);
-      // TweenMax.to("#morph", 5, {morphSVG: 'M83.5,64.25L54.125,48.7500114L34.625,40.25l17.75,4.5000076L83.5,64.25z'});
-      // if(p < 100){
-      //   TweenMax.to(this, 1, {progress: p, onUpdate: function(){
-      //     document.querySelector('.loader .progress').innerHTML = that.progress.toFixed();
-      //   }});
-      // }else{
-      //   TweenMax.to(this, 1, {progress: p, onUpdate: function(){
-      //     document.querySelector('.loader .progress').innerHTML = that.progress.toFixed();
-      //   }, onComplete: this.loaded});
-      // }
+      }
     },
     loaded: function(){      
-      window.scroll(0, 0);
+      window.scroll(0, 0);      
       let tl = new TimelineMax({});
       tl.to('.loader .progress', 0.7, {opacity: 0})
         .to('.loader .logo', 0.7, {opacity: 0, onComplete: function(){          
-          app.homepage.hero.resours.source.play();
+          
         }}, '-=1')              
-        .to(['.blind-left', '.blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn, onComplete: function(){
+        .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn, onComplete: function(){
           document.querySelector('.loader').remove();
           TweenMax.set('body', {overflow: 'auto'});
         }})
         .staggerFrom(document.querySelectorAll('.homepage__hero h1 span'), 1, {rotationX: 90, opacity: 0, ease: Power2.easeOut}, 0.1, '+=0.3')
         .from('header', 0.8, {opacity: 0}, '-=0.5')
         .from('.homepage__hero_footer', 0.8, {opacity: 0}, '-=0.4')
-        .from('[data-action="homepage-hero-play"]', 0.5, {scale: 0}, '-=0.4')
+        .from('[data-action="homepage-hero-play"]', 0.5, {scale: 1.4, opacity: 0}, '-=0.4')
         .add(function(){
-          app.homepage.heroVideo.init();          
+          app.homepage.heroVideo.init();
+          TweenMax.set(document.querySelectorAll('.homepage__insta h2 span, .homepage__form_title h2 span'), {opacity: 0});
         });
     }
   }
@@ -441,7 +492,7 @@ const _homepage = function(page){
   function heroRender(){
     let that = this;    
     this.heroBgCover = function(){
-      let ratio = this.resours.width / this.resours.height;
+      let ratio = this.resours.width / this.resours.height;      
       if(document.body.clientWidth / window.innerHeight > ratio){
         this.heroBgWidth = document.body.clientWidth;
         this.heroBgHeight = document.body.clientWidth / ratio;
@@ -454,6 +505,8 @@ const _homepage = function(page){
         this.heroBgLeft = -((window.innerHeight * ratio) - document.body.clientWidth) / 2;
       }
     };
+
+    
     
     this.el = document.querySelector('.homepage__hero');
     this.hero = new PIXI.Application({
@@ -461,24 +514,67 @@ const _homepage = function(page){
       height: this.el.clientHeight,      
       forceFXAA: true,
       clearBeforeRender: false
+      // forceCanvas: true
     });
     this.el.appendChild(this.hero.view);
-    this.hero.stage.interactive = true;  
 
-    let blob = document.createElement('video');
-    blob.src = app.homepage.blobs.heroBg;    
-    this.resours = new PIXI.resources.VideoResource(blob, {
-      autoPlay: false,
-      updateFPS: 30
-    });
-    this.resours.source.loop = true;
-    this.resours.source.autoplay = true;
-    this.resours.source.muted = true;
-    this.baseTexture = new PIXI.BaseTexture(this.resours);
-    this.ratio = this.baseTexture.realWidth / this.baseTexture.realWidth;
-    this.texture = new PIXI.Texture(this.baseTexture);
-    this.bg = new PIXI.Sprite(this.texture);    
-    this.hero.stage.addChild(this.bg);
+    //this.hero.ticker.maxFPS = 30;
+    //this.hero.ticker.speed = 0.1;
+    this.hero.stage.interactive = true;
+
+    
+    // this.hero.ticker.add(function (delta) {
+    //   console.log(delta, that.hero.ticker.FPS);
+    // });
+
+    const loader = PIXI.Loader.shared;
+    loader.add('baseTexture', app.homepage.blobs.heroBg)
+    .add('displacementSprite', './img/displacement.png');
+    loader.load(function(loader, resources){
+      let blob = document.createElement('video');
+      blob.src = resources.baseTexture.url;      
+      that.resours = new PIXI.resources.VideoResource(blob, {
+        autoPlay: false,
+        autoUpdate: false,
+        updateFPS: 30,
+        width: 100,
+        height: 100
+      });      
+      
+      that.resours.source.setAttribute('playsinline', '')
+      that.resours.source.loop = true;
+      that.resours.source.autoplay = true;
+      that.resours.source.muted = true;      
+      
+      that.baseTexture = new PIXI.BaseTexture(that.resours);
+      that.ratio = that.baseTexture.realWidth / that.baseTexture.realWidth;
+      that.texture = new PIXI.Texture(that.baseTexture);
+      that.bg = new PIXI.Sprite(that.texture);    
+      that.hero.stage.addChild(that.bg);
+
+      that.displacementSprite = new PIXI.Sprite(resources.displacementSprite.texture);      
+      that.displacementSprite.width = document.body.clientWidth / 2;
+      that.displacementSprite.height = document.body.clientWidth / 2;
+      that.displacementSprite.anchor.set(0.5);
+      that.displacementFilter = new PIXI.filters.DisplacementFilter(that.displacementSprite);
+      that.displacementFilter.scale.x = 50;
+      that.displacementFilter.scale.y = 50;
+      that.hero.stage.addChild(that.displacementSprite);  
+      that.bg.filters = [that.displacementFilter];
+      function onPointerMove(e) {      
+        TweenMax.to(that.displacementSprite, 1.5, {x:e.clientX - 25, y: e.clientY});
+      }  
+      that.el.addEventListener('mousemove', onPointerMove);
+      TweenMax.to(that.displacementSprite, 12, {rotation: 6.28319, ease: Power0.easeNone, repeat: -1, onUpdate: function(){        
+        //console.log(that.hero.ticker.FPS)
+      }});      
+    });    
+    
+    
+
+    
+
+    
 
     //this.heroBgCover();
 
@@ -498,20 +594,7 @@ const _homepage = function(page){
     
     
 
-    this.displacementSprite = PIXI.Sprite.from('./img/displacement.png');
-    this.displacementSprite.width = document.body.clientWidth / 2;
-    this.displacementSprite.height = document.body.clientWidth / 2;
-    this.displacementSprite.anchor.set(0.5);
-    this.displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
-    this.displacementFilter.scale.x = 50;
-    this.displacementFilter.scale.y = 50;
-    this.hero.stage.addChild(this.displacementSprite);  
-    this.bg.filters = [this.displacementFilter];
-    function onPointerMove(e) {      
-      TweenMax.to(that.displacementSprite, 1.5, {x:e.clientX - 25, y: e.clientY});
-    }  
-    this.el.addEventListener('mousemove', onPointerMove);
-    TweenMax.to(that.displacementSprite, 12, {rotation: 6.28319, ease: Power0.easeNone, repeat: -1});    
+    
   }    
   // End Hero background
 
@@ -612,6 +695,9 @@ const _homepage = function(page){
     }
 
 
+    
+
+
     this.dragMove = false;
     this.dragx = 0;
     this.dragDone = false;
@@ -641,162 +727,7 @@ const _homepage = function(page){
           }
         }
       }
-    }
-    
-      
-    
-    return;
-    
-    this.img1 = new Image();
-    this.img1.src = this.el.getAttribute('data-img-left');
-    this.img1.onload = function(){
-      that.ctx.save();
-      that.ctx.beginPath();
-      that.ctx.moveTo(-200, 0);
-      that.ctx.lineTo(((that.el.clientWidth / 2) - 200 + (that.el.clientWidth / 2)/2.92), 0);
-      that.ctx.lineTo(((that.el.clientWidth / 2) - 200 - (that.el.clientWidth / 2)/2.92), that.el.clientHeight);
-      that.ctx.lineTo(-200, that.el.clientHeight);      
-      that.ctx.lineTo(-200, 0);      
-      that.ctx.closePath();
-      // Clip to the current path
-      that.ctx.clip();
-      that.ctx.drawImage(that.img1, -200, 0, that.el.clientWidth, that.el.clientHeight);
-      that.ctx.restore();
     }    
-    this.img2 = new Image();
-    this.img2.src = this.el.getAttribute('data-img-right');
-    this.img2.onload = function(){
-      that.ctx.save();
-      that.ctx.beginPath();
-      that.ctx.moveTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);
-      that.ctx.lineTo(that.el.clientWidth, 0);
-      that.ctx.lineTo(that.el.clientWidth, that.el.clientHeight);
-      that.ctx.lineTo(((that.el.clientWidth / 2) - (that.el.clientWidth / 2)/2.92), that.el.clientHeight);      
-      that.ctx.lineTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2)/2.92), 0);      
-      that.ctx.closePath();
-      // Clip to the current path
-      that.ctx.clip();
-      that.ctx.drawImage(that.img2, 0, 0, that.el.clientWidth, that.el.clientHeight);
-      that.ctx.restore();
-    }
-
-
-    
-    // this.img2 = new Image();
-    // this.img2.src = this.el.getAttribute('data-img-right');    
-    // this.img2.onload = function(){
-    //   that.ctx.drawImage(that.img2, 50, 50, 200, 100);
-    // }
-    
-    
-
-    return
-    this.el = document.querySelector('.homepage__drag');
-    this.drag = new PIXI.Application({
-      width: this.el.clientWidth,
-      height: this.el.clientHeight,
-      clearBeforeRender: false,
-      forceCanvas: true
-    });  
-    this.el.appendChild(this.drag.view);
-    this.container1 = new PIXI.Container();
-    this.container2 = new PIXI.Container();
-    
-
-    this.pat1 = PIXI.Sprite.from(this.el.getAttribute('data-pat-left'));
-    this.pat1.width = this.el.clientWidth;
-    this.pat1.height = this.el.clientHeight;
-    this.pat1.x  = 0;
-    this.pat1.y  = 0;    
-    this.drag.stage.addChild(this.pat1);    
-
-    this.pat2 = PIXI.Sprite.from(this.el.getAttribute('data-pat-right'));
-    this.pat2.width = this.el.clientWidth;
-    this.pat2.height = this.el.clientHeight;
-    this.pat2.x  = 0;
-    this.pat2.y  = 0;    
-    this.drag.stage.addChild(this.pat2);
-      
-    this.img1 = PIXI.Sprite.from(this.el.getAttribute('data-img-left'));
-    this.img1.width = this.el.clientWidth;
-    this.img1.height = this.el.clientHeight;
-    this.img1.x  = 0;
-    this.img1.y  = 0;
-    //this.drag.stage.addChild(this.img1);
-    this.container1.addChild(this.img1);
-    
-    const dragPoligonPath1 = [0, this.drag.renderer.height, 0, 0, ((this.drag.renderer.width / 2) + (this.drag.renderer.width / 2)/2.95), 0, ((this.drag.renderer.width / 2) - (this.drag.renderer.width / 2)/2.95), this.drag.renderer.height];
-    this.dragPoligon1 = new PIXI.Graphics()
-    .lineStyle(0)
-    .beginFill(0xFFFFFF, 1)
-    .drawPolygon(dragPoligonPath1)
-    .endFill();
-    //this.drag.stage.addChild(this.dragPoligon1);
-    this.container1.addChild(this.dragPoligon1);
-    this.img1.mask = this.dragPoligon1;
-    this.drag.stage.addChild(this.container1);
-    
-
-
-    this.img2 = PIXI.Sprite.from(this.el.getAttribute('data-img-right'));
-    this.img2.width = this.el.clientWidth;
-    this.img2.height = this.el.clientHeight;
-    this.img2.x  = 0;
-    this.img2.y  = 0;
-    //this.drag.stage.addChild(this.img2);
-    this.container2.addChild(this.img2);
-    
-    const dragPoligonPath2 = [((this.drag.renderer.width / 2) - (this.drag.renderer.width / 2)/2.95), this.drag.renderer.height, ((this.drag.renderer.width / 2) + (this.drag.renderer.width / 2)/2.95), 0, (this.drag.renderer.width * 2), 0, (this.drag.renderer.width * 2), this.drag.renderer.height];
-
-    this.dragPoligon2 = new PIXI.Graphics()
-    .lineStyle(0)
-    .beginFill(0xFFFFFF, 1)
-    .drawPolygon(dragPoligonPath2)
-    .endFill();
-    this.container2.addChild(this.dragPoligon2);
-    this.img2.mask = this.dragPoligon2;
-    this.drag.stage.addChild(this.container2);
-
-    
-    this.patPoligon1 = this.dragPoligon1.clone();
-    this.pat1.mask = this.patPoligon1;
-    this.patPoligon2 = this.dragPoligon2.clone();
-    this.pat2.mask = this.patPoligon2;
-
-
-    this.dragMove = false;
-    this.dragx = 0;
-    this.dragDone = false;
-
-    
-    
-    
-    this.dragControl = function(e){
-      if(that.drag.dragMove){
-        let limit = (that.drag.el.clientWidth / 2) / 3;        
-        let x = e.clientX - that.drag.dragx;
-        if(x < 0 && x > -limit){
-          TweenMax.to(that.drag.container1, 0, {x:x});
-          TweenMax.to(that.drag.container2, 0, {x:0});
-          TweenMax.to('[data-action="homepage-drag"]', 0, {x:x});
-        }else if(x > 0 && x < limit){
-          TweenMax.to(that.drag.container1, 0, {x:0});
-          TweenMax.to(that.drag.container2, 0, {x:x});
-          TweenMax.to('[data-action="homepage-drag"]', 0, {x:x});
-        }else if(x < -limit || x > limit){
-          that.drag.dragMove = false;
-          that.drag.dragDone = true;          
-          if(x < -limit){            
-            TweenMax.to(that.drag.container1, 1.2, {x:- that.drag.el.clientWidth, ease: Power2.easeInOut});
-            TweenMax.to(that.drag.container2, 0, {x:0});
-          }else if(x > limit){
-            TweenMax.to(that.drag.container1, 0, {x:0});
-            TweenMax.to(that.drag.container2, 1.2, {x: that.drag.el.clientWidth, ease: Power2.easeInOut});
-            
-          }
-        }
-      }
-    }
   }  
   
   
@@ -804,6 +735,7 @@ const _homepage = function(page){
   // End Drag Slider
 
   this.resizeHomepage = function(e){
+    
     that.hero.heroBgCover();
     that.hero.hero.renderer.resize(that.hero.el.clientWidth, that.hero.el.clientHeight);
     that.hero.bg.width = that.hero.heroBgWidth;
@@ -813,67 +745,98 @@ const _homepage = function(page){
     that.hero.displacementSprite.width = that.hero.hero.renderer.width / 2;
     that.hero.displacementSprite.height = that.hero.hero.renderer.height / 2;
 
+
+    console.log(that.drag.pat1)
+    let ratio = that.drag.pat1.width/that.drag.pat1.height;
+    that.drag.canv1.width = that.drag.el.clientWidth;
+    that.drag.canv1.height = that.drag.el.clientWidth/ratio;
+    that.drag.canv2.width = that.drag.el.clientWidth;
+    that.drag.canv2.height = that.drag.el.clientWidth/ratio;
+    that.drag.canv3.width = that.drag.el.clientWidth;
+    that.drag.canv3.height = that.drag.el.clientWidth/ratio;
+
+    that.drag.ctx1.save();
+    that.drag.ctx1.beginPath();
+    that.drag.ctx1.moveTo(0, 0);
+    that.drag.ctx1.lineTo(((that.drag.el.clientWidth / 2) + (that.drag.el.clientWidth / 2)/2.92), 0);
+    that.drag.ctx1.lineTo(((that.drag.el.clientWidth / 2) - (that.drag.el.clientWidth / 2)/2.92), that.drag.el.clientHeight);
+    that.drag.ctx1.lineTo(0, that.drag.el.clientHeight);      
+    that.drag.ctx1.lineTo(0, 0);      
+    that.drag.ctx1.closePath();
+    // Clip to the current path
+    that.drag.ctx1.clip();
+    that.drag.ctx1.drawImage(that.drag.pat1, 0, 0, that.drag.el.clientWidth, that.drag.el.clientHeight);
+    that.drag.ctx1.restore();
+
+    that.drag.ctx1.save();
+    that.drag.ctx1.beginPath();
+    that.drag.ctx1.moveTo(((that.drag.el.clientWidth / 2) + (that.drag.el.clientWidth / 2)/2.92), 0);
+    that.drag.ctx1.lineTo(that.drag.el.clientWidth, 0);
+    that.drag.ctx1.lineTo(that.drag.el.clientWidth, that.drag.el.clientHeight);
+    that.drag.ctx1.lineTo(((that.drag.el.clientWidth / 2) - (that.drag.el.clientWidth / 2)/2.92), that.drag.el.clientHeight);      
+    that.drag.ctx1.lineTo(((that.drag.el.clientWidth / 2) + (that.drag.el.clientWidth / 2)/2.92), 0);    
+    that.drag.ctx1.closePath();
+    // Clip to the current path
+    that.drag.ctx1.clip();
+    that.drag.ctx1.drawImage(that.drag.pat2, 0, 0, that.drag.el.clientWidth, that.drag.el.clientHeight);
+    that.drag.ctx1.restore();
+
+    that.drag.ctx2.save();
+    that.drag.ctx2.beginPath();
+    that.drag.ctx2.moveTo(0, 0);
+    that.drag.ctx2.lineTo(((that.drag.el.clientWidth / 2) + (that.drag.el.clientWidth / 2)/2.92), 0);
+    that.drag.ctx2.lineTo(((that.drag.el.clientWidth / 2) - (that.drag.el.clientWidth / 2)/2.92), that.drag.el.clientHeight);
+    that.drag.ctx2.lineTo(0, that.drag.el.clientHeight);      
+    that.drag.ctx2.lineTo(0, 0);
+    that.drag.ctx2.closePath();
+    // Clip to the current path
+    that.drag.ctx2.clip();
+    that.drag.ctx2.drawImage(that.drag.img1, 0, 0, that.drag.el.clientWidth, that.drag.el.clientHeight);
+    that.drag.ctx2.restore();
+
+    that.drag.ctx3.save();
+    that.drag.ctx3.beginPath();
+    that.drag.ctx3.moveTo(((that.drag.el.clientWidth / 2) + (that.drag.el.clientWidth / 2)/2.92), 0);
+    that.drag.ctx3.lineTo(that.drag.el.clientWidth, 0);
+    that.drag.ctx3.lineTo(that.drag.el.clientWidth, that.drag.el.clientHeight);
+    that.drag.ctx3.lineTo(((that.drag.el.clientWidth / 2) - (that.drag.el.clientWidth / 2)/2.92), that.drag.el.clientHeight);      
+    that.drag.ctx3.lineTo(((that.drag.el.clientWidth / 2) + (that.drag.el.clientWidth / 2)/2.92), 0);      
+    that.drag.ctx3.closePath();
+    // Clip to the current path
+    that.drag.ctx3.clip();
+    that.drag.ctx3.drawImage(that.drag.img2, 0, 0, that.drag.el.clientWidth, that.drag.el.clientHeight);
+    that.drag.ctx3.restore();
     
-    that.drag.drag.renderer.resize(that.drag.el.clientWidth, that.drag.el.clientHeight);
-    that.drag.img1.width = that.drag.el.clientWidth;
-    that.drag.img1.height = that.drag.el.clientHeight;
-    that.drag.img2.width = that.drag.el.clientWidth;
-    that.drag.img2.height = that.drag.el.clientHeight;
-    that.drag.pat1.width = that.drag.el.clientWidth;
-    that.drag.pat1.height = that.drag.el.clientHeight;
-    that.drag.pat2.width = that.drag.el.clientWidth;
-    that.drag.pat2.height = that.drag.el.clientHeight;
-
-    const dragPoligonPath1 = [0, that.drag.drag.renderer.height, 0, 0, ((that.drag.drag.renderer.width / 2) + (that.drag.drag.renderer.width / 2)/2.95), 0, ((that.drag.drag.renderer.width / 2) - (that.drag.drag.renderer.width / 2)/2.95), that.drag.drag.renderer.height];    
-    that.drag.dragPoligon1.clear();
-    that.drag.dragPoligon1 = new PIXI.Graphics()
-    .lineStyle(0)
-    .beginFill(0xFFFFFF, 1)
-    .drawPolygon(dragPoligonPath1)
-    .endFill();
-    that.drag.container1.addChild(that.drag.dragPoligon1);
-    that.drag.img1.mask = that.drag.dragPoligon1;
-
-    const dragPoligonPath2 = [((that.drag.drag.renderer.width / 2) - (that.drag.drag.renderer.width / 2)/2.95), that.drag.drag.renderer.height, ((that.drag.drag.renderer.width / 2) + (that.drag.drag.renderer.width / 2)/2.95), 0, (that.drag.drag.renderer.width * 2), 0, (that.drag.drag.renderer.width * 2), that.drag.drag.renderer.height];
-    that.drag.dragPoligon2.clear();
-    that.drag.dragPoligon2 = new PIXI.Graphics()
-    .lineStyle(0)
-    .beginFill(0xFFFFFF, 1)
-    .drawPolygon(dragPoligonPath2)
-    .endFill();
-    that.drag.container2.addChild(that.drag.dragPoligon2);
-    that.drag.img2.mask = that.drag.dragPoligon2;
-
-    that.drag.patPoligon1.clear();
-    that.drag.patPoligon1 = that.drag.dragPoligon1.clone();
-    that.drag.pat1.mask = that.drag.patPoligon1;
-    that.drag.patPoligon2.clear();
-    that.drag.patPoligon2 = that.drag.dragPoligon2.clone();
-    that.drag.pat2.mask = that.drag.patPoligon2;
   }
 
 
 
   this.eventsInit = function(){
-    window.addEventListener('scroll', function(e){
+    window.addEventListener('scroll', function(e){      
       let scrollTop = window.pageYOffset;
       header(e);
       if(scrollTop > (window.innerHeight)){
-        app.homepage.hero.resours.source.pause();
+        if(that.play){
+          app.homepage.hero.hero.ticker.stop();
+          //app.homepage.hero.resours.source.pause();
+          that.play = false;
+          console.log('Pause');
+        }
       }else{
-        app.homepage.hero.resours.source.play();
+        if(!that.play){
+          app.homepage.hero.hero.ticker.start();
+          //app.homepage.hero.resours.source.play();
+          that.play = true;
+          console.log('Play');
+        }        
       }
-    });
-    // document.body.addEventListener('mousemove', function(e){
-    //   TweenMax.set('.cursor', {x : (e.clientX - 35), y : (e.clientY - 35)});
-    // });    
+    });    
     document.querySelectorAll('[data-action="submenu"]').forEach(function(el, i){
       el.addEventListener('mouseenter', header);
       el.addEventListener('mouseleave', header);      
     });
     document.querySelectorAll('.take-button, .form--submit button').forEach(function(el, i){
-      el.addEventListener('mouseenter', function(e){
-        console.log(this);
+      el.addEventListener('mouseenter', function(e){        
         TweenMax.to(this, 0.5, {color: '#fff', ease: Power2.easeOut});
         TweenMax.to(this.querySelector('i'), 0.5, {y:5, height: '40px', ease: Power2.easeOut});
       });
@@ -903,45 +866,82 @@ const _homepage = function(page){
     document.querySelector('[data-action="homepage-hero-play"]').addEventListener('mouseenter', function(e){
       TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
       TweenMax.to(this.querySelector('.icon'), 0.5, {fill: '#fff', ease: Power3.easeOut});
+      TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut});
     });
     document.querySelector('[data-action="homepage-hero-play"]').addEventListener('mouseleave', function(e){
       TweenMax.to(this.querySelector('i'), 0.5, {scale: 0, ease: Power3.easeIn});
       TweenMax.to(this.querySelector('.icon'), 0.5, {fill: '#ee412a', ease: Power3.easeIn});
+      if(!app.homepage.heroVideo.active)TweenMax.to('.cursor span', 0.5, {scale: 1, ease: Power3.easeIn});
     });
 
     document.querySelector('[data-action="homepage-close-video"]').addEventListener('mouseenter', function(e){
       TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
       TweenMax.to(this.querySelector('.icon'), 0.5, {fill: '#fff', ease: Power3.easeOut});
+      TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut});
+      TweenMax.to('.cursor i.circle', 0.5, {scale: 1})
+      TweenMax.to('.cursor i.pause', 0.5, {scale: 0})
+      TweenMax.to('.cursor i.play', 0.5, {scale: 0})
     });
     document.querySelector('[data-action="homepage-close-video"]').addEventListener('mouseleave', function(e){      
       TweenMax.to(this.querySelector('i'), 0.5, {scale: 0, ease: Power3.easeIn});
       TweenMax.to(this.querySelector('.icon'), 0.5, {fill: '#ee412a', ease: Power3.easeIn});
+      if(app.homepage.heroVideo.active){
+        TweenMax.to('.cursor span', 0.5, {scale: 1.4, ease: Power3.easeIn});
+        TweenMax.to('.cursor i.circle', 0.5, {scale: 0, ease: Power3.easeIn})
+        if(app.homepage.heroVideo.video.paused){         
+          TweenMax.to('.cursor i.play', 0.5, {scale: 1, ease: Power3.easeIn})
+        }else{
+          TweenMax.to('.cursor i.pause', 0.5, {scale: 1, ease: Power3.easeIn})
+        }
+      }
     });
 
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mouseenter', function(e){
       TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
       TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.8, {scaleX: 1, ease: Power4.easeOut});
+      TweenMax.to('.cursor i.circle', 0.6, {backgroundColor: '#ee412a'});
+      TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut})
     });
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mouseleave', function(e){
       if(!that.drag.dragDone){
         that.drag.dragMove = false;
         that.drag.dragx = 0;
         TweenMax.to('[data-action="homepage-drag"]', 0.5, {x:0, ease: Power2.easeOut});
-        TweenMax.to([document.querySelector('canvas.leisure'), document.querySelector('canvas.business')], 0.5, {x:0, ease: Power2.easeOut});
+        TweenMax.to([document.querySelector('canvas.leisure'), document.querySelector('canvas.business')], 0.5, {x:0, ease: Power2.easeOut});        
       }
       TweenMax.to(this.querySelector('i'), 0.6, {scale: 0, ease: Power4.easeIn});
-      TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.4, {scaleX: 0, ease: Power3.easeIn});          
-    });
-    return;
+      TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.4, {scaleX: 0, ease: Power3.easeIn});
+      TweenMax.to('.cursor span', 0.6, {scale: 1, ease: Power4.easeIn})
+      TweenMax.to('.cursor i.circle', 0.6, {backgroundColor: '#fff'});
+    });    
     window.addEventListener('resize', this.resizeHomepage);
     
     document.querySelector('[data-action="learn-more"]').addEventListener('mouseenter', function(e){
-      TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});      
+      console.log('data-action="learn-more"')
+      TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
+      TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut});
+      TweenMax.to('.cursor i.circle', 0.6, {backgroundColor: '#fff'});
     });
     document.querySelector('[data-action="learn-more"]').addEventListener('mouseleave', function(e){
-      TweenMax.to(this.querySelector('i'), 0.5, {scale: 0, ease: Power3.easeIn});      
+      TweenMax.to(this.querySelector('i'), 0.5, {scale: 0, ease: Power3.easeIn});
+      TweenMax.to('.cursor span', 0.5, {scale: 1, ease: Power3.easeIn});
+      TweenMax.to('.cursor i.circle', 0.6, {backgroundColor: '#ee412a'});
     });
-
+    document.querySelectorAll('.slider-button-prev, .slider-button-next').forEach(function(el, i){      
+      el.addEventListener('mouseenter', function(e){        
+        if(this.classList.contains('swiper-button-disabled'))return;        
+        TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
+        TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut});
+        if(this.closest('.homepage__services'))return;
+        TweenMax.to(this.querySelector('.icon'), 0.5, {fill: '#fff', ease: Power3.easeOut});        
+      });
+      el.addEventListener('mouseleave', function(e){        
+        TweenMax.to(this.querySelector('i'), 0.5, {scale: 0, ease: Power3.easeIn});
+        TweenMax.to('.cursor span', 0.5, {scale: 1, ease: Power3.easeIn});
+        if(this.closest('.homepage__services'))return;
+        TweenMax.to(this.querySelector('.icon'), 0.5, {fill: '#ee412a', ease: Power3.easeIn});
+      });
+    });
     
   }
 
@@ -1007,11 +1007,44 @@ const _homepage = function(page){
   } 
   // End Buttons render
 
+  this.cursor = {
+    init: function(){
+      TweenMax.set('.cursor', {x:(document.body.clientWidth / 2)-35, y: (window.innerHeight / 2)-35});
+
+      document.body.addEventListener('mousemove', function(e){
+        TweenMax.set('.cursor', {x : (e.clientX - 35), y : (e.clientY - 35)});
+      });
+      document.querySelector('.homepage__hero').addEventListener('mouseenter', function(e){
+        console.log('hero');
+        TweenMax.to('.cursor', 0.5, {borderColor: '#ee412a'});
+        TweenMax.to('.cursor i.circle', 0.5, {backgroundColor: '#fff'});
+      });
+      document.querySelector('.homepage__description').addEventListener('mouseenter', function(e){
+        console.log('description');
+        TweenMax.to('.cursor', 0.5, {borderColor: '#ee412a'});
+        TweenMax.to('.cursor i.circle', 0.5, {backgroundColor: '#ee412a'});
+      });
+      document.querySelector('.homepage__drag').addEventListener('mouseenter', function(e){
+        console.log('drag');
+        TweenMax.to('.cursor', 0.5, {borderColor: '#ee412a'});
+        TweenMax.to('.cursor i.circle', 0.5, {backgroundColor: '#fff'});
+      });
+      document.querySelector('.homepage__feedback').addEventListener('mouseenter', function(e){
+        console.log('feedback');
+        TweenMax.to('.cursor', 0.5, {borderColor: '#ee412a'});
+        TweenMax.to('.cursor i.circle', 0.5, {backgroundColor: '#ee412a'});
+      });
+      
+    }
+  }
+
+
   // Start Tabs render
 
   this.tabs = {
     active: false,
     diskTextAnim: null,
+    show: false,
     init: function(){
       let that = this;
       this.render();
@@ -1020,10 +1053,10 @@ const _homepage = function(page){
           that.onActive(e);
         });
         el.addEventListener('mouseenter', function(e){
-          that.onHover(e);
+          if(that.show)that.onHover(e);
         });
         el.addEventListener('mouseleave', function(e){
-          that.onHover(e);
+          if(that.show)that.onHover(e);
         });
       });
       document.querySelectorAll('.homepage__tabs_content h3 i').forEach(function(el, i){
@@ -1062,7 +1095,7 @@ const _homepage = function(page){
       .fromTo('.homepage__tabs_content [data-tab="'+target+'"] p', 1.5, {opacity: 0}, {opacity: 1, ease: Power2.easeOut}, '-=0.3')
       .set('.homepage__tabs_list', {visibility: 'hidden'})
     },
-    onClose: function(e){      
+    onClose: function(e){
       let that = this;
       TweenMax.to('.homepage__tabs_disk .disk--text', 1.5, {color: '#9BCAD6', onComplete: function(){
         TweenMax.to('.homepage__tabs_disk .disk--arrow-1', 90, {rotation: 360, repeat: -1, ease:Power0.easeNone});
@@ -1108,6 +1141,7 @@ const _homepage = function(page){
         plus.innerText = '+';
         split.words[split.words.length - 1].appendChild(plus);        
       });
+      TweenMax.set(document.querySelectorAll('.homepage__tabs_list span'), {opacity: 0})
     }    
   }  
   // End Tabs render
@@ -1121,6 +1155,61 @@ const _homepage = function(page){
   }
   // End Form render
 
+
+  function aosInit(){    
+    AOS.init({
+      offset: 100,
+      once: true
+    });
+    //TweenMax.set('.homepage__drag canvas.leisure, .homepage__drag canvas.business', {scale: 1.5});
+    document.addEventListener('aos:in', function(e){      
+      if(e.detail.classList.contains('homepage__drag')){
+        new TimelineMax().to(['.homepage__drag .blind-left', '.homepage__drag .blind-right'], 0.8, {scaleX: 0, ease: Power2.easeIn})
+        .staggerFrom(document.querySelectorAll('.homepage__drag canvas.leisure, .homepage__drag canvas.business'), 1.6, {scale: 1.4}, 0.1, '-=0.8')
+        .staggerFrom(document.querySelectorAll('.homepage__drag h2 a'), 1.5, {rotationX: 90, opacity:0, ease: Power3.easeOut}, 0.25, '-=0.8')
+        .from('.homepage__drag .button-circle', 1, {scale: 1.4, opacity: 0, ease: Power2.easeOut}, '-=1')
+      }      
+      if(e.detail.classList.contains('homepage__feedback_slider') && e.detail.classList.contains('leisure')){
+        new TimelineMax().set(e.detail, {visibility: 'visible'})
+        .fromTo(e.detail.querySelector('.swiper-slide-active .slide--photo'), 1.4, {x: '100%', scale: 1.3, opacity:0}, {x: '0%', scale: 1, opacity:1, ease:Power4.easeOut}, 'start')
+        .fromTo(e.detail.querySelector('.swiper-slide-active .slide--photo'), 1.4, {skewX: -30}, {skewX: 0, ease:Power4.easeOut}, 'start')
+        .fromTo('.homepage__feedback_slider.leisure h2 span', 1, {opacity: 0, rotationX: 90}, {opacity: 1, rotationX: 0, ease: Power2.easeOut}, '-=0.7')
+        .fromTo(e.detail.querySelector('.swiper-slide-active .slide--text'), 1, {opacity: 0, y: '50%'}, {opacity: 1, y: '0%', ease: Power2.easeOut}, '-=0.6')
+        .fromTo('.homepage__feedback_slider.leisure .slider-control', 1, {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, ease: Power2.easeOut}, '-=0.6')
+      }
+      if(e.detail.classList.contains('homepage__feedback_slider') && e.detail.classList.contains('business')){
+        new TimelineMax().set(e.detail, {visibility: 'visible'})
+        .fromTo(e.detail.querySelector('.swiper-slide-active .slide--photo'), 1.4, {x: '-100%', scale: 1.3, opacity:0}, {x: '0%', scale: 1, opacity:1, ease:Power4.easeOut}, 'start')
+        .fromTo(e.detail.querySelector('.swiper-slide-active .slide--photo'), 1.4, {skewX: 30}, {skewX: 0, ease:Power4.easeOut}, 'start')
+        .fromTo('.homepage__feedback_slider.business h2 span', 1, {opacity: 0, rotationX: 90}, {opacity: 1, rotationX: 0, ease: Power2.easeOut}, '-=0.7')
+        .fromTo(e.detail.querySelector('.swiper-slide-active .slide--text'), 1, {opacity: 0, y: '50%'}, {opacity: 1, y: '0%', ease: Power2.easeOut}, '-=0.6')
+        .fromTo('.homepage__feedback_slider.business .slider-control', 1, {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, ease: Power2.easeOut}, '-=0.6')
+        .fromTo('.homepage__feedback .button-circle', 1, {opacity: 0, scale: 1.4}, {opacity: 1, scale: 1, ease: Power2.easeOut}, '-=1')
+      }
+      if(e.detail.classList.contains('homepage__services')){
+        new TimelineMax().to(e.detail.querySelectorAll('.swiper-slide-active .slide--photo'), 1.6, {scale: 1})
+        .staggerFrom(e.detail.querySelectorAll('h2'), 1, {opacity: 0, scale: 1.3, ease: Power2.easeOut}, 0.3, '-=1')
+        .staggerFrom(e.detail.querySelectorAll('.swiper-slide-active h3 a'), 1.5, {rotationX: 90, opacity:0, ease: Power3.easeOut}, 0.3, '-=0.8')
+        .staggerFrom(e.detail.querySelectorAll('.slider-control'), 1, {opacity: 0, scale: 1.4, ease: Power2.easeOut}, 0.3, '-=1')
+      }
+      if(e.detail.classList.contains('homepage__tabs')){
+        new TimelineMax().staggerTo(document.querySelectorAll('.homepage__tabs_list span'), 2, {opacity: 1}, 0.1)
+        .add(function(){
+          app.homepage.tabs.show = true;
+        });
+      }      
+      if(e.detail.classList.contains('leisure') && e.detail.closest('.homepage__insta')){
+        TweenMax.fromTo(e.detail.querySelectorAll('h2 span'), 1.5, {rotationX: 90, opacity: 0}, {rotationX: 0, opacity:1, ease: Power3.easeOut});
+      }
+      if(e.detail.classList.contains('business') && e.detail.closest('.homepage__insta')){
+        TweenMax.fromTo(e.detail.querySelectorAll('h2 span'), 1.5, {rotationX: 90, opacity: 0}, {rotationX: 0, opacity:1, ease: Power3.easeOut});
+      }
+      if(e.detail.classList.contains('homepage__form')){
+        TweenMax.fromTo(e.detail.querySelectorAll('h2 span'), 1.5, {rotationX: 90, opacity: 0}, {rotationX: 0, opacity:1, ease: Power3.easeOut});
+      }
+      
+    });    
+  }
   
 }
 

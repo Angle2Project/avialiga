@@ -10,24 +10,74 @@
 
 .cursor {
   width: 70px;
-  height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid $red;
-  border-radius: 50%;
+  height: 70px;  
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
   pointer-events: none;
-  &::before {
-    content: "";
+  will-change: transform;
+  span {
     display: block;
-    width: 10px;
-    height: 10px;
-    background-color: $white;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
+    border: 1px solid $red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+  }
+  i {
+    display: block;    
+    will-change: transform;
+    position: absolute;    
+    &.circle {
+      width: 10px;
+      height: 10px;
+      background-color: $white;
+      border-radius: 50%;      
+      top: calc(50% - 5px);
+      left: calc(50% - 5px);
+    }
+    &.play {
+      width: 0;
+      height: 0;
+      border-top: 9px solid transparent;
+      border-left: 17px solid #fff;
+      border-bottom: 9px solid transparent;
+      top: calc(50% - 9px);
+      left: calc(50% - 8px);
+      transform: scale(0);
+    }
+    &.pause {
+      width: 12px;
+      height: 14px;
+      position: absolute;
+      top: calc(50% - 7px);
+      left: calc(50% - 6px);
+      transform: scale(0);
+      &::before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 14px;
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      &::after {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 14px;
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
   }
 }
 
@@ -193,7 +243,7 @@
     background-color: $white;
     transform: skewX(-35deg);
     transform-origin: right;
-  }  
+  }
   .progress {
     z-index: 1;
     font: 16px/1 $futura;

@@ -1,12 +1,17 @@
 * {
 	box-sizing: border-box;
+	cursor: none;
+	&::before,
+	&::after {
+		cursor: none;
+	}
 }
 
 body {
 	margin: 0;
 	padding: 0;	
 	background: $white;
-	color: $black;
+	color: $black;	
 	// position: fixed;
 	// top: 0;
 	// left: 0;
