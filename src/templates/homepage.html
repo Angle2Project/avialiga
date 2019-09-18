@@ -16,14 +16,14 @@ class: homepage
 
 	<!-- LOADER -->
 	<div class="loader">
-			<div class="progress">0%</div>
-			<!-- <div class="logo">
-				<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="151px" height="151px" viewBox="0 0 151 151" style="enable-background:new 0 0 151 151;" xml:space="preserve">
-					<g>
-						<path id="morph" d="M136.1,31.4L76.5,77.9L50.4,66.4l24.4,7.5L136.1,31.4z"/>
-					</g>
+			<!-- <div class="progress">0%</div> -->
+			<div class="loader-logo">
+				<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+					<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+					<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
 				</svg>
-			</div> -->
+				<div class="brand">avialiga</div>
+			</div>			
 			<div class="blind-left"></div>
 			<div class="blind-right"></div>
 	</div>
@@ -70,6 +70,10 @@ class: homepage
 	</article>
 
 	<article class="homepage__description">
+			<svg version="1.1" class="homepage__description_bg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
 		<p>Specializes in organizing events, group trips and individual tours. While you are developing your business and concentrating on the tasks that are important to you, Avialiga takes care of all the arrangements for the tour.</p>			
 	</article>
 
@@ -86,10 +90,10 @@ class: homepage
 				{% endfor %}
 			</div>				
 			<h2 class="leisure">
-				<a href="">Leisure</a>
+				<a href="" data-target="leisure">Leisure</a>
 			</h2>
 			<h2 class="business">
-				<a href="">Business</a>
+				<a href="" data-target="business">Business</a>
 			</h2>
 		</div>		
 	</article>
@@ -111,7 +115,7 @@ class: homepage
 								<p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>									
 							</div>
 							<div class="slide--photo">
-								<img src="./img/feedback-img-{{i+1}}.jpg" alt="">
+								<img data-src="./img/feedback-img-{{i+1}}.jpg" alt="">
 							</div>
 						</div>
 						{% endfor %}
@@ -145,7 +149,7 @@ class: homepage
 								<p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>									
 							</div>
 							<div class="slide--photo">
-								<img src="./img/feedback-img-{{i+1}}.jpg" alt="">
+								<img data-src="./img/feedback-img-{{i+1}}.jpg" alt="">
 							</div>
 						</div>
 						{% endfor %}
@@ -181,7 +185,7 @@ class: homepage
 									<a href="">Some place - {{i+1}}</a>
 								</h3>
 								<div class="slide--photo">
-									<img src="./img/services-leisure-{{i+1}}.jpg" alt="">
+									<img data-src="./img/services-leisure-{{i+1}}.jpg" alt="">
 								</div>
 							</div>
 							{% endfor %}
@@ -215,7 +219,7 @@ class: homepage
 									<a href="">Some service - {{i+1}}</a>
 								</h3>
 								<div class="slide--photo">
-									<img src="./img/services-business-{{i+1}}.jpg" alt="">
+									<img data-src="./img/services-business-{{i+1}}.jpg" alt="">
 								</div>
 							</div>
 							{% endfor %}
@@ -239,8 +243,8 @@ class: homepage
 	<article class="homepage__tabs" data-aos="fade-up">
 		<div class="homepage__tabs_disk">
 				<div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>				
-				<img src="./img/advantages-1.svg" class="disk--arrow-1" alt="">
-				<img src="./img/advantages-2.svg" class="disk--arrow-2" alt="">
+				<img data-src="./img/advantages-1.svg" class="disk--arrow-1" alt="">
+				<img data-src="./img/advantages-2.svg" class="disk--arrow-2" alt="">
 		</div>
 		<div class="wrapper">
 			<h3>Get with us</h3>
@@ -304,9 +308,9 @@ class: homepage
 				<a href="">@avialiga_leisure</a>
 			</div>
 			<div class="homepage__insta_gallery">
-				<img src="./img/insta-leisure-1.jpg" alt="">
-				<img src="./img/insta-leisure-2.jpg" alt="">
-				<img src="./img/insta-leisure-3.jpg" alt="">
+				<img data-src="./img/insta-leisure-1.jpg" alt="">
+				<img data-src="./img/insta-leisure-2.jpg" alt="">
+				<img data-src="./img/insta-leisure-3.jpg" alt="">
 			</div>
 		</section>
 		<section class="business" data-aos="fade-up">
@@ -317,9 +321,9 @@ class: homepage
 				<a href="">@avialiga_business</a>
 			</div>
 			<div class="homepage__insta_gallery">
-				<img src="./img/insta-business-1.jpg" alt="">
-				<img src="./img/insta-business-2.jpg" alt="">
-				<img src="./img/insta-business-3.jpg" alt="">
+				<img data-src="./img/insta-business-1.jpg" alt="">
+				<img data-src="./img/insta-business-2.jpg" alt="">
+				<img data-src="./img/insta-business-3.jpg" alt="">
 			</div>
 		</section>
 	</article>

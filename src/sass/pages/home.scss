@@ -2,6 +2,113 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  .loader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;  
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    .blind-left {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 49%;
+      background-color: $white;
+      transform: skewX(-35deg);
+      transform-origin: left;
+    }
+    .blind-right {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 49%;
+      background-color: $white;
+      transform: skewX(-35deg);
+      transform-origin: right;
+    }
+    .progress {
+      z-index: 1;
+      font: 16px/1 $futura;
+      color: $black;
+      position: relative;
+      visibility: hidden;
+    }
+    .loader-logo {
+      width: 240px;
+      height: 240px;
+      position: relative;
+      z-index: 1;
+      .brand {
+        position: absolute;    
+        top: 166px;
+        left: 62px;
+        font: 300 20px/1 "Futura";
+        text-transform: uppercase;
+        letter-spacing: 7px;
+        opacity: 0;
+      }
+      // &::before {
+      //   content: "";
+      //   width: 100%;
+      //   height: 2px;
+      //   background-color: red;
+      //   position: absolute;
+      //   top: calc(50% - 1px);
+      //   left: 0;  
+      //   opacity: 0;
+      // }  
+      // &::after {
+      //   content: "";
+      //   width: 2px;
+      //   height: 100%;
+      //   background-color: red;
+      //   position: absolute;
+      //   left: calc(50% - 1px);
+      //   top: 0;  
+      //   opacity: 0;
+      // }  
+    }
+    @keyframes loaderLogo {
+      0% {fill: #2f2f2f;}
+      10% {fill: #f8d4e4;}
+      20% {fill: #d8ebe7;}
+      30% {fill: #5ebfaf;}
+      40% {fill: #577081;}
+      50% {fill: #eb4333;}
+      60% {fill: #d7ebe6;}      
+      70% {fill: #bfbdce;}
+      80% {fill: #9ccad5;}      
+      90% {fill: #5ebfaf;}
+      100% {fill: #2f2f2f;}
+    }
+    #loader-logo {
+      z-index: 1;
+      visibility: hidden;
+      //background-color: beige;
+      &.colors {
+        .m {          
+          //animation: loaderLogo 5s infinite linear;          
+        }
+        .h {          
+          //animation: loaderLogo 5s infinite linear;
+        }  
+      }
+      .m {
+        fill: $black;
+      }
+      .h {
+        fill: $black;        
+      }
+    }
+  }
   .homepage__hero {
     width: 100%;
     height: 100vh;
@@ -18,7 +125,7 @@
       &.play {
         position: absolute;
         left: 350px;
-        top: 325px;
+        top: calc(50% - 50px);
       }
       &.close {
         position: absolute;
@@ -160,10 +267,26 @@
     font: 300 36px/48px $futura;
     padding: 160px 0;
     color: $black;
-    background: url('../img/bg-home-descr.png') no-repeat center;
+    position: relative;
+    //background: url('../img/bg-home-descr.png') no-repeat center;
     p {
       max-width: 810px;
       margin: auto;
+      position: relative;
+      z-index: 1;
+    }
+    .homepage__description_bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      .h {
+        fill: $black;
+      }
+      .m {
+        fill: $black;
+      }
     }
   }
   .homepage__drag {
@@ -799,9 +922,10 @@
       }
     }    
     .wrapper {
-      margin: 200px 90px 0 448px;      
+      margin: 200px 90px 0 auto;
       position: relative;
       z-index: 1;
+      width: calc(70% - 90px - 35px);
       h3 {
         font: 300 30px/1 $futura;
         color: $black;

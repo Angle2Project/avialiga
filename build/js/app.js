@@ -249,19 +249,38 @@ const _homepage = function(page){
     resources: 1,
     resourcesDone: 0,
     next: 0,
-    step: 0,    
+    step: 0,
+    loaderReady: false,
+    colorsAnim: null,
     tl: new TimelineMax(),
     path: [
-     'M150.2,68.6l-74.9,9.6l-25.2-11l23.5,7L150.2,68.6z',
-     'M137.1,117l-60-39.9L49.6,66.6l25.7,6.5L137.1,117z',
-     'M73.6,150l3.9-72.9L49.7,66.5l26.1,6.6L73.6,150z',
-     'M20.4,126.4l57.1-49.1L50.1,65.3l25.7,7.9L20.4,126.4z',
-     'M0,82.2l78-3.1l-29.4-6.5l27.6,2.5L0,82.2z',
-     'M52.5,36.1l47.7,64.2l-50.4,1.2l43.4-4.2L52.5,36.1z',
-     'M70,85.5l-11-36h12c0,0,7.7-1,15,8c7.3,9,35,43,35,43l-92-2l85-1l-33-40c0,0-4.4-5-10-5c-5.6,0-9,0-9,0L70,85.5z'
+     
     ],
     init: function(){
-      let that = this;
+      let that = this;      
+      
+      //TweenMax.to('#loader-logo .h', 3, {morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z'});
+      TweenMax.set('#loader-logo .m', {x: -55, y: -31});
+      TweenMax.set('#loader-logo .h', {x: -55, y: -30});
+      
+      TweenMax.to('#loader-logo .h', 20, {rotation: 360, transformOrigin:"88% 95%", ease: Power0.easeNone, repeat: -1});
+      TweenMax.to('#loader-logo .m', 2, {rotation: 360, transformOrigin:"96% 50%", ease: Power0.easeNone, repeat: -1});
+
+      this.colorsAnim = new TimelineMax({repeat: -1}).to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#f8d4e4', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#d8ebe7', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#5ebfaf', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#577081', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#eb4333', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#d7ebe6', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#bfbdce', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#9ccad5', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#5ebfaf', ease: Power0.easeNone})
+      .to('#loader-logo .h, #loader-logo .m', 0.5, {fill: '#2f2f2f', ease: Power0.easeNone})
+      
+      
+
+      TweenMax.to('#loader-logo', 1, {autoAlpha: 1})
+
       this.resources += document.querySelectorAll('script[data-src]').length
       + document.querySelectorAll('img').length
       + document.querySelectorAll('[data-background]').length
@@ -270,6 +289,8 @@ const _homepage = function(page){
       + document.querySelectorAll('[data-pat-right]').length
       + document.querySelectorAll('[data-img-left]').length
       + document.querySelectorAll('[data-img-right]').length;
+      that.loaderReady = true;
+      that.loading();
       document.querySelectorAll('script[data-src]').forEach(function(el, i){
         let src = el.getAttribute('data-src');
         var script = document.createElement('script');
@@ -281,10 +302,11 @@ const _homepage = function(page){
         }
       });
       document.querySelectorAll('img').forEach(function(el, i){
-        let src = el.getAttribute('src');
+        let src = el.getAttribute('data-src');
         var img = new Image();
-        img.src = src;        
-        img.onload = function() {            
+        img.src = src;
+        img.onload = function() {
+          el.src = src;          
           that.resourcesDone++;
           that.loading();
         }
@@ -354,15 +376,11 @@ const _homepage = function(page){
     },
     loading: function(){
       let that = this;
-      let p = (100/(this.resources/this.resourcesDone)).toFixed();
-      let ratio = 100/this.path.length;      
-      if(Number(p) >= this.next){
-        // this.next = this.next+=ratio;
-        // let path = this.path[this.step];        
-        // this.tl.to("#morph", 0.5, {morphSVG: path, ease: Power0.easeNone});
-        // console.log(this.tl);
-        // this.step ++;
-      }      
+      //let p = (100/(this.resources/this.resourcesDone)).toFixed();
+      
+      
+      
+      if(!that.loaderReady)return;      
       if(this.resources - this.resourcesDone == 1){
         formRender();
         buttonsRender();        
@@ -371,9 +389,7 @@ const _homepage = function(page){
         app.homepage.hero = new heroRender();
         app.homepage.drag = new dragRender();
         app.homepage.eventsInit();
-        TweenMax.to(this, 1, {progress: 100, onUpdate: function(){
-          document.querySelector('.loader .progress').innerHTML = that.progress.toFixed()+'%';
-        }, ease: Power3.easeOut, onComplete: function(){
+        
           this.mySwiper = new Swiper ('.swiper-container', {
             // Optional parameters    
             speed: 800,
@@ -388,8 +404,7 @@ const _homepage = function(page){
               nextEl: '.slider-button-next',
               prevEl: '.slider-button-prev',
             }
-          });
-          console.log(this.mySwiper);
+          });          
           this.mySwiper.forEach(function(el, i){
             if(el.el.closest('.homepage__services')){
               TweenMax.set(el.el.querySelector('.swiper-slide-active .slide--photo'), {scale: 1.4});
@@ -411,8 +426,7 @@ const _homepage = function(page){
                 //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
                 .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
                 .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-              }
-              console.log(this.el.classList)
+              }              
             });            
           });
           // this.mySwiper.on('slideChange', function(a, b){
@@ -428,8 +442,8 @@ const _homepage = function(page){
               app.homepage.hero.bg.height = app.homepage.hero.heroBgHeight;
               app.homepage.hero.bg.x  = app.homepage.hero.heroBgLeft;
               app.homepage.hero.bg.y  = app.homepage.hero.heroBgTop;
-              app.homepage.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 2;
-              app.homepage.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 2;
+              app.homepage.hero.displacementSprite.width = 300;
+              app.homepage.hero.displacementSprite.height = 300;
               app.homepage.hero.displacementSprite.x = app.homepage.hero.hero.renderer.width / 2;
               app.homepage.hero.displacementSprite.y = app.homepage.hero.hero.renderer.height / 2;              
 
@@ -440,31 +454,54 @@ const _homepage = function(page){
                     console.log('error');
                   }).then(() => {
                     app.homepage.hero.resours.source.play(); 
-                    console.log('Ok');
+                    console.log('Video done');
                   });
-              }
-              
+              }                            
               that.loaded();
               aosInit();
             }
           }, 100)
-        }});
+        
       }else{
-        TweenMax.to(this, 1, {progress: p, onUpdate: function(){
-          document.querySelector('.loader .progress').innerHTML = that.progress.toFixed()+'%';
-        }});
+        // TweenMax.to(this, 1, {progress: p, onUpdate: function(){
+        //   document.querySelector('.loader .progress').innerHTML = that.progress.toFixed()+'%';
+        // }});
       }
     },
-    loaded: function(){      
+    loaded: function(){
+      let that = this;
       window.scroll(0, 0);      
-      let tl = new TimelineMax({});
-      tl.to('.loader .progress', 0.7, {opacity: 0})
-        .to('.loader .logo', 0.7, {opacity: 0, onComplete: function(){          
-          
-        }}, '-=1')              
+      that.colorsAnim.remove()
+      let tl = new TimelineMax({delay: 0.5});
+        tl.to('#loader-logo .h, #loader-logo .m', 0.8, {fill: '#2f2f2f', ease: Power3.easeInOut}, 'arrows')
+        .to('#loader-logo .h', 0.8, {rotation: 360, transformOrigin:"88% 95%", ease: Power3.easeInOut}, 'arrows')
+        .to('#loader-logo .m', 0.8, {rotation: 360, transformOrigin:"96% 50%", ease: Power3.easeInOut}, 'arrows')
+        .to('#loader-logo .m', 0.8, {x: 0, y: 0, opacity: 0, ease: Power3.easeInOut}, 'morph')
+        .to('#loader-logo .h', 0.8, {x: 0, y: 0, ease: Power3.easeInOut}, 'morph')
+        .to('#loader-logo .h', 0.8, {morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut}, 'morph')
+        .fromTo('.loader-logo .brand', 0.8, {opacity: 0, scale: 1.4}, {opacity: 1, scale: 1, ease: Power3.easeInOut}, '-=0.6')
+        .to('#loader-logo', 0.5, {opacity: 0})
+        .to('.loader-logo .brand', 0.5, {opacity: 0}, '-=0.3')
         .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn, onComplete: function(){
           document.querySelector('.loader').remove();
           TweenMax.set('body', {overflow: 'auto'});
+          
+          TweenMax.set('.homepage__description_bg .m', {x: -55, y: -31});
+          TweenMax.set('.homepage__description_bg .h', {x: -55, y: -30});
+          
+          TweenMax.to('.homepage__description_bg .h', 20, {rotation: 360, transformOrigin:"88% 95%", ease: Power0.easeNone, repeat: -1});
+          TweenMax.to('.homepage__description_bg .m', 2, {rotation: 360, transformOrigin:"96% 50%", ease: Power0.easeNone, repeat: -1});
+
+          new TimelineMax({repeat: -1}).to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#f8d4e4', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#d8ebe7', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#5ebfaf', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#577081', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#eb4333', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#d7ebe6', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#bfbdce', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#9ccad5', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#5ebfaf', ease: Power0.easeNone})
+          .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#2f2f2f', ease: Power0.easeNone})
         }})
         .staggerFrom(document.querySelectorAll('.homepage__hero h1 span'), 1, {rotationX: 90, opacity: 0, ease: Power2.easeOut}, 0.1, '+=0.3')
         .from('header', 0.8, {opacity: 0}, '-=0.5')
@@ -514,7 +551,7 @@ const _homepage = function(page){
       height: this.el.clientHeight,      
       forceFXAA: true,
       clearBeforeRender: false
-      // forceCanvas: true
+      //forceCanvas: true
     });
     this.el.appendChild(this.hero.view);
 
@@ -536,10 +573,8 @@ const _homepage = function(page){
       that.resours = new PIXI.resources.VideoResource(blob, {
         autoPlay: false,
         autoUpdate: false,
-        updateFPS: 30,
-        width: 100,
-        height: 100
-      });      
+        updateFPS: 30        
+      });
       
       that.resours.source.setAttribute('playsinline', '')
       that.resours.source.loop = true;
@@ -600,10 +635,33 @@ const _homepage = function(page){
 
   // Start Drag Slider
   function dragRender(){
-    let that = this;
+    let that = this;    
     let ratio;
 
+    this.show = false;
     this.el = document.querySelector('.homepage__drag');
+
+    this.el.querySelectorAll('h2 a').forEach(function(el, i){
+      el.addEventListener('click', function(e){        
+        e.preventDefault();
+        let href = e.target.href;
+        let target = e.target.getAttribute('data-target');        
+        TweenMax.to('[data-action="homepage-drag"]', 0.6, {scale: 0, ease: Power2.easeInOut});
+        if(target == 'leisure'){
+          TweenMax.to(document.querySelector('canvas.leisure'), 1.2, {x:- that.el.clientWidth, ease: Power2.easeInOut, onComplete: function(){
+            window.location.href = href;
+          }});
+          TweenMax.set(document.querySelector('canvas.business'), {x:0});
+        }else if(target == 'business'){
+          TweenMax.set(document.querySelector('canvas.leisure'), {x:0});
+          TweenMax.to(document.querySelector('canvas.business'), 1.2, {x: that.el.clientWidth, ease: Power2.easeInOut, onComplete: function(){
+            window.location.href = href;
+          }});
+        }
+      });
+    });
+
+    
     this.canv1 = document.createElement('canvas');
     this.canv1.className = 'pats';    
     this.ctx1 = this.canv1.getContext('2d');
@@ -716,14 +774,21 @@ const _homepage = function(page){
           TweenMax.to('[data-action="homepage-drag"]', 0, {x:x});
         }else if(x < -limit || x > limit){
           that.dragMove = false;
-          that.dragDone = true;          
-          if(x < -limit){            
-            TweenMax.to(document.querySelector('canvas.leisure'), 1.2, {x:- that.el.clientWidth, ease: Power2.easeInOut});
-            TweenMax.to(document.querySelector('canvas.business'), 0, {x:0});
+          that.dragDone = true;
+          let href;
+          TweenMax.to('[data-action="homepage-drag"], .homepage__drag_dots', 0.6, {scale: 0, ease: Power2.easeInOut});
+          if(x < -limit){
+            href = document.querySelector('.homepage__drag h2 a[data-target="leisure"]').href;
+            TweenMax.to(document.querySelector('canvas.leisure'), 1.2, {x:- that.el.clientWidth, ease: Power2.easeInOut, onComplete: function(){
+              window.location.href = href;
+            }});
+            TweenMax.set(document.querySelector('canvas.business'), {x:0});
           }else if(x > limit){
-            TweenMax.to(document.querySelector('canvas.leisure'), 0, {x:0});
-            TweenMax.to(document.querySelector('canvas.business'), 1.2, {x: that.el.clientWidth, ease: Power2.easeInOut});
-            
+            href = document.querySelector('.homepage__drag h2 a[data-target="business"]').href;
+            TweenMax.set(document.querySelector('canvas.leisure'), {x:0});
+            TweenMax.to(document.querySelector('canvas.business'), 1.2, {x: that.el.clientWidth, ease: Power2.easeInOut, onComplete: function(){
+              window.location.href = href;
+            }});
           }
         }
       }
@@ -742,11 +807,9 @@ const _homepage = function(page){
     that.hero.bg.height = that.hero.heroBgHeight;
     that.hero.bg.x  = that.hero.heroBgLeft;
     that.hero.bg.y  = that.hero.heroBgTop;
-    that.hero.displacementSprite.width = that.hero.hero.renderer.width / 2;
-    that.hero.displacementSprite.height = that.hero.hero.renderer.height / 2;
-
-
-    console.log(that.drag.pat1)
+    that.hero.displacementSprite.width = 300;
+    that.hero.displacementSprite.height = 300;
+    
     let ratio = that.drag.pat1.width/that.drag.pat1.height;
     that.drag.canv1.width = that.drag.el.clientWidth;
     that.drag.canv1.height = that.drag.el.clientWidth/ratio;
@@ -819,15 +882,13 @@ const _homepage = function(page){
         if(that.play){
           app.homepage.hero.hero.ticker.stop();
           //app.homepage.hero.resours.source.pause();
-          that.play = false;
-          console.log('Pause');
+          that.play = false;          
         }
       }else{
         if(!that.play){
           app.homepage.hero.hero.ticker.start();
           //app.homepage.hero.resours.source.play();
-          that.play = true;
-          console.log('Play');
+          that.play = true;          
         }        
       }
     });    
@@ -838,7 +899,7 @@ const _homepage = function(page){
     document.querySelectorAll('.take-button, .form--submit button').forEach(function(el, i){
       el.addEventListener('mouseenter', function(e){        
         TweenMax.to(this, 0.5, {color: '#fff', ease: Power2.easeOut});
-        TweenMax.to(this.querySelector('i'), 0.5, {y:5, height: '40px', ease: Power2.easeOut});
+        TweenMax.to(this.querySelector('i'), 0.5, {y:5, height: '40px', skewX: -31, ease: Power2.easeOut});
       });
     });
     document.querySelectorAll('.take-button, .form--submit button').forEach(function(el, i){
@@ -846,13 +907,19 @@ const _homepage = function(page){
         TweenMax.to(this, 0.5, {color: function(){
           return document.querySelector('header').classList.contains('fixed') ? '#2f2f2f':'#ffffff';
         }, ease: Power2.easeOut});
-        TweenMax.to(this.querySelector('i'), 0.5, {y:0, height: '1px', ease: Power2.easeOut});
+        TweenMax.to(this.querySelector('i'), 0.5, {y:0, height: '1px', skewX: -31, ease: Power2.easeOut});
       });
     });
     
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mousedown', function (e) {
-      that.drag.dragMove = true;
-      that.drag.dragx = e.clientX;    
+      if(app.homepage.drag.show){
+        that.drag.dragMove = true;
+        that.drag.dragx = e.clientX;    
+        TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
+        TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut})
+        TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.8, {scaleX: 1, ease: Power4.easeOut});
+        TweenMax.to('.cursor i.circle', 0.6, {backgroundColor: '#ee412a'});
+      }      
     });
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mouseup', function(e){
       if(!that.drag.dragDone){
@@ -897,10 +964,12 @@ const _homepage = function(page){
     });
 
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mouseenter', function(e){
-      TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
-      TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.8, {scaleX: 1, ease: Power4.easeOut});
-      TweenMax.to('.cursor i.circle', 0.6, {backgroundColor: '#ee412a'});
-      TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut})
+      if(app.homepage.drag.show){
+        TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
+        TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.8, {scaleX: 1, ease: Power4.easeOut});
+        TweenMax.to('.cursor i.circle', 0.6, {backgroundColor: '#ee412a'});
+        TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut})
+      }      
     });
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mouseleave', function(e){
       if(!that.drag.dragDone){
@@ -916,8 +985,7 @@ const _homepage = function(page){
     });    
     window.addEventListener('resize', this.resizeHomepage);
     
-    document.querySelector('[data-action="learn-more"]').addEventListener('mouseenter', function(e){
-      console.log('data-action="learn-more"')
+    document.querySelector('[data-action="learn-more"]').addEventListener('mouseenter', function(e){      
       TweenMax.to(this.querySelector('i'), 0.5, {scale: 1, ease: Power3.easeOut});
       TweenMax.to('.cursor span', 0.5, {scale: 0, ease: Power3.easeOut});
       TweenMax.to('.cursor i.circle', 0.6, {backgroundColor: '#fff'});
@@ -1014,23 +1082,19 @@ const _homepage = function(page){
       document.body.addEventListener('mousemove', function(e){
         TweenMax.set('.cursor', {x : (e.clientX - 35), y : (e.clientY - 35)});
       });
-      document.querySelector('.homepage__hero').addEventListener('mouseenter', function(e){
-        console.log('hero');
+      document.querySelector('.homepage__hero').addEventListener('mouseenter', function(e){        
         TweenMax.to('.cursor', 0.5, {borderColor: '#ee412a'});
         TweenMax.to('.cursor i.circle', 0.5, {backgroundColor: '#fff'});
       });
-      document.querySelector('.homepage__description').addEventListener('mouseenter', function(e){
-        console.log('description');
+      document.querySelector('.homepage__description').addEventListener('mouseenter', function(e){        
         TweenMax.to('.cursor', 0.5, {borderColor: '#ee412a'});
         TweenMax.to('.cursor i.circle', 0.5, {backgroundColor: '#ee412a'});
       });
-      document.querySelector('.homepage__drag').addEventListener('mouseenter', function(e){
-        console.log('drag');
+      document.querySelector('.homepage__drag').addEventListener('mouseenter', function(e){        
         TweenMax.to('.cursor', 0.5, {borderColor: '#ee412a'});
         TweenMax.to('.cursor i.circle', 0.5, {backgroundColor: '#fff'});
       });
-      document.querySelector('.homepage__feedback').addEventListener('mouseenter', function(e){
-        console.log('feedback');
+      document.querySelector('.homepage__feedback').addEventListener('mouseenter', function(e){        
         TweenMax.to('.cursor', 0.5, {borderColor: '#ee412a'});
         TweenMax.to('.cursor i.circle', 0.5, {backgroundColor: '#ee412a'});
       });
@@ -1050,7 +1114,7 @@ const _homepage = function(page){
       this.render();
       document.querySelectorAll('.homepage__tabs_list span').forEach(function(el, i){        
         el.addEventListener('click', function(e){
-          that.onActive(e);
+          if(that.show)that.onActive(e);
         });
         el.addEventListener('mouseenter', function(e){
           if(that.show)that.onHover(e);
@@ -1079,6 +1143,7 @@ const _homepage = function(page){
     },
     onActive: function(e){
       this.active = true;
+      e.target.classList.add('active');
       let that = this;
       let target = e.target.getAttribute('data-target');
       TweenMax.to('.homepage__tabs_disk .disk--arrow-1', 1.5, {rotation: 360, ease:Power3.easeInOut});
@@ -1168,6 +1233,9 @@ const _homepage = function(page){
         .staggerFrom(document.querySelectorAll('.homepage__drag canvas.leisure, .homepage__drag canvas.business'), 1.6, {scale: 1.4}, 0.1, '-=0.8')
         .staggerFrom(document.querySelectorAll('.homepage__drag h2 a'), 1.5, {rotationX: 90, opacity:0, ease: Power3.easeOut}, 0.25, '-=0.8')
         .from('.homepage__drag .button-circle', 1, {scale: 1.4, opacity: 0, ease: Power2.easeOut}, '-=1')
+        .add(function(){
+          app.homepage.drag.show = true;
+        });
       }      
       if(e.detail.classList.contains('homepage__feedback_slider') && e.detail.classList.contains('leisure')){
         new TimelineMax().set(e.detail, {visibility: 'visible'})
