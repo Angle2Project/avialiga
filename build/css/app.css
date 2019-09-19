@@ -1729,11 +1729,11 @@ footer .footer__copyright img {
 
 .homepage .loader .loader-logo .brand {
   position: absolute;
-  top: 166px;
-  left: 62px;
-  font: 300 20px/1 "Futura";
+  top: 160px;
+  left: 87px;
+  font: 300 29px/1 "Futura";
   text-transform: uppercase;
-  letter-spacing: 7px;
+  letter-spacing: 5px;
   opacity: 0;
 }
 
@@ -2206,6 +2206,26 @@ footer .footer__copyright img {
 .homepage .homepage__drag h2.business {
   bottom: 70px;
   right: 90px;
+}
+
+.homepage .homepage__drag h2.or {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #ffffff;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.homepage .homepage__drag h2.or span {
+  display: block;
+  -webkit-transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  transform-origin: bottom;
+  -webkit-backface-visibility: hidden;
+  /* Chrome, Safari, Opera */
+  backface-visibility: hidden;
 }
 
 .homepage .homepage__drag h2 a {

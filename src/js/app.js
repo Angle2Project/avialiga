@@ -189,7 +189,13 @@ const _homepage = function(page){
         app.homepage.heroVideo.active = true;        
         let tl = new TimelineMax();        
         let h1 = [].slice.call(document.querySelectorAll('.homepage__hero h1 span'), 0).reverse();          
-        tl.to('[data-action="homepage-hero-play"]', 0.3, {scale: 0, ease: Power2.easeIn}, 'cursor')
+        
+        tl.to(app.homepage.hero.displacementFilter.scale, 0.2, {x: 0, y:0, onComplete: function(){
+            TweenMax.to('.homepage__hero h1 span', 0.2, {opacity: 1, onComplete: function(){
+              TweenMax.to(app.homepage.hero.container, 0.2, {alpha: 0})
+            }})
+          }}, 'cursor')
+          .to('[data-action="homepage-hero-play"]', 0.3, {scale: 0, ease: Power2.easeIn}, 'cursor')
           .to('.cursor span', 0.6, {scale: 1.4}, 'cursor')
           .to('.cursor i.circle', 0.6, {scale: 0}, 'cursor')
           .to('.cursor i.pause', 0.6, {scale: 1}, 'cursor')
@@ -226,7 +232,10 @@ const _homepage = function(page){
         .to('.hero--player', 0.5, {autoAlpha: 0})
         .set('body', {overflow: 'auto'})
         .staggerFromTo(document.querySelectorAll('.homepage__hero h1 span'), 0.8, {rotationX: 90, opacity: 0}, {rotationX: 0, opacity: 1, ease: Power2.easeOut}, 0.1, '-=0.3')
-        .to('header', 0.5, {opacity: 1}, '-=0.3')
+        .to(app.homepage.hero.container, 0.3, {alpha: 1})
+        .to('.homepage__hero h1 span', 0.3, {opacity: 0})        
+        .to(app.homepage.hero.displacementFilter.scale, 0.5, {x: 30, y:30})
+        .to('header', 0.5, {opacity: 1}, '-=1.4')
         .to('.homepage__hero_footer', 0.5, {opacity: 1}, '-=0.3')
         .to('[data-action="homepage-hero-play"]', 0.3, {scale: 1}, '-=0.3')
         .add(function(){
@@ -461,6 +470,7 @@ const _homepage = function(page){
         .to('#loader-logo .h', 0.8, {x: 0, y: 0, ease: Power3.easeInOut}, 'morph')
         .to('#loader-logo .h', 0.8, {morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut}, 'morph')
         .fromTo('.loader-logo .brand', 0.8, {opacity: 0, scale: 1.4}, {opacity: 1, scale: 1, ease: Power3.easeInOut}, '-=0.6')
+        
         .to('#loader-logo', 0.5, {opacity: 0})
         .to('.loader-logo .brand', 0.5, {opacity: 0}, '-=0.3')
         .add(function(){
@@ -1274,8 +1284,9 @@ const _homepage = function(page){
       if(e.detail.classList.contains('homepage__drag')){
         new TimelineMax().to(['.homepage__drag .blind-left', '.homepage__drag .blind-right'], 0.8, {scaleX: 0, ease: Power2.easeIn})
         .staggerFrom(document.querySelectorAll('.homepage__drag canvas.leisure, .homepage__drag canvas.business'), 1.6, {scale: 1.4}, 0.1, '-=0.8')
-        .staggerFrom(document.querySelectorAll('.homepage__drag h2 a'), 1.5, {rotationX: 90, opacity:0, ease: Power3.easeOut}, 0.25, '-=0.8')
-        .from('.homepage__drag .button-circle', 1, {scale: 1.4, opacity: 0, ease: Power2.easeOut}, '-=1')
+        .staggerFrom(document.querySelectorAll('.homepage__drag h2 a, .homepage__drag h2 span'), 1.5, {rotationX: 90, opacity:0, ease: Power3.easeOut}, 0.25, '-=0.8')
+        .to('.homepage__drag h2.or span', 0.8, {scale: 0, opacity: 0, transformOrigin: 'center', ease: Power3.easeOut}, '+=0.8')
+        .from('.homepage__drag .button-circle', 0.8, {scale: 1.4, opacity: 0, ease: Power3.easeOut}, '-=0.6')
         .add(function(){
           app.homepage.drag.show = true;
         });
