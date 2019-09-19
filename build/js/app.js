@@ -432,35 +432,23 @@ const _homepage = function(page){
           // this.mySwiper.on('slideChange', function(a, b){
           //   console.log(a);
           //   console.log(b);
-          // });
-          let interval = setInterval(function(){            
-            if(app.homepage.hero.resours && app.homepage.hero.resours.width > 0){
-              clearInterval(interval);              
-              app.homepage.hero.heroBgCover();
-              app.homepage.hero.hero.renderer.resize(app.homepage.hero.el.clientWidth, app.homepage.hero.el.clientHeight);
-              app.homepage.hero.bg.width = app.homepage.hero.heroBgWidth;
-              app.homepage.hero.bg.height = app.homepage.hero.heroBgHeight;
-              app.homepage.hero.bg.x  = app.homepage.hero.heroBgLeft;
-              app.homepage.hero.bg.y  = app.homepage.hero.heroBgTop;
-              app.homepage.hero.displacementSprite.width = 300;
-              app.homepage.hero.displacementSprite.height = 300;
-              app.homepage.hero.displacementSprite.x = app.homepage.hero.hero.renderer.width / 2;
-              app.homepage.hero.displacementSprite.y = app.homepage.hero.hero.renderer.height / 2;              
+          // });          
+              
 
-              var promise = app.homepage.hero.resours.source.play();
+              //var promise = app.homepage.hero.resours.source.play();
 
-              if (promise !== undefined) {
-                  promise.catch(error => {
-                    console.log('error');
-                  }).then(() => {
-                    app.homepage.hero.resours.source.play(); 
-                    console.log('Video done');
-                  });
-              }                            
+              // if (promise !== undefined) {
+              //     promise.catch(error => {
+              //       console.log('error');
+              //     }).then(() => {
+              //       app.homepage.hero.resours.source.play(); 
+              //       console.log('Video done');
+              //     });
+              // }
               that.loaded();
               aosInit();
-            }
-          }, 100)
+            
+          
         
       }else{
         // TweenMax.to(this, 1, {progress: p, onUpdate: function(){
@@ -485,6 +473,22 @@ const _homepage = function(page){
         .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn, onComplete: function(){
           document.querySelector('.loader').remove();
           TweenMax.set('body', {overflow: 'auto'});
+
+          let fs = (window.innerWidth / 100) * 9.9;
+          app.homepage.hero.smart.style.fontSize = fs;
+          app.homepage.hero.choise.style.fontSize = fs;
+          app.homepage.hero.save.style.fontSize = fs;
+          app.homepage.hero.time.style.fontSize = fs; 
+          //that.hero.heroBgCover();
+          app.homepage.hero.hero.renderer.resize(app.homepage.hero.el.clientWidth, app.homepage.hero.el.clientHeight);
+          app.homepage.hero.smart.x = ((app.homepage.hero.el.clientWidth / 100) * 42);
+          app.homepage.hero.smart.y = 140 - ((Math.floor(fs)/100) * 7.563724377883669);      
+          app.homepage.hero.choise.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 6);
+          app.homepage.hero.choise.y = (140 - ((fs/100) * 7.563724377883669)) + Math.floor(fs);
+          app.homepage.hero.save.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 12.1);
+          app.homepage.hero.save.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 2);
+          app.homepage.hero.time.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 18.2);
+          app.homepage.hero.time.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);
           
           TweenMax.set('.homepage__description_bg .m', {x: -55, y: -31});
           TweenMax.set('.homepage__description_bg .h', {x: -55, y: -30});
@@ -503,7 +507,7 @@ const _homepage = function(page){
           .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#5ebfaf', ease: Power0.easeNone})
           .to('.homepage__description_bg .h, .homepage__description_bg .m', 0.5, {fill: '#2f2f2f', ease: Power0.easeNone})
         }})
-        .staggerFrom(document.querySelectorAll('.homepage__hero h1 span'), 1, {rotationX: 90, opacity: 0, ease: Power2.easeOut}, 0.1, '+=0.3')
+        .staggerFrom(document.querySelectorAll('.homepage__hero h1 span'), 1, {rotationX: 90, opacity: 0, ease: Power2.easeOut}, 0.1, '+=0.3', swichText)
         .from('header', 0.8, {opacity: 0}, '-=0.5')
         .from('.homepage__hero_footer', 0.8, {opacity: 0}, '-=0.4')
         .from('[data-action="homepage-hero-play"]', 0.5, {scale: 1.4, opacity: 0}, '-=0.4')
@@ -511,6 +515,17 @@ const _homepage = function(page){
           app.homepage.heroVideo.init();
           TweenMax.set(document.querySelectorAll('.homepage__insta h2 span, .homepage__form_title h2 span'), {opacity: 0});
         });
+        function swichText(){
+          //TweenMax.set(document.querySelectorAll('.homepage__hero h1 span'), {opacity: 0});
+          new TimelineMax()
+          .to(app.homepage.hero.container, 0.2, {alpha: 1})
+          .to(document.querySelectorAll('.homepage__hero h1 span'), 0.2, {opacity: 0})
+          .to(app.homepage.hero.displacementFilter.scale, 5 , {x: 40, y: 40});
+          // TweenMax.set(app.homepage.hero.choise, 0.5, {alpha: 1});
+          // TweenMax.set(app.homepage.hero.save, 0.5, {alpha: 1});
+          // TweenMax.set(app.homepage.hero.time, 0.5, {alpha: 1});
+        }
+        
     }
   }
   // /.Loader
@@ -548,7 +563,8 @@ const _homepage = function(page){
     this.el = document.querySelector('.homepage__hero');
     this.hero = new PIXI.Application({
       width: this.el.clientWidth,
-      height: this.el.clientHeight,      
+      height: this.el.clientHeight,
+      //transparent: true,
       forceFXAA: true,
       clearBeforeRender: false
       //forceCanvas: true
@@ -558,44 +574,71 @@ const _homepage = function(page){
     //this.hero.ticker.maxFPS = 30;
     //this.hero.ticker.speed = 0.1;
     this.hero.stage.interactive = true;
-
+    this.container = new PIXI.Container();
+    that.hero.stage.addChild(that.container);
     
     // this.hero.ticker.add(function (delta) {
     //   console.log(delta, that.hero.ticker.FPS);
     // });
 
     const loader = PIXI.Loader.shared;
-    loader.add('baseTexture', app.homepage.blobs.heroBg)
-    .add('displacementSprite', './img/displacement.png');
+    loader.add('displacementSprite', './img/displacement.png');
     loader.load(function(loader, resources){
-      let blob = document.createElement('video');
-      blob.src = resources.baseTexture.url;      
-      that.resours = new PIXI.resources.VideoResource(blob, {
-        autoPlay: false,
-        autoUpdate: false,
-        updateFPS: 30        
-      });
+
+    let fs = (window.innerWidth / 100) * 9.9;
+
+    const style = new PIXI.TextStyle({
+      fontFamily: 'Futura',
+      fontSize: fs,
+      fontWeight: 'normal',
+      fill: '#ffffff'      
+    });
+
       
-      that.resours.source.setAttribute('playsinline', '')
-      that.resours.source.loop = true;
-      that.resours.source.autoplay = true;
-      that.resours.source.muted = true;      
+      console.log(((window.innerWidth / 100) * 42))
+      that.smart = new PIXI.Text('Smart', style);
+      that.choise = new PIXI.Text('choise', style);
+      that.save = new PIXI.Text('save', style);
+      that.time = new PIXI.Text('time', style);
       
-      that.baseTexture = new PIXI.BaseTexture(that.resours);
-      that.ratio = that.baseTexture.realWidth / that.baseTexture.realWidth;
-      that.texture = new PIXI.Texture(that.baseTexture);
-      that.bg = new PIXI.Sprite(that.texture);    
-      that.hero.stage.addChild(that.bg);
+      
+      that.smart.x = ((window.innerWidth / 100) * 42);
+      that.smart.y = 140 - ((Math.floor(fs)/100) * 7.563724377883669);      
+      that.choise.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 6);
+      that.choise.y = (140 - ((fs/100) * 7.563724377883669)) + Math.floor(fs);
+      that.save.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 12);
+      that.save.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 2);
+      that.time.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 18);
+      that.time.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);
+
+      that.container.alpha = 0;
+      
+      // that.smart.x = ((window.innerWidth / 100) * 42);
+      // that.smart.y = 140 - ((fs/100) * 7.563724377883669);
+      // that.choise.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 6);
+      // that.choise.y = (140 - ((fs/100) * 7.563724377883669)) + fs;
+      // that.save.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 12);
+      // that.save.y = (140 - ((fs/100) * 7.563724377883669)) + (fs * 2);
+      // that.time.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 18);
+      // that.time.y = (140 - ((fs/100) * 7.563724377883669)) + (fs * 3);
+      
+      console.log(that.container)
+      
+      that.container.addChild(that.smart);
+      that.container.addChild(that.choise);
+      that.container.addChild(that.save);
+      that.container.addChild(that.time);
+      
 
       that.displacementSprite = new PIXI.Sprite(resources.displacementSprite.texture);      
       that.displacementSprite.width = document.body.clientWidth / 2;
       that.displacementSprite.height = document.body.clientWidth / 2;
       that.displacementSprite.anchor.set(0.5);
       that.displacementFilter = new PIXI.filters.DisplacementFilter(that.displacementSprite);
-      that.displacementFilter.scale.x = 50;
-      that.displacementFilter.scale.y = 50;
+      that.displacementFilter.scale.x = 0;
+      that.displacementFilter.scale.y = 0;
       that.hero.stage.addChild(that.displacementSprite);  
-      that.bg.filters = [that.displacementFilter];
+      that.container.filters = [that.displacementFilter];
       function onPointerMove(e) {      
         TweenMax.to(that.displacementSprite, 1.5, {x:e.clientX - 25, y: e.clientY});
       }  
@@ -799,16 +842,28 @@ const _homepage = function(page){
   
   // End Drag Slider
 
-  this.resizeHomepage = function(e){
-    
-    that.hero.heroBgCover();
+  this.resizeHomepage = function(e){    
+    let fs = (window.innerWidth / 100) * 9.9;
+    that.hero.smart.style.fontSize = fs;
+    that.hero.choise.style.fontSize = fs;
+    that.hero.save.style.fontSize = fs;
+    that.hero.time.style.fontSize = fs; 
+    //that.hero.heroBgCover();
     that.hero.hero.renderer.resize(that.hero.el.clientWidth, that.hero.el.clientHeight);
-    that.hero.bg.width = that.hero.heroBgWidth;
-    that.hero.bg.height = that.hero.heroBgHeight;
-    that.hero.bg.x  = that.hero.heroBgLeft;
-    that.hero.bg.y  = that.hero.heroBgTop;
-    that.hero.displacementSprite.width = 300;
-    that.hero.displacementSprite.height = 300;
+    that.hero.smart.x = ((that.hero.el.clientWidth / 100) * 42);
+    that.hero.smart.y = 140 - ((Math.floor(fs)/100) * 7.563724377883669);      
+    that.hero.choise.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 6);
+    that.hero.choise.y = (140 - ((fs/100) * 7.563724377883669)) + Math.floor(fs);
+    that.hero.save.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 12.1);
+    that.hero.save.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 2);
+    that.hero.time.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 18.2);
+    that.hero.time.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);
+    // that.hero.bg.width = that.hero.heroBgWidth;
+    // that.hero.bg.height = that.hero.heroBgHeight;
+    // that.hero.bg.x  = that.hero.heroBgLeft;
+    // that.hero.bg.y  = that.hero.heroBgTop;
+    // that.hero.displacementSprite.width = 300;
+    // that.hero.displacementSprite.height = 300;
     
     let ratio = that.drag.pat1.width/that.drag.pat1.height;
     that.drag.canv1.width = that.drag.el.clientWidth;
