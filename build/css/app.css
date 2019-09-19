@@ -1829,12 +1829,25 @@ footer .footer__copyright img {
   position: relative;
 }
 
+.homepage .homepage__hero .hero--bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.homepage .homepage__hero canvas {
+  position: relative;
+  z-index: 1;
+}
+
 .homepage .homepage__hero .wrapper {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 2;
 }
 
 .homepage .homepage__hero .button-circle.play {

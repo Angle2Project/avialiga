@@ -106,6 +106,19 @@ const _homepage = function(page){
     heroVideo: null
   }
 
+  this.heroBgCover = function(){    
+    let video = document.querySelector('.hero--bg');
+    let ratio = video.videoWidth / video.videoHeight;
+    console.log(ratio, document.body.clientWidth / window.innerHeight)
+    if(document.body.clientWidth / window.innerHeight > ratio){
+      video.width = document.body.clientWidth;
+      video.height = document.body.clientWidth / ratio;
+      TweenMax.set(video, {width: document.body.clientWidth, height: document.body.clientWidth / ratio, top: -((document.body.clientWidth / ratio) - window.innerHeight) / 2, left: 0});      
+    }else{
+      TweenMax.set(video, {width: window.innerHeight*ratio, height: window.innerHeight, top: 0, left: -((window.innerHeight * ratio) - document.body.clientWidth) / 2});      
+    }
+  };
+
   // Start Hero video player render
   this.heroVideo = {
     video: document.querySelector('.homepage__hero .hero--player video'),
@@ -198,17 +211,13 @@ const _homepage = function(page){
           })
           .set('body', {overflow: 'hidden'})
           .to('.hero--player', 0.5, {autoAlpha: 1})
-          .fromTo('[data-action="homepage-close-video"]', 0.5, {scale: 1.4, opacity:0}, {scale: 1, opacity: 1})          
-          .add(function(){
-            app.homepage.hero.resours.source.pause();            
-          })
+          .fromTo('[data-action="homepage-close-video"]', 0.5, {scale: 1.4, opacity:0}, {scale: 1, opacity: 1})
       });      
       document.querySelector('[data-action="homepage-close-video"]').addEventListener('click', function(e){
         app.homepage.heroVideo.active = false;
         let tl = new TimelineMax();        
         let h1 = [].slice.call(document.querySelectorAll('.homepage__hero h1 span'), 0).reverse();
-        video.video.pause();
-        app.homepage.hero.resours.source.play();        
+        video.video.pause();        
         tl.to('.cursor span', 0.6, {scale: 1}, 'cursor')
         .to('.cursor i.circle', 0.6, {scale: 1}, 'cursor')
         .to('.cursor i.pause', 0.6, {scale: 0}, 'cursor')
@@ -283,7 +292,7 @@ const _homepage = function(page){
 
       this.resources += document.querySelectorAll('script[data-src]').length
       + document.querySelectorAll('img').length
-      + document.querySelectorAll('[data-background]').length
+      //+ document.querySelectorAll('[data-background]').length
       + document.querySelectorAll('[data-displacement]').length
       + document.querySelectorAll('[data-pat-left]').length
       + document.querySelectorAll('[data-pat-right]').length
@@ -356,22 +365,22 @@ const _homepage = function(page){
           that.loading();
         }
       });
-      document.querySelectorAll('[data-background]').forEach(function(el, i){      
-        let src = el.getAttribute('data-background');
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', src, true);
-        xhr.responseType = 'blob';      
-        xhr.onload = function(e) {
-          if (this.status == 200) {          
-            var myBlob = this.response;
-            var vid = (window.webkitURL || window.URL).createObjectURL(myBlob);          
-            app.homepage.blobs.heroBg = vid;            
-            that.resourcesDone++;
-            that.loading();
-          }
-        }
-        xhr.send();
-      }); 
+      // document.querySelectorAll('[data-background]').forEach(function(el, i){      
+      //   let src = el.getAttribute('data-background');
+      //   var xhr = new XMLHttpRequest();
+      //   xhr.open('GET', src, true);
+      //   xhr.responseType = 'blob';      
+      //   xhr.onload = function(e) {
+      //     if (this.status == 200) {          
+      //       var myBlob = this.response;
+      //       var vid = (window.webkitURL || window.URL).createObjectURL(myBlob);          
+      //       app.homepage.blobs.heroBg = vid;            
+      //       that.resourcesDone++;
+      //       that.loading();
+      //     }
+      //   }
+      //   xhr.send();
+      // }); 
       
     },
     loading: function(){
@@ -388,65 +397,49 @@ const _homepage = function(page){
         app.homepage.cursor.init();
         app.homepage.hero = new heroRender();
         app.homepage.drag = new dragRender();
-        app.homepage.eventsInit();
-        
-          this.mySwiper = new Swiper ('.swiper-container', {
-            // Optional parameters    
-            speed: 800,
-            simulateTouch: false,
-            // If we need pagination
-            pagination: {
-              el: '.slider-pagination',
-              type: 'fraction'
-            },
-            // Navigation arrows
-            navigation: {
-              nextEl: '.slider-button-next',
-              prevEl: '.slider-button-prev',
-            }
-          });          
-          this.mySwiper.forEach(function(el, i){
-            if(el.el.closest('.homepage__services')){
-              TweenMax.set(el.el.querySelector('.swiper-slide-active .slide--photo'), {scale: 1.4});
-            }
-            el.on('slideChangeTransitionStart', function(){
-              if(this.realIndex > this.previousIndex){
-                let tl = new TimelineMax();
-                tl//.to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 0.7, {opacity: 0}, 'start')
-                .to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 1.4, {scale: 1.5}, 'start')
-                .to(this.el.querySelector('.swiper-slide-prev'), 0.4, {skewX: -30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-                //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
-                .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
-                .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: -30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-              }else{
-                let tl = new TimelineMax();
-                tl//.to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 0.7, {opacity: 0}, 'start')
-                .to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 1.4, {scale: 1.5}, 'start')
-                .to(this.el.querySelector('.swiper-slide-next'), 0.4, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-                //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
-                .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
-                .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-              }              
-            });            
-          });
-          // this.mySwiper.on('slideChange', function(a, b){
-          //   console.log(a);
-          //   console.log(b);
-          // });          
-              
-
-              //var promise = app.homepage.hero.resours.source.play();
-
-              // if (promise !== undefined) {
-              //     promise.catch(error => {
-              //       console.log('error');
-              //     }).then(() => {
-              //       app.homepage.hero.resours.source.play(); 
-              //       console.log('Video done');
-              //     });
-              // }
-              that.loaded();
-              aosInit();
+        app.homepage.eventsInit();        
+        this.mySwiper = new Swiper ('.swiper-container', {
+          // Optional parameters    
+          speed: 800,
+          simulateTouch: false,
+          // If we need pagination
+          pagination: {
+            el: '.slider-pagination',
+            type: 'fraction'
+          },
+          // Navigation arrows
+          navigation: {
+            nextEl: '.slider-button-next',
+            prevEl: '.slider-button-prev',
+          }
+        });          
+        this.mySwiper.forEach(function(el, i){
+          if(el.el.closest('.homepage__services')){
+            TweenMax.set(el.el.querySelector('.swiper-slide-active .slide--photo'), {scale: 1.4});
+          }
+          el.on('slideChangeTransitionStart', function(){
+            if(this.realIndex > this.previousIndex){
+              let tl = new TimelineMax();
+              tl//.to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 0.7, {opacity: 0}, 'start')
+              .to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 1.4, {scale: 1.5}, 'start')
+              .to(this.el.querySelector('.swiper-slide-prev'), 0.4, {skewX: -30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+              //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
+              .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
+              .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: -30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+            }else{
+              let tl = new TimelineMax();
+              tl//.to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 0.7, {opacity: 0}, 'start')
+              .to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 1.4, {scale: 1.5}, 'start')
+              .to(this.el.querySelector('.swiper-slide-next'), 0.4, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+              //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
+              .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
+              .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+            }              
+          });            
+        });        
+        document.querySelector('.homepage__hero .hero--bg').src = document.querySelector('[data-background]').getAttribute('data-background');
+        that.loaded();
+        aosInit();
             
           
         
@@ -459,7 +452,7 @@ const _homepage = function(page){
     loaded: function(){
       let that = this;
       window.scroll(0, 0);      
-      that.colorsAnim.remove()
+      that.colorsAnim.remove();      
       let tl = new TimelineMax({delay: 0.5});
         tl.to('#loader-logo .h, #loader-logo .m', 0.8, {fill: '#2f2f2f', ease: Power3.easeInOut}, 'arrows')
         .to('#loader-logo .h', 0.8, {rotation: 360, transformOrigin:"88% 95%", ease: Power3.easeInOut}, 'arrows')
@@ -470,10 +463,13 @@ const _homepage = function(page){
         .fromTo('.loader-logo .brand', 0.8, {opacity: 0, scale: 1.4}, {opacity: 1, scale: 1, ease: Power3.easeInOut}, '-=0.6')
         .to('#loader-logo', 0.5, {opacity: 0})
         .to('.loader-logo .brand', 0.5, {opacity: 0}, '-=0.3')
+        .add(function(){
+          app.homepage.heroBgCover();
+        })
         .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn, onComplete: function(){
           document.querySelector('.loader').remove();
           TweenMax.set('body', {overflow: 'auto'});
-
+          
           let fs = (window.innerWidth / 100) * 9.9;
           app.homepage.hero.smart.style.fontSize = fs;
           app.homepage.hero.choise.style.fontSize = fs;
@@ -489,6 +485,13 @@ const _homepage = function(page){
           app.homepage.hero.save.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 2);
           app.homepage.hero.time.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 18.2);
           app.homepage.hero.time.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);
+
+          app.homepage.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 3;
+          app.homepage.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 3;
+          app.homepage.hero.displacementSprite.x = app.homepage.hero.hero.renderer.width / 2;
+          app.homepage.hero.displacementSprite.y = app.homepage.hero.hero.renderer.height / 2;
+
+          
           
           TweenMax.set('.homepage__description_bg .m', {x: -55, y: -31});
           TweenMax.set('.homepage__description_bg .h', {x: -55, y: -30});
@@ -520,7 +523,7 @@ const _homepage = function(page){
           new TimelineMax()
           .to(app.homepage.hero.container, 0.2, {alpha: 1})
           .to(document.querySelectorAll('.homepage__hero h1 span'), 0.2, {opacity: 0})
-          .to(app.homepage.hero.displacementFilter.scale, 5 , {x: 40, y: 40});
+          .to(app.homepage.hero.displacementFilter.scale, 5 , {x: 30, y: 30});
           // TweenMax.set(app.homepage.hero.choise, 0.5, {alpha: 1});
           // TweenMax.set(app.homepage.hero.save, 0.5, {alpha: 1});
           // TweenMax.set(app.homepage.hero.time, 0.5, {alpha: 1});
@@ -542,29 +545,13 @@ const _homepage = function(page){
 
   // Start Hero background
   function heroRender(){
-    let that = this;    
-    this.heroBgCover = function(){
-      let ratio = this.resours.width / this.resours.height;      
-      if(document.body.clientWidth / window.innerHeight > ratio){
-        this.heroBgWidth = document.body.clientWidth;
-        this.heroBgHeight = document.body.clientWidth / ratio;
-        this.heroBgTop = -((document.body.clientWidth / ratio) - window.innerHeight) / 2;
-        this.heroBgLeft = 0;
-      }else{
-        this.heroBgWidth = window.innerHeight*ratio;
-        this.heroBgHeight = window.innerHeight;
-        this.heroBgTop = 0;
-        this.heroBgLeft = -((window.innerHeight * ratio) - document.body.clientWidth) / 2;
-      }
-    };
-
-    
+    let that = this;   
     
     this.el = document.querySelector('.homepage__hero');
     this.hero = new PIXI.Application({
       width: this.el.clientWidth,
       height: this.el.clientHeight,
-      //transparent: true,
+      transparent: true,
       forceFXAA: true,
       clearBeforeRender: false
       //forceCanvas: true
@@ -631,8 +618,8 @@ const _homepage = function(page){
       
 
       that.displacementSprite = new PIXI.Sprite(resources.displacementSprite.texture);      
-      that.displacementSprite.width = document.body.clientWidth / 2;
-      that.displacementSprite.height = document.body.clientWidth / 2;
+      that.displacementSprite.width = document.body.clientWidth / 3;
+      that.displacementSprite.height = document.body.clientWidth / 3;
       that.displacementSprite.anchor.set(0.5);
       that.displacementFilter = new PIXI.filters.DisplacementFilter(that.displacementSprite);
       that.displacementFilter.scale.x = 0;
@@ -842,7 +829,8 @@ const _homepage = function(page){
   
   // End Drag Slider
 
-  this.resizeHomepage = function(e){    
+  this.resizeHomepage = function(e){
+    app.homepage.heroBgCover();
     let fs = (window.innerWidth / 100) * 9.9;
     that.hero.smart.style.fontSize = fs;
     that.hero.choise.style.fontSize = fs;
@@ -862,8 +850,8 @@ const _homepage = function(page){
     // that.hero.bg.height = that.hero.heroBgHeight;
     // that.hero.bg.x  = that.hero.heroBgLeft;
     // that.hero.bg.y  = that.hero.heroBgTop;
-    // that.hero.displacementSprite.width = 300;
-    // that.hero.displacementSprite.height = 300;
+    that.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 3;
+    that.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 3;
     
     let ratio = that.drag.pat1.width/that.drag.pat1.height;
     that.drag.canv1.width = that.drag.el.clientWidth;
