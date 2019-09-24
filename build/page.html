@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>Index page</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
     <meta name="theme-color" content="#fff" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" media="all" href="css/app.css" />
@@ -16,10 +16,10 @@
         <div class="header__left">
           <div class="header__logo">
             <a href="" class="logo--white">
-              <img src="./img/logo_avialiga-w.svg" alt="">
+              <img data-src="./img/logo_avialiga-w.svg" alt="">
             </a>
             <a href="" class="logo--black">
-              <img src="./img/logo_avialiga-b.svg" alt="">
+              <img data-src="./img/logo_avialiga-b.svg" alt="">
             </a>
           </div>
           <nav class="header__nav">
@@ -189,10 +189,10 @@
         <div class="header__left">
           <div class="header__logo">
             <a href="" class="logo--white">
-              <img src="./img/logo_avialiga-w.svg" alt="">
+              <img data-src="./img/logo_avialiga-w.svg" alt="">
             </a>
             <a href="" class="logo--black">
-              <img src="./img/logo_avialiga-b.svg" alt="">
+              <img data-src="./img/logo_avialiga-b.svg" alt="">
             </a>
           </div>
           <nav class="header__nav">
@@ -426,18 +426,19 @@
           <li>Complaints and suggestions</li>
           <li>
             <span>by</span>
-            <img src="./img/icon_l2.svg" alt="">
+            <img data-src="./img/icon_l2.svg" alt="">
           </li>
         </ul>
       </footer>
     </main>
     <!-- END content -->
     <!-- BEGIN scripts -->
-    <script type="text/javascript" data-src="js/lib/pixi.min.js"></script>
+    <script type="text/javascript" data-src="js/lib/pixi-legacy.min.js"></script>
     <script type="text/javascript" data-src="js/lib/SplitText.min.js"></script>
-    <script type="text/javascript" data-src="js/lib/MorphSVGPlugin.min.js"></script>
     <script type="text/javascript" data-src="js/lib/swiper.min.js"></script>
+    <script type="text/javascript" data-src="js/lib/aos.js"></script>
     <script type="text/javascript" src="js/lib/TweenMax.min.js"></script>
+    <script type="text/javascript" src="js/lib/MorphSVGPlugin.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <!-- END scripts -->
   </body>

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>Index page,</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
     <meta name="theme-color" content="#fff" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" media="all" href="css/app.css" />
@@ -16,10 +16,10 @@
         <div class="header__left">
           <div class="header__logo">
             <a href="" class="logo--white">
-              <img src="./img/logo_avialiga-w.svg" alt="">
+              <img data-src="./img/logo_avialiga-w.svg" alt="">
             </a>
             <a href="" class="logo--black">
-              <img src="./img/logo_avialiga-b.svg" alt="">
+              <img data-src="./img/logo_avialiga-b.svg" alt="">
             </a>
           </div>
           <nav class="header__nav">
@@ -184,21 +184,28 @@
         </div>
       </header>
       <div class="header__bg"></div>
+      <div class="cursor">
+        <span></span>
+        <i class="circle"></i>
+        <i class="play"></i>
+        <i class="pause"></i>
+      </div>
       <!-- LOADER -->
       <div class="loader">
-        <div class="progress">0</div>
-        <div class="logo">
-          <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
-            <g>
-              <path id="morph" d="M95.5,24.25L35.9011612,72.5523224L11.75,55.4127922l23.3720932,10.9069786L95.5,24.25z" />
-            </g>
+        <!-- <div class="progress">0%</div> -->
+        <div class="loader-logo">
+          <svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">
+            <path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z" />
+            <path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z" />
           </svg>
+          <div class="brand">avialiga</div>
         </div>
         <div class="blind-left"></div>
         <div class="blind-right"></div>
       </div>
       <!-- /LOADER -->
       <article class="homepage__hero" data-background="./img/home.mp4" data-displacement="./img/displacement.png">
+        <video class="hero--bg" src="" autoplay muted loop></video>
         <div class="wrapper">
           <div class="button-circle play" data-action="homepage-hero-play" data-text="play video">
             <svg class="icon icon-icon_play">
@@ -223,9 +230,7 @@
           </div>
         </div>
         <div class="hero--player">
-          <video>
-            <source src="./img/installation-video.mp4" type="video/mp4">
-          </video>
+          <video data-src="./img/installation-video.mp4" playsinline></video>
           <div class="player--controls">
             <div class="controls--time">
               <span data-time="current">00:00</span>
@@ -244,9 +249,15 @@
         </div>
       </article>
       <article class="homepage__description">
+        <svg version="1.1" class="homepage__description_bg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">
+          <path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z" />
+          <path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z" />
+        </svg>
         <p>Specializes in organizing events, group trips and individual tours. While you are developing your business and concentrating on the tasks that are important to you, Avialiga takes care of all the arrangements for the tour.</p>
       </article>
-      <article class="homepage__drag" data-img-left="./img/hone-leisure.jpg" data-img-right="./img/home-business.jpg" data-pat-left="./img/pat1.png" data-pat-right="./img/pat2.png">
+      <article class="homepage__drag" data-aos="fade-up" data-img-left="./img/hone-leisure.jpg" data-img-right="./img/home-business.jpg" data-pat-left="./img/pat1.png" data-pat-right="./img/pat2.png">
+        <div class="blind-left"></div>
+        <div class="blind-right"></div>
         <div class="wrapper">
           <div class="button-circle drag" data-action="homepage-drag" data-text="learn more" data-hover="drag my">
             <svg class="icon icon-icon_arrows">
@@ -266,16 +277,21 @@
             <i></i>
           </div>
           <h2 class="leisure">
-            <a href="">Leisure</a>
+            <a href="" data-target="leisure">Leisure</a>
+          </h2>
+          <h2 class="or">
+            <span>or</span>
           </h2>
           <h2 class="business">
-            <a href="">Business</a>
+            <a href="" data-target="business">Business</a>
           </h2>
         </div>
       </article>
       <article class="homepage__feedback">
-        <section class="leisure">
-          <h2>Leisure Feedback</h2>
+        <section class="homepage__feedback_slider leisure" data-aos="fade-up">
+          <h2>
+            <span>Leisure Feedback</span>
+          </h2>
           <!-- Slider main container -->
           <div class="swiper-container">
             <!-- Additional required wrapper -->
@@ -287,7 +303,7 @@
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
                 </div>
                 <div class="slide--photo">
-                  <img src="./img/feedback-img-1.jpg" alt="">
+                  <img data-src="./img/feedback-img-1.jpg" alt="">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -296,7 +312,7 @@
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
                 </div>
                 <div class="slide--photo">
-                  <img src="./img/feedback-img-2.jpg" alt="">
+                  <img data-src="./img/feedback-img-2.jpg" alt="">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -305,7 +321,7 @@
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
                 </div>
                 <div class="slide--photo">
-                  <img src="./img/feedback-img-3.jpg" alt="">
+                  <img data-src="./img/feedback-img-3.jpg" alt="">
                 </div>
               </div>
             </div>
@@ -314,18 +330,22 @@
                 <svg class="icon icon-icon_arrow_menu">
                   <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
                 </svg>
+                <i></i>
               </div>
               <div class="slider-pagination"></div>
               <div class="slider-button-next">
                 <svg class="icon icon-icon_arrow_menu">
                   <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
                 </svg>
+                <i></i>
               </div>
             </div>
           </div>
         </section>
-        <section class="business">
-          <h2>Business Cases</h2>
+        <section class="homepage__feedback_slider business" data-aos="fade-up">
+          <h2>
+            <span>Business Cases</span>
+          </h2>
           <!-- Slider main container -->
           <div class="swiper-container">
             <!-- Additional required wrapper -->
@@ -337,7 +357,7 @@
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
                 </div>
                 <div class="slide--photo">
-                  <img src="./img/feedback-img-1.jpg" alt="">
+                  <img data-src="./img/feedback-img-1.jpg" alt="">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -346,7 +366,7 @@
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
                 </div>
                 <div class="slide--photo">
-                  <img src="./img/feedback-img-2.jpg" alt="">
+                  <img data-src="./img/feedback-img-2.jpg" alt="">
                 </div>
               </div>
               <div class="swiper-slide">
@@ -355,7 +375,7 @@
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
                 </div>
                 <div class="slide--photo">
-                  <img src="./img/feedback-img-3.jpg" alt="">
+                  <img data-src="./img/feedback-img-3.jpg" alt="">
                 </div>
               </div>
             </div>
@@ -364,19 +384,21 @@
                 <svg class="icon icon-icon_arrow_menu">
                   <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
                 </svg>
+                <i></i>
               </div>
               <div class="slider-pagination"></div>
               <div class="slider-button-next">
                 <svg class="icon icon-icon_arrow_menu">
                   <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
                 </svg>
+                <i></i>
               </div>
             </div>
           </div>
         </section>
         <div class="button-circle more" data-action="learn-more" data-text="learn more"></div>
       </article>
-      <article class="homepage__services">
+      <article class="homepage__services" data-aos="fade-up">
         <div class="wrapper">
           <section class="leisure">
             <h2>Leisure Destinations</h2>
@@ -390,7 +412,7 @@
                     <a href="">Some place - 1</a>
                   </h3>
                   <div class="slide--photo">
-                    <img src="./img/services-leisure-1.jpg" alt="">
+                    <img data-src="./img/services-leisure-1.jpg" alt="">
                   </div>
                 </div>
                 <div class="swiper-slide">
@@ -398,7 +420,7 @@
                     <a href="">Some place - 2</a>
                   </h3>
                   <div class="slide--photo">
-                    <img src="./img/services-leisure-2.jpg" alt="">
+                    <img data-src="./img/services-leisure-2.jpg" alt="">
                   </div>
                 </div>
                 <div class="swiper-slide">
@@ -406,7 +428,7 @@
                     <a href="">Some place - 3</a>
                   </h3>
                   <div class="slide--photo">
-                    <img src="./img/services-leisure-3.jpg" alt="">
+                    <img data-src="./img/services-leisure-3.jpg" alt="">
                   </div>
                 </div>
               </div>
@@ -415,12 +437,14 @@
                   <svg class="icon icon-icon_arrow_menu">
                     <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
                   </svg>
+                  <i></i>
                 </div>
                 <div class="slider-pagination"></div>
                 <div class="slider-button-next">
                   <svg class="icon icon-icon_arrow_menu">
                     <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
                   </svg>
+                  <i></i>
                 </div>
               </div>
             </div>
@@ -437,7 +461,7 @@
                     <a href="">Some service - 1</a>
                   </h3>
                   <div class="slide--photo">
-                    <img src="./img/services-business-1.jpg" alt="">
+                    <img data-src="./img/services-business-1.jpg" alt="">
                   </div>
                 </div>
                 <div class="swiper-slide">
@@ -445,7 +469,7 @@
                     <a href="">Some service - 2</a>
                   </h3>
                   <div class="slide--photo">
-                    <img src="./img/services-business-2.jpg" alt="">
+                    <img data-src="./img/services-business-2.jpg" alt="">
                   </div>
                 </div>
                 <div class="swiper-slide">
@@ -453,7 +477,7 @@
                     <a href="">Some service - 3</a>
                   </h3>
                   <div class="slide--photo">
-                    <img src="./img/services-business-3.jpg" alt="">
+                    <img data-src="./img/services-business-3.jpg" alt="">
                   </div>
                 </div>
               </div>
@@ -462,23 +486,25 @@
                   <svg class="icon icon-icon_arrow_menu">
                     <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
                   </svg>
+                  <i></i>
                 </div>
                 <div class="slider-pagination"></div>
                 <div class="slider-button-next">
                   <svg class="icon icon-icon_arrow_menu">
                     <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
                   </svg>
+                  <i></i>
                 </div>
               </div>
             </div>
           </section>
         </div>
       </article>
-      <article class="homepage__tabs">
+      <article class="homepage__tabs" data-aos="fade-up">
         <div class="homepage__tabs_disk">
           <div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>
-          <img src="./img/advantages-1.svg" class="disk--arrow-1" alt="">
-          <img src="./img/advantages-2.svg" class="disk--arrow-2" alt="">
+          <img data-src="./img/advantages-1.svg" class="disk--arrow-1" alt="">
+          <img data-src="./img/advantages-2.svg" class="disk--arrow-2" alt="">
         </div>
         <div class="wrapper">
           <h3>Get with us</h3>
@@ -538,32 +564,38 @@
         </div>
       </article>
       <article class="homepage__insta">
-        <section class="leisure">
+        <section class="leisure" data-aos="fade-up">
           <div class="homepage__insta_title">
-            <h2>Leisure insta</h2>
+            <h2>
+              <span>Leisure insta</span>
+            </h2>
             <a href="">@avialiga_leisure</a>
           </div>
           <div class="homepage__insta_gallery">
-            <img src="./img/insta-leisure-1.jpg" alt="">
-            <img src="./img/insta-leisure-2.jpg" alt="">
-            <img src="./img/insta-leisure-3.jpg" alt="">
+            <img data-src="./img/insta-leisure-1.jpg" alt="">
+            <img data-src="./img/insta-leisure-2.jpg" alt="">
+            <img data-src="./img/insta-leisure-3.jpg" alt="">
           </div>
         </section>
-        <section class="business">
+        <section class="business" data-aos="fade-up">
           <div class="homepage__insta_title">
-            <h2>Business insta</h2>
+            <h2>
+              <span>Business insta</span>
+            </h2>
             <a href="">@avialiga_business</a>
           </div>
           <div class="homepage__insta_gallery">
-            <img src="./img/insta-business-1.jpg" alt="">
-            <img src="./img/insta-business-2.jpg" alt="">
-            <img src="./img/insta-business-3.jpg" alt="">
+            <img data-src="./img/insta-business-1.jpg" alt="">
+            <img data-src="./img/insta-business-2.jpg" alt="">
+            <img data-src="./img/insta-business-3.jpg" alt="">
           </div>
         </section>
       </article>
-      <article class="homepage__form">
+      <article class="homepage__form" data-aos="fade-up">
         <div class="homepage__form_title">
-          <h2>Your travel expert</h2>
+          <h2>
+            <span>Your travel expert</span>
+          </h2>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         </div>
         <div class="homepage__form_body">
@@ -582,6 +614,7 @@
             <div class="form--submit">
               <button>
                 <span>Submit</span>
+                <i></i>
               </button>
             </div>
           </form>
@@ -651,18 +684,19 @@
           <li>Complaints and suggestions</li>
           <li>
             <span>by</span>
-            <img src="./img/icon_l2.svg" alt="">
+            <img data-src="./img/icon_l2.svg" alt="">
           </li>
         </ul>
       </footer>
     </main>
     <!-- END content -->
     <!-- BEGIN scripts -->
-    <script type="text/javascript" data-src="js/lib/pixi.min.js"></script>
+    <script type="text/javascript" data-src="js/lib/pixi-legacy.min.js"></script>
     <script type="text/javascript" data-src="js/lib/SplitText.min.js"></script>
-    <script type="text/javascript" data-src="js/lib/MorphSVGPlugin.min.js"></script>
     <script type="text/javascript" data-src="js/lib/swiper.min.js"></script>
+    <script type="text/javascript" data-src="js/lib/aos.js"></script>
     <script type="text/javascript" src="js/lib/TweenMax.min.js"></script>
+    <script type="text/javascript" src="js/lib/MorphSVGPlugin.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <!-- END scripts -->
   </body>

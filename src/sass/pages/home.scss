@@ -2,23 +2,141 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  .loader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;  
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    .blind-left {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 49%;
+      background-color: $white;
+      transform: skewX(-35deg);
+      transform-origin: left;
+    }
+    .blind-right {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 49%;
+      background-color: $white;
+      transform: skewX(-35deg);
+      transform-origin: right;
+    }
+    .progress {
+      z-index: 1;
+      font: 16px/1 $futura;
+      color: $black;
+      position: relative;
+      visibility: hidden;
+    }
+    .loader-logo {
+      width: 240px;
+      height: 240px;
+      position: relative;
+      z-index: 1;
+      .brand {
+        position: absolute;
+        top: 160px;
+        left: 87px;
+        font: 300 29px/1 "Futura";
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        opacity: 0;
+      }
+      // &::before {
+      //   content: "";
+      //   width: 100%;
+      //   height: 2px;
+      //   background-color: red;
+      //   position: absolute;
+      //   top: calc(50% - 1px);
+      //   left: 0;  
+      //   opacity: 0;
+      // }  
+      // &::after {
+      //   content: "";
+      //   width: 2px;
+      //   height: 100%;
+      //   background-color: red;
+      //   position: absolute;
+      //   left: calc(50% - 1px);
+      //   top: 0;  
+      //   opacity: 0;
+      // }  
+    }
+    @keyframes loaderLogo {
+      0% {fill: #2f2f2f;}
+      10% {fill: #f8d4e4;}
+      20% {fill: #d8ebe7;}
+      30% {fill: #5ebfaf;}
+      40% {fill: #577081;}
+      50% {fill: #eb4333;}
+      60% {fill: #d7ebe6;}      
+      70% {fill: #bfbdce;}
+      80% {fill: #9ccad5;}      
+      90% {fill: #5ebfaf;}
+      100% {fill: #2f2f2f;}
+    }
+    #loader-logo {
+      z-index: 1;
+      visibility: hidden;
+      //background-color: beige;
+      &.colors {
+        .m {          
+          //animation: loaderLogo 5s infinite linear;          
+        }
+        .h {          
+          //animation: loaderLogo 5s infinite linear;
+        }  
+      }
+      .m {
+        fill: $black;
+      }
+      .h {
+        fill: $black;        
+      }
+    }
+  }
   .homepage__hero {
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    position: relative;
+    position: relative;   
+    .hero--bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    } 
+    canvas {
+      position: relative;
+      z-index: 1;
+    }
     .wrapper {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
+      z-index: 2;
     }
     .button-circle {
       &.play {
         position: absolute;
         left: 350px;
-        top: 325px;
+        top: calc(50% - 50px);
       }
       &.close {
         position: absolute;
@@ -26,13 +144,15 @@
         right: 50px;
       }      
     }
-    h1 {
+    h1 {      
       font: normal 9.9vw/1 $futura;
-      color: $white;
+      color: $white;      
       margin-left: 42%;
       margin-top: 140px;
+      perspective: 400px;
       span {
         display: block;
+        transform-origin: bottom;
         &:nth-child(2) {
           margin-left: 6vw;
         }
@@ -158,10 +278,26 @@
     font: 300 36px/48px $futura;
     padding: 160px 0;
     color: $black;
-    background: url('../img/bg-home-descr.png') no-repeat center;
+    position: relative;
+    //background: url('../img/bg-home-descr.png') no-repeat center;
     p {
       max-width: 810px;
       margin: auto;
+      position: relative;
+      z-index: 1;
+    }
+    .homepage__description_bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      .h {
+        fill: $black;
+      }
+      .m {
+        fill: $black;
+      }
     }
   }
   .homepage__drag {
@@ -169,21 +305,44 @@
     width: 100%;
     height: calc(100vw / 2.08);
     position: relative;
+    .blind-left {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 49%;
+      background-color: $white;
+      transform: skewX(-35deg);
+      transform-origin: left;
+      z-index: 3;
+    }
+    .blind-right {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 49%;
+      background-color: $white;
+      transform: skewX(-35deg);
+      transform-origin: right;
+      z-index: 3;
+    }
     .wrapper {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
+      z-index: 1;
     }
     .homepage__drag_dots {
       display: flex;
       justify-content: space-between;      
       width: calc(((100% / 2) / 3) * 2);
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scaleX(0);      
+      left: calc(50% - (((100% / 2) / 3)));
+      top: calc(50% - 4px);
+      transform: scaleX(0);
       z-index: 0;
       i {
         display: block;
@@ -202,6 +361,20 @@
       left: calc(50% - 50px);
       z-index: 1;
     }
+    canvas {
+      &.leisure,
+      &.business {
+        position: absolute;
+        top: 0;
+        left: 0;  
+      }
+      &.leisure {
+        transform-origin: top;
+      }
+      &.business {
+        transform-origin: bottom;
+      }
+    }
     h2 {
       -webkit-user-select: none;  /* Chrome all / Safari all */
       -moz-user-select: none;     /* Firefox all */
@@ -209,6 +382,7 @@
       user-select: none;
       font: normal 9.9vw/1 $futura;
       position: absolute;
+      perspective: 400px;
       &.leisure {
         top: 60px;
         left: 90px;
@@ -217,9 +391,23 @@
         bottom: 70px;
         right: 90px;
       }
+      &.or {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: $white;
+        transform: translate(-50%, -50%);
+        span {
+          display: block;
+          transform-origin: bottom;
+          -webkit-backface-visibility: hidden; /* Chrome, Safari, Opera */
+          backface-visibility: hidden;
+        }
+      }
       a {
         display: block;
         position: relative;
+        transform-origin: bottom;
         &::after {
           content: "";
           width: 100%;
@@ -268,6 +456,11 @@
         h2 {
           font: normal 72px/60px $futura;
           color: $green;
+          perspective: 400px;
+          span {
+            display: inline-block;
+            transform-origin: bottom;
+          }
         }
         a {
           font: 300 24px/60px $futura;
@@ -306,6 +499,11 @@
       h2 {
         font: normal 72px/60px $futura;
         color: $black;
+        perspective: 400px;
+        span {
+          display: inline-block;
+          transform-origin: bottom;
+        }
       }
       p {
         margin: 40px 0 0 90px;
@@ -356,29 +554,19 @@
           text-transform: uppercase;
           color: $red;
           margin: auto;
-          position: relative;
-          transition: all 250ms ease;
+          position: relative;          
           span {
             position: relative;
             z-index: 1;
-          }
-          &:hover {
-            color: $white;
-            &::before {
-              bottom: 0;
-              height: 100%;
-            }
-          }
-          &::before {
-            content: "";
+          }          
+          i {            
             display: block;
             width: 100%;
             height: 2px;
             background-color: $red;
             position: absolute;
             left: 0;
-            bottom: 14px;
-            transition: all 250ms ease;
+            bottom: 14px;            
             z-index: 0;
           }
         }
@@ -386,14 +574,24 @@
     }
   }
   .homepage__services {
-    margin-top: 160px;
+    margin-top: 80px;
     .wrapper {
       display: flex;
       justify-content: space-between;
       section {
         width: 50%;
         flex-shrink: 0;
-        position: relative;        
+        position: relative;
+        &.leisure {
+          .slide--photo {
+            transform-origin: top;
+          }          
+        }
+        &.business {
+          .slide--photo {
+            transform-origin: bottom;
+          }
+        }
         h2 {
           font: 300 30px/1 $futura;
           color: $white;
@@ -401,9 +599,11 @@
           top: 45%;
           left: 90px;
           z-index: 2;
+          will-change: transform;          
         }
         .swiper-slide {
-          position: relative;          
+          position: relative;
+          will-change: transform;
           &::before {
             content: "";
             display: block;
@@ -414,17 +614,21 @@
             left: 0;
             background: #000;
             opacity: 0.15;
-          }
+            z-index: 1;
+          }          
           h3 {
             font: normal 5.1vw/60px $futura;
             color: $white;
             position: absolute;
             top: 0;
             left: 90px;
-            top: 55%;            
+            top: 55%;
+            z-index: 1;            
+            perspective: 400px;
             a {
               display: block;
               position: relative;
+              transform-origin: bottom;
               &::after {
                 content: "";
                 width: 100%;
@@ -444,6 +648,9 @@
           .slide--photo {
             font-size: 0;
             line-height: 1;
+            overflow: hidden;
+            line-height: 1;
+            font-size: 0;
             img {
               width: 100%;
             }
@@ -455,6 +662,7 @@
           top: 75%;
           left: 90px;
           align-items: center;
+          z-index: 2;
           .slider-pagination {
             position: relative;
             z-index: 1;
@@ -474,8 +682,7 @@
             display: flex;
             justify-content: center;
             align-items: center; 
-            z-index: 3;
-            cursor: pointer;
+            z-index: 3;            
             position: relative;            
             transition: all 250ms ease;
             &.swiper-button-disabled {
@@ -484,8 +691,7 @@
                 fill: $white;
               }
             }
-            &::before {
-              content: "";
+            i {              
               display: block;
               width: 100%;
               height: 100%;
@@ -493,20 +699,14 @@
               top: 0;
               left: 0;
               background-color: $white;
-              transform: scale(0);
-              transition: all 250ms ease;
+              transform: scale(0);              
               border-radius: 50%;
-            }
-            &:not(.swiper-button-disabled):hover {              
-              &::before {                
-                transform: scale(1);                
-              }              
             }            
             .icon {
-              fill: $red;
-              transition: all 250ms ease;
+              fill: $red!important;             
               width: 22px;
               height: 11px;
+              z-index: 1;
             }
           }
           .slider-button-prev {
@@ -523,13 +723,16 @@
       }
     }
   }
-  .homepage__feedback {
-    margin-top: 140px;
+  .homepage__feedback {    
+    padding-top: 140px;
+    padding-bottom: 80px;
     position: relative;
     section {
+      visibility: hidden;
       position: relative;
       margin-bottom: 100px;
       &.business {
+        margin-bottom: 0;
         h2 {
           color: $bud;
           left: calc(50% + 90px);
@@ -555,10 +758,16 @@
         top: 15%;
         left: 90px;
         z-index: 2;
+        perspective: 400px;
+        span {
+          display: inline-block;
+          transform-origin: bottom;
+        }
       }
       .swiper-slide {        
         padding: 0 90px;
-        position: relative;        
+        position: relative;
+        will-change: transform;
         .slide--text {
           width: calc(50% - 180px);
           font: 300 24px/36px $futura;
@@ -570,9 +779,24 @@
         }
         .slide--photo {
           width: 50%;
-          margin-left: auto;          
+          margin-left: auto;   
+          overflow: hidden;       
+          line-height: 1;
+          font-size: 0;
           img {
             width: 100%;
+            //transition: transform 1000ms ease, opacity 800ms ease;
+          }
+        }
+        &.swiper-slide-prev {
+          
+        }
+        &.swiper-slide-next {
+          
+        }
+        &.swiper-slide-active {
+          .slide--photo {
+            
           }
         }
       }
@@ -582,6 +806,7 @@
         top: 75%;
         left: 180px;
         align-items: center;
+        z-index: 1;
         .slider-pagination {
           position: relative;
           z-index: 1;
@@ -601,8 +826,7 @@
           display: flex;
           justify-content: center;
           align-items: center; 
-          z-index: 3;
-          cursor: pointer;
+          z-index: 3;          
           position: relative;            
           transition: all 250ms ease;
           &.swiper-button-disabled {
@@ -611,8 +835,7 @@
               fill: $green;
             }
           }
-          &::before {
-            content: "";
+          i {            
             display: block;
             width: 100%;
             height: 100%;
@@ -620,23 +843,14 @@
             top: 0;
             left: 0;
             background-color: $green;
-            transform: scale(0);
-            transition: all 250ms ease;
+            transform: scale(0);            
             border-radius: 50%;
-          }
-          &:not(.swiper-button-disabled):hover {              
-            &::before {                
-              transform: scale(1);                
-            }
-            .icon {
-              fill: $white;
-            }
-          }            
+          }          
           .icon {
-            fill: $red;
-            transition: all 250ms ease;
+            fill: $red;            
             width: 22px;
             height: 11px;
+            z-index: 1;
           }
         }
         .slider-button-prev {
@@ -653,7 +867,7 @@
     }
     .button-circle.more {
       position: absolute;
-      bottom: 0;
+      bottom: 80px;
       left: 50%;
       transform: translate(-50%, 50%);
       z-index: 1;
@@ -732,9 +946,10 @@
       }
     }    
     .wrapper {
-      margin: 200px 90px 0 448px;      
+      margin: 200px 90px 0 auto;
       position: relative;
       z-index: 1;
+      width: calc(70% - 90px - 35px);
       h3 {
         font: 300 30px/1 $futura;
         color: $black;
@@ -744,10 +959,9 @@
         font: 300 72px/60px $futura;
         color: $red;
         position: relative;
-        z-index: 1;
+        z-index: 1;        
         span {
-          transform-origin: bottom;          
-          cursor: pointer;
+          transform-origin: bottom;
           &.active {
             position: relative;
             z-index: 1;
@@ -781,8 +995,7 @@
                 width: 60px;
                 height: 60px; 
                 transform: rotate(45deg);
-                margin-left: 20px;
-                cursor: pointer;  
+                margin-left: 20px;                
                 font-size: 76px;
                 display: inline-flex;
                 justify-content: center;
