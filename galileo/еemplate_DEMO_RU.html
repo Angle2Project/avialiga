@@ -1,0 +1,682 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>Itinerary</title>
+	<style type="text/css">
+	@font-face {
+    font-family: 'Proxima Nova';
+    src: url('ProximaNova-RegularCondensed.eot');
+    src: url('ProximaNova-RegularCondensed.eot?#iefix') format('embedded-opentype'),
+        url('ProximaNova-RegularCondensed.woff2') format('woff2'),
+        url('ProximaNova-RegularCondensed.woff') format('woff'),
+        url('ProximaNova-RegularCondensed.ttf') format('truetype'),
+        url('ProximaNova-RegularCondensed.svg#ProximaNova-RegularCondensed') format('svg');
+    font-weight: normal;
+    font-style: normal;
+	}
+	@font-face {
+    font-family: 'Proxima Nova';
+    src: url('ProximaNova-Semibold.eot');
+    src: url('ProximaNova-Semibold.eot?#iefix') format('embedded-opentype'),
+        url('ProximaNova-Semibold.woff2') format('woff2'),
+        url('ProximaNova-Semibold.woff') format('woff'),
+        url('ProximaNova-Semibold.ttf') format('truetype'),
+        url('ProximaNova-Semibold.svg#ProximaNova-Semibold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+	}
+
+
+
+
+
+
+		.tluste {
+			font-weight: bold;
+		}
+
+		.tence {
+			font-weight: lighter;
+		}
+
+		.spolu {
+			page-break-inside: avoid;
+		}
+
+		h4 {
+			margin-bottom: 2pt;
+			margin-top: 7pt;
+		}
+
+		th {
+			text-align: left;
+		}
+
+		body {
+			font-size: 75%;
+			padding: 0;
+			margin: 0;
+			font-family: 'Proxima Nova', sans-serif;
+			color: black;
+			padding-bottom: 40px;
+		}
+
+		#sectionTrawysLink td {
+			border-radius: 5px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			padding: 5px;
+			background-color: #00ace6;
+			color: white;
+			font-size: 1.2em;
+		}
+
+		#sectionTrawysLink td a {
+			color: white;
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="sectionItin" class="spolu">
+		<!-- informace pro itinerar, aby vedel, ze ma do nadpisu pouzit dvojjazycny text !-->
+		<div id="sectionAgencyName"></div>
+		<!-- konec informace !-->
+
+		<div id="sectionHeader" style="background-color: #d5e9e4; padding: 30px 0;">
+			<table width="748px;" align="center" cellpadding="0" cellspacing="0">
+				<tr>
+					<td valign="bottom" width="36%">
+						<div id="logo">
+							<img src='logo_avialiga.svg' height="98px" alt="Avialiga" />
+						</div>
+					</td>		
+					<td valign="bottom" style="color:#eb3826;text-transform: uppercase;">
+						<div style="font-size: 12px;">номер заявки</div>
+						<div style="font-size: 21px;">
+							<b>№ 30303003</b>
+						</div>
+					</td>
+					<td valign="bottom" style="color: #50b8a7; text-align: right;">
+						<div style="margin-bottom: 8px;">
+							<span style="display: block;font-size: 10px;text-transform: uppercase; margin-bottom: 4px;">агент</span>
+							<b style="display: block;font-size: 12px;text-transform: uppercase;">Смоков Олександр</b>
+						</div>
+						<div style="margin-bottom: 8px;">
+							<span style="display: block;font-size: 10px;text-transform: uppercase; margin-bottom: 4px;">Контакти агента</span>
+							<b style="display: block;font-size: 12px;text-transform: uppercase;">+38 (067) 123 45 56</b>
+						</div>
+						<div>
+							<span style="display: block;font-size: 10px;text-transform: uppercase; margin-bottom: 4px;">avialiga</span>
+							<b style="display: block;font-size: 12px;text-transform: uppercase;">+38 (044) 123 45 56</b>
+						</div>
+							<!-- <div>Локатор Galileo:</div>
+							<div class="tluste">PHRecLoc</div>
+							<div>Локатор авиакомпании:</div>
+							<div class="tluste" colspan="5">PHVendorRecLoc</div>
+							<div>Имя агента:</div>
+							<div class="tluste">PHConsultantName</div> -->
+					</td>
+				</tr>
+			</table>
+		<!-- <div id="sectionTitle">
+			<h4 style="text-align:center;">
+				PHTitle
+			</h4>		
+		</div> -->		
+	</div>
+	<div id="sectionPassengers" style="width:748px;margin: 50px auto 70px auto;">
+		<table width="100%" align="center" cellpadding="0" cellspacing="0" style="font-size: 21px;">
+			<thead>
+				<tr>
+					<th width="36%">
+						<div style="border-bottom: 1px solid #50b8a7;padding-bottom: 20px;margin-left: 20px;">
+							<b>NAME</b>
+						</div>
+					</th>
+					<th>
+						<div style="border-bottom: 1px solid #50b8a7;padding-bottom: 20px;">
+							<b>TICKET</b>
+						</div>
+					</th>
+					<th>
+						<div style="border-bottom: 1px solid #50b8a7;padding-bottom: 20px;">
+							<b>PASSPORT</b>
+						</div>
+					</th>
+					<th width="5%">
+						<div style="border-bottom: 1px solid #50b8a7;padding-bottom: 20px;">
+							<b>SEAT</b>
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="4" height="6"></td>
+				</tr>
+				<tr>
+					<td style="padding: 10px 0 0 20px;">Іванов Петро</td>
+					<td style="padding: 10px 0;">123 12345678912</td>
+					<td style="padding: 10px 0;">CH 653777</td>
+					<td style="padding: 10px 0;">353G</td>
+				</tr>
+				<tr>
+					<td style="padding: 10px 0 0 20px;">Іванов Петро</td>
+					<td style="padding: 10px 0;">123 12345678912</td>
+					<td style="padding: 10px 0;">CH 653777</td>
+					<td style="padding: 10px 0;">353G</td>
+				</tr>
+				<tr>
+					<td style="padding: 10px 0 0 20px;">Іванов Петро</td>
+					<td style="padding: 10px 0;">123 12345678912</td>
+					<td style="padding: 10px 0;">CH 653777</td>
+					<td style="padding: 10px 0;">353G</td>
+				</tr>
+				<tr>
+					<td style="padding: 10px 0 0 20px;">Іванов Петро</td>
+					<td style="padding: 10px 0;">123 12345678912</td>
+					<td style="padding: 10px 0;">CH 653777</td>
+					<td style="padding: 10px 0;">353G</td>
+				</tr>
+				<tr>
+					<td style="padding: 10px 0 0 20px;">Іванов Петро</td>
+					<td style="padding: 10px 0;">123 12345678912</td>
+					<td style="padding: 10px 0;">CH 653777</td>
+					<td style="padding: 10px 0;">353G</td>
+				</tr>
+			</tbody>
+			<!-- <tr>
+				<td>Пассажиры:</td>
+				<td>Программа лояльности:</td>
+				<td width="33%">Номер электронного билета:</td>
+			</tr>
+			<tr class="tluste" id="repeaterPap">
+				<td>PHPaxLastName/PHPaxFirstName</td>
+				<td>PHPaxLoyaltyProgram</td>
+				<td>PHETNumber</td>
+			</tr> -->
+		</table>		
+	</div>
+
+	<div id="sectionAirContent" style="width: 748px; margin: auto;">
+		<div id="repeaterFlight">
+			<div class="ticket">
+				<div id="sectionBookingComDeepLinkBefore" style="background-color: #50b8a7; padding: 16px 20px; border-radius: 22px 0 0 0;">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" style="color: #fff;">
+						<tr>
+							<td width="50%" valign="bottom" style="font-size: 36px;line-height: 1;">
+								<b>10 DEC 2019</b>
+							</td>
+							<td valign="bottom" style="font-size: 22px;line-height: 1;">
+								<b>Airbus 321</b>
+							</td>
+							<td valign="bottom" align="right">
+								<img src="airplane.svg" height="40" alt="">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="border: 2px solid #50b8a7; border-radius: 0 0 22px 0;">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" style="background: url('pattern_ticket.svg') no-repeat left / 35% auto;">
+						<tr style="vertical-align: top;">
+							<td width="35%" colspan="2" style="padding: 16px 20px;">
+								<span style="display: block;font-size: 12px;margin-bottom: 8px;">FLIGHT NUMBER</span>
+								<b style="display: block;font-size: 36px;">FR 3069</b>
+							</td>
+							<td width="22%" style="padding: 16px 0 24px 20px;border-left: 2px solid #50b8a7;">
+								<table width="100%" cellpadding="0" cellspacing="0">
+									<tr>
+										<td>
+											<b style="display: block;font-size: 36px;">KBP</b>
+										</td>
+										<td align="right" style="font-size: 36px;color:#50b8a7;">&rarr;</td>
+									</tr>
+								</table>
+								<div style="padding: 10px 0 0 0">
+									<b style="font-size: 12px;">
+										Kyiv,
+										<br>
+										Ukraine
+									</b>
+								</div>
+							</td>
+							<td width="22%" style="padding: 16px 0 24px 20px;border-right: 2px solid #50b8a7;">
+								<b style="display: block;font-size: 36px;">BCN</b>
+								<div style="padding: 10px 0 0 0">
+									<b style="font-size: 12px;">
+										Barcelona,
+										<br>
+										Spain
+									</b>
+								</div>
+							</td>
+							<td style="padding: 16px 20px;font-size: 12px;line-height: 1.4;">
+								<span style="display: block;text-transform: uppercase;">CLASS</span>
+								<b style="display: block;">economy</b>
+							</td>
+						</tr>
+						<tr style="vertical-align: top;">
+							<td style="padding: 12px 20px 14px 20px;font-size: 12px;">
+								<div>
+									<span style="display: block;margin-bottom: 4px;">OPERATED BY</span>
+									<b style="display: block;">Air France</b>
+								</div>
+								<div style="margin-top: 20px;">
+									<span style="display: block;margin-bottom: 4px;">IN FLIGHT</span>
+									<b style="display: block;">3 hours 10 min</b>
+								</div>
+							</td>
+							<td style="padding: 12px 20px 14px 20px;font-size: 12px;">
+								<span style="display: block;margin-bottom: 4px;">LOCATOR</span>
+								<b style="display: block;">123456</b>
+							</td>
+							<td style="padding: 14px 10px 16px 20px;border-left: 2px solid #50b8a7;border-top: 2px solid #50b8a7;border-right: 2px solid #50b8a7;">
+								<div>
+									<span style="display: block;margin-bottom: 4px;font-size: 12px;">DEPARTURE</span>
+									<b style="display: block;font-size: 22px;">14:05</b>
+								</div>
+								<div style="margin-top: 20px;">
+									<span style="display: block;margin-bottom: 4px;font-size: 12px;">TERMINAL</span>
+									<b style="display: block;font-size: 22px;">D</b>
+								</div>
+							</td>
+							<td style="padding: 14px 10px 16px 20px;border-top: 2px solid #50b8a7;border-right: 2px solid #50b8a7;">
+								<div>
+									<span style="display: block;margin-bottom: 4px;">ARRIVAL</span>
+									<b style="display: block;font-size: 22px;">17:15 </b>
+								</div>
+								<div style="margin-top: 20px;">
+									<span style="display: block;margin-bottom: 4px;">TERMINAL</span>
+									<b style="display: block;font-size: 22px;">T1</b>
+								</div>
+							</td>
+							<td style="padding: 14px 10px 16px 20px;font-size: 12px;">
+								<div>
+									<span style="display: block;margin-bottom: 4px;">BAGGAGE</span>
+									<b style="display: block;">up to 20 kg</b>
+								</div>
+								<div style="margin-top: 20px;">
+									<span style="display: block;margin-bottom: 4px;">ONBOARD SERVICES</span>
+									<b style="display: block;">meal</b>
+								</div>
+							</td>
+						</tr>					
+					</table>
+				</div>
+			</div>
+
+			<table width="748" align="center" cellpadding="0" cellspacing="0" style="margin: 32px 0 40px 0;">
+				<tr>
+					<td width="50%" style="font-size: 12px;">
+						<span>CONNECTION:</span>
+						<b>3 hours</b>
+					</td>
+					<td align="right" style="font-size: 18px;">
+						<a href="" style="color:#50b8a7;">Link to airport site</a>
+					</td>
+				</tr>
+			</table>
+
+			<div class="ticket">
+				<div id="sectionBookingComDeepLinkBefore" style="background-color: #50b8a7; padding: 16px 20px; border-radius: 22px 0 0 0;">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" style="color: #fff;">
+						<tr>
+							<td width="50%" valign="bottom" style="font-size: 36px;line-height: 1;">
+								<b>20 DEC 2019</b>
+							</td>
+							<td valign="bottom" style="font-size: 22px;line-height: 1;">
+								<b>Airbus 321</b>
+							</td>
+							<td valign="bottom" align="right">
+								<img src="airplane.svg" height="40" alt="" style="transform: rotate(-90deg);">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="border: 2px solid #50b8a7; border-radius: 0 0 22px 0;">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" style="background: url('pattern_ticket.svg') no-repeat left / 35% auto;">
+						<tr style="vertical-align: top;">
+							<td width="35%" colspan="2" style="padding: 16px 20px;">
+								<span style="display: block;font-size: 12px;margin-bottom: 8px;">FLIGHT NUMBER</span>
+								<b style="display: block;font-size: 36px;">FR 3069</b>
+							</td>
+							<td width="22%" style="padding: 16px 0 24px 20px;border-left: 2px solid #50b8a7;">
+								<table width="100%" cellpadding="0" cellspacing="0">
+									<tr>
+										<td>
+											<b style="display: block;font-size: 36px;">KBP</b>
+										</td>
+										<td align="right" style="font-size: 36px;color:#50b8a7;">&rarr;</td>
+									</tr>
+								</table>
+								<div style="padding: 10px 0 0 0">
+									<b style="font-size: 12px;">
+										Kyiv,
+										<br>
+										Ukraine
+									</b>
+								</div>
+							</td>
+							<td width="22%" style="padding: 16px 0 24px 20px;border-right: 2px solid #50b8a7;">
+								<b style="display: block;font-size: 36px;">BCN</b>
+								<div style="padding: 10px 0 0 0">
+									<b style="font-size: 12px;">
+										Barcelona,
+										<br>
+										Spain
+									</b>
+								</div>
+							</td>
+							<td style="padding: 16px 20px;font-size: 12px;line-height: 1.4;">
+								<span style="display: block;text-transform: uppercase;">CLASS</span>
+								<b style="display: block;">economy</b>
+							</td>
+						</tr>
+						<tr style="vertical-align: top;">
+							<td style="padding: 12px 20px 14px 20px;font-size: 12px;">
+								<div>
+									<span style="display: block;margin-bottom: 4px;">OPERATED BY</span>
+									<b style="display: block;">Air France</b>
+								</div>
+								<div style="margin-top: 20px;">
+									<span style="display: block;margin-bottom: 4px;">IN FLIGHT</span>
+									<b style="display: block;">3 hours 10 min</b>
+								</div>
+							</td>
+							<td style="padding: 12px 20px 14px 20px;font-size: 12px;">
+								<span style="display: block;margin-bottom: 4px;">LOCATOR</span>
+								<b style="display: block;">123456</b>
+							</td>
+							<td style="padding: 14px 10px 16px 20px;border-left: 2px solid #50b8a7;border-top: 2px solid #50b8a7;border-right: 2px solid #50b8a7;">
+								<div>
+									<span style="display: block;margin-bottom: 4px;font-size: 12px;">DEPARTURE</span>
+									<b style="display: block;font-size: 22px;">14:05</b>
+								</div>
+								<div style="margin-top: 20px;">
+									<span style="display: block;margin-bottom: 4px;font-size: 12px;">TERMINAL</span>
+									<b style="display: block;font-size: 22px;">D</b>
+								</div>
+							</td>
+							<td style="padding: 14px 10px 16px 20px;border-top: 2px solid #50b8a7;border-right: 2px solid #50b8a7;">
+								<div>
+									<span style="display: block;margin-bottom: 4px;">ARRIVAL</span>
+									<b style="display: block;font-size: 22px;">17:15 </b>
+								</div>
+								<div style="margin-top: 20px;">
+									<span style="display: block;margin-bottom: 4px;">TERMINAL</span>
+									<b style="display: block;font-size: 22px;">T1</b>
+								</div>
+							</td>
+							<td style="padding: 14px 10px 16px 20px;font-size: 12px;">
+								<div>
+									<span style="display: block;margin-bottom: 4px;">BAGGAGE</span>
+									<b style="display: block;">up to 20 kg</b>
+								</div>
+								<div style="margin-top: 20px;">
+									<span style="display: block;margin-bottom: 4px;">ONBOARD SERVICES</span>
+									<b style="display: block;">meal</b>
+								</div>
+							</td>
+						</tr>					
+					</table>
+				</div>
+			</div>
+
+
+
+			
+
+
+			
+			
+			<!-- <h4>Перелет: PHOriginCityName to PHDestinationCityName (PHCarrierCode PHFlightNumber)</h4>
+			<table cellspacing="5" style="width:100%">
+				<tr>
+					<td style="width:80px">Дата:</td>
+					<td class="tluste" style="width:200px">PHdate PHDepDateDOW</td>
+					<td>Вылет:</td>
+					<td class="tluste">PHdeptime</td>
+					<td>Продолжительность:</td>
+					<td class="tluste">PHFlighTime</td>
+				</tr>
+				<tr>
+					<td>Авиакомпания:</td>
+					<td class="tluste">PHairline</td>
+					<td>Прибытие:</td>
+					<td class="tluste">PHarrtime PHArrDate</td>
+					<td>Остановки:</td>
+					<td class="tluste">PHNbrOfStops PHTransferPoints</td>
+				</tr>
+				<tr>
+					<td>Рейс:</td>
+					<td class="tluste">PHCarrierCode PHFlightNumber</td>
+					<td>Выполняется:</td>
+					<td class="tluste">PHOperatedBy</td>
+					<td>Класс обслуживания:</td>
+					<td class="tluste">PHTravelClass</td>
+				</tr>
+				<tr>
+					<td>Из:</td>
+					<td class="tluste">PHorgcityandcountry</td>
+					<td>Аэропорт:</td>
+					<td class="tluste">PHorgaptandterminal</td>
+					<td>Класс бронирования:</td>
+					<td class="tluste">PHBookingClass</td>
+				</tr>
+				<tr>
+					<td>В:</td>
+					<td class="tluste">PHDesCityAndCountry</td>
+					<td>Аэропорт:</td>
+					<td class="tluste" colspan="3">PHDesAptAndTerminal</td>
+				</tr>
+				<tr>
+					<td>Статус:</td>
+					<td class="tluste">PHSegmentStatus</td>
+					<td>Тип ВС:</td>
+					<td class="tluste" colspan="3">PHAircraftType</td>
+				</tr>
+			</table>
+			<div id="sectionSeating">
+				<table cellspacing="5" style="width:100%;">
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+					PHSeatsAll
+				</table>
+			</div>
+			<div id="sectionSSRTKNE">
+				<table cellspacing="5" style="width:100%;">
+					<tr>
+						<td style="width:200px;"></td>
+						<td></td>
+					</tr>
+					PHSSRTKNE
+				</table>
+			</div>
+			<div id="sectionSSR">
+				<table cellspacing="5" style="width:100%;">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					PHSSRAll
+				</table>
+			</div>
+			<div id="sectionBagAir">
+				<table cellspacing="5" style="width:100%;">
+					<tr>
+						<td>PHBagInAir</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+
+				</table>
+			</div>
+			<div id="sectionBookingComDeepLinkAfter">
+				PHBookingComDeepLinkAfter
+			</div> -->
+			
+		</div>
+	</div>
+
+	<!-- <div id="sectionNonAirContent">
+
+		<div id="repeaterHotel">
+			<h4>Отель: PHHotelCityAndName</h4>
+			<table cellspacing="5" style="width:100%">
+				<tr>
+					<td width="130">Заезд:</td>
+					<td width="200" class="tluste">PHCheckInDate</td>
+					<td>Nights:</td>
+					<td class="tluste">PHNumberOfNights</td>
+					<td>Rooms:</td>
+					<td class="tluste">PHNumberOfRooms</td>
+				</tr>
+				<tr>
+					<td>Выезд:</td>
+					<td class="tluste">PHCheckOutDate</td>
+					<td>Persons:</td>
+					<td class="tluste" colspan="3">PHNumberOfPersons</td>
+				</tr>
+				<tr>
+					<td>Статус:</td>
+					<td class="tluste">PHHotelStatus</td>
+					<td>Rate:</td>
+					<td class="tluste">PHHotelRate</td>
+				</tr>
+				<tr>
+					<td>Номер подтверждения:</td>
+					<td class="tluste">PHHotelConfirmationNumber</td>
+					<td>Rate Code:</td>
+					<td class="tluste">PHRateCodeHotel</td>
+				</tr>
+				<tr>
+					<td>Адрес:</td>
+					<td class="tluste" colspan="5">PHHotelAddress<br />PHHotelCountry</td>
+				</tr>				
+			</table>
+			<hr />
+		</div>
+
+		<div id="repeaterCar">
+			<h4>Аренда автомобиля: PHCarRentalCompany</h4>
+			<table cellspacing="5" style="width:100%">
+				<tr>
+					<td>Место получения:</td>
+					<td class="tluste">PHCarPickupDate</td>
+					<td>Pick-up Time:</td>
+					<td class="tluste">PHCarPickupTime</td>
+					<td>Cars:</td>
+					<td class="tluste">PHNumberOfCars</td>
+				</tr>
+				<tr>
+					<td>Место возврата:</td>
+					<td class="tluste">PHCarDropoffDate</td>
+					<td>Drop-off Time:</td>
+					<td class="tluste">PHCarDropoffTime</td>
+					<td>Car Type:</td>
+					<td class="tluste">PHCarType</td>
+				</tr>
+				<tr>
+					<td>Статус:</td>
+					<td class="tluste">PHCarStatus</td>
+					<td>Rate:</td>
+					<td class="tluste">PHCarRate</td>
+					<td>Rate Code:</td>
+					<td class="tluste">PHRateCodeCar</td>
+				</tr>
+				<tr>
+					<td>Локатор поставщика:</td>
+					<td class="tluste">PHCarReference</td>
+					<td>Приблизительная стоимость:</td>
+					<td class="tluste">PHApproxTotal</td>
+					<td>Extra Mileage:</td>
+					<td class="tluste">PHExtraMileageRate</td>
+				</tr>
+				<tr>
+					<td>Адрес получения:</td>
+					<td class="tluste" colspan="5">PHCarPickupAddress</td>
+				</tr>
+				<tr>
+					<td>Адрес возврата:</td>
+					<td class="tluste" colspan="5">PHCarDropoffAddress</td>
+				</tr>				
+			</table>
+			<hr />
+		</div>
+	</div>
+
+	<div id="sectionFare">
+		<h4>Информация о тарифе</h4>
+		<table cellspacing="2">
+			<tr id="repeaterFare">
+				<td>Тариф:</td>
+				<td>PHFarePrice</td>
+				<td class="tluste" style="padding-left:20px;">Итоговая стоимость:</td>
+				<td class="tluste">PHTotalPrice</td>
+				<td style="padding-left:20px;">PHEndorzacniRubrika</td>
+			</tr>
+		</table>
+	</div>
+	
+
+	<div id="sectionViewTripLink">
+		<table>
+			<tr>
+				<td>
+					<a href="PHViewTripLink">Актуальный статус бронирования</a>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+	
+	<div id="sectionTrawysLink">
+		PHTrawysLink
+	</div>
+	
+
+	<div id="sectionRMK">
+		<table cellspacing="2">
+			<tr>
+				<td class="tluste">Ремарки:</td>
+			</tr>
+			<tr>
+				<td>PHitineraryRemarks</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="sectionDataProtectionRemark" class="spolu">
+		<p>Уведомление о защите данных:<br />
+			Ваши персональные данные будут обрабатываться в соответствии с применимой политикой конфиденциальности операторов
+			и - если ваше бронирование производится через поставщика системы бронирования (GDS),
+			с его политикой конфиденциальности. Они доступны <a href="https://www.iatatravelcentre.com/privacy.htm"> здесь
+			</a> или напрямую от оператора или GDS. <br />
+			Вы должны прочитать эту документацию, которая относится к вашему бронированию, и определяет, например, как ваши
+			личные данные собираются, хранятся, используются, раскрываются и передаются. <br />
+			(применимо для перевозки в интерлайн) </p>
+	</div>
+
+	<div id="sectionFooter">
+
+		<div id="logofooter">
+			<center>
+				<img src='PHUrlFooter' alt="Logo of the Agency Footer" />
+			</center>
+		</div>
+
+	</div>
+	<div id="sectionFixedFooter">
+	</div> -->
+	</div>
+</body>
+
+</html>
