@@ -1,0 +1,63 @@
+---
+title: Index page,
+class: catalog hotels
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<!-- <div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div> -->
+
+
+	<!-- LOADER -->
+	<!-- <div class="loader">
+			
+	</div> -->
+	<!-- /LOADER -->
+
+
+
+	<div class="catalog__title">
+		<div class="breadcrumb">
+			<a href="">MAIN</a>			
+			<a href="">LEISURE</a>			
+			<span>TOURS</span>
+		</div>
+		<h1>ALL TOURS</h1>
+	</div>
+
+	<div class="catalog__filter">
+		<ul class="catalog__filter_list">
+			<li data-target="mood">
+				<span>+</span>
+				<a href="">MOOD</a>
+			</li>
+			<li data-target="thematic">
+				<span>+</span>
+				<a href="">THEMATIC</a>
+			</li>
+			<li data-target="countries">
+				<span>+</span>
+				<a href="">COUNTRIES</a>
+			</li>
+			<li data-target="date">
+				<span>+</span>
+				<a href="">DATE DEPARTURE</a>
+			</li>
+			<li data-target="price">
+				<span>+</span>
+				<a href="">SORT BY PRICE</a>
+			</li>
+		</ul>
+
+		<div class="catalog__filter"></div>
+	</div>
+
+
+
+{% endblock %}

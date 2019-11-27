@@ -47,7 +47,9 @@ header {
       }
       &.logo--black {
         opacity: 0;
-
+      }
+      &.logo--green {
+        opacity: 0;
       }
     }
     img {
@@ -292,4 +294,29 @@ header {
       }
     }
   }
+}
+.catalog header {
+  a {
+    color: #5ac0b0;
+  }
+  .header__logo {
+    a {
+      &.logo--white {
+        opacity: 0;
+      }
+      &.logo--black {
+        opacity: 0;
+      }
+      &.logo--green {
+        opacity: 1;
+      }
+    }    
+  }  
+  .header__nav {
+    a {
+      .icon {
+        fill: #5ac0b0;
+      }      
+    }
+  }  
 }

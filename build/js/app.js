@@ -37,7 +37,7 @@ const app = {
 }
 
 
-function header(e){
+function header(e){  
   if(e.type == 'mouseenter'){    
     this.classList.add('active');
     let tl = new TimelineMax();    
@@ -54,10 +54,19 @@ function header(e){
     this.classList.remove('active');
     let tl = new TimelineMax();
     tl.to(document.querySelectorAll('.header__nav_link > a, .header__right a'), 0.6, {color: function(){
-      return document.querySelector('header').classList.contains('fixed') ? '#2f2f2f':'#ffffff';
+      if(document.body.classList.contains('homepage')){
+        return document.querySelector('header').classList.contains('fixed') ? '#2f2f2f':'#ffffff';
+      }else if(document.body.classList.contains('catalog')){
+        return document.querySelector('header').classList.contains('fixed') ? '#2f2f2f':'#5ac0b0';
+      }
     }, ease: Power0.easeNone}, 'start')
       .to(document.querySelectorAll('.header__nav_link > a .icon, .header__right .icon'), 0.6, {fill: function(){
-        return document.querySelector('header').classList.contains('fixed') ? '#2f2f2f':'#ffffff';
+        if(document.body.classList.contains('homepage')){
+          return document.querySelector('header').classList.contains('fixed') ? '#2f2f2f':'#ffffff';  
+        }else if(document.body.classList.contains('catalog')){
+          return document.querySelector('header').classList.contains('fixed') ? '#2f2f2f':'#5ac0b0';
+        }
+        
       }, rotation: 0, ease: Power0.easeNone}, 'start')
       .to('.header__bg', 0.5, {opacity: 0, ease: Power0.easeNone}, 'start')
       .to('.header__logo .logo--white', 0.5, {opacity: 1}, 'start')
@@ -406,7 +415,7 @@ const _homepage = function(page){
         app.homepage.cursor.init();
         app.homepage.hero = new heroRender();
         app.homepage.drag = new dragRender();
-        app.homepage.eventsInit();        
+        app.homepage.eventsInit();
         this.mySwiper = new Swiper ('.swiper-container', {
           // Optional parameters    
           speed: 800,
@@ -496,10 +505,19 @@ const _homepage = function(page){
           app.homepage.hero.time.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 18.2);
           app.homepage.hero.time.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);
 
-          app.homepage.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 3;
-          app.homepage.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 3;
-          app.homepage.hero.displacementSprite.x = app.homepage.hero.hero.renderer.width / 2;
-          app.homepage.hero.displacementSprite.y = app.homepage.hero.hero.renderer.height / 2;
+          app.homepage.hero.smart2.x = ((app.homepage.hero.el.clientWidth / 100) * 42);
+          app.homepage.hero.smart2.y = 140 - ((Math.floor(fs)/100) * 7.563724377883669);      
+          app.homepage.hero.choise2.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 6);
+          app.homepage.hero.choise2.y = (140 - ((fs/100) * 7.563724377883669)) + Math.floor(fs);
+          app.homepage.hero.save2.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 12.1);
+          app.homepage.hero.save2.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 2);
+          app.homepage.hero.time2.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 18.2);
+          app.homepage.hero.time2.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);
+
+          // app.homepage.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 3;
+          // app.homepage.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 3;
+          // app.homepage.hero.displacementSprite.x = app.homepage.hero.hero.renderer.width / 2;
+          // app.homepage.hero.displacementSprite.y = app.homepage.hero.hero.renderer.height / 2;
 
           
           
@@ -531,9 +549,10 @@ const _homepage = function(page){
         function swichText(){
           //TweenMax.set(document.querySelectorAll('.homepage__hero h1 span'), {opacity: 0});
           new TimelineMax()
-          .to(app.homepage.hero.container, 0.2, {alpha: 1})
+          .to([app.homepage.hero.container, app.homepage.hero.container2], 0.2, {alpha: 1})
           .to(document.querySelectorAll('.homepage__hero h1 span'), 0.2, {opacity: 0})
-          .to(app.homepage.hero.displacementFilter.scale, 5 , {x: 30, y: 30});
+          .to(app.homepage.hero.blur, 1, {blur: 16})
+          //.to(app.homepage.hero.displacementFilter.scale, 5 , {x: 30, y: 30});
           // TweenMax.set(app.homepage.hero.choise, 0.5, {alpha: 1});
           // TweenMax.set(app.homepage.hero.save, 0.5, {alpha: 1});
           // TweenMax.set(app.homepage.hero.time, 0.5, {alpha: 1});
@@ -572,14 +591,16 @@ const _homepage = function(page){
     //this.hero.ticker.speed = 0.1;
     this.hero.stage.interactive = true;
     this.container = new PIXI.Container();
+    this.container2 = new PIXI.Container();
     that.hero.stage.addChild(that.container);
+    that.hero.stage.addChild(that.container2);
     
     // this.hero.ticker.add(function (delta) {
     //   console.log(delta, that.hero.ticker.FPS);
     // });
 
     const loader = PIXI.Loader.shared;
-    loader.add('displacementSprite', './img/displacement.png');
+    loader.add('displacementSprite', './img/displacement.png')          
     loader.load(function(loader, resources){
 
     let fs = (window.innerWidth / 100) * 9.9;
@@ -590,59 +611,125 @@ const _homepage = function(page){
       fontWeight: 'normal',
       fill: '#ffffff'      
     });
+      
+    
+      that.smart = new PIXI.Text('Focus', style);
+      that.choise = new PIXI.Text('on your', style);
+      that.save = new PIXI.Text('important', style);
+      that.time = new PIXI.Text('things', style);
 
+      that.smart2 = new PIXI.Text('Focus', style);
+      that.choise2 = new PIXI.Text('on your', style);
+      that.save2 = new PIXI.Text('important', style);
+      that.time2 = new PIXI.Text('things', style);
+
+      that.container.addChild(that.smart);
+      that.container.addChild(that.choise);
+      that.container.addChild(that.save);
+      that.container.addChild(that.time);
+      that.container2.addChild(that.smart2);
+      that.container2.addChild(that.choise2);
+      that.container2.addChild(that.save2);
+      that.container2.addChild(that.time2);
+      that.blur = new PIXI.filters.BlurFilter();
+      that.blur.blur = 0;
+      that.blur.quality = 8;
+      that.container2.filters = [that.blur];
       
-      console.log(((window.innerWidth / 100) * 42))
-      that.smart = new PIXI.Text('Smart', style);
-      that.choise = new PIXI.Text('choise', style);
-      that.save = new PIXI.Text('save', style);
-      that.time = new PIXI.Text('time', style);
       
-      
-      that.smart.x = ((window.innerWidth / 100) * 42);
+      that.smart.x = ((window.innerWidth / 100) * 42);      
       that.smart.y = 140 - ((Math.floor(fs)/100) * 7.563724377883669);      
       that.choise.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 6);
       that.choise.y = (140 - ((fs/100) * 7.563724377883669)) + Math.floor(fs);
       that.save.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 12);
       that.save.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 2);
       that.time.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 18);
-      that.time.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);
+      that.time.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);      
+
+      that.smart2.x = ((window.innerWidth / 100) * 42);      
+      that.smart2.y = 140 - ((Math.floor(fs)/100) * 7.563724377883669);      
+      that.choise2.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 6);
+      that.choise2.y = (140 - ((fs/100) * 7.563724377883669)) + Math.floor(fs);
+      that.save2.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 12);
+      that.save2.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 2);
+      that.time2.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 18);
+      that.time2.y = (140 - ((Math.floor(fs)/100) * 7.563724377883669)) + (Math.floor(fs) * 3);
 
       that.container.alpha = 0;
+      that.container2.alpha = 0;
+
+      const blurSize = 30;
+      const radius = 170;
+      const circle = new PIXI.Graphics()
+        .beginFill(0xFF0000)
+        .drawCircle(radius + blurSize, radius + blurSize, radius)
+        .endFill();
+      circle.filters = [new PIXI.filters.BlurFilter(blurSize)];
+
+      const rect = new PIXI.Graphics();
       
-      // that.smart.x = ((window.innerWidth / 100) * 42);
-      // that.smart.y = 140 - ((fs/100) * 7.563724377883669);
-      // that.choise.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 6);
-      // that.choise.y = (140 - ((fs/100) * 7.563724377883669)) + fs;
-      // that.save.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 12);
-      // that.save.y = (140 - ((fs/100) * 7.563724377883669)) + (fs * 2);
-      // that.time.x = ((window.innerWidth / 100) * 42) + ((window.innerWidth / 100) * 18);
-      // that.time.y = (140 - ((fs/100) * 7.563724377883669)) + (fs * 3);
-      
-      console.log(that.container)
-      
-      that.container.addChild(that.smart);
-      that.container.addChild(that.choise);
-      that.container.addChild(that.save);
-      that.container.addChild(that.time);
+      rect.beginFill(0xFFFFFF);
+      rect.drawRect(0, 0, 4000, 4000);
+      rect.beginHole();
+      rect.drawCircle(1925, 1925, 150);
+      rect.endHole();
+      rect.endFill();
+
+      rect.filters = [new PIXI.filters.BlurFilter(blurSize)];
+
+
+    
+    //console.log(app.homepage.hero.hero.renderer)
+    const bounds = new PIXI.Rectangle(0, 0, (radius + blurSize) * 2, (radius + blurSize) * 2);
+    const bounds2 = new PIXI.Rectangle(0, 0, 4000, 4000);
+    const texture = app.homepage.hero.hero.renderer.generateTexture(circle, PIXI.SCALE_MODES.NEAREST, 1, bounds);
+    const texture2 = app.homepage.hero.hero.renderer.generateTexture(rect, PIXI.SCALE_MODES.NEAREST, 1, bounds2);
+    
+    const focus = new PIXI.Sprite(texture);
+    const unFocus = new PIXI.Sprite(texture2);
+    that.hero.stage.addChild(focus);
+    that.hero.stage.addChild(unFocus);
+    //that.container.addChild(focus);
+    that.container.mask = focus;
+    that.container2.mask = unFocus;
+
+    
+
+
+      //const blurFilter = new PIXI.filters.BlurFilter();
+      //littleDudes.filters = [blurFilter1];
+
       
 
-      that.displacementSprite = new PIXI.Sprite(resources.displacementSprite.texture);      
-      that.displacementSprite.width = document.body.clientWidth / 3;
-      that.displacementSprite.height = document.body.clientWidth / 3;
-      that.displacementSprite.anchor.set(0.5);
-      that.displacementFilter = new PIXI.filters.DisplacementFilter(that.displacementSprite);
-      that.displacementFilter.scale.x = 0;
-      that.displacementFilter.scale.y = 0;
-      that.hero.stage.addChild(that.displacementSprite);  
-      that.container.filters = [that.displacementFilter];
+      // that.displacementSprite = new PIXI.Sprite(resources.displacementSprite.texture);
+      // that.displacementSprite.width = document.body.clientWidth / 3;
+      // that.displacementSprite.height = document.body.clientWidth / 3;
+      // that.displacementSprite.anchor.set(0.5);
+      // that.displacementFilter = new PIXI.filters.DisplacementFilter(that.displacementSprite);
+      // that.displacementFilter.scale.x = 0;
+      // that.displacementFilter.scale.y = 0;
+      // that.hero.stage.addChild(that.displacementSprite);  
+      // that.container.filters = [that.displacementFilter];
+      //that.container2.mask = that.displacementSprite;
       function onPointerMove(e) {      
-        TweenMax.to(that.displacementSprite, 1.5, {x:e.clientX - 25, y: e.clientY});
+        TweenMax.to(focus, 1, {x:e.clientX - 200, y: e.clientY - 200});
+        TweenMax.to(unFocus, 1, {x:e.clientX - 1925, y: e.clientY - 1925});
+
+        // 3d hover
+        // let rootX = -((e.currentTarget.clientWidth / 2) - e.clientX);
+        // let moveX = 100 / ((e.currentTarget.clientWidth / 2) / rootX);
+        // let degX = (20/100)*moveX;
+        // let rootY = ((e.currentTarget.clientHeight / 2) - e.clientY);
+        // let moveY = 100 / ((e.currentTarget.clientHeight / 2) / rootY);
+        // let degY = (20/100)*moveY;
+        // TweenMax.set(e.currentTarget.querySelector('canvas'), {rotationY: degX, rotationX: degY})
+        
+        //console.log(deg);
       }  
       that.el.addEventListener('mousemove', onPointerMove);
-      TweenMax.to(that.displacementSprite, 12, {rotation: 6.28319, ease: Power0.easeNone, repeat: -1, onUpdate: function(){        
-        //console.log(that.hero.ticker.FPS)
-      }});      
+      // TweenMax.to(that.displacementSprite, 12, {rotation: 6.28319, ease: Power0.easeNone, repeat: -1, onUpdate: function(){        
+      
+      // }});      
     });    
     
     
@@ -860,8 +947,8 @@ const _homepage = function(page){
     // that.hero.bg.height = that.hero.heroBgHeight;
     // that.hero.bg.x  = that.hero.heroBgLeft;
     // that.hero.bg.y  = that.hero.heroBgTop;
-    that.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 3;
-    that.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 3;
+    // that.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 3;
+    // that.hero.displacementSprite.height = app.homepage.hero.hero.renderer.width / 3;
     
     let ratio = that.drag.pat1.width/that.drag.pat1.height;
     that.drag.canv1.width = that.drag.el.clientWidth;
@@ -1335,13 +1422,53 @@ const _homepage = function(page){
   
 }
 
+// Catalog init
+const _catalog = function(){
+  const root = this;
+
+  this.eventsInit = function(){
+    window.addEventListener('scroll', function(e){
+      header(e);        
+    });    
+    document.querySelectorAll('[data-action="submenu"]').forEach(function(el, i){
+      el.addEventListener('mouseenter', header);
+      el.addEventListener('mouseleave', header);
+    });      
+  };  
+
+  this.loader = {
+    init: function(){
+      let that = this;
+      
+      document.querySelectorAll('img').forEach(function(el, i){
+        let src = el.getAttribute('data-src');
+        var img = new Image();
+        img.src = src;
+        img.onload = function() {
+          el.src = src;          
+        }
+      });
+
+      root.eventsInit();      
+    }    
+  }
+  // /.Loader
+
+  this.loader.init();  
+}
+
 
 //app.init();
 
 
 window.onload = function(){
-  setTimeout(function(){
-    app.homepage = new _homepage();
+  setTimeout(function(){    
+    if(document.body.classList.contains('homepage')){
+      app.homepage = new _homepage();
+    }
+    if(document.body.classList.contains('catalog')){      
+      app.catalog = new _catalog();      
+    }
   }, 100);
 }
 

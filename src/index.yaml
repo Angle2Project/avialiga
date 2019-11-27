@@ -2,4 +2,8 @@ ProjectTitle: avialiga
 
 PageList:
 - file: homepage.html
+  ready: 80
+- file: hotels.html
   ready: 10
+
+  

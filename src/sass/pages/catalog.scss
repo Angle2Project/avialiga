@@ -1,0 +1,35 @@
+.catalog {
+  padding-top: 130px;  
+}
+.catalog__title {
+  background-color: #d3e7e1;
+  padding: 38px 0 40px 0;
+  font-family: 'Futura';
+  h1 {
+    line-height: 1;
+    font-size: 72px;
+    color: $white;
+    font-weight: normal;
+    padding: 0;
+    margin: 31px 90px 0 90px;
+  }
+}
+.breadcrumb {
+  padding: 0 58px;
+  font-size: 12px;
+  line-height: 1;
+  color: $black;
+  a {
+    display: inline-block;
+    color: $black;
+    &::after {
+      content: "–";
+      display: inline-block;
+      margin: 0 20px;
+    }
+    &:last-child::after {
+      display: none;
+    }    
+  }  
+}
+
