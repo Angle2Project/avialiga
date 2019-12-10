@@ -212,3 +212,152 @@
   transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
 }
 
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 33px;
+  input[type="checkbox"] {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+  }
+  input[type="checkbox"] + span {
+    font: 16px/1 'Futura';
+    color: $black;
+    text-transform: uppercase;
+    &::before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #d3e7e1;
+      position: absolute;
+      top: -2px;
+      left: 0;
+    }
+    &::after {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #d3e7e1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 250ms ease;
+      transform: scale(0);
+      background: url('../img/icon_check.svg') no-repeat center 4px;
+    }
+  }
+  input[type="checkbox"]:checked + span {
+    &::after {
+      transform: scale(1);
+    }
+  }
+}
+.btn-skew {
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  //will-change: transform;
+  padding: 0 20px;
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-color: $red;
+    transform: skewX(-34deg);
+    //backface-visibility: hidden;
+    i {
+      display: block;    
+      position: absolute;
+      bottom: 1px;
+      left: 1px;
+      right: 1px;
+      top: 1px;
+      z-index: 0;
+      background-color: $white;    
+      transform-origin: bottom;
+      transform: scaleY(0);
+      //backface-visibility: hidden;
+    }  
+  }
+  span {
+    position: relative;
+    z-index: 1;
+    color: $white;
+    font-family: "Futura";
+    font-size: 16px;
+    text-transform: uppercase;    
+    //backface-visibility: hidden;
+  }  
+}
+
+.expert__form {
+  margin: 130px 90px 0 90px;
+  display: flex;
+  justify-content: space-between;
+  .expert__form_title {
+    margin-right: 100px;
+    h2 {
+      font: normal 72px/60px $futura;
+      color: $black;
+      perspective: 400px;
+      span {
+        display: inline-block;
+        transform-origin: bottom;
+      }
+    }
+    p {
+      margin: 40px 0 0 90px;
+      font: 300 18px/30px $futura;
+    }
+  }
+  .expert__form_body {
+    width: 56%;
+    flex-shrink: 0;
+    .form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .form-control {
+        input,
+        textarea {
+          font: normal 14px/18px $futura;
+        }          
+        &.name,
+        &.phone {
+          width: calc(50% - 22px);
+        }
+        &.comment {
+          width: 100%;
+          height: initial;
+          line-height: 1;
+          textarea {
+            height: 70px;
+            padding: 28px 0 0 0;
+            font-size: 14px;
+            transition: all 250ms ease;
+            &:focus {
+              height: 90px;
+            }
+          }
+        }
+      }           
+    }
+    .form--submit {        
+      margin-top: 35px;
+      text-align: center;
+      button {
+        width: 320px;          
+      }
+    }     
+  }
+}
+

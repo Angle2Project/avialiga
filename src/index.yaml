@@ -3,7 +3,13 @@ ProjectTitle: avialiga
 PageList:
 - file: homepage.html
   ready: 80
+- file: tours.html
+  ready: 75
 - file: hotels.html
   ready: 10
+- file: leisure.html
+  ready: 10
+  
+  
 
   

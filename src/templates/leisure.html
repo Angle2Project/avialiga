@@ -1,0 +1,314 @@
+---
+title: Index page,
+class: leisure
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<!-- <div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div> -->
+
+
+	<!-- LOADER -->
+	<!-- <div class="loader">
+		<ul><li><div></div></li><li><div></div></li><li><div></div></li><li><div></div></li><li><div></div></li><li><div></div></li></ul>
+	</div> -->
+	<!-- /LOADER -->
+
+
+<article class="leisure__hero">
+	<div class="breadcrumb">
+		<a href="">MAIN</a>
+		<span>LEISURE</span>
+	</div>
+	<div class="leisure__hero_backgrounds">
+		<img data-src="./img/leisure-hero-1.png" alt="">
+		<img data-src="./img/leisure-hero-2.jpg" alt="">
+		<img data-src="./img/leisure-hero-3.jpg" alt="">
+	</div>
+	<h1>
+		<span>Focus on your</span>
+		<span>important</span>
+		<span class="switch" data-slide="1">family</span>
+		<span class="switch" data-slide="2">friends</span>
+		<span class="switch" data-slide="3">yourself</span>
+	</h1>
+	<div class="leisure__hero_pagination">
+		<div class="pagination--slide">
+			<span class="current"></span>
+			/
+			<span class="all"></span>
+		</div>
+		<div class="pagination--bar">
+			<i></i>
+		</div>
+	</div>
+	<div class="hero--scroll animation">
+		<span>Sroll Down</span>
+		<div class="hero--scroll-line"></div>
+	</div>
+</article>
+
+<article class="homepage__tabs" data-aos="fade-up">
+	<div class="homepage__tabs_disk">
+			<div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>				
+			<div class="disk--icons">
+				<div class="shape"></div>
+				<img data-slide="1" data-src="./img/tabs/leisure_1.svg" alt="">
+				<img data-slide="2" data-src="./img/tabs/leisure_2.svg" alt="">
+				<img data-slide="3" data-src="./img/tabs/leisure_3.svg" alt="">
+				<img data-slide="4" data-src="./img/tabs/leisure_4.svg" alt="">
+				<img data-slide="5" data-src="./img/tabs/leisure_5.svg" alt="">						
+			</div>
+		</div>
+		<div class="wrapper">
+			<h3>Get with us Leisure values</h3>
+			<div class="homepage__tabs_list">
+				<span data-target="time-saving">TIME SAVING</span>
+				<span data-target="cost-saving">COST SAVINGS</span>
+				<span data-target="risk-minimization">RISK MINIMAZATION</span>
+				<span data-target="legal-support">LEGAL SUPPORT</span>
+				<span data-target="experience">EXPERIENCE</span>
+				<span data-target="development">DEVELOPMENT</span>
+				<span data-target="real-expectation">REAL EXPECTATIONS</span>				
+			</div>
+			<div class="homepage__tabs_content">
+				{% for i in [
+					{
+						title: 'TIME SAVING',
+						data: 'time-saving'
+					},
+					{
+						title: 'COST SAVINGS',
+						data: 'cost-saving'
+					},
+					{
+						title: 'RISK MINIMAZATION',
+						data: 'risk-minimization'
+					},
+					{
+						title: 'LEGAL SUPPORT',
+						data: 'legal-support'
+					},
+					{
+						title: 'EXPERIENCE',
+						data: 'experience'
+					},
+					{
+						title: 'DEVELOPMENT',
+						data: 'development'
+					},
+					{
+						title: 'REAL EXPECTATIONS',
+						data: 'real-expectation'
+					}
+				] %}
+				<section class="tab--body" data-tab="{{i.data}}">
+					<h3>
+						<div class="title">{{i.title}}</div>
+					</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</section>
+				{% endfor %}
+			</div>
+		</div>			
+	</article>
+
+	<article class="tour-types">
+		<div class="tour-types__bg left" style="background-image: url('./img/bg-tour-types-1.jpg');"></div>
+		<div class="tour-types__bg right" style="background-image: url('./img/bg-tour-types-2.jpg');"></div>		
+		<section class="tour-types__section">
+			<div class="wrapper">
+				<div class="section--bg relax">
+					<img data-src="./img/tour-types-relax.jpg" alt="">
+				</div>
+				<h2>
+					<a href="">
+						<span>Relax</span>
+					</a>				
+				</h2>
+			</div>
+			<a href="" class="btn-skew">
+				<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
+				<span style="color: rgb(255, 255, 255);">view tours</span>
+			</a>
+		</section>
+		<section class="tour-types__section">
+			<div class="wrapper">
+				<div class="section--bg adventure">
+					<img data-src="./img/tour-types-adventure.jpg" alt="">
+				</div>
+				<h2>
+					<a href="">
+						<span>Adventure</span>
+					</a>				
+				</h2>
+			</div>
+			<a href="" class="btn-skew">
+				<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
+				<span style="color: rgb(255, 255, 255);">view tours</span>
+			</a>
+		</section>
+		<section class="tour-types__section">
+			<div class="wrapper">
+				<div class="section--bg discover">
+					<img data-src="./img/tour-types-discover.jpg" alt="">
+				</div>
+				<h2>
+					<a href="">
+						<span>Discover &</span>
+						<span>Upgrade</span>
+					</a>				
+				</h2>
+			</div>
+			<a href="" class="btn-skew">
+				<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
+				<span style="color: rgb(255, 255, 255);">view tours</span>
+			</a>
+		</section>
+	</article>
+
+	<article class="single-slider">
+		<!-- Slider main container -->
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					{% set singleSlider = [
+						{
+							title: "Maldives",
+							src: "./img/maldives.jpg"
+						},
+						{
+							title: "Seychelles",
+							src: "./img/seychelles.jpg"
+						},
+						{
+							title: "Mauritius",
+							src: "./img/mauritius.jpg"
+						}
+					] %}
+					{% for i in singleSlider %}
+					<div class="swiper-slide">
+						<div class="slide--photo" style="background-image: url('{{i.src}}"></div>
+						<h2>{{i.title}}</h2>
+						<div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+						<div class="slide--nav">
+							<a href="" class="about">ABOUT MALDIVES</a>
+							<a href="" class="btn-skew">
+								<div class="background"><i></i></div>
+								<span>view tours</span>
+							</a>
+						</div>
+					</div>
+					{% endfor %}
+			</div>
+			<div class="slider-control">
+				<div class="slider-button-prev">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+				<div class="slider-pagination"></div>
+				<div class="slider-button-next">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+			</div>
+		</div>		
+	</article>
+
+	{% set list = [
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: true,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: false,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		},
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: false,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: true,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		}
+	] %}
+
+
+	<article class="catalog__slider">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for i in list %}
+				<div class="swiper-slide">
+					<div class="grid--photo">
+						<a href="">
+							<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
+						</a>
+					</div>
+					<div class="grid--location">{{i.location}}</div>
+					<div class="grid--hotel">{{i.hotel}}</div>
+					<div class="grid--info">
+						<div class="date">{{i.date}}</div>
+						<div class="price">{{i.price}}</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>			
+			<div class="slider-button-prev">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>			
+			<div class="slider-button-next">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>
+		</div>
+		<div class="catalog__list_more">
+			<button class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>More</span>				
+			</button>
+		</div>
+	</article>
+
+	
+
+
+
+
+
+
+{% endblock %}

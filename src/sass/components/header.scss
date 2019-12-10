@@ -99,7 +99,7 @@ header {
           width: 100%;          
           position: absolute;
           left: 0;
-          top: -50px;
+          top: -50px;          
         }
         &.leisure {          
           background-color: $rose;          
@@ -312,11 +312,20 @@ header {
       }
     }    
   }  
-  .header__nav {
+  .header__nav,
+  .header__sub_nav {
     a {
       .icon {
         fill: #5ac0b0;
       }      
     }
-  }  
+  }
+  &.fixed {
+    .header__nav_link,
+    .header__sub_nav {
+      & > a {
+        color: #5ac0b0;
+      }
+    }    
+  }
 }

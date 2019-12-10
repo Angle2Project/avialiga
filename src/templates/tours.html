@@ -1,0 +1,214 @@
+---
+title: Index page,
+class: catalog tours
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<!-- <div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div> -->
+
+
+	<!-- LOADER -->
+	<!-- <div class="loader">
+			
+	</div> -->
+	<!-- /LOADER -->
+
+
+
+	<div class="catalog__title">
+		<div class="breadcrumb">
+			<a href="">MAIN</a>			
+			<a href="">LEISURE</a>			
+			<span>TOURS</span>
+		</div>
+		<h1>ALL TOURS</h1>
+	</div>
+
+
+
+	{% set filters = [
+		{
+			title: 'MOOD',
+			target: 'mood'
+		},
+		{
+			title: 'THEMATIC',
+			target: 'thematic'
+		},
+		{
+			title: 'COUNTRIES',
+			target: 'countries'
+		},
+		{
+			title: 'DATE DEPARTURE',
+			target: 'date'
+		},
+		{
+			title: 'SORT BY PRICE',
+			target: 'price'
+		}
+	] %}
+
+
+	<div class="catalog__filter">
+		<ul class="catalog__filter_nav">
+			{% for i in filters %}
+			<li data-target="{{i.target}}">
+				<i>+</i>
+				<span>{{i.title}}</span>
+			</li>
+			{% endfor %}
+		</ul>
+
+		<div class="catalog__filter_list">
+			{% for i in filters %}
+				<section class="list--item" id="{{i.target}}">
+					<ul>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 1</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 2</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 3</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 4</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 5</span>
+							</label>
+						</li>
+					</ul>
+				</section>
+			{% endfor %}
+		</div>
+	</div>
+
+	{% set list = [
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: true,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: false,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		},
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: false,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: true,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		}
+	] %}
+
+
+	<article class="catalog__list">
+		<ul class="catalog__list_grid">
+			{% for i in list %}
+			<li {%if i.sell%}class="sell"{%endif%}>
+				<div class="grid--photo">
+					<a href="">
+						<img src="./img/hotels/{{loop.index}}.jpg" alt="">
+					</a>
+				</div>
+				<div class="grid--location">{{i.location}}</div>
+				<div class="grid--hotel">{{i.hotel}}</div>
+				<div class="grid--info">
+					<div class="date">{{i.date}}</div>
+					<div class="price">{{i.price}}</div>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+		<div class="catalog__list_more">
+			<button class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>More</span>				
+			</button>
+		</div>
+	</article>
+
+	<article class="expert__form" data-aos="fade-up">
+		<div class="expert__form_title">
+			<h2>
+				<span>Your travel expert</span>
+			</h2>
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+		</div>
+		<div class="expert__form_body">
+			<form action="">
+				<div class="form">
+					<div class="form-control name">
+						<input type="text" placeholder="Your Name">
+					</div>
+					<div class="form-control phone">
+						<input type="text" placeholder="Your Phone">
+					</div>
+					<div class="form-control comment">
+						<textarea name="" placeholder="Your comment"></textarea>
+					</div>
+				</div>
+				<div class="form--submit">
+					<button class="btn-skew">
+						<div class="background"><i></i></div>
+						<span>Submit</span>						
+					</button>
+				</div>
+			</form>
+		</div>
+	</article>
+
+
+
+{% endblock %}
