@@ -195,15 +195,22 @@ class: leisure
 					] %}
 					{% for i in singleSlider %}
 					<div class="swiper-slide">
-						<div class="slide--photo" style="background-image: url('{{i.src}}"></div>
-						<h2>{{i.title}}</h2>
-						<div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
-						<div class="slide--nav">
-							<a href="" class="about">ABOUT MALDIVES</a>
-							<a href="" class="btn-skew">
-								<div class="background"><i></i></div>
-								<span>view tours</span>
-							</a>
+						<div class="slide--photo">							
+							<div class="wrapper">
+								<img data-src="{{i.src}}" alt="">
+							</div>
+						</div>
+						<div class="photo--mask"></div>
+						<div class="slide--content">
+							<h2>{{i.title}}</h2>
+							<div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+							<div class="slide--nav">
+								<a href="" class="about">ABOUT MALDIVES</a>
+								<a href="" class="btn-skew">
+									<div class="background"><i></i></div>
+									<span>view tours</span>
+								</a>
+							</div>
 						</div>
 					</div>
 					{% endfor %}

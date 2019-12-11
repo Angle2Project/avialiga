@@ -3617,7 +3617,6 @@ footer .footer__copyright img {
 
 .single-slider .swiper-container {
   position: relative;
-  will-change: transform;
 }
 
 .single-slider .swiper-container .swiper-slide {
@@ -3634,21 +3633,62 @@ footer .footer__copyright img {
   -ms-flex-pack: end;
   justify-content: flex-end;
   padding: 90px 90px 100px 90px;
-  overflow: hidden;
+}
+
+.single-slider .swiper-container .swiper-slide .photo--mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  -webkit-transform: skewX(34deg);
+  -ms-transform: skewX(34deg);
+  transform: skewX(34deg);
+  opacity: 0.6;
+  -webkit-transition: opacity 4s ease;
+  -o-transition: opacity 4s ease;
+  transition: opacity 4s ease;
+}
+
+.single-slider .swiper-container .swiper-slide.swiper-slide-active .photo--mask {
+  opacity: 0.3;
 }
 
 .single-slider .swiper-container .swiper-slide .slide--photo {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: skewX(34deg);
+  -ms-transform: skewX(34deg);
+  transform: skewX(34deg);
+  overflow: hidden;
 }
 
-.single-slider .swiper-container .swiper-slide .slide--photo::before {
+.single-slider .swiper-container .swiper-slide .slide--photo .wrapper {
+  -webkit-transform: skewX(-34deg);
+  -ms-transform: skewX(-34deg);
+  transform: skewX(-34deg);
+  position: absolute;
+  top: 0;
+  left: -325px;
+  width: calc(100% + (325px * 2));
+  height: 100%;
+}
+
+.single-slider .swiper-container .swiper-slide .slide--photo img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.single-slider .swiper-container .swiper-slide .slide--photo .mask {
   content: "";
   display: block;
   position: absolute;
@@ -3666,6 +3706,11 @@ footer .footer__copyright img {
   z-index: 1;
   color: #ffffff;
   width: 50%;
+}
+
+.single-slider .swiper-container .swiper-slide .slide--content {
+  position: relative;
+  z-index: 2;
 }
 
 .single-slider .swiper-container .swiper-slide .slide--text {
@@ -4208,9 +4253,9 @@ footer .footer__copyright img {
 }
 
 .swiper-wrapper {
-  -webkit-transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
-  -o-transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
-  transition-timing-function: cubic-bezier(0.74, 0.04, 0.32, 1.02);
+  -webkit-transition-timing-function: cubic-bezier(0.57, 0.01, 0.48, 0.99);
+  -o-transition-timing-function: cubic-bezier(0.57, 0.01, 0.48, 0.99);
+  transition-timing-function: cubic-bezier(0.57, 0.01, 0.48, 0.99);
 }
 
 .custom-checkbox {

@@ -1869,9 +1869,12 @@ const _catalog = function(){
         console.log(this);
         root.tabs.init();
         this.singleSlider = new Swiper ('.single-slider .swiper-container', {
-          // Optional parameters    
-          speed: 800,
-          simulateTouch: false,
+          // Optional parameters
+          speed: 1000,
+          simulateTouch: false,          
+          // loop: true,
+          // loopAdditionalSlides: 1,
+          //spaceBetween: -60,
           // If we need pagination
           pagination: {
             el: '.slider-pagination',
@@ -1882,25 +1885,15 @@ const _catalog = function(){
             nextEl: '.slider-button-next',
             prevEl: '.slider-button-prev',
           }
-        });
+        });        
         this.singleSlider.on('slideChangeTransitionStart', function(){
           if(this.realIndex > this.previousIndex){
-            let tl = new TimelineMax();
-            tl//.to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 0.7, {opacity: 0}, 'start')
-            .to(this.el.querySelector('.swiper-slide-prev .slide--photo'), 1.4, {scale: 1.5}, 'start')
-            .to(this.el.querySelector('.swiper-slide-prev'), 0.4, {skewX: -30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-            //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
-            .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
-            .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: -30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-          }else{
-            let tl = new TimelineMax();
-            tl//.to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 0.7, {opacity: 0}, 'start')
-            .to(this.el.querySelector('.swiper-slide-next .slide--photo'), 1.4, {scale: 1.5}, 'start')
-            .to(this.el.querySelector('.swiper-slide-next'), 0.4, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-            //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
-            .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo'), 1.4, {scale: 1.5}, {scale: 1}, 'start')
-            .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, {skewX: 0, scale: 1}, {skewX: 30, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
-          }              
+            new TimelineMax().to(this.el.querySelectorAll('.swiper-slide .slide--photo img'), 0.5, {scale: 1.8, skewX: -34, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, {skewX: -34, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start');
+          }else{                        
+            new TimelineMax().to(this.el.querySelectorAll('.swiper-slide .slide--photo img'), 0.5, {scale: 1.8, skewX: 34, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, {skewX: 34, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start');
+          }
         });
         this.catalogSlider = new Swiper ('.catalog__slider .swiper-container', {
           // Optional parameters    
@@ -1952,10 +1945,10 @@ window.onload = function(){
       app.homepage = new _homepage();
     }
     if(document.body.classList.contains('catalog')){      
-      app.catalog = new _catalog();      
+      app.catalog = new _catalog();
     }
     if(document.body.classList.contains('leisure')){
-      app.leisure = new _leisure();      
+      app.leisure = new _leisure();
     }
   }, 100);
 }
