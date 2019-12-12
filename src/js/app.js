@@ -1870,8 +1870,9 @@ const _catalog = function(){
         root.tabs.init();
         this.singleSlider = new Swiper ('.single-slider .swiper-container', {
           // Optional parameters
+          init: false,
           speed: 1000,
-          simulateTouch: false,          
+          simulateTouch: false,
           // loop: true,
           // loopAdditionalSlides: 1,
           //spaceBetween: -60,
@@ -1885,13 +1886,174 @@ const _catalog = function(){
             nextEl: '.slider-button-next',
             prevEl: '.slider-button-prev',
           }
-        });        
+        });
+        this.singleSlider.on('init', function(){
+          const that = this;
+
+          function heroBgCover(el){
+            let ratio = el.width / el.height;            
+            if((that.el.clientWidth + (325*2)) / that.el.clientHeight > ratio){              
+              return {
+                width: (that.el.clientWidth + (325*2)),
+                height: (that.el.clientWidth + (325*2)) / ratio,
+                x: 0,
+                y: (window.innerHeight - (that.el.clientWidth + (325*2)) / ratio) / 2
+              }
+            }else{
+              return {
+                width: that.el.clientHeight*ratio,
+                height: that.el.clientHeight,
+                x: ((that.el.clientWidth + (325*2)) - that.el.clientHeight*ratio) / 2,
+                y: 0
+              }          
+            }
+          }
+
+          let galleryEl = this.el.closest('.single-slider');
+          this.gallery = new PIXI.Application({
+            width: galleryEl.clientWidth,
+            height: galleryEl.clientHeight,            
+            backgroundColor: 0x000000
+          });
+          galleryEl.appendChild(this.gallery.view);
+          this.rootContainer = new PIXI.Container();
+          this.gallery.stage.addChild(this.rootContainer);
+          this.containers = [];
+          this.images = [];
+
+          this.mask = new PIXI.Graphics();
+          this.mask.lineStyle(0);
+          this.mask.beginFill(0xffffff, 0.5);
+          //this.mask.drawPolygon([0, 0, 100, 0, window.innerWidth, window.innerHeight, (325*2), window.innerHeight, 0, 0]);          
+          this.mask.drawPolygon([-325, 0, galleryEl.clientWidth - 325, 0, (galleryEl.clientWidth+(325)), window.innerHeight, 325, window.innerHeight]);
+          this.mask.endFill();
+          
+          this.el.querySelectorAll('.swiper-slide .slide--photo img').forEach(function(el, i){
+            let src = el.getAttribute('data-src');
+            let container = new PIXI.Container();
+            let image = PIXI.Sprite.from(src);
+            let mask = that.mask.clone();
+            mask.x = galleryEl.clientWidth*i;
+            that.rootContainer.addChild(mask);
+            container.mask = mask;
+            
+            image.anchor.x = 0.5;
+            image.anchor.y = 0.5;
+            image.width = heroBgCover(el).width;
+            image.height = heroBgCover(el).height;
+            image.x = heroBgCover(el).x + (image.width/2);
+            image.y = heroBgCover(el).y + (image.height/2);
+            image.alpha = 0.7;
+            container.width = galleryEl.clientWidth + (325*2);
+            container.x =  (galleryEl.clientWidth * i) - 325;
+            that.rootContainer.addChild(container);
+            container.addChild(image);
+
+            if(i == (that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 1)){
+              let cloneImage = PIXI.Sprite.from(src);
+              cloneImage.width = heroBgCover(el).width;
+              cloneImage.height = heroBgCover(el).height;
+              cloneImage.x = heroBgCover(el).x;
+              cloneImage.y = heroBgCover(el).y;
+              cloneImage.alpha = 0.7;
+              let cloneContaner = new PIXI.Container();
+              cloneContaner.width = galleryEl.clientWidth + (325*2);              
+              that.rootContainer.addChild(cloneContaner);
+              cloneContaner.x = -galleryEl.clientWidth;              
+              let cloneMask = that.mask.clone();
+              cloneMask.x = -galleryEl.clientWidth;
+              that.rootContainer.addChild(cloneMask);
+              cloneContaner.mask = cloneMask;
+              cloneContaner.addChild(cloneImage);
+            }else if(i == 0){
+              let cloneImage = PIXI.Sprite.from(src);
+              cloneImage.width = heroBgCover(el).width;
+              cloneImage.height = heroBgCover(el).height;
+              cloneImage.x = heroBgCover(el).x;
+              cloneImage.y = heroBgCover(el).y;
+              cloneImage.alpha = 0.7;
+              let cloneContaner = new PIXI.Container();
+              cloneContaner.width = galleryEl.clientWidth + (325*2);
+              that.rootContainer.addChild(cloneContaner);
+              cloneContaner.x = galleryEl.clientWidth*that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 325;
+              let cloneMask = that.mask.clone();
+              cloneMask.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length;
+              that.rootContainer.addChild(cloneMask);
+              cloneContaner.mask = cloneMask;
+              cloneContaner.addChild(cloneImage);
+            }            
+            that.containers.push(container);
+            that.images.push(image);
+            
+            
+          });
+          this.rootContainer.x = 0;
+          this.rootContainer.y = 0;
+          return
+
+
+          this.container1 = new PIXI.Container();
+          this.container2 = new PIXI.Container();         
+
+
+          
+
+          
+          this.image1 = PIXI.Sprite.from('./img/maldives.jpg');
+          this.image1.width = galleryEl.clientWidth;
+          this.image1.height = galleryEl.clientHeight;
+          this.image1.alpha = 0.7;
+
+          this.image2 = PIXI.Sprite.from('./img/seychelles.jpg');
+          this.image2.width = galleryEl.clientWidth;
+          this.image2.height = galleryEl.clientHeight;
+          this.image2.alpha = 0.7;
+
+          this.container1.addChild(this.image1);
+          this.container2.addChild(this.image2);
+          this.container2.x = galleryEl.clientWidth + 325;
+          this.rootContainer.addChild(this.container1);
+          this.rootContainer.addChild(this.container2);
+
+          
+          
+          this.container1.width = galleryEl.clientWidth + (325*2)          
+          this.container1.x = -325;
+
+          this.rootContainer.x = -600;
+          
+          
+
+          
+          
+         //this.mask2 = this.mask.clone();
+          
+          // console.log(this.mask2)
+          
+
+          this.rootContainer.addChild(this.mask);
+          // this.container1.mask = this.mask;
+          //this.rootContainer.addChild(this.mask);
+          this.container2.mask = this.mask;
+
+        });
+        this.singleSlider.init();
         this.singleSlider.on('slideChangeTransitionStart', function(){
+          let x = this.el.clientWidth * this.realIndex;
+          console.log(this);
           if(this.realIndex > this.previousIndex){
-            new TimelineMax().to(this.el.querySelectorAll('.swiper-slide .slide--photo img'), 0.5, {scale: 1.8, skewX: -34, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+            this.images.forEach(function(el, i){
+              TweenMax.to(el.skew, 0.5, {x: -0.6, ease:Power2.easeIn, yoyo: true, repeat: 1});
+              TweenMax.to(el.scale, 0.5, {x: 1.5, y: 1.5, ease:Power2.easeIn, yoyo: true, repeat: 1});
+            });
+            new TimelineMax().to(this.rootContainer, 1, {x: -x, ease:Power2.easeInOut}, 'start')
             .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, {skewX: -34, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start');
-          }else{                        
-            new TimelineMax().to(this.el.querySelectorAll('.swiper-slide .slide--photo img'), 0.5, {scale: 1.8, skewX: 34, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start')
+          }else{
+            this.images.forEach(function(el, i){
+              TweenMax.to(el.skew, 0.5, {x: 0.6, ease:Power2.easeIn, yoyo: true, repeat: 1});
+              TweenMax.to(el.scale, 0.5, {x: 1.5, y: 1.5, ease:Power2.easeIn, yoyo: true, repeat: 1});
+            });
+            new TimelineMax().to(this.rootContainer, 1, {x: -x, ease:Power2.easeInOut}, 'start')
             .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, {skewX: 34, scale: 1.2, ease:Power1.easeIn, yoyo: true, repeat: 1}, 'start');
           }
         });

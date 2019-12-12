@@ -3209,6 +3209,7 @@ footer .footer__copyright img {
 
 .leisure {
   font-family: 'Futura';
+  overflow: visible;
 }
 
 .leisure .loader {
@@ -3615,6 +3616,16 @@ footer .footer__copyright img {
   width: 178px;
 }
 
+.single-slider {
+  position: relative;
+}
+
+.single-slider canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .single-slider .swiper-container {
   position: relative;
 }
@@ -3665,6 +3676,7 @@ footer .footer__copyright img {
   -ms-transform: skewX(34deg);
   transform: skewX(34deg);
   overflow: hidden;
+  display: none;
 }
 
 .single-slider .swiper-container .swiper-slide .slide--photo .wrapper {

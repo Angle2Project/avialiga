@@ -1,5 +1,6 @@
 .leisure {
   font-family: 'Futura';
+  overflow: visible;
   .loader {
     position: fixed;
     top: 0;
@@ -352,8 +353,15 @@
 }
 
 .single-slider {  
+  position: relative;
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   .swiper-container {
-    position: relative;    
+    position: relative;
+    
     .swiper-wrapper {
       
     }
@@ -389,6 +397,7 @@
         height: 100%;
         transform: skewX(34deg);
         overflow: hidden;
+        display: none;
         //backface-visibility: hidden;
         .wrapper {          
           transform: skewX(-34deg);
