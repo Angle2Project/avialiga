@@ -187,16 +187,25 @@
         </div>
       </header>
       <div class="header__bg"></div>
-      <!-- <div class="cursor">
-	<span></span>
-	<i class="circle"></i>
-	<i class="play"></i>
-	<i class="pause"></i>	
-</div> -->
+      <div class="cursor">
+        <span></span>
+        <i class="circle"></i>
+        <i class="play"></i>
+        <i class="pause"></i>
+      </div>
       <!-- LOADER -->
-      <!-- <div class="loader">
-		<ul><li><div></div></li><li><div></div></li><li><div></div></li><li><div></div></li><li><div></div></li><li><div></div></li></ul>
-	</div> -->
+      <div class="loader">
+        <!-- <div class="progress">0%</div> -->
+        <div class="loader-logo">
+          <svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">
+            <path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z" />
+            <path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z" />
+          </svg>
+          <div class="brand">avialiga</div>
+        </div>
+        <div class="blind-left"></div>
+        <div class="blind-right"></div>
+      </div>
       <!-- /LOADER -->
       <article class="leisure__hero">
         <div class="breadcrumb">
@@ -209,11 +218,10 @@
           <img data-src="./img/leisure-hero-3.jpg" alt="">
         </div>
         <h1>
-          <span>Focus on your</span>
-          <span>important</span>
-          <span class="switch" data-slide="1">family</span>
-          <span class="switch" data-slide="2">friends</span>
-          <span class="switch" data-slide="3">yourself</span>
+          <span>Focus on</span>
+          <span class="switch" data-slide="1">your family</span>
+          <span class="switch" data-slide="2">your friends</span>
+          <span class="switch" data-slide="3">your yourself</span>
         </h1>
         <div class="leisure__hero_pagination">
           <div class="pagination--slide">
@@ -228,7 +236,7 @@
           <div class="hero--scroll-line"></div>
         </div>
       </article>
-      <article class="homepage__tabs" data-aos="fade-up">
+      <article class="homepage__tabs aos-init" data-aos="fade-up">
         <div class="homepage__tabs_disk">
           <div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>
           <div class="disk--icons">
@@ -297,7 +305,7 @@
           </div>
         </div>
       </article>
-      <article class="tour-types">
+      <article class="tour-types aos-init" data-aos="fade-up">
         <div class="tour-types__bg left" style="background-image: url('./img/bg-tour-types-1.jpg');"></div>
         <div class="tour-types__bg right" style="background-image: url('./img/bg-tour-types-2.jpg');"></div>
         <section class="tour-types__section">
@@ -350,7 +358,7 @@
           </a>
         </section>
       </article>
-      <article class="single-slider">
+      <article class="single-slider aos-init" data-aos="fade-up">
         <!-- Slider main container -->
         <div class="swiper-container">
           <!-- Additional required wrapper -->
@@ -425,7 +433,10 @@
           </div>
         </div>
       </article>
-      <article class="catalog__slider">
+      <article class="catalog__slider tours aos-init" data-aos="fade-up">
+        <h2>
+          <span>Editorial tours</span>
+        </h2>
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -525,6 +536,200 @@
             <div class="background"><i></i></div>
             <span>More</span>
           </button>
+        </div>
+      </article>
+      <article class="catalog__slider hotels aos-init" data-aos="fade-up">
+        <h2>
+          <span>Editorial hotels</span>
+        </h2>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="grid--photo">
+                <a href="">
+                  <img data-src="./img/hotels/1.jpg" alt="">
+                </a>
+              </div>
+              <div class="grid--location">Maldives</div>
+              <div class="grid--hotel">JOALI MALDIVES 5*</div>
+              <div class="grid--info">
+                <div class="date">20.09.2019 – 30.09.2019</div>
+                <div class="price">9 112 USD</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="grid--photo">
+                <a href="">
+                  <img data-src="./img/hotels/2.jpg" alt="">
+                </a>
+              </div>
+              <div class="grid--location">Mexico</div>
+              <div class="grid--hotel">PLAYACAR PALACE</div>
+              <div class="grid--info">
+                <div class="date">20.09.2019 – 30.09.2019</div>
+                <div class="price">2 654 USD</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="grid--photo">
+                <a href="">
+                  <img data-src="./img/hotels/3.jpg" alt="">
+                </a>
+              </div>
+              <div class="grid--location">Sofitel Dubai</div>
+              <div class="grid--hotel">The Palm Resort &amp; Spa 5*</div>
+              <div class="grid--info">
+                <div class="date">20.09.2019 – 30.09.2019</div>
+                <div class="price">1 430 USD</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="grid--photo">
+                <a href="">
+                  <img data-src="./img/hotels/4.jpg" alt="">
+                </a>
+              </div>
+              <div class="grid--location">Maldives</div>
+              <div class="grid--hotel">JOALI MALDIVES 5*</div>
+              <div class="grid--info">
+                <div class="date">20.09.2019 – 30.09.2019</div>
+                <div class="price">9 112 USD</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="grid--photo">
+                <a href="">
+                  <img data-src="./img/hotels/5.jpg" alt="">
+                </a>
+              </div>
+              <div class="grid--location">Mexico</div>
+              <div class="grid--hotel">PLAYACAR PALACE</div>
+              <div class="grid--info">
+                <div class="date">20.09.2019 – 30.09.2019</div>
+                <div class="price">2 654 USD</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="grid--photo">
+                <a href="">
+                  <img data-src="./img/hotels/6.jpg" alt="">
+                </a>
+              </div>
+              <div class="grid--location">Sofitel Dubai</div>
+              <div class="grid--hotel">The Palm Resort &amp; Spa 5*</div>
+              <div class="grid--info">
+                <div class="date">20.09.2019 – 30.09.2019</div>
+                <div class="price">1 430 USD</div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-button-prev">
+            <svg class="icon icon-icon_arrow_menu">
+              <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+            </svg>
+            <i></i>
+          </div>
+          <div class="slider-button-next">
+            <svg class="icon icon-icon_arrow_menu">
+              <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+            </svg>
+            <i></i>
+          </div>
+        </div>
+        <div class="catalog__list_more">
+          <button class="btn-skew">
+            <div class="background"><i></i></div>
+            <span>More</span>
+          </button>
+        </div>
+      </article>
+      <article class="leisure__calendar aos-init" data-aos="fade-up">
+        <div class="wrapper">
+          <h2>
+            <span>calendar of events</span>
+          </h2>
+          <div class="leisure__calendar_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+          <button class="btn-skew">
+            <div class="background"><i></i></div>
+            <span>More</span>
+          </button>
+        </div>
+        <div class="leisure__calendar_bg">
+          <img data-src="./img/leisure-calendar.png" alt="">
+          <div class="date date-3">
+            <img data-src="./img/leisure-calendar-3.jpg" alt="">
+            <span>3</span>
+            <i></i>
+          </div>
+          <div class="date date-8">
+            <img data-src="./img/leisure-calendar-8.jpg" alt="">
+            <span>8</span>
+            <i></i>
+          </div>
+          <div class="date date-17">
+            <img data-src="./img/leisure-calendar-17.jpg" alt="">
+            <span>17</span>
+            <i></i>
+          </div>
+        </div>
+      </article>
+      <article class="homepage__drag aos-init" data-aos="fade-up">
+        <div class="blind-left"></div>
+        <div class="blind-right"></div>
+        <img data-src="./img/leisure-trust-left.jpg" data-img-left class="bg" alt="">
+        <img data-src="./img/leisure-trust-right.jpg" data-img-right class="bg" alt="">
+        <div class="wrapper">
+          <h2>
+            <span>Trust your instincts</span>
+          </h2>
+          <a href="" class="btn-skew">
+            <div class="background"><i></i></div>
+            <span>try</span>
+          </a>
+        </div>
+      </article>
+      <article class="homepage__insta aos-init" data-aos="fade-up">
+        <section class="business" data-aos="fade-up">
+          <div class="homepage__insta_title">
+            <h2>
+              <span>Business insta</span>
+            </h2>
+            <a href="">@avialiga_business</a>
+          </div>
+          <div class="homepage__insta_gallery">
+            <img data-src="./img/insta-business-1.jpg" alt="">
+            <img data-src="./img/insta-business-2.jpg" alt="">
+            <img data-src="./img/insta-business-3.jpg" alt="">
+          </div>
+        </section>
+      </article>
+      <article class="expert__form aos-init" data-aos="fade-up">
+        <div class="expert__form_title">
+          <h2>
+            <span>Your travel expert</span>
+          </h2>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        </div>
+        <div class="expert__form_body">
+          <form action="">
+            <div class="form">
+              <div class="form-control name">
+                <input type="text" placeholder="Your Name">
+              </div>
+              <div class="form-control phone">
+                <input type="text" placeholder="Your Phone">
+              </div>
+              <div class="form-control comment">
+                <textarea name="" placeholder="Your comment"></textarea>
+              </div>
+            </div>
+            <div class="form--submit">
+              <button class="btn-skew">
+                <div class="background"><i></i></div>
+                <span>Submit</span>
+              </button>
+            </div>
+          </form>
         </div>
       </article>
       <footer>
