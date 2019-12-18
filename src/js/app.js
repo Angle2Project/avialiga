@@ -2329,8 +2329,7 @@ const _leisure = function () {
         }
       }
     },
-    resize: function(){
-      return
+    resize: function(){      
       this.ctx1.clearRect(0, 0, this.el.clientWidth, this.el.clientHeight);
       this.canv1.width = this.el.clientWidth;
       this.canv1.height = this.el.clientHeight;
@@ -2346,18 +2345,21 @@ const _leisure = function () {
       this.ctx1.drawImage(this.pat1, this.heroBgCover(this.pat1).x, this.heroBgCover(this.pat1).y, this.heroBgCover(this.pat1).width, this.heroBgCover(this.pat1).height);
       this.ctx1.restore();
 
-      this.ctx1.save();
-      this.ctx1.beginPath();
-      this.ctx1.moveTo(((this.el.clientWidth / 2) + (this.el.clientWidth / 2) / 2.92), 0);
-      this.ctx1.lineTo(this.el.clientWidth, 0);
-      this.ctx1.lineTo(this.el.clientWidth, this.el.clientHeight);
-      this.ctx1.lineTo(((this.el.clientWidth / 2) - (this.el.clientWidth / 2) / 2.92), this.el.clientHeight);
-      this.ctx1.lineTo(((this.el.clientWidth / 2) + (this.el.clientWidth / 2) / 2.92), 0);
-      this.ctx1.closePath();
+      this.ctx2.clearRect(0, 0, this.el.clientWidth, this.el.clientHeight);
+      this.canv2.width = this.el.clientWidth;
+      this.canv2.height = this.el.clientHeight;
+      this.ctx2.save();
+      this.ctx2.beginPath();
+      this.ctx2.moveTo(((this.el.clientWidth / 2) + (this.el.clientWidth / 2) / 2.92), 0);
+      this.ctx2.lineTo(this.el.clientWidth, 0);
+      this.ctx2.lineTo(this.el.clientWidth, this.el.clientHeight);
+      this.ctx2.lineTo(((this.el.clientWidth / 2) - (this.el.clientWidth / 2) / 2.92), this.el.clientHeight);
+      this.ctx2.lineTo(((this.el.clientWidth / 2) + (this.el.clientWidth / 2) / 2.92), 0);
+      this.ctx2.closePath();
       // Clip to the current path
-      this.ctx1.clip();
-      this.ctx1.drawImage(this.pat2, this.heroBgCover(this.pat2).x, this.heroBgCover(this.pat2).y, this.heroBgCover(this.pat2).width, this.heroBgCover(this.pat2).height);
-      this.ctx1.restore();      
+      this.ctx2.clip();
+      this.ctx2.drawImage(this.pat2, this.heroBgCover(this.pat2).x, this.heroBgCover(this.pat2).y, this.heroBgCover(this.pat2).width, this.heroBgCover(this.pat2).height);
+      this.ctx2.restore();      
     }
   }
 
@@ -2419,7 +2421,7 @@ const _leisure = function () {
     TweenMax.set(document.querySelectorAll('.single-slider .swiper-slide-active .slide--content h2, .single-slider .swiper-slide-active .slide--content .slide--text, .single-slider .swiper-slide-active .slide--content .slide--nav'), {opacity: 0, y: 100});
     TweenMax.set('.single-slider .slider-control', {opacity: 0, scale: 1.3});    
     TweenMax.set(document.querySelectorAll('.catalog__slider .swiper-slide'), {x: '100%', opacity: 0, skewX: -34});
-    TweenMax.set(document.querySelectorAll('.catalog__slider .slider-button-prev, .catalog__slider .slider-button-next'), {opacity: 0, scale: 1.3});
+    TweenMax.set(document.querySelectorAll('.catalog__slider .slider-button-next'), {opacity: 0, scale: 1.3});
     TweenMax.set('.leisure__calendar h2 span', {opacity: 0, rotationX: 90});
     TweenMax.set('.leisure__calendar_text', {opacity: 0, y: 50});
     TweenMax.set('.leisure__calendar .btn-skew', {opacity: 0, y: 50});
@@ -2449,9 +2451,8 @@ const _leisure = function () {
       }
       if (e.detail.classList.contains('catalog__slider') && e.detail.classList.contains('tours')) {
         new TimelineMax()
-          .staggerTo(document.querySelectorAll('.catalog__slider.tours .swiper-slide'), 0.8, {x: '0%', opacity: 1, skewX: 0, scale: 1, ease: Power1.easeOut}, 0.25)
-          .to('.catalog__slider.tours .slider-button-prev', 1, {opacity: 0.3, scale: 1})
-          .to('.catalog__slider.tours .slider-button-next', 1, {opacity: 1, scale: 1}, '-=1');
+          .staggerTo(document.querySelectorAll('.catalog__slider.tours .swiper-slide'), 0.8, {x: '0%', opacity: 1, skewX: 0, scale: 1, ease: Power1.easeOut}, 0.25)          
+          .to('.catalog__slider.tours .slider-button-next', 1, {opacity: 1, scale: 1});
       }
       if (e.detail.classList.contains('catalog__slider') && e.detail.classList.contains('hotels')) {
         new TimelineMax()
@@ -2489,6 +2490,916 @@ const _leisure = function () {
 };
 
 
+/* ==============================================================
+                          LEISURE INIT
+   ============================================================== */
+const _business = function () {
+  const root = this;
+
+  this.loader = {
+    progress: 0,
+    resources: 1,
+    resourcesDone: 0,
+    loaderReady: false,
+    scripts:
+      [
+        'pixi',
+        'splitText',
+        'swiper',
+        'aos',
+        //'pixiFilters'
+      ],    
+    resourcesDone: 0,
+    init: function () {
+      let that = this;
+
+      //window.scrollTo(0, 0);
+
+      // TweenMax.set('#loader-logo .m', { x: -55, y: -31 });
+      // TweenMax.set('#loader-logo .h', { x: -55, y: -30 });
+      // TweenMax.to('#loader-logo .h', 20, { rotation: 360, transformOrigin: "88% 95%", ease: Power0.easeNone, repeat: -1 });
+      // TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
+      // TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
+      
+      this.resources += document.querySelectorAll('img').length        
+        + this.scripts.length;
+
+      document.querySelectorAll('img').forEach(function (el, i) {
+        let src = el.getAttribute('data-src');
+        var img = new Image();
+        img.src = src;
+        img.onload = function () {
+          el.src = src;
+          that.resourcesDone++;
+          that.loading();
+        }
+      });
+
+      this.scripts.forEach(function (n) {        
+        let src = './js/lib/' + app.resours[n];
+        var script = document.createElement('script');
+        script.src = src;
+        document.head.appendChild(script);
+        script.onload = function () {
+          if (n == 'pixi') {
+            filters();
+          }
+          that.resourcesDone++;
+          that.loading();
+        }
+      });
+
+      function filters() {
+        let src = './js/lib/pixi-filters.js';
+        var script = document.createElement('script');
+        script.src = src;
+        document.head.appendChild(script);
+        script.onload = function () {
+          that.resourcesDone++;
+          that.loading();
+        }
+      }      
+    },
+    loading: function () {
+      const that = this;
+      //console.log(this.resources, this.resourcesDone);
+      if (this.resources == this.resourcesDone) {  
+        that.loaded();      
+        // let tl = new TimelineMax({delay: 1});
+        // tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
+        // .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
+        // .to('#loader-logo .m', 0.8, { rotation: 360, transformOrigin: "96% 50%", ease: Power3.easeInOut }, 'arrows')        
+        // .to('#loader-logo .m', 0.8, { x: 0, y: 0, opacity: 0, ease: Power3.easeInOut }, 'morph')
+        // .to('#loader-logo .h', 0.8, { x: 0, y: 0, ease: Power3.easeInOut }, 'morph')
+        // .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')
+        // .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')
+        // .add(function(){          
+        //   root.hero.render();
+        //   root.tabs.init();
+        //   root.eventsInit();
+        //   root.sliders.init();
+        //   root.trust.init();
+        //   root.cursor.init();
+        //   app.globalEvents();
+        // })
+        // .to('#loader-logo', 0.5, { opacity: 0 }, '+=1')
+        // .to('.loader-logo .brand', 0.5, { opacity: 0 }, '-=0.3')
+        // .add(function(){
+        //   that.loaded();
+        // });       
+        
+      }
+    },
+    loaded: function () {
+      const that = this;
+
+      root.hero.render();
+      root.tabs.init();
+      root.eventsInit();
+      root.sliders.init();
+      root.inquirer.init();      
+      //root.cursor.init();
+      app.globalEvents();
+
+      // new TimelineMax()
+      // .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
+      // .add(function(){
+      //   root.hero.startTimer();
+      //   document.querySelector('.loader').remove();
+      //   TweenMax.set('body', { overflow: 'auto' });
+      //   root.hero.resize();
+      //   root.sliders.resize();
+      //   root.trust.resize();
+      //   root.aosInit();
+      // })
+      // .staggerFrom(document.querySelectorAll('.leisure__hero h1 span'), 1, { rotationX: 90, opacity: 0, ease: Power2.easeOut }, 0.1, '+=0.3')
+      // .from('header, .leisure__hero .breadcrumb', 0.8, { opacity: 0 }, '-=0.5')
+      // .from('.hero--scroll, .leisure__hero_pagination', 0.8, { opacity: 0 }, '-=0.4')
+      // .to(root.hero.heroFilter, 0.8, { innerRadius: 200 }, '-=0.4')      
+    }
+  };
+
+  this.hero = {
+    slides: document.querySelectorAll('.leisure__hero_backgrounds img').length,
+    slide: 1,
+    timer: null,
+    transition: false,
+    heroBgCover: function (el) {
+      let ratio = el.width / el.height;
+      if (document.body.clientWidth / window.innerHeight > ratio) {        
+        return {          
+          width: window.innerWidth,
+          height: window.innerWidth / ratio,
+          x: 0,
+          y: (window.innerHeight - window.innerWidth / ratio) / 2
+        }
+      } else {        
+        return {
+          width: window.innerHeight * ratio,
+          height: window.innerHeight,
+          x: (window.innerWidth - (window.innerHeight * ratio)) / 2,
+          y: 0
+        }
+      }
+    },
+    render: function () {
+      let that = this;
+      that.el = document.querySelector('.leisure__hero');
+      that.hero = new PIXI.Application({
+        width: that.el.clientWidth,
+        height: that.el.clientHeight,
+        transparent: true,
+        //forceCanvas: true
+      });
+      that.el.appendChild(that.hero.view);
+      that.container = new PIXI.Container();
+      that.hero.stage.addChild(that.container);
+      that.hero.stage.interactive = true;
+      const loader = PIXI.Loader.shared;
+      document.querySelectorAll('.leisure__hero_backgrounds img').forEach(function (el, i) {
+        loader.add('slide' + (i + 1), el.getAttribute('data-src'));
+      });
+
+      loader.load(function (loader, resources) {
+        for (i in resources) {
+          that[i] = new PIXI.Sprite(resources[i].texture);
+          that.container.addChild(that[i]);
+          let params = that.heroBgCover(resources[i].data);
+          that[i].width = params.width;
+          that[i].height = params.height;
+          that[i].x = params.x;
+          that[i].y = params.y;
+          that[i].alpha = 0;
+        }
+        that.slide1.alpha = 1;
+        TweenMax.set('.leisure__hero h1 .switch[data-slide="1"]', { display: 'block' });
+        document.querySelector('.leisure__hero_pagination .pagination--slide .current').innerHTML = that.slide < 10 ? '0' + that.slide : that.slide;
+        document.querySelector('.leisure__hero_pagination .pagination--slide .all').innerHTML = that.slides < 10 ? '0' + that.slides : that.slides;
+        that.heroFilter = new PIXI.filters.ZoomBlurFilter();
+        that.heroFilter.strength = 0.1;
+        that.heroFilter.center = {
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2
+        }
+        that.heroFilter.innerRadius = 0;
+        that.container.filters = [that.heroFilter];        
+        that.el.addEventListener('mousemove', onPointerMove);
+        that.el.addEventListener('click', that.onPointerClick);
+
+        function onPointerMove(e) {
+          TweenMax.to(that.heroFilter.center, 1, { x: e.clientX, y: e.clientY });
+        };
+        
+      });
+    },
+     onPointerClick: function(e){
+      const that = app.leisure.hero;
+      if (that.transition) return;
+      clearTimeout(that.timer);
+      that.transition = true;
+      let r = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+      let current = that['slide' + that.slide];
+      let next;
+      let pS, pE;
+      if (that.slide < that.slides) {
+        next = that['slide' + (that.slide + 1)];
+        pS = ((100 / that.slides) * (that.slide + 1)) - ((100 / that.slides) / 2);
+        pE = ((100 / that.slides) * (that.slide + 1));
+      } else {
+        next = that['slide1'];
+        pS = (100 - ((100 / that.slides)));
+        pE = 100 / that.slides;
+      }      
+      new TimelineMax().to(that.heroFilter, 1.3, { innerRadius: r, ease: Power4.easeIn })
+        .set(that.heroFilter, { innerRadius: 0, strength: 0 })
+        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition')
+        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition')
+        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition')
+        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition')
+        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition')
+        .set('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', { display: 'none' })
+        .set('.leisure__hero h1 .switch[data-slide="' + (that.slide < that.slides ? (that.slide + 1) : 1) + '"]', { display: 'block' })
+        .add(function () {
+          let slide;
+          if (that.slide < that.slides) {
+            slide = (that.slide + 1) < 10 ? '0' + (that.slide + 1) : (that.slide + 1)
+          } else {
+            slide = '01';
+          }
+          document.querySelector('.leisure__hero_pagination .pagination--slide .current').innerHTML = slide;
+        })
+        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pE + '%', ease: Power3.easeOut }, 'end')
+        .fromTo('.leisure__hero h1 .switch[data-slide="' + (that.slide < that.slides ? (that.slide + 1) : 1) + '"]', 1, { rotationX: -90, opacity: 0, y: 30 }, { rotationX: 0, opacity: 1, y: 0, ease: Power3.easeOut }, 'end')
+        .to(that.heroFilter, 1, { strength: 0.1, ease: Power3.easeOut }, 'end')
+        .to(that.heroFilter, 1, { innerRadius: 200, ease: Power3.easeOut }, 'end')
+        .add(function () {
+          if (that.slide < that.slides) {
+            that.slide++;
+          } else {
+            that.slide = 1;
+          }
+          that.transition = false;
+          that.startTimer();
+
+        })
+    },
+    startTimer: function() {
+      const that = this;
+      app.leisure.hero.timer = setTimeout(function () {
+        that.onPointerClick();
+      }, 5000);
+    },
+    resize: function(){
+      this.hero.renderer.resize(this.el.clientWidth, window.innerHeight);
+      for (var i=0; i<this.slides; i++) {
+        let n = i+1;
+        let slide = this['slide'+n];        
+        let params = this.heroBgCover(slide._texture);
+        slide.width = params.width;
+        slide.height = params.height;
+        slide.x = params.x;
+        slide.y = params.y;        
+      }
+    }
+  };
+
+  this.tabs = {
+    active: false,
+    diskTextAnim: null,
+    show: true,
+    init: function () {
+      let that = this;
+      this.render();
+      document.querySelectorAll('.homepage__tabs_list span').forEach(function (el, i) {        
+        el.addEventListener('click', function (e) {
+          if (that.show) that.onActive(e);
+        });
+        el.addEventListener('mouseenter', function (e) {
+          if (that.show) that.onHover(e);
+        });
+        el.addEventListener('mouseleave', function (e) {
+          if (that.show) that.onHover(e);
+        });
+      });
+      document.querySelectorAll('.homepage__tabs_content h3 i').forEach(function (el, i) {
+        el.addEventListener('click', function (e) {
+          that.onClose(e);
+        });
+      });
+
+    },
+    onHover: function (e) {
+      if (!this.active) {
+        if (e.type == 'mouseenter') {
+          e.target.classList.add('active');
+          TweenMax.to(document.querySelectorAll('.homepage__tabs_list span:not(.active)'), 1, { opacity: 0.1, color: '#2f2f2f', ease: Power2.easeOut });
+        } else {
+          TweenMax.to(document.querySelectorAll('.homepage__tabs_list span'), 0.8, { opacity: 1, color: '#ee412a', ease: Power2.easeOut });
+          e.target.classList.remove('active');
+        }
+      }
+    },
+    onActive: function (e) {
+      this.active = true;
+      e.target.classList.add('active');
+      let that = this;
+      let target = e.target.getAttribute('data-target');
+      TweenMax.to('.homepage__tabs_disk .disk--arrow-1', 1.5, { rotation: 360, ease: Power3.easeInOut });
+      TweenMax.to('.homepage__tabs_disk .disk--arrow-2', 1.5, { rotation: 360, ease: Power3.easeInOut });
+      TweenMax.to('.homepage__tabs_disk .disk--text', 1.5, {
+        color: '#d7ebe6', onComplete: function () {
+          that.diskTextAnim.pause();
+          TweenMax.set('.homepage__tabs_disk .disk--arrow-1, .homepage__tabs_disk .disk--arrow-2', { clearProps: 'all' });
+        }
+      });
+      let tl = new TimelineMax();
+      tl.staggerTo(document.querySelectorAll('.homepage__tabs_list span:not(.active)'), 0.8, { opacity: 0, ease: Power2.easeOut }, 0.1)
+        .to(document.querySelector('.homepage__tabs_list span.active'), 0.7, { opacity: 0, ease: Power2.easeOut }, '-=0.8')
+        .set('.homepage__tabs_content [data-tab="' + target + '"]', { display: 'block', zIndex: 2, position: 'relative' }, '-=0.5')
+        .fromTo('.homepage__tabs_content [data-tab="' + target + '"] h3 div', 0.8, { rotationX: 90, opacity: 0 }, { rotationX: 0, opacity: 1, ease: Power2.easeOut })
+        .fromTo('.homepage__tabs_content [data-tab="' + target + '"] p', 1.5, { opacity: 0 }, { opacity: 1, ease: Power2.easeOut }, '-=0.3')
+        .set('.homepage__tabs_list', { visibility: 'hidden' })
+    },
+    onClose: function (e) {
+      let that = this;
+      TweenMax.to('.homepage__tabs_disk .disk--text', 1.5, {
+        color: '#9BCAD6', onComplete: function () {
+          TweenMax.to('.homepage__tabs_disk .disk--arrow-1', 90, { rotation: 360, repeat: -1, ease: Power0.easeNone });
+          TweenMax.to('.homepage__tabs_disk .disk--arrow-2', 15, { rotation: 360, repeat: -1, ease: Power0.easeNone });
+          that.diskTextAnim.play();
+          document.querySelector('.homepage__tabs_list .active').classList.remove('active');
+          that.active = false;
+        }
+      });
+      let tl = new TimelineMax();
+      tl.to(e.target.closest('.title'), 0.8, { rotationX: 90, opacity: 0, ease: Power2.easeOut }, 'start')
+        .to(e.target.closest('.tab--body').querySelector('p'), 1, { opacity: 0, ease: Power2.easeOut }, 'start')
+        .set(e.target.closest('.tab--body'), { clearProps: 'all' })
+        .set(document.querySelectorAll('.homepage__tabs_list span'), { color: '#ee412a' })
+        .set('.homepage__tabs_list', { visibility: 'visible' })
+        .staggerTo(document.querySelectorAll('.homepage__tabs_list span'), 2, { opacity: 1 }, 0.1)
+    },
+    render: function () {
+      let el = document.querySelector('.homepage__tabs_disk .disk--text');
+      var text = '';
+      for (var i in el.innerText) {
+        text += el.innerText[i].replace(' ', '&nbsp;');
+        if (i == el.innerText.length - 1) text += '&nbsp;+&nbsp;';
+      }
+      var textBlock = document.createElement('div');
+      textBlock.className = 'text';
+      textBlock.innerHTML = text;
+      var split = new SplitText(textBlock, { type: "chars", reduceWhiteSpace: false });
+      el.innerHTML = '';
+      el.appendChild(textBlock);
+      var deg = 360 / split.chars.length, origin = 0, radius = 320;
+      for (var i in split.chars) {
+        split.chars[i].style.height = radius + 'px';
+        split.chars[i].style.transform = 'rotate(' + (origin) + 'deg)';
+        origin += deg;
+      }
+      this.diskTextAnim = TweenMax.to('.homepage__tabs_disk .disk--text', 60, { rotation: 360, repeat: -1, ease: Power0.easeNone });
+      TweenMax.to('.homepage__tabs_disk .disk--arrow-1', 90, { rotation: 360, repeat: -1, ease: Power0.easeNone });
+      TweenMax.to('.homepage__tabs_disk .disk--arrow-2', 15, { rotation: 360, repeat: -1, ease: Power0.easeNone });
+
+      document.querySelectorAll('.homepage__tabs_content .tab--body h3 div').forEach(function (el, i) {
+        let split = new SplitText(el, { type: "words" });
+        let plus = document.createElement('i');
+        plus.innerText = '+';
+        split.words[split.words.length - 1].appendChild(plus);
+      });      
+    }
+  };
+
+  this.sliders = {
+    meetingsSlider: null,
+    caseSlider: null,
+    init: function(){
+      this.meetingsSlider = new Swiper('.single-slider.meetings .swiper-container', {
+        // Optional parameters
+        init: false,
+        speed: 1000,
+        //simulateTouch: false,        
+        // If we need pagination
+        pagination: {
+          el: '.slider-pagination',
+          type: 'fraction'
+        },
+        // Navigation arrows
+        navigation: {
+          nextEl: '.slider-button-next',
+          prevEl: '.slider-button-prev',
+        }
+      });
+      this.caseSlider = new Swiper('.single-slider.case .swiper-container', {
+        // Optional parameters
+        init: false,
+        speed: 1000,
+        //simulateTouch: false,        
+        // If we need pagination
+        pagination: {
+          el: '.slider-pagination',
+          type: 'fraction'
+        },
+        // Navigation arrows
+        navigation: {
+          nextEl: '.slider-button-next',
+          prevEl: '.slider-button-prev',
+        }
+      });
+      this.events();
+      this.meetingsSlider.init();
+      this.caseSlider.init();
+      
+    },
+    events: function(){
+      this.meetingsSlider.on('init', function () {        
+        const that = this;
+        function heroBgCover(el) {
+          let ratio = el.width / el.height;
+          if ((that.el.clientWidth + (325 * 2)) / that.el.clientHeight > ratio) {
+            return {
+              width: (that.el.clientWidth + (325 * 2)),
+              height: (that.el.clientWidth + (325 * 2)) / ratio,
+              x: 0,
+              y: (window.innerHeight - (that.el.clientWidth + (325 * 2)) / ratio) / 2
+            }
+          } else {
+            return {
+              width: that.el.clientHeight * ratio,
+              height: that.el.clientHeight,
+              x: ((that.el.clientWidth + (325 * 2)) - that.el.clientHeight * ratio) / 2,
+              y: 0
+            }
+          }
+        }
+
+        let galleryEl = this.el.closest('.single-slider');
+        this.gallery = new PIXI.Application({
+          width: galleryEl.clientWidth,
+          height: galleryEl.clientHeight,
+          backgroundColor: 0x000000
+        });
+        galleryEl.appendChild(this.gallery.view);
+        this.rootContainer = new PIXI.Container();
+        this.gallery.stage.addChild(this.rootContainer);
+        this.containers = [];
+        this.cloneContainers = [];
+        this.images = [];
+        this.cloneImages = [];
+        this.masks = [];
+        this.cloneMasks = [];
+
+        this.mask = new PIXI.Graphics();
+        this.mask.lineStyle(0);
+        this.mask.beginFill(0xffffff, 0.5);
+        //this.mask.drawPolygon([0, 0, 100, 0, window.innerWidth, window.innerHeight, (325*2), window.innerHeight, 0, 0]);          
+        this.mask.drawPolygon([325, 0, galleryEl.clientWidth + 325, 0, (galleryEl.clientWidth - (325)), window.innerHeight, -325, window.innerHeight]);        
+        this.mask.endFill();
+
+        this.el.querySelectorAll('.swiper-slide .slide--photo img').forEach(function (el, i) {
+          let src = el.getAttribute('data-src');
+          let container = new PIXI.Container();
+          let image = PIXI.Sprite.from(src);
+          let mask = that.mask.clone();
+          mask.x = galleryEl.clientWidth * i;
+          that.rootContainer.addChild(mask);
+          container.mask = mask;
+          image.anchor.x = 0.5;
+          image.anchor.y = 0.5;          
+          image.width = heroBgCover(el).width;
+          image.height = heroBgCover(el).height;          
+          image.x = heroBgCover(el).x + (image.width / 2);
+          image.y = heroBgCover(el).y + (image.height / 2);
+          image.alpha = (i == 0 ? 0.7 : 0.5);
+          container.width = galleryEl.clientWidth + (325 * 2);
+          container.x = (galleryEl.clientWidth * i) - 325;
+          that.rootContainer.addChild(container);
+          container.addChild(image);
+
+          if (i == (that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 1)) {
+            let cloneImage = PIXI.Sprite.from(src);
+            cloneImage.width = heroBgCover(el).width;
+            cloneImage.height = heroBgCover(el).height;
+            cloneImage.x = heroBgCover(el).x;
+            cloneImage.y = heroBgCover(el).y;
+            cloneImage.alpha = 0.5;
+            let cloneContaner = new PIXI.Container();
+            cloneContaner.width = galleryEl.clientWidth + (325 * 2);
+            that.rootContainer.addChild(cloneContaner);
+            cloneContaner.x = -galleryEl.clientWidth;
+            let cloneMask = that.mask.clone();
+            cloneMask.x = -galleryEl.clientWidth;
+            that.rootContainer.addChild(cloneMask);
+            cloneContaner.mask = cloneMask;
+            cloneContaner.addChild(cloneImage);
+            that.cloneMasks.push(cloneMask);
+            that.cloneContainers.push(cloneContaner);
+            that.cloneImages.push(cloneImage);
+          } else if (i == 0) {
+            let cloneImage = PIXI.Sprite.from(src);
+            cloneImage.width = heroBgCover(el).width;
+            cloneImage.height = heroBgCover(el).height;
+            cloneImage.x = heroBgCover(el).x;
+            cloneImage.y = heroBgCover(el).y;
+            cloneImage.alpha = 0.5;
+            let cloneContaner = new PIXI.Container();
+            cloneContaner.width = galleryEl.clientWidth + (325 * 2);
+            that.rootContainer.addChild(cloneContaner);
+            cloneContaner.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 325;
+            let cloneMask = that.mask.clone();
+            cloneMask.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length;
+            that.rootContainer.addChild(cloneMask);
+            cloneContaner.mask = cloneMask;
+            cloneContaner.addChild(cloneImage);
+            that.cloneMasks.push(cloneMask);            
+            that.cloneContainers.push(cloneContaner);
+            that.cloneImages.push(cloneImage);
+          }
+          that.containers.push(container);
+          that.images.push(image);
+          that.masks.push(mask);
+
+        });
+      });
+      this.meetingsSlider.on('slideChangeTransitionStart', function () {
+        let that = this;        
+        let x = this.el.clientWidth * this.realIndex;
+        if (this.realIndex > this.previousIndex) {
+          this.images.forEach(function (el, i) {
+            TweenMax.to(el, 0.8, {
+              alpha: function () {
+                return that.realIndex == i ? 0.7 : 0.5;
+              }, ease: Power2.easeIn
+            });
+            let scale = el.scale;
+            new TimelineMax()
+              .to(el.skew, 0.5, { x: -0.6, ease: Power2.easeIn }, 'start')
+              .to(el.scale, 0.5, { x: (scale.x * 2), y: (scale.y * 2), ease: Power2.easeIn }, 'start')
+              .to(el.skew, 0.5, { x: 0, ease: Power2.easeOut }, 'end')
+              .to(el.scale, 0.5, { x: scale.x, y: scale.y, ease: Power2.easeOut }, 'end')
+          });
+          new TimelineMax()
+            .to(this.rootContainer, 1, { x: -x, ease: Power2.easeInOut }, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, { skewX: -34, scale: 1.2, ease: Power1.easeIn }, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, { skewX: 0, scale: 1, ease: Power2.easeOut }, '-=0.4');
+        } else {
+          this.images.forEach(function (el, i) {
+            TweenMax.to(el, 0.8, {
+              alpha: function () {
+                return that.realIndex == i ? 0.7 : 0.5;
+              }, ease: Power2.easeIn
+            });
+            let scale = el.scale;
+            new TimelineMax()
+            .to(el.skew, 0.5, { x: 0.6, ease: Power2.easeIn }, 'start')
+            .to(el.scale, 0.5, { x: (scale.x * 2), y: (scale.y * 2), ease: Power2.easeIn }, 'start')
+            .to(el.skew, 0.5, { x: 0, ease: Power2.easeOut }, 'end')
+            .to(el.scale, 0.5, { x: scale.x, y: scale.y, ease: Power2.easeOut }, 'end')
+          });
+          new TimelineMax()
+            .to(this.rootContainer, 1, { x: -x, ease: Power2.easeInOut }, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, { skewX: 34, scale: 1.2, ease: Power1.easeIn }, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, { skewX: 0, scale: 1, ease: Power2.easeOut }, '-=0.4');
+        }
+      });
+      this.caseSlider.on('init', function () {        
+        const that = this;
+        function heroBgCover(el) {
+          let ratio = el.width / el.height;
+          if ((that.el.clientWidth + (325 * 2)) / that.el.clientHeight > ratio) {
+            return {
+              width: (that.el.clientWidth + (325 * 2)),
+              height: (that.el.clientWidth + (325 * 2)) / ratio,
+              x: 0,
+              y: (window.innerHeight - (that.el.clientWidth + (325 * 2)) / ratio) / 2
+            }
+          } else {
+            return {
+              width: that.el.clientHeight * ratio,
+              height: that.el.clientHeight,
+              x: ((that.el.clientWidth + (325 * 2)) - that.el.clientHeight * ratio) / 2,
+              y: 0
+            }
+          }
+        }
+
+        let galleryEl = this.el.closest('.single-slider');
+        this.gallery = new PIXI.Application({
+          width: galleryEl.clientWidth,
+          height: galleryEl.clientHeight,
+          backgroundColor: 0x000000
+        });
+        galleryEl.appendChild(this.gallery.view);
+        this.rootContainer = new PIXI.Container();
+        this.gallery.stage.addChild(this.rootContainer);
+        this.containers = [];
+        this.cloneContainers = [];
+        this.images = [];
+        this.cloneImages = [];
+        this.masks = [];
+        this.cloneMasks = [];
+
+        this.mask = new PIXI.Graphics();
+        this.mask.lineStyle(0);
+        this.mask.beginFill(0xffffff, 0.5);
+        //this.mask.drawPolygon([0, 0, 100, 0, window.innerWidth, window.innerHeight, (325*2), window.innerHeight, 0, 0]);          
+        this.mask.drawPolygon([-325, 0, galleryEl.clientWidth - 325, 0, (galleryEl.clientWidth + (325)), window.innerHeight, 325, window.innerHeight]);
+        this.mask.endFill();
+
+        this.el.querySelectorAll('.swiper-slide .slide--photo img').forEach(function (el, i) {
+          let src = el.getAttribute('data-src');
+          let container = new PIXI.Container();
+          let image = PIXI.Sprite.from(src);
+          let mask = that.mask.clone();
+          mask.x = galleryEl.clientWidth * i;
+          that.rootContainer.addChild(mask);
+          container.mask = mask;
+          image.anchor.x = 0.5;
+          image.anchor.y = 0.5;          
+          image.width = heroBgCover(el).width;
+          image.height = heroBgCover(el).height;          
+          image.x = heroBgCover(el).x + (image.width / 2);
+          image.y = heroBgCover(el).y + (image.height / 2);
+          image.alpha = (i == 0 ? 0.7 : 0.5);
+          container.width = galleryEl.clientWidth + (325 * 2);
+          container.x = (galleryEl.clientWidth * i) - 325;
+          that.rootContainer.addChild(container);
+          container.addChild(image);
+
+          if (i == (that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 1)) {
+            let cloneImage = PIXI.Sprite.from(src);
+            cloneImage.width = heroBgCover(el).width;
+            cloneImage.height = heroBgCover(el).height;
+            cloneImage.x = heroBgCover(el).x;
+            cloneImage.y = heroBgCover(el).y;
+            cloneImage.alpha = 0.5;
+            let cloneContaner = new PIXI.Container();
+            cloneContaner.width = galleryEl.clientWidth + (325 * 2);
+            that.rootContainer.addChild(cloneContaner);
+            cloneContaner.x = -galleryEl.clientWidth;
+            let cloneMask = that.mask.clone();
+            cloneMask.x = -galleryEl.clientWidth;
+            that.rootContainer.addChild(cloneMask);
+            cloneContaner.mask = cloneMask;
+            cloneContaner.addChild(cloneImage);
+            that.cloneMasks.push(cloneMask);
+            that.cloneContainers.push(cloneContaner);
+            that.cloneImages.push(cloneImage);
+          } else if (i == 0) {
+            let cloneImage = PIXI.Sprite.from(src);
+            cloneImage.width = heroBgCover(el).width;
+            cloneImage.height = heroBgCover(el).height;
+            cloneImage.x = heroBgCover(el).x;
+            cloneImage.y = heroBgCover(el).y;
+            cloneImage.alpha = 0.5;
+            let cloneContaner = new PIXI.Container();
+            cloneContaner.width = galleryEl.clientWidth + (325 * 2);
+            that.rootContainer.addChild(cloneContaner);
+            cloneContaner.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 325;
+            let cloneMask = that.mask.clone();
+            cloneMask.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length;
+            that.rootContainer.addChild(cloneMask);
+            cloneContaner.mask = cloneMask;
+            cloneContaner.addChild(cloneImage);
+            that.cloneMasks.push(cloneMask);            
+            that.cloneContainers.push(cloneContaner);
+            that.cloneImages.push(cloneImage);
+          }
+          that.containers.push(container);
+          that.images.push(image);
+          that.masks.push(mask);
+
+        });
+      });
+      this.caseSlider.on('slideChangeTransitionStart', function () {
+        let that = this;        
+        let x = this.el.clientWidth * this.realIndex;
+        if (this.realIndex > this.previousIndex) {
+          this.images.forEach(function (el, i) {
+            TweenMax.to(el, 0.8, {
+              alpha: function () {
+                return that.realIndex == i ? 0.7 : 0.5;
+              }, ease: Power2.easeIn
+            });
+            let scale = el.scale;
+            new TimelineMax()
+              .to(el.skew, 0.5, { x: -0.6, ease: Power2.easeIn }, 'start')
+              .to(el.scale, 0.5, { x: (scale.x * 2), y: (scale.y * 2), ease: Power2.easeIn }, 'start')
+              .to(el.skew, 0.5, { x: 0, ease: Power2.easeOut }, 'end')
+              .to(el.scale, 0.5, { x: scale.x, y: scale.y, ease: Power2.easeOut }, 'end')
+          });
+          new TimelineMax()
+            .to(this.rootContainer, 1, { x: -x, ease: Power2.easeInOut }, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, { skewX: -34, scale: 1.2, ease: Power1.easeIn }, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, { skewX: 0, scale: 1, ease: Power2.easeOut }, '-=0.4');
+        } else {
+          this.images.forEach(function (el, i) {
+            TweenMax.to(el, 0.8, {
+              alpha: function () {
+                return that.realIndex == i ? 0.7 : 0.5;
+              }, ease: Power2.easeIn
+            });
+            let scale = el.scale;
+            new TimelineMax()
+            .to(el.skew, 0.5, { x: 0.6, ease: Power2.easeIn }, 'start')
+            .to(el.scale, 0.5, { x: (scale.x * 2), y: (scale.y * 2), ease: Power2.easeIn }, 'start')
+            .to(el.skew, 0.5, { x: 0, ease: Power2.easeOut }, 'end')
+            .to(el.scale, 0.5, { x: scale.x, y: scale.y, ease: Power2.easeOut }, 'end')
+          });
+          new TimelineMax()
+            .to(this.rootContainer, 1, { x: -x, ease: Power2.easeInOut }, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, { skewX: 34, scale: 1.2, ease: Power1.easeIn }, 'start')
+            .to(this.el.querySelectorAll('.swiper-slide .slide--content'), 0.5, { skewX: 0, scale: 1, ease: Power2.easeOut }, '-=0.4');
+        }
+      });
+      
+      
+    },    
+    resize: function(){
+      const that = this.singleSlider;
+      function heroBgCover(el) {
+        let ratio = el.width / el.height;
+        if (((that.el.clientWidth + (325 * 2)) / that.el.clientHeight) > ratio) {          
+          return {
+            width: (that.el.clientWidth + (325 * 2)),
+            height: (that.el.clientWidth + (325 * 2)) / ratio,
+            x: 0,
+            y: (window.innerHeight - (that.el.clientWidth + (325 * 2)) / ratio) / 2
+          }
+        } else {          
+          return {
+            width: that.el.clientHeight * ratio,
+            height: that.el.clientHeight,
+            x: ((that.el.clientWidth + (325 * 2)) - that.el.clientHeight * ratio) / 2,
+            y: 0
+          }
+        }
+      };
+      let x = that.el.clientWidth * that.realIndex;
+      that.rootContainer.x = -x;
+      let galleryEl = that.el.closest('.single-slider');
+      that.gallery.renderer.resize(that.el.clientWidth, window.innerHeight);
+      that.images.forEach(function(el, i){        
+          el.width = heroBgCover(el.texture).width;
+          el.height = heroBgCover(el.texture).height;
+          el.x = heroBgCover(el).x + (el.width / 2);
+          el.y = heroBgCover(el).y + (el.height / 2);
+          that.containers[i].width = galleryEl.clientWidth + (325 * 2);
+          that.containers[i].x = (galleryEl.clientWidth * i) - 325;
+          that.masks[i].clear();
+          that.masks[i].lineStyle(0);
+          that.masks[i].beginFill(0xffffff, 0.5);          
+          that.masks[i].drawPolygon([-325, 0, galleryEl.clientWidth - 325, 0, (galleryEl.clientWidth + (325)), window.innerHeight, 325, window.innerHeight]);
+          that.masks[i].endFill();
+          that.masks[i].x = galleryEl.clientWidth * i;
+      });
+      that.cloneImages.forEach(function(el, i){
+          el.width = heroBgCover(el.texture).width;
+          el.height = heroBgCover(el.texture).height;
+          el.x = heroBgCover(el).x + (el.width / 2);
+          el.y = heroBgCover(el).y + (el.height / 2);
+          if(i == 0){
+            that.cloneImages[0].width = heroBgCover(that.cloneImages[0].texture).width;
+            that.cloneImages[0].height = heroBgCover(that.cloneImages[0].texture).height;
+            that.cloneImages[0].x = heroBgCover(that.cloneImages[0].texture).x;
+            that.cloneImages[0].y = heroBgCover(that.cloneImages[0].texture).y;
+            that.cloneContainers[0].width = galleryEl.clientWidth + (325 * 2);
+            that.cloneContainers[0].x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 325;            
+            that.cloneMasks[0].clear();
+            that.cloneMasks[0].lineStyle(0);
+            that.cloneMasks[0].beginFill(0xffffff, 0.5);          
+            that.cloneMasks[0].drawPolygon([-325, 0, galleryEl.clientWidth - 325, 0, (galleryEl.clientWidth + (325)), window.innerHeight, 325, window.innerHeight]);
+            that.cloneMasks[0].endFill();
+            that.cloneMasks[0].x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length;
+          }else {
+            that.cloneImages[1].width = heroBgCover(that.cloneImages[0].texture).width;
+            that.cloneImages[1].height = heroBgCover(that.cloneImages[0].texture).height;
+            that.cloneImages[1].x = heroBgCover(that.cloneImages[0].texture).x;
+            that.cloneImages[1].y = heroBgCover(that.cloneImages[0].texture).y;
+            that.cloneContainers[1].width = galleryEl.clientWidth + (325 * 2);
+            that.cloneContainers[1].x = -galleryEl.clientWidth;
+            that.cloneMasks[1].clear();
+            that.cloneMasks[1].lineStyle(0);
+            that.cloneMasks[1].beginFill(0xffffff, 0.5);          
+            that.cloneMasks[1].drawPolygon([-325, 0, galleryEl.clientWidth - 325, 0, (galleryEl.clientWidth + (325)), window.innerHeight, 325, window.innerHeight]);
+            that.cloneMasks[1].endFill();
+            that.cloneMasks[1].x = -galleryEl.clientWidth;
+          }
+      });
+    }
+  };
+
+  this.inquirer = {
+    slides: null,
+    current: 1,
+    init: function(){
+      let that = this;
+      this.slides = document.querySelectorAll('.business__select_slider .slide').length;
+      document.querySelector('.business__select_slider .pagination').innerText = this.current+'/'+this.slides;
+      document.querySelectorAll('.business__select .custom-select .select--label').forEach(function(el, i){
+        el.addEventListener('click', that.onActive);
+      });
+      document.querySelectorAll('.business__select .custom-select .select--options input[type="radio"]').forEach(function(el, i){
+        el.addEventListener('change', that.onChange);        
+      });
+      document.querySelector('.business__select [data-action]').addEventListener('click', this.onNext);
+      TweenMax.set('.business__select_slider [data-slide="1"]', {display: 'block'});
+
+    },
+    onActive: function(e){
+      let target = e.currentTarget.closest('.custom-select');
+      let active = target.classList.contains('active');
+      if(active){
+        new TimelineMax().to(target.querySelector('.select--options'), 0.4, {height: 0, ease: Power2.easeInOut})
+          .set(target.querySelector('.select--options'), {clearProps: 'all'});
+        target.classList.remove('active');
+      }else{        
+        new TimelineMax().set(target.querySelector('.select--options'), {display: 'block'})
+          .from(target.querySelector('.select--options'), 0.4, {height: 0, ease: Power2.easeInOut});
+        target.classList.add('active');          
+      }      
+    },
+    onChange: function(e){
+      let that = this;
+      let target = e.target.closest('.custom-select');
+      let text = e.target.closest('li').querySelector('span').innerText;
+      target.querySelector('.select--label span').innerText = text;
+      new TimelineMax().to(target.querySelector('.select--options'), 0.4, {height: 0, ease: Power2.easeInOut})
+          .set(target.querySelector('.select--options'), {clearProps: 'all'});
+        target.classList.remove('active');
+      
+    },
+    onNext: function(e){
+      const that = app.business.inquirer;
+      let next = (that.current+1);      
+      if(that.current < that.slides){
+        if(!document.querySelectorAll('.business__select_slider [data-slide="'+that.current+'"] input[type="radio"]:checked').length)return;
+        new TimelineMax()
+        .set('.business__select_slider', {overflow: 'hidden'})
+        .to('.business__select_slider [data-slide="'+that.current+'"]', 0.6, {x: '-100%', opacity: 0, ease: Power3.easeIn})
+        .set('.business__select_slider [data-slide="'+that.current+'"]', {clearProps: 'all'})
+        .add(function(){          
+          that.current++;
+          document.querySelector('.business__select_slider .pagination').innerText = that.current+'/'+that.slides;
+        })
+        .set('.business__select_slider [data-slide="'+next+'"]', {display: 'block'})
+        .from('.business__select_slider [data-slide="'+next+'"]', 0.6, {x: '100%', opacity: 0, ease: Power3.easeOut})
+        .set('.business__select_slider', {clearProps: 'all'})
+        .add(function(){
+          if(that.current == that.slides){
+            document.querySelector('.business__select [data-action] span').innerText = 'Submit';
+          }
+        })
+      }      
+    }
+  }
+
+  this.eventsInit = function () {
+    const that = this;    
+    window.addEventListener('scroll', function (e) {
+      let scrollTop = window.pageYOffset;
+      header(e);      
+    });
+    window.addEventListener('resize', function(){
+      heightUpdate();
+      that.hero.resize();
+      //that.sliders.resize();
+    });
+    document.addEventListener('click', function(e){      
+      if(!e.target.closest('.custom-select') && document.querySelectorAll('.custom-select.active').length){
+        new TimelineMax().to(document.querySelector('.custom-select.active .select--options'), 0.4, {height: 0, ease: Power2.easeInOut})
+          .set(document.querySelectorAll('.custom-select.active .select--options'), {clearProps: 'all'});
+          document.querySelector('.custom-select.active').classList.remove('active');
+      }
+    });
+    
+    
+    document.querySelectorAll('.slider-button-prev, .slider-button-next').forEach(function (el, i) {
+      el.addEventListener('mouseenter', function (e) {        
+        if (this.classList.contains('swiper-button-disabled')) return;
+        TweenMax.to(this.querySelector('i'), 0.5, { scale: 1, ease: Power3.easeOut });
+        TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut });
+        //TweenMax.to('.cursor i.circle', 0.5, { backgroundColor: '#ee412a', ease: Power3.easeOut });        
+        if (this.closest('.catalog__slider')){
+          TweenMax.to(this.querySelector('.icon'), 0.5, { fill: '#ee412a', ease: Power3.easeOut });
+        }
+      });
+      el.addEventListener('mouseleave', function (e) {        
+        TweenMax.to(this.querySelector('i'), 0.5, { scale: 0, ease: Power3.easeIn });
+        TweenMax.to('.cursor span', 0.5, { scale: 1, ease: Power3.easeIn });
+        //TweenMax.to('.cursor i.circle', 0.5, { backgroundColor: '#fff', ease: Power3.easeOut });        
+        if (this.closest('.catalog__slider')){
+          TweenMax.to(this.querySelector('.icon'), 0.5, { fill: '#fff', ease: Power3.easeIn });
+        }        
+      });
+    });
+
+  }
+
+  this.loader.init(); 
+}
+
 
 window.onload = function () {
   setTimeout(function () {
@@ -2503,6 +3414,10 @@ window.onload = function () {
     if (document.body.classList.contains('leisure')) {
       app.leisure = new _leisure();
     }
+    if (document.body.classList.contains('business')) {
+      app.business = new _business();
+    }
+    
   }, 100);
 }
 

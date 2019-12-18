@@ -4,11 +4,13 @@ PageList:
 - file: homepage.html
   ready: 80
 - file: tours.html
-  ready: 75
+  ready: 90
 - file: hotels.html
-  ready: 10
+  ready: 90
 - file: leisure.html
-  ready: 10
+  ready: 90
+- file: business.html
+  ready: 40
   
   
 

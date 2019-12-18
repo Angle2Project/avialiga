@@ -471,3 +471,47 @@
   }
 }
 
+.custom-radio {
+  position: relative;
+  display: inline-block;
+  padding-left: 40px;  
+  input[type="radio"] {
+    display: none;
+  }
+  span {
+    display: inline-block;    
+    &::before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #bebccd;
+      border-radius: 50%;
+      position: absolute;
+      top: calc(0.5em - 10px);
+      left: 0;      
+    }
+    &::after {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: calc(0.5em - 11px);
+      left: 4px;
+      transition: transform 250ms ease;
+      transform: scale(0);
+      background: url('../img/icon_radio-red.svg') no-repeat center 4px / 16px auto;
+    }
+  }
+  input[type="radio"]:checked + span {
+    &::before {
+      transform: scale(1);
+      border-color: $red;
+    }
+    &::after {
+      transform: scale(1);
+    }
+  }
+}
+

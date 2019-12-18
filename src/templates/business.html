@@ -1,0 +1,414 @@
+---
+title: Index page,
+class: business
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<!-- <div class="loader">			
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div> -->
+	<!-- /LOADER -->
+
+
+	<article class="leisure__hero">
+		<div class="breadcrumb">
+			<a href="">MAIN</a>
+			<span>BUSINESS</span>
+		</div>
+		<div class="leisure__hero_backgrounds">
+			<img data-src="./img/leisure-hero-3.jpg" class="scooterok" alt="">
+			<img data-src="./img/leisure-hero-2.jpg" alt="">
+			<img data-src="./img/leisure-hero-1.png" alt="">
+		</div>
+		<h1>
+			<span>Focus on</span>		
+			<span class="switch" data-slide="1">your family</span>
+			<span class="switch" data-slide="2">your friends</span>
+			<span class="switch" data-slide="3">your yourself</span>
+		</h1>
+		<div class="leisure__hero_pagination">
+			<div class="pagination--slide">
+				<span class="current"></span>
+				/
+				<span class="all"></span>
+			</div>
+			<div class="pagination--bar">
+				<i></i>
+			</div>
+		</div>
+		<div class="hero--scroll animation">
+			<span>Sroll Down</span>
+			<div class="hero--scroll-line"></div>
+		</div>
+	</article>
+
+	<article class="homepage__tabs" data-aos="fade-up">
+		<div class="homepage__tabs_disk">
+				<div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>				
+				<img data-src="./img/advantages-1-w.svg" class="disk--arrow-1" alt="">
+				<img data-src="./img/advantages-2-w.svg" class="disk--arrow-2" alt="">
+		</div>
+		<div class="wrapper">
+			<h3>Get with us</h3>
+			<div class="homepage__tabs_list">
+				<span data-target="time-saving">TIME SAVING</span>
+				<span data-target="cost-saving">COST SAVINGS</span>
+				<span data-target="risk-minimization">RISK MINIMAZATION</span>
+				<span data-target="legal-support">LEGAL SUPPORT</span>
+				<span data-target="experience">EXPERIENCE</span>
+				<span data-target="development">DEVELOPMENT</span>
+				<span data-target="real-expectation">REAL EXPECTATIONS</span>				
+			</div>
+			<div class="homepage__tabs_content">
+				{% for i in [
+					{
+						title: 'TIME SAVING',
+						data: 'time-saving'
+					},
+					{
+						title: 'COST SAVINGS',
+						data: 'cost-saving'
+					},
+					{
+						title: 'RISK MINIMAZATION',
+						data: 'risk-minimization'
+					},
+					{
+						title: 'LEGAL SUPPORT',
+						data: 'legal-support'
+					},
+					{
+						title: 'EXPERIENCE',
+						data: 'experience'
+					},
+					{
+						title: 'DEVELOPMENT',
+						data: 'development'
+					},
+					{
+						title: 'REAL EXPECTATIONS',
+						data: 'real-expectation'
+					}
+				] %}
+				<section class="tab--body" data-tab="{{i.data}}">
+					<h3>
+						<div class="title">{{i.title}}</div>
+					</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</section>
+				{% endfor %}
+			</div>
+		</div>			
+	</article>
+
+
+	<article class="single-slider meetings aos-init" data-aos="fade-up">
+		<!-- Slider main container -->
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					{% set singleSlider1 = [
+						{
+							title: "Maldives",
+							src: "./img/maldives.jpg"
+						},
+						{
+							title: "Seychelles",
+							src: "./img/seychelles.jpg"
+						},
+						{
+							title: "Mauritius",
+							src: "./img/mauritius.jpg"
+						}
+					] %}
+					{% for i in singleSlider1 %}
+					<div class="swiper-slide">
+						<div class="slide--photo">
+							<img data-src="{{i.src}}" alt="">
+						</div>
+						<!-- <div class="photo--mask"></div> -->
+						<div class="slide--content">
+							<h2>{{i.title}}</h2>
+							<div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+							<div class="slide--nav">
+								<a href="" class="about">ABOUT MALDIVES</a>
+								<a href="" class="btn-skew">
+									<div class="background"><i></i></div>
+									<span>view tours</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+			</div>
+			<div class="slider-control">
+				<div class="slider-button-prev">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+				<div class="slider-pagination"></div>
+				<div class="slider-button-next">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+			</div>
+		</div>		
+	</article>
+
+	<article class="single-slider case aos-init" data-aos="fade-up">
+		<!-- Slider main container -->
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					{% set singleSlider2 = [						
+						{
+							title: "Seychelles",
+							src: "./img/seychelles.jpg"
+						},
+						{
+							title: "Mauritius",
+							src: "./img/mauritius.jpg"
+						},
+						{
+							title: "Maldives",
+							src: "./img/maldives.jpg"
+						}
+					] %}
+					{% for i in singleSlider2 %}
+					<div class="swiper-slide">
+						<div class="slide--photo">
+							<img data-src="{{i.src}}" alt="">
+						</div>
+						<!-- <div class="photo--mask"></div> -->
+						<div class="slide--content">
+							<h2>{{i.title}}</h2>
+							<div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+							<div class="slide--nav">
+								<a href="" class="about">ABOUT MALDIVES</a>
+								<a href="" class="btn-skew">
+									<div class="background"><i></i></div>
+									<span>view tours</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+			</div>
+			<div class="slider-control">
+				<div class="slider-button-prev">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+				<div class="slider-pagination"></div>
+				<div class="slider-button-next">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+			</div>
+		</div>		
+	</article>
+
+	<article class="business__select">
+		<form action="">
+			<div class="business__select_description">
+				<h2>Business Questinaire</h2>
+				<div class="description--text">
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+				</div>			
+			</div>
+			<div class="business__select_slider">
+				<div class="pagination"></div>
+
+				<!-- Questions -->
+				<div class="slide" data-slide="1">
+					<div class="question">Purpose of travel arrangements?</div>
+					<section class="custom-select">
+						<div class="select--label">
+							<span>Select an answer</span>
+							<i>{{mixins.icon('icon_arrow_menu')}}</i>
+						</div>
+						<ul class="select--options">
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+						</ul>
+					</section>	
+				</div>
+				
+				<div class="slide" data-slide="2">
+					<div class="question">Purpose of travel arrangements?</div>
+					<section class="custom-select">
+						<div class="select--label">
+							<span>Select an answer</span>
+							<i>{{mixins.icon('icon_arrow_menu')}}</i>
+						</div>
+						<ul class="select--options">
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+						</ul>
+					</section>	
+				</div>
+				
+				<div class="slide" data-slide="3">
+					<div class="question">Purpose of travel arrangements?</div>
+					<section class="custom-select">
+						<div class="select--label">
+							<span>Select an answer</span>
+							<i>{{mixins.icon('icon_arrow_menu')}}</i>
+						</div>
+						<ul class="select--options">
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+						</ul>
+					</section>	
+				</div>
+			
+				<div class="slide" data-slide="4">
+					<div class="question">Purpose of travel arrangements?</div>
+					<section class="custom-select">
+						<div class="select--label">
+							<span>Select an answer</span>
+							<i>{{mixins.icon('icon_arrow_menu')}}</i>
+						</div>
+						<ul class="select--options">
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+						</ul>
+					</section>	
+				</div>
+			<!-- /Questions -->
+
+			</div>
+			<button class="btn-skew" type="button" data-action="next">
+				<div class="background"><i></i></div>
+				<span>Next</span>
+			</button>
+		</form>
+	</article>
+
+	<article class="expert__form aos-init" data-aos="fade-up">
+		<div class="expert__form_title">
+			<h2>
+				<span>Your travel expert</span>
+			</h2>
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+		</div>
+		<div class="expert__form_body">
+			<form action="">
+				<div class="form">
+					<div class="form-control name">
+						<input type="text" placeholder="Your Name">
+					</div>
+					<div class="form-control phone">
+						<input type="text" placeholder="Your Phone">
+					</div>
+					<div class="form-control comment">
+						<textarea name="" placeholder="Your comment"></textarea>
+					</div>
+				</div>
+				<div class="form--submit">
+					<button class="btn-skew">
+						<div class="background"><i></i></div>
+						<span>Submit</span>						
+					</button>
+				</div>
+			</form>
+		</div>
+	</article>
+
+
+
+
+
+	
+
+
+
+
+
+
+{% endblock %}

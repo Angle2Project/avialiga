@@ -1,6 +1,6 @@
 .leisure {
   font-family: 'Futura';
-  overflow: hidden;
+  overflow: hidden;  
   .cursor {
     i {
       &.circle {
@@ -204,6 +204,12 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      i {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
     }
   }
   .homepage__insta {
@@ -222,6 +228,136 @@
         color: $green;
       }
     }
+  }
+}
+
+.leisure__hero {
+  min-height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+  cursor: default;
+  line-height: 0;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background: rgb(0,0,0);
+    background: -moz-linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#fdffff",GradientType=1);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+  }
+  .breadcrumb {
+    top: 130px;
+    position: absolute;
+    color: $white;
+    a {
+      color: currentColor;
+    }
+  }
+  .leisure__hero_backgrounds {
+    display: none;
+  }
+  h1 {
+    width: 55vw;
+    font: normal 9.9vw/1 "Futura";
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    perspective: 1000px;
+    perspective-origin: 20% 100%;
+    will-change: transform;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+    span {
+      display: block;
+      white-space: nowrap;
+      transform-origin: bottom;
+
+      &:nth-child(1) {
+        margin-left: 0vw;
+      }
+      &:nth-child(2) {
+        margin-left: 6vw;
+      }        
+      &.switch {
+        margin-left: 6vw;
+        display: none;
+      }
+    }
+  }
+  .leisure__hero_pagination {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: $white;
+    position: absolute;
+    bottom: 85px;
+    left: 85px;
+    .pagination--bar {
+      margin-left: 15px;
+      width: 270px;
+      height: 1px;
+      background-color: $white;
+      i {
+        display: block;
+        height: 1px;
+        background-color: $red;
+        width: 33.333333333%;
+      }
+    }
+  }
+  @keyframes scrollDown {
+    from {
+      transform: translateY(-100%);
+    }
+    50% {
+      transform: translateY(0%);
+    }  
+    to {
+      transform: translateY(100%);
+    }
+  }
+  .hero--scroll {
+    position: relative;      
+    position: absolute;      
+    right: 85px;
+    bottom: 85px;
+    padding-right: 20px;
+    color: $white;
+    &.animation {
+      .hero--scroll-line {
+        &::before {
+          animation: scrollDown 2s infinite ease;
+        }            
+      }          
+    }
+    .hero--scroll-line {
+      width: 2px;
+      height: 80px;          
+      position: absolute;
+      right: 0;
+      bottom: -30px;
+      overflow: hidden;
+      &::before {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 80px;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        bottom: 0;            
+      }          
+    }        
   }
 }
 
@@ -353,11 +489,11 @@
       right: 147px;
       top: 70%;
       width: 178px;
-      .background {
-        
-      }
-      span {
-        
+      i {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
       }
     }
   }
@@ -489,6 +625,12 @@
         }
         .btn-skew {
           width: 175px;
+          i {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          }
         }
       }
     }
@@ -595,9 +737,10 @@
       justify-content: center;
       align-items: center; 
       z-index: 3;
-      transition: all 250ms ease;
+      transition: all 300ms ease;
+      border: none;
       &.swiper-button-disabled {
-        opacity: 0.3;
+        opacity: 0;
         .icon {
           fill: $white;
         }
