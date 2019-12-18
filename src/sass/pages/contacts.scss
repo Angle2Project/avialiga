@@ -1,0 +1,47 @@
+.contact {
+    margin: 40px 0 157px;
+    color: #2f2f2f;
+    a {
+        color: #ee412a;
+    }
+}
+.contact__inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+#map {
+    display: block;
+    height: 604px;
+    width: 50%;
+}
+.contact__descr {
+    padding-top: 75px;
+    padding-left: 100px;
+}
+.contact__list {
+    margin-top: 48px;
+    padding-left: 93px;
+    font-family: "Futura";
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.25;
+    letter-spacing: 1.2px;
+    color: #2f2f2f;
+    li {
+        margin-top: 32px;
+    }
+    h6 {
+        font-size: 16px;
+        line-height: 1.8em;
+        letter-spacing: 0.8px;
+        font-weight: normal;
+    }
+    address {
+        font-style: normal;
+    }
+}
+.contact__title {
+    font: normal 72px/0.83 "Futura";
+    letter-spacing: -0.72px;
+    color: #2f2f2f;
+}

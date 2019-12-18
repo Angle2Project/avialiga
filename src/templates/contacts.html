@@ -1,0 +1,85 @@
+---
+title: Contacts
+class: catalog hotels
+---
+
+{% extends "layouts/_layout.html" %} {% block content %}
+
+<!-- <div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div> -->
+
+<!-- LOADER -->
+<!-- <div class="loader">
+			
+	</div> -->
+<!-- /LOADER -->
+
+<div class="catalog__title">
+  <div class="breadcrumb">
+    <a href="">MAIN</a>
+    <span>CONTACTS</span>
+  </div>
+</div>
+<div class="contact">
+  <div class="contact__inner">
+    <div class="contact__map" id="map"></div>
+    <div class="contact__descr">
+      <h2 class="contact__title">Contacts</h2>
+      <ul class="contact__list">
+        <li>ООО «АВИАЛИГА»</li>
+        <li>
+          <h6>Адрес:</h6>
+          <address>
+            ул. Павловская 29, 2 этаж <br />
+            Киев, Украина, 01135
+          </address>
+        </li>
+        <li>
+          <h6>Тел/Факс:</h6>
+          <a href="tel:+380443039553">+38-044-303-95-53</a>
+        </li>
+        <li>
+          <h6>E-mail:</h6>
+          <a href="mailto:hello@avialiga.ua">hello@avialiga.ua</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<article class="expert__form" data-aos="fade-up">
+  <div class="expert__form_title">
+    <h2>
+      <span>Your travel expert</span>
+    </h2>
+    <p>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    </p>
+  </div>
+  <div class="expert__form_body">
+    <form action="">
+      <div class="form">
+        <div class="form-control name">
+          <input type="text" placeholder="Your Name" />
+        </div>
+        <div class="form-control phone">
+          <input type="text" placeholder="Your Phone" />
+        </div>
+        <div class="form-control comment">
+          <textarea name="" placeholder="Your comment"></textarea>
+        </div>
+      </div>
+      <div class="form--submit">
+        <button class="btn-skew">
+          <div class="background"><i></i></div>
+          <span>Submit</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</article>
+
+{% endblock %}

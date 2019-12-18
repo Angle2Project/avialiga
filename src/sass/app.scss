@@ -1,364 +1,366 @@
 // done by riverco.de
-@import 'helpers/index';
-@import 'generated/sprite-svg';
-@import 'generated/index';
-@import 'base/index';
-@import 'lib/index';
-@import 'common';
-@import 'components/index';
-@import 'pages/index';
+@import "helpers/index";
+@import "generated/sprite-svg";
+@import "generated/index";
+@import "base/index";
+@import "lib/index";
+@import "common";
+@import "components/index";
+@import "pages/index";
+@import "pages/contacts";
 
 .cursor {
-  width: 70px;
-  height: 70px;  
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  pointer-events: none;
-  will-change: transform;
-  span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 1px solid $red;
-    position: absolute;
+    width: 70px;
+    height: 70px;
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: 100;
+    pointer-events: none;
     will-change: transform;
-  }
-  i {
-    display: block;    
-    will-change: transform;
-    position: absolute;    
-    &.circle {
-      width: 10px;
-      height: 10px;
-      background-color: $white;
-      border-radius: 50%;      
-      top: calc(50% - 5px);
-      left: calc(50% - 5px);
-    }
-    &.play {
-      width: 0;
-      height: 0;
-      border-top: 9px solid transparent;
-      border-left: 17px solid #fff;
-      border-bottom: 9px solid transparent;
-      top: calc(50% - 9px);
-      left: calc(50% - 8px);
-      transform: scale(0);
-    }
-    &.pause {
-      width: 12px;
-      height: 14px;
-      position: absolute;
-      top: calc(50% - 7px);
-      left: calc(50% - 6px);
-      transform: scale(0);
-      &::before {
-        content: "";
+    span {
         display: block;
-        width: 4px;
-        height: 14px;
-        background-color: #fff;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 1px solid $red;
         position: absolute;
         top: 0;
         left: 0;
-      }
-      &::after {
-        content: "";
-        display: block;
-        width: 4px;
-        height: 14px;
-        background-color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
-      }
+        will-change: transform;
     }
-  }
+    i {
+        display: block;
+        will-change: transform;
+        position: absolute;
+        &.circle {
+            width: 10px;
+            height: 10px;
+            background-color: $white;
+            border-radius: 50%;
+            top: calc(50% - 5px);
+            left: calc(50% - 5px);
+        }
+        &.play {
+            width: 0;
+            height: 0;
+            border-top: 9px solid transparent;
+            border-left: 17px solid #fff;
+            border-bottom: 9px solid transparent;
+            top: calc(50% - 9px);
+            left: calc(50% - 8px);
+            transform: scale(0);
+        }
+        &.pause {
+            width: 12px;
+            height: 14px;
+            position: absolute;
+            top: calc(50% - 7px);
+            left: calc(50% - 6px);
+            transform: scale(0);
+            &::before {
+                content: "";
+                display: block;
+                width: 4px;
+                height: 14px;
+                background-color: #fff;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            &::after {
+                content: "";
+                display: block;
+                width: 4px;
+                height: 14px;
+                background-color: #fff;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+    }
 }
 
 .button-circle {
-  width: 100px;
-  height: 100px;
-  color: $white;
-  font: 300 16px/1 $futura;
-  letter-spacing: -1px;
-  text-transform: uppercase;
-  .icon {    
-    position: absolute;
-    z-index: 1;
-  }  
-  &.play {
-    .icon {
-      width: 17px;
-      height: 18px;
-      fill: $red;      
-      top: 50%;
-      left: 50%;
-      transform: translate(-40%, -50%);    
-    }    
-  }
-  &.close {
-    .icon {
-      width: 16px;
-      height: 16px;
-      fill: $red;      
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);    
-    }    
-  }
-  &.more {
-    color: $red;    
-  }
-  &.drag {
-    .icon {
-      width: 58px;  
-      height: 24px;    
-      fill: $red;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);    
-    }    
-    i {
-      background-color: $white;      
-    }
-  }
-  i {    
-    display: block;
     width: 100px;
     height: 100px;
-    background-color: $red;
-    border-radius: 50%;    
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);    
-  }
-  &:hover {
+    color: $white;
+    font: 300 16px/1 $futura;
+    letter-spacing: -1px;
+    text-transform: uppercase;
     .icon {
-      fill: #fff;
+        position: absolute;
+        z-index: 1;
     }
-    &::after {      
-      transform: translate(-50%, -50%) scale(1);      
+    &.play {
+        .icon {
+            width: 17px;
+            height: 18px;
+            fill: $red;
+            top: 50%;
+            left: 50%;
+            transform: translate(-40%, -50%);
+        }
+    }
+    &.close {
+        .icon {
+            width: 16px;
+            height: 16px;
+            fill: $red;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    &.more {
+        color: $red;
     }
     &.drag {
-      .icon {
-        fill: $red;
-      }
+        .icon {
+            width: 58px;
+            height: 24px;
+            fill: $red;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        i {
+            background-color: $white;
+        }
     }
-  }
-  .text,
-  .hover {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform-origin: center;
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
-    user-select: none;
-    animation: buttonText 15s infinite linear;
-    .top {
-      div {
-        transform-origin: 0 100%;
-        position: absolute!important;
-        bottom: 50%;
-        left: 50%;        
-        width: 12px;
-        text-align: center;
-      }    
-    }    
-    .bot {
-      div {
-        transform-origin: 0 100%;
-        position: absolute!important;
-        bottom: 50%;
-        left: 50%;        
-        width: 12px;
-        text-align: center;     
-      }    
-    }    
-  }
-  .hover {
-    opacity: 0;
-  }
-
-  &.drag {
-    &:active {
-      .text {
+    i {
+        display: block;
+        width: 100px;
+        height: 100px;
+        background-color: $red;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    &:hover {
+        .icon {
+            fill: #fff;
+        }
+        &::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        &.drag {
+            .icon {
+                fill: $red;
+            }
+        }
+    }
+    .text,
+    .hover {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform-origin: center;
+        -webkit-user-select: none; /* Chrome all / Safari all */
+        -moz-user-select: none; /* Firefox all */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none;
+        animation: buttonText 15s infinite linear;
+        .top {
+            div {
+                transform-origin: 0 100%;
+                position: absolute !important;
+                bottom: 50%;
+                left: 50%;
+                width: 12px;
+                text-align: center;
+            }
+        }
+        .bot {
+            div {
+                transform-origin: 0 100%;
+                position: absolute !important;
+                bottom: 50%;
+                left: 50%;
+                width: 12px;
+                text-align: center;
+            }
+        }
+    }
+    .hover {
         opacity: 0;
-      }
-      .hover {
-        opacity: 1;
-      }
     }
-  }
+
+    &.drag {
+        &:active {
+            .text {
+                opacity: 0;
+            }
+            .hover {
+                opacity: 1;
+            }
+        }
+    }
 }
 
 @keyframes buttonText {
-  from {transform: rotate(0deg);}  
-  to {transform: rotate(360deg);}
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-
 .swiper-wrapper {
-  transition-timing-function: cubic-bezier(0.57, 0.01, 0.48, 0.99);
-  
+    transition-timing-function: cubic-bezier(0.57, 0.01, 0.48, 0.99);
 }
 
 .custom-checkbox {
-  display: inline-block;
-  position: relative;
-  padding-left: 33px;
-  input[type="checkbox"] {
-    position: absolute;
-    visibility: hidden;
-    top: 0;
-    left: 0;
-  }
-  input[type="checkbox"] + span {
-    font: 16px/1 'Futura';
-    color: $black;
-    text-transform: uppercase;
-    &::before {
-      content: "";
-      display: block;
-      width: 20px;
-      height: 20px;
-      border: 1px solid #d3e7e1;
-      position: absolute;
-      top: -2px;
-      left: 0;
+    display: inline-block;
+    position: relative;
+    padding-left: 33px;
+    input[type="checkbox"] {
+        position: absolute;
+        visibility: hidden;
+        top: 0;
+        left: 0;
     }
-    &::after {
-      content: "";
-      display: block;
-      width: 20px;
-      height: 20px;
-      border: 1px solid #d3e7e1;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: transform 250ms ease;
-      transform: scale(0);
-      background: url('../img/icon_check.svg') no-repeat center 4px;
+    input[type="checkbox"] + span {
+        font: 16px/1 "Futura";
+        color: $black;
+        text-transform: uppercase;
+        &::before {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #d3e7e1;
+            position: absolute;
+            top: -2px;
+            left: 0;
+        }
+        &::after {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #d3e7e1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 250ms ease;
+            transform: scale(0);
+            background: url("../img/icon_check.svg") no-repeat center 4px;
+        }
     }
-  }
-  input[type="checkbox"]:checked + span {
-    &::after {
-      transform: scale(1);
+    input[type="checkbox"]:checked + span {
+        &::after {
+            transform: scale(1);
+        }
     }
-  }
 }
 .btn-skew {
-  height: 60px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  //will-change: transform;
-  padding: 0 20px;
-  .background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    background-color: $red;
-    transform: skewX(-34deg);
-    //backface-visibility: hidden;
-    i {
-      display: block;    
-      position: absolute;
-      bottom: 1px;
-      left: 1px;
-      right: 1px;
-      top: 1px;
-      z-index: 0;
-      background-color: $white;    
-      transform-origin: bottom;
-      transform: scaleY(0);
-      //backface-visibility: hidden;
-    }  
-  }
-  span {
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    z-index: 1;
-    color: $white;
-    font-family: "Futura";
-    font-size: 16px;
-    text-transform: uppercase;    
-    //backface-visibility: hidden;
-  }  
+    //will-change: transform;
+    padding: 0 20px;
+    .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        background-color: $red;
+        transform: skewX(-34deg);
+        //backface-visibility: hidden;
+        i {
+            display: block;
+            position: absolute;
+            bottom: 1px;
+            left: 1px;
+            right: 1px;
+            top: 1px;
+            z-index: 0;
+            background-color: $white;
+            transform-origin: bottom;
+            transform: scaleY(0);
+            //backface-visibility: hidden;
+        }
+    }
+    span {
+        position: relative;
+        z-index: 1;
+        color: $white;
+        font-family: "Futura";
+        font-size: 16px;
+        text-transform: uppercase;
+        //backface-visibility: hidden;
+    }
 }
 
 .expert__form {
-  margin: 130px 90px 0 90px;
-  display: flex;
-  justify-content: space-between;
-  .expert__form_title {
-    margin-right: 100px;
-    h2 {
-      font: normal 72px/60px $futura;
-      color: $black;
-      perspective: 400px;
-      span {
-        display: inline-block;
-        transform-origin: bottom;
-      }
-    }
-    p {
-      margin: 40px 0 0 90px;
-      font: 300 18px/30px $futura;
-    }
-  }
-  .expert__form_body {
-    width: 56%;
-    flex-shrink: 0;
-    .form {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      .form-control {
-        input,
-        textarea {
-          font: normal 14px/18px $futura;
-        }          
-        &.name,
-        &.phone {
-          width: calc(50% - 22px);
-        }
-        &.comment {
-          width: 100%;
-          height: initial;
-          line-height: 1;
-          textarea {
-            height: 70px;
-            padding: 28px 0 0 0;
-            font-size: 14px;
-            transition: all 250ms ease;
-            &:focus {
-              height: 90px;
+    margin: 130px 90px 0 90px;
+    display: flex;
+    justify-content: space-between;
+    .expert__form_title {
+        margin-right: 100px;
+        h2 {
+            font: normal 72px/60px $futura;
+            color: $black;
+            perspective: 400px;
+            span {
+                display: inline-block;
+                transform-origin: bottom;
             }
-          }
         }
-      }           
+        p {
+            margin: 40px 0 0 90px;
+            font: 300 18px/30px $futura;
+        }
     }
-    .form--submit {        
-      margin-top: 35px;
-      text-align: center;
-      button {
-        width: 320px;          
-      }
-    }     
-  }
+    .expert__form_body {
+        width: 56%;
+        flex-shrink: 0;
+        .form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .form-control {
+                input,
+                textarea {
+                    font: normal 14px/18px $futura;
+                }
+                &.name,
+                &.phone {
+                    width: calc(50% - 22px);
+                }
+                &.comment {
+                    width: 100%;
+                    height: initial;
+                    line-height: 1;
+                    textarea {
+                        height: 70px;
+                        padding: 28px 0 0 0;
+                        font-size: 14px;
+                        transition: all 250ms ease;
+                        &:focus {
+                            height: 90px;
+                        }
+                    }
+                }
+            }
+        }
+        .form--submit {
+            margin-top: 35px;
+            text-align: center;
+            button {
+                width: 320px;
+            }
+        }
+    }
 }
-

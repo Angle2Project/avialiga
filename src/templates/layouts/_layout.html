@@ -1,33 +1,26 @@
 {% import "partials/_mixins.html" as mixins %}
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>{% if title %}{{ title }}{% else %}Template{% endif %}</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
-    <meta name="theme-color" content="#fff"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <link rel="stylesheet" media="all" href="css/app.css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"
+    />
+    <meta name="theme-color" content="#fff" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" media="all" href="css/app.css" />
     {# {% include "../partials/_media-tags.html" %} #}
-
-    
   </head>
   <body class="{{class}}">
-
-    
-
-    <!-- BEGIN content -->    
+    <!-- BEGIN content -->
     <main>
-      {% include "partials/_header.html" %}
-
-      {% block content %}{% endblock %}
-
-      {% include "partials/_footer.html" %}
-    </main>    
+      {% include "partials/_header.html" %} {% block content %}{% endblock %} {%
+      include "partials/_footer.html" %}
+    </main>
     <!-- END content -->
-
-    
 
     <!-- BEGIN scripts -->
     <!-- <script type="text/javascript" src="js/lib/pixi-legacy.min.js"></script>
@@ -38,9 +31,13 @@
 
     <script type="text/javascript" src="js/lib/TweenMax.min.js"></script>
     <script type="text/javascript" src="js/lib/MorphSVGPlugin.min.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe4WeeWQ8_mWVwzL0Z9j3S4MpM6Of17wo&callback=initMap"
+      async
+      defer
+    ></script>
     <script type="text/javascript" src="js/app.js"></script>
-    
-    <!-- END scripts -->
 
+    <!-- END scripts -->
   </body>
 </html>
