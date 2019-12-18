@@ -1215,6 +1215,7 @@ header .header__nav .header__nav_link .submenu {
   left: 0;
   top: 130px;
   padding: 60px 90px 30px 90px;
+  overflow: visible;
 }
 
 header .header__nav .header__nav_link .submenu::before {
@@ -4330,6 +4331,14 @@ footer .footer__copyright img {
   color: #ffffff;
 }
 
+.business .expert__form .expert__form_title h2 {
+  color: #bebccd;
+}
+
+.business .cursor i.circle {
+  background-color: #ee412a;
+}
+
 .business__select {
   background-color: #bebccd;
   padding: 120px 0;
@@ -4361,6 +4370,15 @@ footer .footer__copyright img {
   -ms-flex-positive: 1;
   flex-grow: 1;
   padding-right: 90px;
+  -webkit-perspective: 500px;
+  perspective: 500px;
+}
+
+.business__select_description h2 span {
+  display: inline-block;
+  -webkit-transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  transform-origin: bottom;
 }
 
 .business__select_description .description--text {
@@ -4395,6 +4413,21 @@ footer .footer__copyright img {
   position: absolute;
   top: 0;
   left: 90px;
+}
+
+.business__select_slider .thank {
+  display: none;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.business__select_slider .thank h2 {
+  font: 300 72px/1.4 "Futura";
+  color: #576f81;
 }
 
 .custom-select {

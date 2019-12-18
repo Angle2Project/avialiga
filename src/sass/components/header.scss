@@ -91,7 +91,8 @@ header {
         width: 100%;                
         left: 0;
         top: 130px;
-        padding: 60px 90px 30px 90px;        
+        padding: 60px 90px 30px 90px;
+        overflow: visible;
         &::before {
           content: "";
           display: block;
