@@ -1,6 +1,8 @@
 .business {
+  font-family: 'Futura';
   .homepage__tabs {
     background-color: #bebccd;
+    min-height: calc(var(--vh, 1vh) * 100);
     .homepage__tabs_disk {
       .disk--text {
         color: $white;

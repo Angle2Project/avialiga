@@ -27,15 +27,7 @@
       bottom: 0;
       left: 0;
       z-index: 0;
-    }
-    .breadcrumb {
-      top: 130px;
-      position: absolute;
-      color: $white;
-      a {
-        color: currentColor;
-      }
-    }
+    }    
     .leisure__hero_backgrounds {
       display: none;
     }
@@ -979,5 +971,13 @@
         }
       }
     }
+  }
+}
+.breadcrumb {
+  top: 130px;
+  position: absolute;
+  color: $white;
+  a {
+    color: currentColor;
   }
 }

@@ -3095,16 +3095,6 @@ footer .footer__copyright img {
   z-index: 0;
 }
 
-.leisure .leisure__hero .breadcrumb {
-  top: 130px;
-  position: absolute;
-  color: #ffffff;
-}
-
-.leisure .leisure__hero .breadcrumb a {
-  color: currentColor;
-}
-
 .leisure .leisure__hero .leisure__hero_backgrounds {
   display: none;
 }
@@ -4323,8 +4313,23 @@ footer .footer__copyright img {
   transform-origin: right;
 }
 
+.breadcrumb {
+  top: 130px;
+  position: absolute;
+  color: #ffffff;
+}
+
+.breadcrumb a {
+  color: currentColor;
+}
+
+.business {
+  font-family: 'Futura';
+}
+
 .business .homepage__tabs {
   background-color: #bebccd;
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 
 .business .homepage__tabs .homepage__tabs_disk .disk--text {
