@@ -32,7 +32,7 @@ header {
     width: 95px;
     height: 50px;
     margin-right: 65px;
-    background: url('../img/logo_avialiga-w.svg') no-repeat center / cover;
+    //background: url('../img/logo_avialiga-w.svg') no-repeat center / cover;
     position: relative;
     z-index: 1;    
     a {
@@ -91,7 +91,8 @@ header {
         width: 100%;                
         left: 0;
         top: 130px;
-        padding: 60px 90px 30px 90px;        
+        padding: 60px 90px 30px 90px;
+        overflow: visible;
         &::before {
           content: "";
           display: block;
@@ -295,7 +296,7 @@ header {
     }
   }
 }
-.catalog header {
+.h-black header {
   a {
     color: #5ac0b0;
   }

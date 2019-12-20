@@ -1,6 +1,6 @@
 ---
 title: Index page,
-class: catalog hotels
+class: catalog hotels h-black
 ---
 {% extends "layouts/_layout.html" %}
 
@@ -158,7 +158,7 @@ class: catalog hotels
 			<li {%if i.sell%}class="sell"{%endif%}>
 				<div class="grid--photo">
 					<a href="">
-						<img src="./img/hotels/{{loop.index}}.jpg" alt="">
+						<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
 					</a>
 				</div>
 				<div class="grid--location">{{i.location}}</div>

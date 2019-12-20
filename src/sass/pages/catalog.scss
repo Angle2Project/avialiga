@@ -148,6 +148,7 @@
         margin-top: 20px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         .date {
           font-size: 16px;
         }
@@ -156,16 +157,16 @@
         }
       }
     }
-  }
-  .catalog__list_more {
-    margin-top: 130px;
-    margin-bottom: -30px;
-    border-top: 1px solid #a3d6cc;
-    text-align: center;    
-    .btn-skew {
-      width: 180px;
-      transform: translateY(-50%);
-    }
   }  
+}
+.catalog__list_more {
+  margin-top: 130px;
+  margin-bottom: -30px;
+  border-top: 1px solid #a3d6cc;
+  text-align: center;    
+  .btn-skew {
+    width: 180px;
+    transform: translateY(-50%);
+  }
 }
 

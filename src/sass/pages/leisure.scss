@@ -1,90 +1,18 @@
 .leisure {
   font-family: 'Futura';
-  overflow: visible;
-  .loader {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    ul {      
-      width: 100%;
-      height: 100%;      
-      will-change: transform;
-      background-color: #fff;
-      li {
-        width: 0%;
-        height: 16.6667%;
-        overflow: hidden;
-        position: absolute;
-        &:nth-child(odd) {
-          div {
-            background-position: center 0;
-            left: 0;
-          }
-          left: 0;          
-        }
-        &:nth-child(even) {          
-          right: 0;
-          div {
-            right: 0;
-            background-position: center 100%;
-          }            
-        }
-        &:nth-child(2) {
-          top: 16.6667%;
-        }
-        &:nth-child(3) {
-          top: calc(16.6667% * 2);
-        }
-        &:nth-child(4) {
-          top: calc(16.6667% * 3);
-        }
-        &:nth-child(5) {
-          top: calc(16.6667% * 4);
-        }
-        &:nth-child(6) {
-          top: calc(16.6667% * 5);
-        }
-        div {          
-          position: absolute;
-          top: 0px;
-          width: 100vw;
-          height: 100%;          
-          background-image: url('../img/preloader_leis.png');
-          background-repeat: repeat;
-          background-size: auto 200%;
-          background-position: center 0;
-        }
-      }
-      &.fill {
-        background-color: transparent;
-        li {
-          &:nth-child(odd) {
-            left: auto;
-            right: 0;
-            div {              
-              left: auto;
-              right: 0;
-            }            
-          }
-          &:nth-child(even) {          
-            right: auto;
-            left: 0;
-            div {
-              right: auto;
-              left: 0;
-            }            
-          }
-        }
+  overflow: hidden;  
+  .cursor {
+    i {
+      &.circle {
+        background-color: $red;
       }
     }
   }
   .leisure__hero {
-    min-height: calc(var(--vh, 1vh) * 100);;
+    min-height: calc(var(--vh, 1vh) * 100);
     position: relative;
     cursor: default;
+    line-height: 0;
     &::before {
       content: "";
       display: block;
@@ -112,6 +40,7 @@
       display: none;
     }
     h1 {
+      width: 55vw;
       font: normal 9.9vw/1 "Futura";
       color: #ffffff;
       position: absolute;
@@ -131,13 +60,13 @@
         transform-origin: bottom;
 
         &:nth-child(1) {
-          margin-left: 6vw;
+          margin-left: 0vw;
         }
         &:nth-child(2) {
-          margin-left: 0vw;
+          margin-left: 6vw;
         }        
         &.switch {
-          margin-left: -6vw;
+          margin-left: 6vw;
           display: none;
         }
       }
@@ -217,6 +146,219 @@
       }
     }
   }
+  .homepage__drag {
+    min-height: calc(var(--vh, 1vh) * 100);
+    background-color: #000;
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      background: rgb(0,0,0);
+      background: -moz-linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+      background: -webkit-linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#fdffff",GradientType=1);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+    }
+    canvas {      
+      position: absolute;
+      top: 0;
+      left: 0;
+      &.left {
+        transform-origin: top;
+      }
+      &.right {
+        transform-origin: bottom;
+      }
+    }
+    .wrapper {
+      display: flex;      
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;      
+    }
+    h2 {
+      color: $white;
+      font: normal 72px/60px "Futura";
+      text-transform: uppercase;      
+      position: static;
+      text-align: center;
+      position: absolute;
+      top: auto;
+      bottom: calc(50% + 140px);
+      width: 100%;
+      transform: translateY(50%);
+      span {
+        display: inline-block;
+        transform-origin: bottom;
+      }
+    }    
+    .btn-skew {      
+      width: 175px;
+      z-index: 3;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      i {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+  .homepage__insta {
+    margin-top: 157px;
+    section.business {
+      .homepage__insta_title {
+        h2 {
+          color: $green;
+        }
+      }
+    }
+  }
+  .expert__form {
+    .expert__form_title {
+      h2 {
+        color: $green;
+      }
+    }
+  }
+}
+
+.leisure__hero {
+  min-height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+  cursor: default;
+  line-height: 0;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background: rgb(0,0,0);
+    background: -moz-linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.3029586834733894) 0%, rgba(253,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#fdffff",GradientType=1);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+  }
+  .breadcrumb {
+    top: 130px;
+    position: absolute;
+    color: $white;
+    a {
+      color: currentColor;
+    }
+  }
+  .leisure__hero_backgrounds {
+    display: none;
+  }
+  h1 {
+    width: 55vw;
+    font: normal 9.9vw/1 "Futura";
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    perspective: 1000px;
+    perspective-origin: 20% 100%;
+    will-change: transform;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+    span {
+      display: block;
+      white-space: nowrap;
+      transform-origin: bottom;
+
+      &:nth-child(1) {
+        margin-left: 0vw;
+      }
+      &:nth-child(2) {
+        margin-left: 6vw;
+      }        
+      &.switch {
+        margin-left: 6vw;
+        display: none;
+      }
+    }
+  }
+  .leisure__hero_pagination {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: $white;
+    position: absolute;
+    bottom: 85px;
+    left: 85px;
+    .pagination--bar {
+      margin-left: 15px;
+      width: 270px;
+      height: 1px;
+      background-color: $white;
+      i {
+        display: block;
+        height: 1px;
+        background-color: $red;
+        width: 33.333333333%;
+      }
+    }
+  }
+  @keyframes scrollDown {
+    from {
+      transform: translateY(-100%);
+    }
+    50% {
+      transform: translateY(0%);
+    }  
+    to {
+      transform: translateY(100%);
+    }
+  }
+  .hero--scroll {
+    position: relative;      
+    position: absolute;      
+    right: 85px;
+    bottom: 85px;
+    padding-right: 20px;
+    color: $white;
+    &.animation {
+      .hero--scroll-line {
+        &::before {
+          animation: scrollDown 2s infinite ease;
+        }            
+      }          
+    }
+    .hero--scroll-line {
+      width: 2px;
+      height: 80px;          
+      position: absolute;
+      right: 0;
+      bottom: -30px;
+      overflow: hidden;
+      &::before {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 80px;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        bottom: 0;            
+      }          
+    }        
+  }
 }
 
 .tour-types {
@@ -225,6 +367,7 @@
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+  will-change: transform;
   &::before {
     content: "";
     display: block;
@@ -305,7 +448,7 @@
       width: 100%;
       height: 100%;
       position: relative;
-      overflow: hidden;
+      overflow: hidden;      
     }
     h2 {
       position: absolute;
@@ -314,7 +457,11 @@
       transform: translateY(-50%) skewX(34deg);
       z-index: 3;
       font: 5.08vw/1 "Futura";
-      color: $white;      
+      color: $white;
+      a {
+        display: inline-block;
+        perspective: 500px;
+      }
       span {
         display: inline-block;
         position: relative;
@@ -342,11 +489,11 @@
       right: 147px;
       top: 70%;
       width: 178px;
-      .background {
-        
-      }
-      span {
-        
+      i {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
       }
     }
   }
@@ -478,6 +625,12 @@
         }
         .btn-skew {
           width: 175px;
+          i {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          }
         }
       }
     }
@@ -547,7 +700,26 @@
     }
   }
 }
-.catalog__slider {
+.catalog__slider {  
+  min-height: calc(var(--vh, 1vh) * 100);
+  padding: 100px 0;
+  &.tours {
+    background-color: #d7ebe6;
+  }
+  &.hotels {
+    background-color: #f9d4e4;
+  }
+  h2 {
+    font: normal 72px/60px "Futura";
+    color: #5ac0b0;
+    perspective: 400px;
+    margin-bottom: 50px;
+    margin-left: 90px;
+    span {
+      display: inline-block;      
+      transform-origin: bottom;
+    }
+  }
   .swiper-container {
     padding: 0 90px;
     position: relative;
@@ -565,9 +737,10 @@
       justify-content: center;
       align-items: center; 
       z-index: 3;
-      transition: all 250ms ease;
+      transition: all 300ms ease;
+      border: none;
       &.swiper-button-disabled {
-        opacity: 0.3;
+        opacity: 0;
         .icon {
           fill: $white;
         }
@@ -579,7 +752,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: $green;
+        background-color: $white;
         transform: scale(0);            
         border-radius: 50%;
       }          
@@ -591,13 +764,13 @@
       }
     }
     .slider-button-prev {      
-      left: 0;
+      left: 5px;
       .icon {
         transform: rotate(90deg);
       }
     }
     .slider-button-next {      
-      right: 0;
+      right: 5px;
       .icon {
         transform: rotate(-90deg);
       }
@@ -647,13 +820,163 @@
     }
     .grid--info {
       margin-top: 20px;
+      margin-bottom: 1vw;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       .date {
         font-size: 16px;
       }
       .price {
         font-size: 24px;
+      }
+    }
+  }
+  .catalog__list_more {    
+    margin-top: calc(100px - 1vw);
+    margin-right: 90px;
+    margin-bottom: -30px;
+    margin-left: 90px;
+    border-top: 1px solid #a3d6cc;
+    text-align: center;    
+    .btn-skew {
+      width: 180px;
+      transform: translateY(-50%);
+    }
+  }  
+}
+.leisure__calendar {
+  min-height: calc(var(--vh, 1vh) * 100);
+  background-color: #d7ebe6;
+  display: flex;
+  align-items: center;
+  position: relative;
+  .wrapper {
+    width: 50%;
+    padding-left: 90px;
+    h2 {
+      font: normal 72px/60px "Futura";
+      color: #5ac0b0;    
+      perspective: 400px;
+      margin-bottom: 50px;      
+      text-transform: uppercase;
+      perspective: 500px;
+      span {
+        display: inline-block;
+        transform-origin: bottom;
+      }
+    }
+    .leisure__calendar_text {
+      font: 300 18px/30px "Futura";
+      padding-left: 90px;
+      padding-right: 90px;  
+    }
+    .btn-skew {
+      width: 175px;
+      margin-top: 35px;
+      margin-left: 110px;    
+    }
+  }
+  .leisure__calendar_bg {
+    position: absolute;
+    width: 50%;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    &>img {
+      width: 100%;
+    }
+    .date {      
+      position: absolute;
+      overflow: hidden;
+      will-change: transform;
+      &::before {
+        content: "";
+        display: block;
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2.4vw;
+        height: 2.2vw;
+        z-index: 2;
+      }
+      img {
+        width: 180%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: -40%;
+        object-fit: cover;
+      }
+      span {
+        display: flex;
+        justify-content: center;  
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2.4vw;
+        height: 2.2vw;
+        font: 500 1.27vw/1 "Futura";
+        color: $green;
+        z-index: 3;
+      }
+      i {
+        display: block;
+        position: absolute;
+        background-color: $white;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+      }
+      &.date-3 {        
+        top: -0.4vw;
+        left: 26.39vw;
+        width: 10.8vw;
+        height: 11.94vw;
+        transform: skewX(-35.2deg);
+        img {          
+          transform: skewX(35.2deg);
+        }
+        span {          
+          transform: skewX(35.2deg);
+        }
+        i {
+          transform-origin: right;
+        }
+      }
+      &.date-8 {        
+        top: 11vw;
+        left: 3.75vw;
+        width: 11vw;
+        height: 11.94vw;        
+        transform: skewX(35.2deg);
+        img {          
+          transform: skewX(-35.2deg);
+        }
+        span {          
+          transform: skewX(-35.2deg);
+        }
+        i {
+          transform-origin: left;
+        }
+      }
+      &.date-17 {    
+        top: 22.3vw;
+        left: 26.1vw;
+        width: 10.8vw;
+        height: 11.94vw;
+        transform: skewX(-35.2deg);
+        img {          
+          transform: skewX(35.2deg);
+        }
+        span {          
+          transform: skewX(35.2deg);
+        }
+        i {
+          transform-origin: right;
+        }
       }
     }
   }

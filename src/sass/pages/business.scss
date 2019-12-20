@@ -1,0 +1,181 @@
+.business {
+  font-family: 'Futura';
+  .homepage__tabs {
+    background-color: #bebccd;
+    min-height: calc(var(--vh, 1vh) * 100);
+    .homepage__tabs_disk {
+      .disk--text {
+        color: $white;
+      }
+    }
+  }
+  .expert__form {
+    .expert__form_title {
+      h2 {
+        color: #bebccd;
+      }  
+    }
+  }
+  .cursor {
+    i.circle {
+      background-color: $red;
+    }
+  }
+}
+.business__select {
+  background-color: #bebccd;
+  padding: 120px 0;
+  .btn-skew {
+    margin: 25px auto 0 auto;
+    width: 175px;
+    display: flex;
+  }
+}
+.business__select_description {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 90px;
+  h2 {
+    font: normal 72px/60px "Futura";
+    color: $white;
+    width: 50%;
+    flex-grow: 1;
+    padding-right: 90px;
+    perspective: 500px;
+    span {
+      display: inline-block;
+      transform-origin: bottom;
+    }
+  }
+  .description--text {
+    width: 50%;
+    flex-grow: 1;
+    font: 300 18px/30px "Futura";
+    color: $black;
+  }
+}
+.business__select_slider {
+  margin-top: 70px;
+  padding: 0 180px;
+  position: relative;
+  z-index: 1;
+  .slide {
+    display: none;
+  }
+  .question {
+    font: 300 36px/1.4 "Futura";
+    color: $black;
+    margin-bottom: 20px;
+  }
+  .pagination {
+    font: 300 36px/1.4 "Futura";
+    color: $black;
+    position: absolute;
+    top: 0;
+    left: 90px;
+  }
+  .thank {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    h2 {
+      font: 300 72px/1.4 "Futura";
+      color: #576f81;
+    }
+  }
+}
+
+.custom-select {
+  position: relative;
+  box-shadow: 0 0 11px 0px rgba(190, 188, 205, 0.3);
+  z-index: 3;
+  .select--label {
+    display: flex;
+    height: 100px;
+    align-items: center;
+    padding: 0 80px 0 40px;
+    transition: background-color 300ms ease;
+    font: 300 36px/1 "Futura";
+    color: #576f81;
+    background-color: $white;
+    position: relative;
+    z-index: 2;
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    i {
+      position: absolute;
+      right: 40px;
+      top: calc(50% - 6px); 
+      height: 12px;
+      transition: transform 600ms ease;
+      .icon {
+        width: 24px;
+        height: 12px;
+        display: block;
+        fill: $red;
+        transition: fill 300ms ease;
+      }
+    }
+    &:hover {      background-color: #d7ebe7;
+      
+      .icon {
+        fill: #576f81;
+      }
+    }
+  }
+  &.active {
+    i {
+      transform: scale(-1);
+    }
+  }
+  .select--options {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    background-color: $white;
+    z-index: 1;
+    box-shadow: 0 0 11px 0px rgba(190, 188, 205, 0.3);
+    font: 300 36px/1 "Futura";
+    overflow: hidden;
+    li {      
+      padding: 0px 40px;
+      transition: background-color 300ms ease;
+      &:hover {
+        background-color: #d7ebe7;
+        .custom-radio {
+          input[type="radio"]:checked + span {
+            &::before {              
+              border-color: #576f81;
+            }
+            &::after {              
+              background-image: url('../img/icon_radio-black.svg');
+            }
+          }
+        }
+      }
+    }
+  }
+  .custom-radio {
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    span {
+      color: #576f81;
+      &::before {
+        top: calc(50% - 10px);
+        transition: border-color 300ms ease;
+      }
+      &::after {
+        top: calc(50% - 11px);
+        transition: background-image 300ms ease;        
+      }
+    }
+  }
+}

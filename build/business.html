@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" media="all" href="css/app.css" />
   </head>
-  <body class="homepage h-white">
+  <body class="business h-white">
     <!-- BEGIN content -->
     <main>
       <header>
@@ -195,7 +195,6 @@
       </div>
       <!-- LOADER -->
       <div class="loader">
-        <!-- <div class="progress">0%</div> -->
         <div class="loader-logo">
           <svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">
             <path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z" />
@@ -207,307 +206,40 @@
         <div class="blind-right"></div>
       </div>
       <!-- /LOADER -->
-      <article class="homepage__hero" data-background="./img/home.mp4" data-displacement="./img/displacement.png">
-        <video class="hero--bg" src="" autoplay muted loop></video>
-        <div class="wrapper">
-          <div class="button-circle play" data-action="homepage-hero-play" data-text="play video">
-            <svg class="icon icon-icon_play">
-              <use xlink:href="img/sprite.svg#icon-icon_play"></use>
-            </svg>
+      <article class="leisure__hero">
+        <div class="breadcrumb">
+          <a href="">MAIN</a>
+          <span>BUSINESS</span>
+        </div>
+        <div class="leisure__hero_backgrounds">
+          <img data-src="./img/leisure-hero-3.jpg" alt="">
+          <img data-src="./img/leisure-hero-2.jpg" alt="">
+          <img data-src="./img/leisure-hero-1.png" alt="">
+        </div>
+        <h1>
+          <span>Focus on</span>
+          <span class="switch" data-slide="1">your family</span>
+          <span class="switch" data-slide="2">your friends</span>
+          <span class="switch" data-slide="3">your yourself</span>
+        </h1>
+        <div class="leisure__hero_pagination">
+          <div class="pagination--slide">
+            <span class="current"></span> / <span class="all"></span>
           </div>
-          <h1>
-            <span>Focus</span>
-            <span>on your</span>
-            <span>important</span>
-            <span>things</span>
-          </h1>
-          <div class="homepage__hero_footer">
-            <div class="hero--social">
-              <a href="">Instagram</a>
-              <a href="">Facebook</a>
-            </div>
-            <div class="hero--scroll animation">
-              <span>Sroll Down</span>
-              <div class="hero--scroll-line"></div>
-            </div>
+          <div class="pagination--bar">
+            <i></i>
           </div>
         </div>
-        <div class="hero--player">
-          <video data-src="./img/installation-video.mp4" playsinline></video>
-          <div class="player--controls">
-            <div class="controls--time">
-              <span data-time="current">00:00</span>
-              <i>/</i>
-              <span data-time="all">00:00</span>
-            </div>
-            <div class="controls--bar">
-              <i></i>
-            </div>
-          </div>
-          <div class="button-circle close" data-action="homepage-close-video" data-text="close video">
-            <svg class="icon icon-icon_close">
-              <use xlink:href="img/sprite.svg#icon-icon_close"></use>
-            </svg>
-          </div>
+        <div class="hero--scroll animation">
+          <span>Sroll Down</span>
+          <div class="hero--scroll-line"></div>
         </div>
       </article>
-      <article class="homepage__description">
-        <svg version="1.1" class="homepage__description_bg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">
-          <path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z" />
-          <path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z" />
-        </svg>
-        <p>Specializes in organizing events, group trips and individual tours. While you are developing your business and concentrating on the tasks that are important to you, Avialiga takes care of all the arrangements for the tour.</p>
-      </article>
-      <article class="homepage__drag" data-aos="fade-up" data-img-left="./img/hone-leisure.jpg" data-img-right="./img/home-business.jpg" data-pat-left="./img/pat1.png" data-pat-right="./img/pat2.png">
-        <div class="blind-left"></div>
-        <div class="blind-right"></div>
-        <div class="wrapper">
-          <div class="button-circle drag" data-action="homepage-drag" data-text="learn more" data-hover="drag my">
-            <svg class="icon icon-icon_arrows">
-              <use xlink:href="img/sprite.svg#icon-icon_arrows"></use>
-            </svg>
-          </div>
-          <div class="homepage__drag_dots">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-          <h2 class="leisure">
-            <a href="" data-target="leisure">Leisure</a>
-          </h2>
-          <h2 class="or">
-            <span>or</span>
-          </h2>
-          <h2 class="business">
-            <a href="" data-target="business">Business</a>
-          </h2>
-        </div>
-      </article>
-      <article class="homepage__feedback">
-        <section class="homepage__feedback_slider leisure" data-aos="fade-up">
-          <h2>
-            <span>Leisure Feedback</span>
-          </h2>
-          <!-- Slider main container -->
-          <div class="swiper-container">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-              <!-- Slides -->
-              <div class="swiper-slide">
-                <div class="slide--text">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
-                </div>
-                <div class="slide--photo">
-                  <img data-src="./img/feedback-img-1.jpg" alt="">
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="slide--text">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
-                </div>
-                <div class="slide--photo">
-                  <img data-src="./img/feedback-img-2.jpg" alt="">
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="slide--text">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
-                </div>
-                <div class="slide--photo">
-                  <img data-src="./img/feedback-img-3.jpg" alt="">
-                </div>
-              </div>
-            </div>
-            <div class="slider-control">
-              <div class="slider-button-prev">
-                <svg class="icon icon-icon_arrow_menu">
-                  <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
-                </svg>
-                <i></i>
-              </div>
-              <div class="slider-pagination"></div>
-              <div class="slider-button-next">
-                <svg class="icon icon-icon_arrow_menu">
-                  <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
-                </svg>
-                <i></i>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="homepage__feedback_slider business" data-aos="fade-up">
-          <h2>
-            <span>Business Cases</span>
-          </h2>
-          <!-- Slider main container -->
-          <div class="swiper-container">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-              <!-- Slides -->
-              <div class="swiper-slide">
-                <div class="slide--text">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
-                </div>
-                <div class="slide--photo">
-                  <img data-src="./img/feedback-img-1.jpg" alt="">
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="slide--text">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
-                </div>
-                <div class="slide--photo">
-                  <img data-src="./img/feedback-img-2.jpg" alt="">
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="slide--text">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
-                </div>
-                <div class="slide--photo">
-                  <img data-src="./img/feedback-img-3.jpg" alt="">
-                </div>
-              </div>
-            </div>
-            <div class="slider-control">
-              <div class="slider-button-prev">
-                <svg class="icon icon-icon_arrow_menu">
-                  <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
-                </svg>
-                <i></i>
-              </div>
-              <div class="slider-pagination"></div>
-              <div class="slider-button-next">
-                <svg class="icon icon-icon_arrow_menu">
-                  <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
-                </svg>
-                <i></i>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div class="button-circle more" data-action="learn-more" data-text="learn more"></div>
-      </article>
-      <article class="homepage__services" data-aos="fade-up">
-        <div class="wrapper">
-          <section class="leisure">
-            <h2>Leisure Destinations</h2>
-            <!-- Slider main container -->
-            <div class="swiper-container">
-              <!-- Additional required wrapper -->
-              <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                  <h3>
-                    <a href="">Some place - 1</a>
-                  </h3>
-                  <div class="slide--photo">
-                    <img data-src="./img/services-leisure-1.jpg" alt="">
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <h3>
-                    <a href="">Some place - 2</a>
-                  </h3>
-                  <div class="slide--photo">
-                    <img data-src="./img/services-leisure-2.jpg" alt="">
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <h3>
-                    <a href="">Some place - 3</a>
-                  </h3>
-                  <div class="slide--photo">
-                    <img data-src="./img/services-leisure-3.jpg" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="slider-control">
-                <div class="slider-button-prev">
-                  <svg class="icon icon-icon_arrow_menu">
-                    <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
-                  </svg>
-                  <i></i>
-                </div>
-                <div class="slider-pagination"></div>
-                <div class="slider-button-next">
-                  <svg class="icon icon-icon_arrow_menu">
-                    <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
-                  </svg>
-                  <i></i>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section class="business">
-            <h2>Business Sevices</h2>
-            <!-- Slider main container -->
-            <div class="swiper-container">
-              <!-- Additional required wrapper -->
-              <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                  <h3>
-                    <a href="">Some service - 1</a>
-                  </h3>
-                  <div class="slide--photo">
-                    <img data-src="./img/services-business-1.jpg" alt="">
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <h3>
-                    <a href="">Some service - 2</a>
-                  </h3>
-                  <div class="slide--photo">
-                    <img data-src="./img/services-business-2.jpg" alt="">
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <h3>
-                    <a href="">Some service - 3</a>
-                  </h3>
-                  <div class="slide--photo">
-                    <img data-src="./img/services-business-3.jpg" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="slider-control">
-                <div class="slider-button-prev">
-                  <svg class="icon icon-icon_arrow_menu">
-                    <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
-                  </svg>
-                  <i></i>
-                </div>
-                <div class="slider-pagination"></div>
-                <div class="slider-button-next">
-                  <svg class="icon icon-icon_arrow_menu">
-                    <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
-                  </svg>
-                  <i></i>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </article>
-      <article class="homepage__tabs" data-aos="fade-up">
+      <article class="homepage__tabs aos-init" data-aos="fade-up">
         <div class="homepage__tabs_disk">
           <div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>
-          <img data-src="./img/advantages-1.svg" class="disk--arrow-1" alt="">
-          <img data-src="./img/advantages-2.svg" class="disk--arrow-2" alt="">
+          <img data-src="./img/advantages-1-w.svg" class="disk--arrow-1" alt="">
+          <img data-src="./img/advantages-2-w.svg" class="disk--arrow-2" alt="">
         </div>
         <div class="wrapper">
           <h3>Get with us</h3>
@@ -566,35 +298,311 @@
           </div>
         </div>
       </article>
-      <article class="homepage__insta">
-        <section class="leisure" data-aos="fade-up">
-          <div class="homepage__insta_title">
-            <h2>
-              <span>Leisure insta</span>
-            </h2>
-            <a href="">@avialiga_leisure</a>
+      <article class="single-slider meetings aos-init" data-aos="fade-up">
+        <!-- Slider main container -->
+        <div class="swiper-container">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <div class="slide--photo">
+                <img data-src="./img/maldives.jpg" alt="">
+              </div>
+              <!-- <div class="photo--mask"></div> -->
+              <div class="slide--content">
+                <h2>Maldives</h2>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+                <div class="slide--nav">
+                  <a href="" class="about">ABOUT MALDIVES</a>
+                  <a href="" class="btn-skew">
+                    <div class="background"><i></i></div>
+                    <span>view tours</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide--photo">
+                <img data-src="./img/seychelles.jpg" alt="">
+              </div>
+              <!-- <div class="photo--mask"></div> -->
+              <div class="slide--content">
+                <h2>Seychelles</h2>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+                <div class="slide--nav">
+                  <a href="" class="about">ABOUT MALDIVES</a>
+                  <a href="" class="btn-skew">
+                    <div class="background"><i></i></div>
+                    <span>view tours</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide--photo">
+                <img data-src="./img/mauritius.jpg" alt="">
+              </div>
+              <!-- <div class="photo--mask"></div> -->
+              <div class="slide--content">
+                <h2>Mauritius</h2>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+                <div class="slide--nav">
+                  <a href="" class="about">ABOUT MALDIVES</a>
+                  <a href="" class="btn-skew">
+                    <div class="background"><i></i></div>
+                    <span>view tours</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="homepage__insta_gallery">
-            <img data-src="./img/insta-leisure-1.jpg" alt="">
-            <img data-src="./img/insta-leisure-2.jpg" alt="">
-            <img data-src="./img/insta-leisure-3.jpg" alt="">
+          <div class="slider-control">
+            <div class="slider-button-prev">
+              <svg class="icon icon-icon_arrow_menu">
+                <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+              </svg>
+              <i></i>
+            </div>
+            <div class="slider-pagination"></div>
+            <div class="slider-button-next">
+              <svg class="icon icon-icon_arrow_menu">
+                <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+              </svg>
+              <i></i>
+            </div>
           </div>
-        </section>
-        <section class="business" data-aos="fade-up">
-          <div class="homepage__insta_title">
-            <h2>
-              <span>Business insta</span>
-            </h2>
-            <a href="">@avialiga_business</a>
-          </div>
-          <div class="homepage__insta_gallery">
-            <img data-src="./img/insta-business-1.jpg" alt="">
-            <img data-src="./img/insta-business-2.jpg" alt="">
-            <img data-src="./img/insta-business-3.jpg" alt="">
-          </div>
-        </section>
+        </div>
       </article>
-      <article class="expert__form" data-aos="fade-up">
+      <article class="single-slider case aos-init" data-aos="fade-up">
+        <!-- Slider main container -->
+        <div class="swiper-container">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <div class="slide--photo">
+                <img data-src="./img/seychelles.jpg" alt="">
+              </div>
+              <!-- <div class="photo--mask"></div> -->
+              <div class="slide--content">
+                <h2>Seychelles</h2>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+                <div class="slide--nav">
+                  <a href="" class="about">ABOUT MALDIVES</a>
+                  <a href="" class="btn-skew">
+                    <div class="background"><i></i></div>
+                    <span>view tours</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide--photo">
+                <img data-src="./img/mauritius.jpg" alt="">
+              </div>
+              <!-- <div class="photo--mask"></div> -->
+              <div class="slide--content">
+                <h2>Mauritius</h2>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+                <div class="slide--nav">
+                  <a href="" class="about">ABOUT MALDIVES</a>
+                  <a href="" class="btn-skew">
+                    <div class="background"><i></i></div>
+                    <span>view tours</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="slide--photo">
+                <img data-src="./img/maldives.jpg" alt="">
+              </div>
+              <!-- <div class="photo--mask"></div> -->
+              <div class="slide--content">
+                <h2>Maldives</h2>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+                <div class="slide--nav">
+                  <a href="" class="about">ABOUT MALDIVES</a>
+                  <a href="" class="btn-skew">
+                    <div class="background"><i></i></div>
+                    <span>view tours</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-control">
+            <div class="slider-button-prev">
+              <svg class="icon icon-icon_arrow_menu">
+                <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+              </svg>
+              <i></i>
+            </div>
+            <div class="slider-pagination"></div>
+            <div class="slider-button-next">
+              <svg class="icon icon-icon_arrow_menu">
+                <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+              </svg>
+              <i></i>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="business__select aos-init" data-aos="fade-up">
+        <form action="">
+          <div class="business__select_description">
+            <h2>
+              <span>Business Questinaire</span>
+            </h2>
+            <div class="description--text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </div>
+          </div>
+          <div class="business__select_slider">
+            <div class="pagination"></div>
+            <!-- Questions -->
+            <div class="slide" data-slide="1">
+              <div class="question">Purpose of travel arrangements?</div>
+              <section class="custom-select">
+                <div class="select--label">
+                  <span>Select an answer</span>
+                  <i>
+                    <svg class="icon icon-icon_arrow_menu">
+                      <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+                    </svg>
+                  </i>
+                </div>
+                <ul class="select--options">
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <div class="slide" data-slide="2">
+              <div class="question">Purpose of travel arrangements?</div>
+              <section class="custom-select">
+                <div class="select--label">
+                  <span>Select an answer</span>
+                  <i>
+                    <svg class="icon icon-icon_arrow_menu">
+                      <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+                    </svg>
+                  </i>
+                </div>
+                <ul class="select--options">
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <div class="slide" data-slide="3">
+              <div class="question">Purpose of travel arrangements?</div>
+              <section class="custom-select">
+                <div class="select--label">
+                  <span>Select an answer</span>
+                  <i>
+                    <svg class="icon icon-icon_arrow_menu">
+                      <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+                    </svg>
+                  </i>
+                </div>
+                <ul class="select--options">
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <div class="slide" data-slide="4">
+              <div class="question">Purpose of travel arrangements?</div>
+              <section class="custom-select">
+                <div class="select--label">
+                  <span>Select an answer</span>
+                  <i>
+                    <svg class="icon icon-icon_arrow_menu">
+                      <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+                    </svg>
+                  </i>
+                </div>
+                <ul class="select--options">
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <!-- /Questions -->
+            <div class="thank">
+              <h2>Thank you!</h2>
+            </div>
+          </div>
+          <button class="btn-skew" type="button" data-action="next">
+            <div class="background"><i></i></div>
+            <span>Next</span>
+          </button>
+        </form>
+      </article>
+      <article class="expert__form aos-init" data-aos="fade-up">
         <div class="expert__form_title">
           <h2>
             <span>Your travel expert</span>

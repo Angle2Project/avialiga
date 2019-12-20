@@ -9,9 +9,118 @@
 @import "pages/index";
 @import "pages/contacts";
 
+
+.loader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;  
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  .blind-left {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 49%;
+    background-color: $white;
+    transform: skewX(-35deg);
+    transform-origin: left;
+  }
+  .blind-right {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 49%;
+    background-color: $white;
+    transform: skewX(-35deg);
+    transform-origin: right;
+  }
+  .progress {
+    z-index: 1;
+    font: 16px/1 $futura;
+    color: $black;
+    position: relative;
+    visibility: hidden;
+  }
+  .loader-logo {
+    width: 240px;
+    height: 240px;
+    position: relative;
+    z-index: 1;
+    .brand {
+      position: absolute;
+      top: 160px;
+      left: 87px;
+      font: 300 29px/1 "Futura";
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      opacity: 0;
+    }
+    // &::before {
+    //   content: "";
+    //   width: 100%;
+    //   height: 2px;
+    //   background-color: red;
+    //   position: absolute;
+    //   top: calc(50% - 1px);
+    //   left: 0;  
+    //   opacity: 0;
+    // }  
+    // &::after {
+    //   content: "";
+    //   width: 2px;
+    //   height: 100%;
+    //   background-color: red;
+    //   position: absolute;
+    //   left: calc(50% - 1px);
+    //   top: 0;  
+    //   opacity: 0;
+    // }  
+  }
+  @keyframes loaderLogo {
+    0% {fill: #2f2f2f;}
+    10% {fill: #f8d4e4;}
+    20% {fill: #d8ebe7;}
+    30% {fill: #5ebfaf;}
+    40% {fill: #577081;}
+    50% {fill: #eb4333;}
+    60% {fill: #d7ebe6;}      
+    70% {fill: #bfbdce;}
+    80% {fill: #9ccad5;}      
+    90% {fill: #5ebfaf;}
+    100% {fill: #2f2f2f;}
+  }
+  #loader-logo {
+    z-index: 1;
+    visibility: hidden;
+    //background-color: beige;
+    &.colors {
+      .m {          
+        //animation: loaderLogo 5s infinite linear;          
+      }
+      .h {          
+        //animation: loaderLogo 5s infinite linear;
+      }  
+    }
+    .m {
+      fill: $black;
+    }
+    .h {
+      fill: $black;        
+    }
+  }
+}
+
 .cursor {
     width: 70px;
-    height: 70px;
+  height: 70px;  
     position: fixed;
     top: 0;
     left: 0;
@@ -30,14 +139,14 @@
         will-change: transform;
     }
     i {
-        display: block;
+        display: block;    
         will-change: transform;
-        position: absolute;
+        position: absolute;    
         &.circle {
             width: 10px;
             height: 10px;
-            background-color: $white;
-            border-radius: 50%;
+            background-color: $red;
+            border-radius: 50%;      
             top: calc(50% - 5px);
             left: calc(50% - 5px);
         }
@@ -169,23 +278,23 @@
         .top {
             div {
                 transform-origin: 0 100%;
-                position: absolute !important;
+        position: absolute!important;
                 bottom: 50%;
-                left: 50%;
+        left: 50%;        
                 width: 12px;
                 text-align: center;
-            }
-        }
+      }    
+    }    
         .bot {
             div {
                 transform-origin: 0 100%;
-                position: absolute !important;
+        position: absolute!important;
                 bottom: 50%;
-                left: 50%;
+        left: 50%;        
                 width: 12px;
-                text-align: center;
-            }
-        }
+        text-align: center;     
+      }    
+    }    
     }
     .hover {
         opacity: 0;
@@ -364,3 +473,4 @@
         }
     }
 }
+
