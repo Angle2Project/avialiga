@@ -19,3 +19,11 @@ PageList:
   ready: 40 
 - file: news.html
   ready: 40 
+- file: spa_avialiga.html
+  ready: 40  
+- file: relax_avialiga.html
+  ready: 40
+- file: business_travel.html
+  ready: 40
+- file: leisure_questionaire.html
+  ready: 40  

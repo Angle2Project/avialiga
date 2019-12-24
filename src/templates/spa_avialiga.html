@@ -1,37 +1,57 @@
 ---
 title: Index page,
-class: catalog tours h-black
+class: spa h-white
 ---
 {% extends "layouts/_layout.html" %}
 
 {% block content %}
 
-<!-- <div class="cursor">
+<div class="cursor">
 	<span></span>
 	<i class="circle"></i>
 	<i class="play"></i>
 	<i class="pause"></i>	
-</div> -->
+</div>
 
 
 	<!-- LOADER -->
-	<!-- <div class="loader">
-			
-	</div> -->
+	<div class="loader">
+			<div class="loader-logo">
+				<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+					<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+					<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+				</svg>
+				<div class="brand">avialiga</div>
+			</div>			
+			<div class="blind-left"></div>
+			<div class="blind-right"></div>
+	</div>
 	<!-- /LOADER -->
 
 
-
-	<div class="catalog__title">
+	<article class="photo__hero">
 		<div class="breadcrumb">
-			<a href="">MAIN</a>			
-			<a href="">LEISURE</a>			
-			<span>TOURS</span>
+			<a href="">MAIN</a>
+			<a href="">LEISURE</a>
+			<a href="">RELAX</a>
+			<span>SPA</span>
 		</div>
-		<h1>ALL TOURS</h1>
-	</div>
-
-
+		<div class="hero_background">
+			<img data-src="./img/spa-avialiga.jpg" alt="">
+		</div>
+		<div class="wrapper">
+			<h1>
+				<span>SPA</span>
+			</h1>
+			<div class="hero__description">
+				<div class="hero__description_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>				
+			</div>
+		</div>	
+		<div class="hero--scroll animation">
+			<span>Sroll Down</span>
+			<div class="hero--scroll-line"></div>
+		</div>
+	</article>
 
 	{% set filters = [
 		{
@@ -55,7 +75,6 @@ class: catalog tours h-black
 			target: 'price'
 		}
 	] %}
-
 
 	<div class="catalog__filter">
 		<ul class="catalog__filter_nav">
@@ -179,7 +198,20 @@ class: catalog tours h-black
 		</div>
 	</article>
 
+
+
+	
+
 	{% include "partials/_expert.html" %}
+
+
+
+
+
+	
+
+
+
 
 
 

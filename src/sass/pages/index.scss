@@ -3,3 +3,132 @@
 @import 'leisure';
 @import  'business';
 @import  'blogs';
+
+
+.spa {
+  overflow: hidden;
+  .breadcrumb {
+    top: 130px;
+    position: absolute;
+    color: $white;
+    z-index: 1;
+    a {
+      color: currentColor;
+    }
+  }
+  .catalog__list {
+    background-color: #d3e7e1;
+  }
+  .expert__form {
+    .expert__form_title {
+      h2 {
+        color: #5ac0b0;
+      }
+    }
+  }  
+}
+
+.relax {
+  overflow: hidden;
+  .breadcrumb {
+    top: 130px;
+    position: absolute;
+    color: $white;
+    z-index: 1;
+    a {
+      color: currentColor;
+    }
+  }
+  .photo__hero {
+    .wrapper {
+      h1 {
+        font-size: 140px;
+      }
+    }
+  }
+  .expert__form {
+    .expert__form_title {
+      h2 {
+        color: #5ac0b0;
+      }
+    }
+  }  
+  .catalog__list {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    .catalog__list_grid {
+      li {
+        .grid--hotel {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+}
+
+.bt {
+  overflow: hidden;
+  .breadcrumb {
+    top: 130px;
+    position: absolute;
+    color: $white;
+    z-index: 1;
+    a {
+      color: currentColor;
+    }
+  }
+  .photo__hero {
+    .hero_background {
+      overflow: hidden;
+      img {
+        //filter: blur(20px);
+      }
+    }
+    .wrapper {
+      h1 {
+        font-size: 140px;
+      }
+    }    
+  }
+  .homepage__insta {
+    section {
+      .homepage__insta_title {
+        h2 {
+          color: #bebccd;
+        }
+      }
+    }
+  }
+  .expert__form {
+    .expert__form_title {
+      h2 {
+        color: #bebccd;
+      }
+    }
+  }  
+  .catalog__list {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    .catalog__list_grid {
+      li {
+        .grid--hotel {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+}
+
+.leisure-questionaire {
+  .hero {
+    padding: 150px 0 0 0;
+  }
+  .wrapper {
+    padding: 50px 90px;
+    h1 {     
+      font: normal 72px/60px "Futura";
+      color: #5ac0b0;
+    }
+  }  
+}
+

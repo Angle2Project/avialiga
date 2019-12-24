@@ -1,0 +1,121 @@
+---
+title: Index page,
+class: bt h-white
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+
+	<article class="photo__hero">
+		<div class="breadcrumb">
+			<a href="">MAIN</a>
+			<a href="">BUSINESS</a>			
+			<span>BUSINESS TRAVEL</span>
+		</div>
+		<div class="hero_background">
+			<img data-src="./img/tour-types-discover.jpg" alt="">
+		</div>
+		<div class="wrapper">
+			<h1>
+				<span>Business Travel</span>
+			</h1>
+			<div class="hero__description">
+				<div class="hero__description_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>				
+			</div>
+		</div>	
+		<div class="hero--scroll animation">
+			<span>Sroll Down</span>
+			<div class="hero--scroll-line"></div>
+		</div>
+	</article>
+
+	{% set list = [
+		{
+			sell: false,
+			src: 'tour-types-relax.jpg',
+			title: 'Retreat'
+		},
+		{
+			sell: false,
+			src: 'relax-avialiga.jpg',
+			title: 'SPA'
+		},
+		{
+			sell: false,
+			src: 'services-leisure-2.jpg',
+			title: 'Lazy'
+		},
+		{
+			sell: false,
+			src: 'services-business-1.jpg',
+			title: 'Retreat'
+		},
+		{
+			sell: false,
+			src: 'services-business-2.jpg',
+			title: 'SPA'
+		},
+		{
+			sell: false,
+			src: 'services-business-3.jpg',
+			title: 'Lazy'
+		}
+	] %}
+
+
+	<article class="catalog__list">
+		<ul class="catalog__list_grid">
+			{% for i in list %}
+			<li {%if i.sell%}class="sell"{%endif%}>
+				<div class="grid--photo">
+					<a href="">
+						<img data-src="./img/{{i.src}}" alt="">
+					</a>
+				</div>				
+				<div class="grid--hotel">{{i.title}}</div>				
+			</li>
+			{% endfor %}
+		</ul>		
+	</article>
+
+	<article class="homepage__insta">		
+		<section class="business" data-aos="fade-up">
+			<div class="homepage__insta_title">
+				<h2>
+					<span>Business facebook</span>
+				</h2>
+				<a href="">@avialiga_business</a>
+			</div>
+			<div class="homepage__insta_gallery">
+				<img data-src="./img/insta-business-1.jpg" alt="">
+				<img data-src="./img/insta-business-2.jpg" alt="">
+				<img data-src="./img/insta-business-3.jpg" alt="">
+			</div>
+		</section>
+	</article>
+	{% include "partials/_expert.html" %}
+
+{% endblock %}

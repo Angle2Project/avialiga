@@ -1,0 +1,192 @@
+---
+title: Index page,
+class: relax h-white
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+
+	<article class="photo__hero">
+		<div class="breadcrumb">			
+			<a href="">MAIN</a>
+			<a href="">LEISURE</a>			
+			<span>RELAX</span>
+		</div>
+		<div class="hero_background">
+			<img data-src="./img/tour-types-relax.jpg" alt="">
+		</div>
+		<div class="wrapper">
+			<h1>
+				<span>Relax</span>
+			</h1>
+			<div class="hero__description">
+				<div class="hero__description_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+				<div class="hero__description_info"><b>25</b> Tours</div>
+			</div>
+		</div>	
+		<div class="hero--scroll animation">
+			<span>Sroll Down</span>
+			<div class="hero--scroll-line"></div>
+		</div>
+	</article>
+	
+
+	{% set list = [
+		{
+			sell: false,
+			src: 'tour-types-relax.jpg',
+			title: 'Retreat'
+		},
+		{
+			sell: false,
+			src: 'relax-avialiga.jpg',
+			title: 'SPA'
+		},
+		{
+			sell: false,
+			src: 'services-leisure-2.jpg',
+			title: 'Lazy'
+		}
+	] %}
+
+
+	<article class="catalog__list">
+		<ul class="catalog__list_grid">
+			{% for i in list %}
+			<li {%if i.sell%}class="sell"{%endif%}>
+				<div class="grid--photo">
+					<a href="">
+						<img data-src="./img/{{i.src}}" alt="">
+					</a>
+				</div>				
+				<div class="grid--hotel">{{i.title}}</div>				
+			</li>
+			{% endfor %}
+		</ul>		
+	</article>
+
+
+	{% set slider = [
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: true,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: false,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		},
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: false,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: true,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		}
+	] %}
+	<article class="catalog__slider tours aos-init" data-aos="fade-up">
+		<h2>
+			<span>Relax tours</span>
+		</h2>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for i in slider %}
+				<div class="swiper-slide">
+					<div class="grid--photo">
+						<a href="">
+							<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
+						</a>
+					</div>
+					<div class="grid--location">{{i.location}}</div>
+					<div class="grid--hotel">{{i.hotel}}</div>
+					<div class="grid--info">
+						<div class="date">{{i.date}}</div>
+						<div class="price">{{i.price}}</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>			
+			<div class="slider-button-prev">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>			
+			<div class="slider-button-next">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>
+		</div>
+		<div class="catalog__list_more">
+			<button class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>ALL TOURS</span>				
+			</button>
+		</div>
+	</article>
+
+
+
+	
+
+	{% include "partials/_expert.html" %}
+
+
+
+
+
+	
+
+
+
+
+
+
+{% endblock %}

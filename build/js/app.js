@@ -1691,7 +1691,7 @@ const _leisure = function () {
       .staggerFrom(document.querySelectorAll('.leisure__hero h1 span'), 1, { rotationX: 90, opacity: 0, ease: Power2.easeOut }, 0.1, '+=0.3')
       .from('header, .leisure__hero .breadcrumb', 0.8, { opacity: 0 }, '-=0.5')
       .from('.hero--scroll, .leisure__hero_pagination', 0.8, { opacity: 0 }, '-=0.4')
-      .to(root.hero.heroFilter, 0.8, { innerRadius: 200 }, '-=0.4')      
+      .to(root.hero.heroFilter, 0.8, { innerRadius: 200 }, '-=0.4')
     }
   };
 
@@ -3523,7 +3523,7 @@ const _business = function () {
 /* ==============================================================
                           BLOGS INIT
    ============================================================== */
-const _blogs = function () {
+const _default = function () {
   const root = this;
 
   this.loader = {
@@ -3789,7 +3789,7 @@ const _cases = function () {
 /* ==============================================================
                           NEWS INIT
    ============================================================== */
-   const _news = function () {
+  const _news = function () {
     const root = this;  
     this.loader = {
       progress: 0,
@@ -3863,10 +3863,7 @@ const _cases = function () {
         }
       },
       loaded: function () {
-        const that = this;
-        root.tabs.init();      
-        root.eventsInit();      
-        app.globalEvents();      
+        const that = this;        
         new TimelineMax()
         .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
         .add(function(){        
@@ -3940,6 +3937,460 @@ const _cases = function () {
     this.loader.init(); 
   }
 
+  /* ==============================================================
+                          SPA INIT
+   ============================================================== */
+const _spa = function () {
+  const root = this;  
+  this.loader = {
+    progress: 0,
+    resources: 0,
+    resourcesDone: 0,
+    loaderReady: false,
+    scripts:
+      [         
+        //'pixiFilters'
+      ],    
+    resourcesDone: 0,
+    init: function () {
+      let that = this;
+
+      window.scrollTo(0, 0);
+
+      TweenMax.set('#loader-logo .m', { x: -55, y: -31 });
+      TweenMax.set('#loader-logo .h', { x: -55, y: -30 });
+      TweenMax.to('#loader-logo .h', 20, { rotation: 360, transformOrigin: "88% 95%", ease: Power0.easeNone, repeat: -1 });
+      TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
+      TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
+      
+      this.resources += document.querySelectorAll('img').length        
+        + this.scripts.length;
+
+      document.querySelectorAll('img').forEach(function (el, i) {
+        let src = el.getAttribute('data-src');
+        var img = new Image();
+        img.src = src;
+        img.onload = function () {
+          el.src = src;
+          that.resourcesDone++;
+          that.loading();
+        }
+      });
+
+      this.scripts.forEach(function (n) {        
+        let src = './js/lib/' + app.resours[n];
+        var script = document.createElement('script');
+        script.src = src;
+        document.head.appendChild(script);
+        script.onload = function () {          
+          that.resourcesDone++;
+          that.loading();
+        }
+      });      
+    },
+    loading: function () {
+      const that = this;      
+      if(this.resources == this.resourcesDone) {
+        let tl = new TimelineMax({delay: 1});
+        tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
+        .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
+        .to('#loader-logo .m', 0.8, { rotation: 360, transformOrigin: "96% 50%", ease: Power3.easeInOut }, 'arrows')        
+        .to('#loader-logo .m', 0.8, { x: 0, y: 0, opacity: 0, ease: Power3.easeInOut }, 'morph')
+        .to('#loader-logo .h', 0.8, { x: 0, y: 0, ease: Power3.easeInOut }, 'morph')
+        .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')
+        .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')
+        .add(function(){
+          root.cursor.init();
+          root.eventsInit();
+          app.globalEvents();
+        })
+        .to('#loader-logo', 0.5, { opacity: 0 }, '+=1')
+        .to('.loader-logo .brand', 0.5, { opacity: 0 }, '-=0.3')
+        .add(function(){
+          that.loaded();
+        });
+        
+      }
+    },
+    loaded: function () {
+      const that = this;        
+      new TimelineMax()
+      .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
+      .add(function(){        
+        document.querySelector('.loader').remove();
+        TweenMax.set('body', { overflow: 'auto' });        
+      })
+      .from(document.querySelectorAll('.photo__hero h1 span'), 1, {rotationX: 90, opacity: 0, ease: Power2.easeOut }, '+=0.3')
+      .from('.photo__hero .hero__description', 0.8, { opacity: 0, y: 50 }, '-=0.5')
+      .from('header, .photo__hero .breadcrumb, .hero--scroll', 0.8, { opacity: 0 }, '-=0.5')
+    },
+  };    
+
+  this.cursor = {
+    init: function () {
+      TweenMax.set('.cursor', { x: (document.body.clientWidth / 2) - 35, y: (window.innerHeight / 2) - 35 });
+      document.body.addEventListener('mousemove', function (e) {
+        TweenMax.set('.cursor', { x: (e.clientX - 35), y: (e.clientY - 35) });
+      });      
+    }
+  };
+
+  this.eventsInit = function () {
+    const that = this;    
+    window.addEventListener('scroll', function (e) {
+      let scrollTop = window.pageYOffset;
+      header(e);      
+    });
+    window.addEventListener('resize', function(){
+      heightUpdate();      
+    });
+    document.querySelectorAll('.catalog__filter_nav li').forEach(function (el, i) {
+      el.addEventListener('click', function (e) {
+        let target = document.querySelector('.catalog__filter_list #' + e.currentTarget.getAttribute('data-target'));
+        if (document.querySelectorAll('.catalog__filter_list .active').length) {
+          let current = document.querySelector('.catalog__filter_list .active').id == e.currentTarget.getAttribute('data-target');
+          TweenMax.to(document.querySelector('.catalog__filter_list .active'), 0.3, {
+            height: 0, opacity: 0, onComplete: function () {
+              TweenMax.set(document.querySelector('.catalog__filter_list .active'), { clearProps: "all" });
+              document.querySelector('.catalog__filter_list .active').classList.remove('active');
+              if (!current) {
+                TweenMax.set(target, { display: 'block' });
+                TweenMax.from(target, 0.3, {
+                  height: 0, opacity: 0, onComplete: function () {
+                    target.classList.add('active');
+                  }
+                });
+              }
+            }
+          });
+        } else {
+          TweenMax.set(target, { display: 'block' });
+          TweenMax.from(target, 0.3, {
+            height: 0, opacity: 0, onComplete: function () {
+              target.classList.add('active');
+            }
+          });
+        }  
+      });
+    });
+  }
+
+  this.loader.init(); 
+}
+
+  /* ==============================================================
+                          RELAX INIT
+   ============================================================== */
+   const _relax = function () {
+    const root = this;  
+    this.loader = {
+      progress: 0,
+      resources: 0,
+      resourcesDone: 0,
+      loaderReady: false,
+      scripts:
+        [         
+          'swiper'
+        ],    
+      resourcesDone: 0,
+      init: function () {
+        let that = this;
+  
+        window.scrollTo(0, 0);
+  
+        TweenMax.set('#loader-logo .m', { x: -55, y: -31 });
+        TweenMax.set('#loader-logo .h', { x: -55, y: -30 });
+        TweenMax.to('#loader-logo .h', 20, { rotation: 360, transformOrigin: "88% 95%", ease: Power0.easeNone, repeat: -1 });
+        TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
+        TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
+        
+        this.resources += document.querySelectorAll('img').length        
+          + this.scripts.length;
+  
+        document.querySelectorAll('img').forEach(function (el, i) {
+          let src = el.getAttribute('data-src');
+          var img = new Image();
+          img.src = src;
+          img.onload = function () {
+            el.src = src;
+            that.resourcesDone++;
+            that.loading();
+          }
+        });
+  
+        this.scripts.forEach(function (n) {        
+          let src = './js/lib/' + app.resours[n];
+          var script = document.createElement('script');
+          script.src = src;
+          document.head.appendChild(script);
+          script.onload = function () {          
+            that.resourcesDone++;
+            that.loading();
+          }
+        });      
+      },
+      loading: function () {
+        const that = this;      
+        if(this.resources == this.resourcesDone) {          
+          let tl = new TimelineMax({delay: 1});
+          tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
+          .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
+          .to('#loader-logo .m', 0.8, { rotation: 360, transformOrigin: "96% 50%", ease: Power3.easeInOut }, 'arrows')        
+          .to('#loader-logo .m', 0.8, { x: 0, y: 0, opacity: 0, ease: Power3.easeInOut }, 'morph')
+          .to('#loader-logo .h', 0.8, { x: 0, y: 0, ease: Power3.easeInOut }, 'morph')
+          .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')
+          .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')
+          .add(function(){
+            root.eventsInit();
+            root.cursor.init();
+            root.sliders.init();
+            app.globalEvents();
+          })
+          .to('#loader-logo', 0.5, { opacity: 0 }, '+=1')
+          .to('.loader-logo .brand', 0.5, { opacity: 0 }, '-=0.3')
+          .add(function(){
+            that.loaded();
+          });
+          
+        }
+      },
+      loaded: function () {
+        const that = this;
+        new TimelineMax()
+        .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
+        .add(function(){        
+          document.querySelector('.loader').remove();
+          TweenMax.set('body', { overflow: 'auto' });        
+        })
+        .from(document.querySelectorAll('.photo__hero h1 span'), 1, {rotationX: 90, opacity: 0, ease: Power2.easeOut }, '+=0.3')
+        .from('.photo__hero .hero__description', 0.8, { opacity: 0, y: 50 }, '-=0.5')
+        .from('header, .photo__hero .breadcrumb, .hero--scroll', 0.8, { opacity: 0 }, '-=0.5')
+      },
+    };    
+  
+    this.cursor = {
+      init: function () {
+        TweenMax.set('.cursor', { x: (document.body.clientWidth / 2) - 35, y: (window.innerHeight / 2) - 35 });
+        document.body.addEventListener('mousemove', function (e) {
+          TweenMax.set('.cursor', { x: (e.clientX - 35), y: (e.clientY - 35) });
+        });      
+      }
+    };
+
+    this.sliders = {
+      singleSlider: null,
+      catalogSlider: null,
+      init: function(){
+        this.catalogSlider = new Swiper('.catalog__slider .swiper-container', {
+          // Optional parameters    
+          speed: 800,
+          //simulateTouch: false,
+          watchSlidesProgress: true,
+          watchSlidesVisibility: true,
+          slidesPerView: 3,
+          spaceBetween: 60,
+          // If we need pagination
+          // pagination: {
+          //   el: '.slider-pagination',
+          //   type: 'fraction'
+          // },
+          // Navigation arrows
+          navigation: {
+            nextEl: '.slider-button-next',
+            prevEl: '.slider-button-prev',
+          }
+        });
+        this.events();        
+      },
+      events: function(){
+        this.catalogSlider.on('slideChangeTransitionStart', function () {
+          if (this.realIndex > this.previousIndex) {
+            new TimelineMax()
+            .to(this.el.querySelectorAll('.swiper-slide'), 0.4, { skewX: -30, scale: 1.2, ease: Power1.easeIn})
+            .to(this.el.querySelectorAll('.swiper-slide'), 0.4, { skewX: 0, scale: 1, ease: Power1.easeOut})  
+          } else {
+            new TimelineMax()
+            .to(this.el.querySelectorAll('.swiper-slide'), 0.4, { skewX: 30, scale: 1.2, ease: Power1.easeIn})
+            .to(this.el.querySelectorAll('.swiper-slide'), 0.4, { skewX: 0, scale: 1, ease: Power1.easeOut})  
+          }
+        });
+      }
+    }
+  
+    this.eventsInit = function () {
+      const that = this;    
+      window.addEventListener('scroll', function (e) {
+        let scrollTop = window.pageYOffset;
+        header(e);      
+      });
+      window.addEventListener('resize', function(){
+        heightUpdate();      
+      });
+      document.querySelectorAll('.slider-button-prev, .slider-button-next').forEach(function (el, i) {
+        el.addEventListener('mouseenter', function (e) {        
+          if (this.classList.contains('swiper-button-disabled')) return;
+          TweenMax.to(this.querySelector('i'), 0.5, { scale: 1, ease: Power3.easeOut });
+          TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut });
+          //TweenMax.to('.cursor i.circle', 0.5, { backgroundColor: '#ee412a', ease: Power3.easeOut });        
+          if (this.closest('.catalog__slider')){
+            TweenMax.to(this.querySelector('.icon'), 0.5, { fill: '#ee412a', ease: Power3.easeOut });
+          }
+        });
+        el.addEventListener('mouseleave', function (e) {        
+          TweenMax.to(this.querySelector('i'), 0.5, { scale: 0, ease: Power3.easeIn });
+          TweenMax.to('.cursor span', 0.5, { scale: 1, ease: Power3.easeIn });
+          //TweenMax.to('.cursor i.circle', 0.5, { backgroundColor: '#fff', ease: Power3.easeOut });        
+          if (this.closest('.catalog__slider')){
+            TweenMax.to(this.querySelector('.icon'), 0.5, { fill: '#fff', ease: Power3.easeIn });
+          }        
+        });
+      });
+    }
+  
+    this.loader.init(); 
+  }
+
+  /* ==============================================================
+                          BT INIT
+   ============================================================== */
+const _bt = function () {
+  const root = this;  
+  this.loader = {
+    progress: 0,
+    resources: 0,
+    resourcesDone: 0,
+    loaderReady: false,
+    scripts:
+      [         
+        //'pixiFilters'
+      ],    
+    resourcesDone: 0,
+    init: function () {
+      let that = this;
+
+      window.scrollTo(0, 0);
+
+      TweenMax.set('#loader-logo .m', { x: -55, y: -31 });
+      TweenMax.set('#loader-logo .h', { x: -55, y: -30 });
+      TweenMax.to('#loader-logo .h', 20, { rotation: 360, transformOrigin: "88% 95%", ease: Power0.easeNone, repeat: -1 });
+      TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
+      TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
+      
+      this.resources += document.querySelectorAll('img').length        
+        + this.scripts.length;
+
+      document.querySelectorAll('img').forEach(function (el, i) {
+        let src = el.getAttribute('data-src');
+        var img = new Image();
+        img.src = src;
+        img.onload = function () {
+          el.src = src;
+          that.resourcesDone++;
+          that.loading();
+        }
+      });
+
+      this.scripts.forEach(function (n) {        
+        let src = './js/lib/' + app.resours[n];
+        var script = document.createElement('script');
+        script.src = src;
+        document.head.appendChild(script);
+        script.onload = function () {          
+          that.resourcesDone++;
+          that.loading();
+        }
+      });      
+    },
+    loading: function () {
+      const that = this;      
+      if(this.resources == this.resourcesDone) {        
+        let tl = new TimelineMax({delay: 1});
+        tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
+        .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
+        .to('#loader-logo .m', 0.8, { rotation: 360, transformOrigin: "96% 50%", ease: Power3.easeInOut }, 'arrows')        
+        .to('#loader-logo .m', 0.8, { x: 0, y: 0, opacity: 0, ease: Power3.easeInOut }, 'morph')
+        .to('#loader-logo .h', 0.8, { x: 0, y: 0, ease: Power3.easeInOut }, 'morph')
+        .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')
+        .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')
+        .add(function(){
+          root.cursor.init();
+          root.eventsInit();
+          app.globalEvents();
+        })
+        .to('#loader-logo', 0.5, { opacity: 0 }, '+=1')
+        .to('.loader-logo .brand', 0.5, { opacity: 0 }, '-=0.3')
+        .add(function(){
+          that.loaded();
+        });
+        
+      }
+    },
+    loaded: function () {
+      const that = this;
+      new TimelineMax()
+      .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
+      .add(function(){        
+        document.querySelector('.loader').remove();
+        TweenMax.set('body', { overflow: 'auto' });        
+      })
+      .from(document.querySelectorAll('.photo__hero h1 span'), 1, {rotationX: 90, opacity: 0, ease: Power2.easeOut }, '+=0.3')
+      .from('.photo__hero .hero__description', 0.8, { opacity: 0, y: 50 }, '-=0.5')
+      .from('header, .photo__hero .breadcrumb, .hero--scroll', 0.8, { opacity: 0 }, '-=0.5')
+    },
+  };    
+
+  this.cursor = {
+    init: function () {
+      TweenMax.set('.cursor', { x: (document.body.clientWidth / 2) - 35, y: (window.innerHeight / 2) - 35 });
+      document.body.addEventListener('mousemove', function (e) {
+        TweenMax.set('.cursor', { x: (e.clientX - 35), y: (e.clientY - 35) });
+      });      
+    }
+  };
+
+  this.eventsInit = function () {
+    const that = this;    
+    window.addEventListener('scroll', function (e) {
+      let scrollTop = window.pageYOffset;
+      header(e);      
+    });
+    window.addEventListener('resize', function(){
+      heightUpdate();      
+    });
+    document.querySelectorAll('.catalog__filter_nav li').forEach(function (el, i) {
+      el.addEventListener('click', function (e) {
+        let target = document.querySelector('.catalog__filter_list #' + e.currentTarget.getAttribute('data-target'));
+        if (document.querySelectorAll('.catalog__filter_list .active').length) {
+          let current = document.querySelector('.catalog__filter_list .active').id == e.currentTarget.getAttribute('data-target');
+          TweenMax.to(document.querySelector('.catalog__filter_list .active'), 0.3, {
+            height: 0, opacity: 0, onComplete: function () {
+              TweenMax.set(document.querySelector('.catalog__filter_list .active'), { clearProps: "all" });
+              document.querySelector('.catalog__filter_list .active').classList.remove('active');
+              if (!current) {
+                TweenMax.set(target, { display: 'block' });
+                TweenMax.from(target, 0.3, {
+                  height: 0, opacity: 0, onComplete: function () {
+                    target.classList.add('active');
+                  }
+                });
+              }
+            }
+          });
+        } else {
+          TweenMax.set(target, { display: 'block' });
+          TweenMax.from(target, 0.3, {
+            height: 0, opacity: 0, onComplete: function () {
+              target.classList.add('active');
+            }
+          });
+        }  
+      });
+    });
+  }
+
+  this.loader.init(); 
+}
+
 // Map
 // var map;
 // function initMap() {
@@ -3967,6 +4418,12 @@ window.onload = function () {
   setTimeout(function () {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+    if (
+      document.body.classList.contains('blogs') ||
+      document.body.classList.contains('leisure-questionaire')
+    ){
+      app.blogs = new _default();
+    }
     if (document.body.classList.contains('homepage')) {
       app.homepage = new _homepage();
     }
@@ -3978,16 +4435,24 @@ window.onload = function () {
     }
     if (document.body.classList.contains('business')) {
       app.business = new _business();
-    }
-    if (document.body.classList.contains('blogs')) {
-      app.blogs = new _blogs();
-    }
+    }    
     if (document.body.classList.contains('cases')) {
       app.cases = new _cases();
     }
     if (document.body.classList.contains('news')) {
       app.cases = new _news();
     }
+    if (document.body.classList.contains('spa')) {
+      app.cases = new _spa();
+    }
+    if (document.body.classList.contains('relax')) {
+      app.cases = new _relax();
+    }
+    if (document.body.classList.contains('bt')) {
+      app.cases = new _bt();
+    }
+
+    
     
   }, 100);
 }
