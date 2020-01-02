@@ -10,6 +10,34 @@
 @import "pages/contacts";
 
 
+a.link-hover {
+    display: inline-flex;
+    align-items: center;
+    position: relative;      
+    transition: all 400ms ease;
+    z-index: 1;
+    &::after {
+      content: "";
+      width: 0%;
+      height: 1px;
+      background: currentColor;
+      position: absolute;
+      left: initial;
+      right: 0;
+      bottom: -8px;
+      transition: all 400ms ease;
+    }
+    &:hover {
+      &::after {        
+        height: 1px;
+        width: 100%; 
+        left: 0;
+        right: initial;
+        z-index: 1;
+      }
+    }    
+  }
+
 .loader {
   position: fixed;
   top: 0;

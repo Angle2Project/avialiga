@@ -1,0 +1,219 @@
+---
+title: Index page,
+class: single-country h-white
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+
+	<article class="photo__hero">
+		<div class="breadcrumb">			
+			<a href="">MAIN</a>
+			<a href="">COUNTRIES</a>			
+			<span>AUSTRALIA</span>
+		</div>
+		<div class="hero_background">
+			<img data-src="./img/australia.jpg" alt="">
+		</div>
+		<div class="wrapper">			
+			<div class="hero__description">
+				<div class="hero__description_text">
+					<h1>
+						<span>Australia</span>
+					</h1>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+				</div>
+				<div class="hero__description_info">
+					<div class="hotels">
+						<p><b>20</b> Hotels</p>
+						<p class="map">
+							<img data-src="./img/icon_map-marker.svg" alt="">
+							<a href="#">VIEW ON MAP</a>
+						</p>
+					</div>
+					<div class="tours"><b>12</b> Tours</div>
+				</div>
+			</div>
+		</div>	
+		<div class="hero--scroll animation">
+			<span>Sroll Down</span>
+			<div class="hero--scroll-line"></div>
+		</div>
+	</article>
+
+	<article class="single-slider aos-init" data-aos="fade-up">
+		<!-- Slider main container -->
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					{% set singleSlider = [
+						{
+							title: "Top facts or why we recomend ",
+							src: "./img/maldives.jpg"
+						},
+						{
+							title: "Top hotels or why we recomend ",
+							src: "./img/seychelles.jpg"
+						},
+						{
+							title: "Top restaurants or why we recomend ",
+							src: "./img/mauritius.jpg"
+						}
+					] %}
+					{% for i in singleSlider %}
+					<div class="swiper-slide">
+						<div class="slide--photo">
+							<img data-src="{{i.src}}" alt="">
+						</div>
+						<!-- <div class="photo--mask"></div> -->
+						<div class="slide--content">
+							<h2>{{i.title}}</h2>
+							<div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>							
+						</div>
+					</div>
+					{% endfor %}
+			</div>
+			<div class="slider-control">
+				<div class="slider-button-prev">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+				<div class="slider-pagination"></div>
+				<div class="slider-button-next">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+			</div>
+		</div>		
+	</article>
+
+	{% set list = [
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: true,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: false,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		},
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: false,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: true,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		}
+	] %}
+
+
+	<article class="catalog__slider tours aos-init" data-aos="fade-up">
+		<h2>
+			<span>Australia tours</span>
+		</h2>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for i in list %}
+				<div class="swiper-slide">
+					<div class="grid--photo">
+						<a href="">
+							<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
+						</a>
+					</div>
+					<div class="grid--location">{{i.location}}</div>
+					<div class="grid--hotel">{{i.hotel}}</div>
+					<div class="grid--info">
+						<div class="date">{{i.date}}</div>
+						<div class="price">{{i.price}}</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>			
+			<div class="slider-button-prev">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>			
+			<div class="slider-button-next">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>
+		</div>
+		<div class="catalog__list_more">
+			<button class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>More</span>				
+			</button>
+		</div>
+	</article>
+	
+
+	
+
+
+
+	
+
+	{% include "partials/_expert.html" %}
+
+
+
+
+
+	
+
+
+
+
+
+
+{% endblock %}

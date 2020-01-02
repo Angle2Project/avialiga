@@ -1,0 +1,159 @@
+---
+title: Index page,
+class: meetings h-white
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+
+	<article class="photo__hero">
+		<div class="breadcrumb">			
+			<a href="">MAIN</a>
+			<a href="">BUSINESS</a>			
+			<span>MEETINGS</span>
+		</div>
+		<div class="hero_background">
+			<img data-src="./img/meetings.jpg" alt="">
+		</div>
+		<div class="wrapper">
+			<h1>
+				<span>Meetings</span>
+			</h1>
+			<div class="hero__description">
+				<div class="hero__description_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>				
+			</div>
+		</div>	
+		<div class="hero--scroll animation">
+			<span>Sroll Down</span>
+			<div class="hero--scroll-line"></div>
+		</div>
+	</article>
+
+	{% set list = [
+		{
+			sell: false,
+			src: 'tour-types-relax.jpg',
+			title: 'Деловые встречи'
+		},
+		{
+			sell: false,
+			src: 'relax-avialiga.jpg',
+			title: 'Круглый стол'
+		},
+		{
+			sell: false,
+			src: 'services-leisure-2.jpg',
+			title: 'Бизнес-завтраки'
+		}
+	] %}
+
+
+	<article class="catalog__list">
+		<ul class="catalog__list_grid">
+			{% for i in list %}
+			<li {%if i.sell%}class="sell"{%endif%}>
+				<div class="grid--photo">
+					<a href="">
+						<img data-src="./img/{{i.src}}" alt="">
+					</a>
+				</div>				
+				<div class="grid--hotel">{{i.title}}</div>				
+			</li>
+			{% endfor %}
+		</ul>		
+	</article>
+
+	<article class="single-slider aos-init" data-aos="fade-up">
+		<!-- Slider main container -->
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					{% set singleSlider2 = [						
+						{
+							title: "Name Business Case 1",
+							src: "./img/seychelles.jpg"
+						},
+						{
+							title: "Name Business Case 2",
+							src: "./img/mauritius.jpg"
+						},
+						{
+							title: "Name Business Case 3",
+							src: "./img/maldives.jpg"
+						}
+					] %}
+					{% for i in singleSlider2 %}
+					<div class="swiper-slide">
+						<div class="slide--photo">
+							<img data-src="{{i.src}}" alt="">
+						</div>
+						<!-- <div class="photo--mask"></div> -->
+						<div class="slide--content">
+							<h2>{{i.title}}</h2>
+							<div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+							<div class="slide--nav">
+								<a href="" class="about">ABOUT CASE</a>
+								<a href="" class="btn-skew">
+									<div class="background"><i></i></div>
+									<span>ALL CASES</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+			</div>
+			<div class="slider-control">
+				<div class="slider-button-prev">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+				<div class="slider-pagination"></div>
+				<div class="slider-button-next">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+			</div>
+		</div>		
+	</article>
+
+	{% include "partials/_expert.html" %}
+
+	<article class="next-category">
+		<div class="next-category__photo">
+			<img data-src="./img/meetings-2.jpg" alt="">
+		</div>
+		<div class="wrapper">
+			<h2>
+				<span>Next Category</span>
+				<a href="">Incentives</a>
+			</h2>
+		</div>
+	</article>
+	
+	
+
+{% endblock %}

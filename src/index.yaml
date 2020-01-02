@@ -26,4 +26,12 @@ PageList:
 - file: business_travel.html
   ready: 40
 - file: leisure_questionaire.html
+  ready: 40
+- file: single_country.html
+  ready: 40
+- file: countries.html
   ready: 40  
+- file: meetings.html
+  ready: 40
+- file: services.html
+  ready: 40 

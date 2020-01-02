@@ -51,6 +51,9 @@ header {
       &.logo--green {
         opacity: 0;
       }
+      &.logo--blue {
+        opacity: 0;
+      }
     }
     img {
       width: 100%;
@@ -110,12 +113,33 @@ header {
         }
         &.more {          
           background-color: $white;
-          padding: 90px;
+          padding: 0 90px 90px 90px;
           .row {
             margin-bottom: 0;
             justify-content: space-between;
+            flex-wrap: wrap;
+            &.contacts {
+              justify-content: flex-end;
+              section {
+                font-size: 16px;
+                line-height: 30px;
+                .tel {
+                  margin-bottom: 0;
+                  &::after {
+                    display: none;
+                  }
+                }
+                .mail {
+                  color: $red;
+                  &::after {
+                    background-color: $red;
+                  }
+                }
+              }
+            }
             section {
-              width: auto;  
+              width: 25%;
+              margin-top: 70px;
             }
           }
         }
@@ -266,13 +290,19 @@ header {
       .logo--black {
         opacity: 1!important;
       }
+      .logo--green {
+        opacity: 0!important;
+      }
+      .logo--blue {
+        opacity: 0!important;
+      }
     }
     .header__nav,
     .header__sub_nav {
       margin-top: 0;
     }
     .header__nav_link,
-    .header__sub_nav {      
+    .header__sub_nav {
       &>a {
         color: $black;
         .icon {
@@ -296,7 +326,7 @@ header {
     }
   }
 }
-.h-black header {
+.h-green header {
   a {
     color: #5ac0b0;
   }
@@ -325,7 +355,81 @@ header {
     .header__nav_link,
     .header__sub_nav {
       & > a {
-        color: #5ac0b0;
+        color: $black;
+        .icon {
+          fill: $black;
+        }
+      }
+    }    
+  }
+}
+.h-black header {
+  a {
+    color: $black;
+  }
+  .header__logo {
+    a {
+      &.logo--white {
+        opacity: 0;
+      }
+      &.logo--black {
+        opacity: 1;
+      }
+      &.logo--green {
+        opacity: 0;
+      }
+    }    
+  }  
+  .header__nav,
+  .header__sub_nav {
+    a {
+      .icon {
+        fill: $black;
+      }      
+    }
+  }
+  &.fixed {
+    .header__nav_link,
+    .header__sub_nav {
+      & > a {
+        color: $black;
+      }
+    }    
+  }
+}
+.h-blue header {
+  a {
+    color: #577082;
+  }
+  .header__logo {
+    a {
+      &.logo--white {
+        opacity: 0;
+      }
+      &.logo--black {
+        opacity: 0;
+      }
+      &.logo--green {
+        opacity: 0;
+      }
+      &.logo--blue {
+        opacity: 1;
+      }
+    }    
+  }  
+  .header__nav,
+  .header__sub_nav {
+    a {
+      .icon {
+        fill: #577082;
+      }      
+    }
+  }
+  &.fixed {
+    .header__nav_link,
+    .header__sub_nav {
+      & > a {
+        color: $black;
       }
     }    
   }

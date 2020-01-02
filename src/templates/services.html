@@ -1,0 +1,129 @@
+---
+title: Index page,
+class: blogs h-green
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">		
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+</div>
+	<!-- /LOADER -->
+
+	
+
+	<div class="catalog__title">
+		<div class="breadcrumb">			
+			<a href="">MAIN</a>
+			<a href="">AVIA</a>
+			<span>ADDITIONAL SERVICES</span>
+		</div>
+		<h1>ADDITIONAL SERVICES</h1>
+	</div>
+
+
+	<article>
+		<div class="grid">
+			{% set grid = [
+				{
+					src: './img/tour-types-adventure.jpg',					
+					title: 'Выбор места в салоне'
+				},
+				{
+					src: './img/tour-types-discover.jpg',					
+					title: 'Выбор питания на борту'
+				},
+				{
+					src: './img/tour-types-relax.jpg',					
+					title: 'Name Service'
+				},
+				{
+					src: './img/leisure-hero-1.jpg',					
+					title: 'Name Service'
+				},
+				{
+					src: './img/leisure-hero-2.jpg',					
+					title: 'Name Service'
+				},
+				{
+					src: './img/leisure-hero-1.png',					
+					title: 'Name Service'
+				}
+			] %}
+	
+			{% for i in grid%}
+			<section class="grid__item">
+				<div class="item--photo">
+					<a href="">
+						<img data-src="{{i.src}}" alt="">
+					</a>					
+				</div>				
+				<h3>
+					<a href="">{{i.title}}</a>
+				</h3>
+			</section>
+			{% endfor %}
+		</div>		
+
+		<div class="catalog__list_more">
+			<button class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>More</span>
+			</button>
+		</div>
+	</article>
+	
+	
+
+	<article class="homepage__insta">
+		<section class="leisure" data-aos="fade-up">
+			<div class="homepage__insta_title">
+				<h2>
+					<span>Leisure insta</span>
+				</h2>
+				<a href="">@avialiga_leisure</a>
+			</div>
+			<div class="homepage__insta_gallery">
+				<img data-src="./img/insta-leisure-1.jpg" alt="">
+				<img data-src="./img/insta-leisure-2.jpg" alt="">
+				<img data-src="./img/insta-leisure-3.jpg" alt="">
+			</div>
+		</section>
+		<section class="business" data-aos="fade-up">
+			<div class="homepage__insta_title">
+				<h2>
+					<span>Business insta</span>
+				</h2>
+				<a href="">@avialiga_business</a>
+			</div>
+			<div class="homepage__insta_gallery">
+				<img data-src="./img/insta-business-1.jpg" alt="">
+				<img data-src="./img/insta-business-2.jpg" alt="">
+				<img data-src="./img/insta-business-3.jpg" alt="">
+			</div>
+		</section>
+	</article>
+	
+	
+
+
+
+{% endblock %}
