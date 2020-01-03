@@ -1,16 +1,17 @@
 .contacts {
     margin: 0px 0 157px;
     padding-top: 130px;
+    #map {
+        display: block;
+        height: 604px;
+        width: 50%;
+    }
 }
 .contact__inner {
     display: flex;
     flex-wrap: wrap;
 }
-#map {
-    display: block;
-    height: 604px;
-    width: 50%;
-}
+
 .contact__descr {
     padding-top: 75px;
     padding-left: 100px;

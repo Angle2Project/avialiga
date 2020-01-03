@@ -34,4 +34,8 @@ PageList:
 - file: meetings.html
   ready: 40
 - file: services.html
-  ready: 40 
+  ready: 40
+- file: card_product.html
+  ready: 40
+
+  

@@ -1,0 +1,454 @@
+---
+title: Index page,
+class: card product h-white
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+
+	<div class="modal modal__weather">
+		<div class="modal__wrapper">
+			<h2>
+				<span>ClIMATE CHARTS</span>
+			</h2>
+			<div id="container" style="width:100%; height:500px;"></div>
+		</div>
+	</div>
+
+
+	<article class="single-slider card__hero">
+		<div class="breadcrumb">			
+			<a href="">MAIN</a>
+			<a href="">TOURS</a>
+			<span>VAKKARU TOUR Beach Bungalow</span>
+		</div>
+		<!-- Slider main container -->
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					{% set singleSlider = [
+						{
+							title: "Maldives",							
+							src: "./img/maldives.jpg"
+						},
+						{
+							title: "Seychelles",
+							src: "./img/seychelles.jpg"
+						},
+						{
+							title: "Mauritius",
+							src: "./img/mauritius.jpg"
+						}
+					] %}
+					{% for i in singleSlider %}
+					<div class="swiper-slide">
+						<div class="slide--photo">
+							<img data-src="{{i.src}}" alt="">
+						</div>
+						<!-- <div class="photo--mask"></div> -->
+						<div class="slide--content">
+							<h2>{{i.title}}</h2>
+							<div class="slide--text">VAKKARU  TOUR Beach Bungalow</div>							
+						</div>
+					</div>
+					{% endfor %}
+			</div>
+			<div class="slider-button-prev">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>
+			<div class="slider-button-next">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>
+			<div class="slider-control">				
+				<div class="slider-pagination"></div>				
+			</div>
+		</div>		
+	</article>
+
+	<div class="product__aside">
+		<div class="product__aside_info">
+			<div class="info--date">
+				<span class="name">Date:</span>
+				<span class="duration">10 days</span>
+				<time>09.10.2019 - 19.19.2019</time>
+			</div>
+			<div class="info-price">
+				<span class="name">Price:</span>
+				<span class="price">9 112 USD</span>
+			</div>
+		</div>
+		<div class="product__aside_button">
+			<a href="" class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>view tours</span>
+			</a>
+		</div>
+	</div>
+
+	<article class="card__includes">
+		<div class="card__includes_left">
+			<h2>
+				<span>This tour includes</span>
+			</h2>
+			<ul class="left--list">							
+				<li>
+					{{mixins.icon('icon_card_01')}}
+					<span>Питание: завтраки и ужины</span>
+				</li>
+				<li>
+					{{mixins.icon('icon_card_02')}}
+					<span>Страховка: входит в стоимость</span>
+				</li>
+				<li>
+					{{mixins.icon('icon_card_03')}}
+					<span>Проживание в отелях: 10 ночей</span>
+				</li>
+				<li>
+					{{mixins.icon('icon_card_04')}}
+					<span>Перелёт: входит в стоимость</span>
+				</li>
+				<li>
+					{{mixins.icon('icon_card_05')}}
+					<span>Трансфер: входит в стоимость</span>
+				</li>
+			</ul>
+		</div>
+		<div class="card__includes_right">
+			<h2>
+				<span>Best time to visit</span>
+			</h2>
+			<ul class="right--list">
+				<li>Winter</li>
+				<li>Spring</li>
+				<li>Summer</li>
+				<li class="disabled">Autumn</li>
+			</ul>
+			<div class="climate-modal">
+				<a href="">CLIMATE CHARTS</a>
+			</div>
+		</div>
+	</article>
+
+	<article class="single-slider product__features">
+		<h2>TOUR FEATURES</h2>
+		<!-- Slider main container -->
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					{% set singleSlider = [
+						{
+							number: 1,
+							title: "Посетим места съемок «Игры престолов». Три сцены 7-го сезона снимали как раз в Эстрамадуре.",							
+							src: "./img/got-1.jpg"
+						},
+						{
+							number: 2,
+							title: "Посетим места съемок «Игры престолов». Три сцены 7-го сезона снимали как раз в Эстрамадуре.",
+							src: "./img/got-2.jpg"
+						},
+						{
+							number: 3,
+							title: "Посетим места съемок «Игры престолов». Три сцены 7-го сезона снимали как раз в Эстрамадуре.",
+							src: "./img/got-3.jpg"
+						}
+					] %}
+					{% for i in singleSlider %}
+					<div class="swiper-slide">
+						<div class="slide--photo">
+							<img data-src="{{i.src}}" alt="">
+						</div>
+						<!-- <div class="photo--mask"></div> -->
+						<div class="slide--content">
+							<h3>{{i.number}}.</h3>
+							<div class="slide--text">{{i.title}}</div>
+						</div>
+					</div>
+					{% endfor %}
+			</div>			
+			<div class="slider-control">				
+				<div class="slider-button-prev">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+				<div class="slider-pagination"></div>
+				<div class="slider-button-next">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+			</div>
+		</div>		
+	</article>
+
+	<nav class="nav__tabs">
+
+		{% set tabs = [
+			{
+				name: "OVERVIEW",
+				id: "overview"
+			},
+			{
+				name: "ITINERARY",
+				id: "itinerary"
+			},
+			{
+				name: "ADD SERVICES",
+				id: "services"
+			}
+		] %}
+
+		<ul>
+			{% for i in tabs %}
+			<li class="btn-skew" data-target="{{i.id}}">
+				<div class="background"><i></i></div>
+				<span>{{i.name}}</span>
+			</li>
+			{% endfor %}
+			
+		</ul>
+	</nav>
+	
+	<ul class="tabs__list">		
+		<li id="overview">
+			<article class="overview__description">
+				<section class="overview__description_text">
+					<div class="text">Предлагаем вам отправиться с нами в Эстремадуру. Этот регион на западе Испании мало известен туристам, так что каждый почувствует себя здесь первооткрывателем римско-мавританской истории, колоритных традиций и знаменитой на всю Испанию хамонно-винно-сырной гастрономии.</div>
+					<div class="link">
+						{{mixins.icon('icon_download')}}
+						<a href="">							
+							<span>DOWNLOAD TOUR PDF</span>
+						</a>
+					</div>
+				</section>
+				<section class="overview__itinerary">
+					<div class="overview__itinerary_list">
+						<h2>Itinerary</h2>
+						<ul>
+							<li>
+								<span class="day">DAY 1</span>
+								<span class="place">МАДРИД</span>
+							</li>
+							<li>
+								<span class="day">DAY 2</span>
+								<span class="place">САЛАМАНКА</span>
+							</li>
+							<li>
+								<span class="day">DAY 3</span>
+								<span class="place">КАСЕРЕС</span>
+							</li>
+							<li>
+								<span class="day">DAY 4</span>
+								<span class="place">МЕРИДА</span>
+							</li>
+						</ul>
+						<div class="link">
+							<a href="">VIEW FULL ITINERARY</a>
+						</div>
+					</div>
+					<div class="overview__itinerary_map">
+						<h2>YOUR JOURNEY</h2>
+						<div class="map" id="map"></div>
+					</div>
+				</section>
+				<div class="overview__share">
+					<div class="overview__share_title">
+						<span>Share tour with your friends on</span>
+					</div>
+					<a href="">FACEBOOK</a>
+				</div>
+			</article>		
+		</li>
+		<li id="itinerary">
+			<article class="itinerary__list">
+				<section>
+					<div class="itinerary__list_title">
+						<span class="day">DAY 1</span>
+						<span class="place">МАДРИД</span>
+					</div>
+					<div class="itinerary__list_photo">
+						<img data-src="./img/madrid.jpg" alt="">
+					</div>
+					<div class="itinerary__list_description">
+						<h4>Прилет в Мадрид</h4>
+						<h4>Трансфер на жд вокзал</h4>
+						<h4>Отправление на поезде в Саламанку</h4>
+						<h4>Размещение в отеле в Саламанке</h4>
+					</div>
+				</section>
+				<section>
+					<div class="itinerary__list_title">
+						<span class="day">DAY 2</span>
+						<span class="place">САЛАМАНКА</span>
+					</div>
+					<div class="itinerary__list_photo">
+						<img data-src="./img/salamanka.jpg" alt="">
+					</div>
+					<div class="itinerary__list_description">
+						<h4>Завтрак в отеле</h4>
+						<h4>Знакомство с городом</h4>
+						<p>Саламанка – один из самых мистических и загадочных городов Испании, ведет счет своих лет с 220 г. до н.э. В городе буквально каждый квадратный метр — истори- ческая реликвия, а что ни дом — то место рождения ве- ликого человека. Действительно, испанские короли ис- пытывали самые трогательные чувства по отношению к Саламанке, и, наверное, поэтому ей многое прощалось. Давайте вместе отправимся на прогулку по местам со старинными домами и красивыми площадями, интерес- ными храмами и знаменитым университетом.</p>
+						<h4>Обед</h4>
+						<h4>Посещение фермы по производству хамона</h4>
+					</div>
+				</section>
+				<section>
+					<div class="itinerary__list_title">
+						<span class="day">DAY 3</span>
+						<span class="place">КАСЕРЕС</span>
+					</div>
+					<div class="itinerary__list_photo">
+						<img data-src="./img/kaseres.jpg" alt="">
+					</div>
+					<div class="itinerary__list_description">
+						<h4>Завтрак в отеле</h4>
+						<h4>Знакомство с г. Касерес</h4>						
+					</div>
+				</section>
+			</article>
+			<div class="link itinerary__link">
+				{{mixins.icon('icon_download')}}
+				<a href="">							
+					<span>DOWNLOAD TOUR PDF</span>
+				</a>
+			</div>
+			<div class="overview__share">
+				<div class="overview__share_title">
+					<span>Share tour with your friends on</span>
+				</div>
+				<a href="">FACEBOOK</a>
+			</div>
+		</li>
+		<li id="services">
+			<h2>SERVICES</h2>
+		</li>
+	</ul>
+
+	{% set list = [
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: true,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: false,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		},
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: false,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: true,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		}
+	] %}
+
+
+	<article class="catalog__slider tours aos-init" data-aos="fade-up">
+		<h2>
+			<span>Editorial tours</span>
+		</h2>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for i in list %}
+				<div class="swiper-slide">
+					<div class="grid--photo">
+						<a href="">
+							<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
+						</a>
+					</div>
+					<div class="grid--location">{{i.location}}</div>
+					<div class="grid--hotel">{{i.hotel}}</div>
+					<div class="grid--info">
+						<div class="date">{{i.date}}</div>
+						<div class="price">{{i.price}}</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>			
+			<div class="slider-button-prev">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>			
+			<div class="slider-button-next">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>
+		</div>
+		<div class="catalog__list_more">
+			<button class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>More</span>				
+			</button>
+		</div>
+	</article>
+
+
+
+	
+
+	{% include "partials/_expert.html" %}
+
+
+
+
+
+	
+
+
+
+
+
+
+{% endblock %}

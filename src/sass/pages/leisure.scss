@@ -488,7 +488,7 @@
   }
 }
 
-.single-slider {  
+.single-slider {
   position: relative;
   canvas {
     position: absolute;
@@ -639,8 +639,9 @@
         color: $white;
         bottom: initial;
         left: initial;
-      }
-      .slider-button-prev,
+      }      
+    }
+    .slider-button-prev,
       .slider-button-next {
         width: 80px;
         height: 80px;
@@ -686,7 +687,6 @@
           transform: rotate(-90deg);
         }
       }
-    }
   }
 }
 .catalog__slider {  
