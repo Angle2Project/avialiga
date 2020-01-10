@@ -9051,6 +9051,7 @@ const _tickets = function () {
       loaderReady: false,
       scripts:
         [         
+          'pixi',
           //'pixiFilters'
         ],    
       resourcesDone: 0,
@@ -9077,7 +9078,21 @@ const _tickets = function () {
             that.resourcesDone++;
             that.loading();
           }
-        });      
+        });
+        this.scripts.forEach(function (n) {        
+          let src = './js/lib/' + app.resours[n];
+          var script = document.createElement('script');
+          script.src = src;
+          document.head.appendChild(script);
+          script.onload = function () {
+            if (n == 'pixi') {
+              filters();
+            }
+            that.resourcesDone++;
+            that.loading();
+          }
+        });
+
       },
       loading: function () {
         const that = this;      
@@ -9122,6 +9137,30 @@ const _tickets = function () {
           TweenMax.set('body', { overflow: 'auto' });        
         })      
       },
+    };
+
+    this.questionaire = {
+      init: function(){
+        let that = this;
+        that.questions = [];
+        that.total = document.querySelectorAll('.leisure-questionaire__hero .hero--questions li').length;
+        that.current = 1;
+        document.querySelectorAll('.leisure-questionaire__hero .hero--questions li').forEach(function(el, i){
+          
+          let question = {
+            
+          }
+        });
+
+
+        that.el = document.querySelector('.leisure-questionaire__hero');
+        that.hero = new PIXI.Application({
+          width: that.el.clientWidth,
+          height: that.el.clientHeight,
+          transparent: true,
+          //forceCanvas: true
+        });
+      }
     };
   
     this.cursor = {
