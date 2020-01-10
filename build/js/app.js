@@ -9039,7 +9039,7 @@ const _tickets = function () {
 };
 
 /* ==============================================================
-                          DEFAULT INIT
+                          LEISURE QUESTIONAIRE INIT
    ============================================================== */
    const _leisureQuestionaire = function () {
     const root = this;
