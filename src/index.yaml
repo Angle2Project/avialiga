@@ -2,7 +2,7 @@ ProjectTitle: avialiga
 
 PageList:
 - file: homepage.html
-  ready: 80
+  ready: 90
 - file: tours.html
   ready: 90
 - file: hotels.html
@@ -12,47 +12,47 @@ PageList:
 - file: business.html
   ready: 40
 - file: contacts.html
-  ready: 40
+  ready: 90
 - file: blogs.html
-  ready: 40
+  ready: 90
 - file: cases.html
-  ready: 40 
+  ready: 90 
 - file: news.html
-  ready: 40 
+  ready: 90 
 - file: spa_avialiga.html
-  ready: 40  
+  ready: 90  
 - file: relax_avialiga.html
-  ready: 40
+  ready: 90
 - file: business_travel.html
-  ready: 40
+  ready: 90
 - file: leisure_questionaire.html
-  ready: 40
+  ready: 20
 - file: single_country.html
-  ready: 40
+  ready: 90
 - file: countries.html
-  ready: 40  
+  ready: 90  
 - file: meetings.html
-  ready: 40
+  ready: 90
 - file: services.html
-  ready: 40
+  ready: 90
 - file: card_product.html
-  ready: 40
+  ready: 90
 - file: card_hotel.html
-  ready: 40 
+  ready: 90 
 - file: airports.html
-  ready: 40
+  ready: 90
 - file: mice.html
-  ready: 40
+  ready: 90
 - file: business_questionaire.html
-  ready: 40
+  ready: 90
 - file: agents.html
-  ready: 40
+  ready: 90
 - file: vacancy.html
-  ready: 40
+  ready: 90
 - file: about.html
-  ready: 40
+  ready: 90
 - file: article.html
-  ready: 40
+  ready: 90
 - file: tickets.html
   ready: 40
 
