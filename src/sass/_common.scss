@@ -50,6 +50,7 @@ input, button {
 		color: $black;
 		opacity: 0.6;
 		transition: all 250ms ease;
+		font-family: "Proxima";
 		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 			color: $black;
 			opacity: 1;

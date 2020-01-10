@@ -37,5 +37,23 @@ PageList:
   ready: 40
 - file: card_product.html
   ready: 40
+- file: card_hotel.html
+  ready: 40 
+- file: airports.html
+  ready: 40
+- file: mice.html
+  ready: 40
+- file: business_questionaire.html
+  ready: 40
+- file: agents.html
+  ready: 40
+- file: vacancy.html
+  ready: 40
+- file: about.html
+  ready: 40
+- file: article.html
+  ready: 40
+- file: tickets.html
+  ready: 40
 
   

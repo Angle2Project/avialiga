@@ -1,0 +1,201 @@
+---
+title: Index page,
+class: article h-black
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+	<div class="breadcrumb">
+		<a href="">MAIN</a>
+		<a href="">OUR BLOG</a>
+    <span>ARTICLE</span>
+	</div>
+	
+	<article class="article__head">
+		<h1>
+			<span>New great opening on MALDIVES Hotel Lorem Ipsum</span>
+		</h1>
+		<ul class="vacancy__head_list">
+			<li>
+				<span>Autor</span>
+				<b>Anton Kiruoka</b>
+			</li>
+			<li>
+				<span>Category</span>
+				<b>LEISURE</b>
+			</li>
+			<li>
+				<span>Date</span>
+				<b>21 Desemer</b>
+			</li>
+		</ul>
+	</article>
+	<article class="article__photo">
+		<div class="vacancy__photo_wrapper">
+			<img data-src="./img/leisure-hero-1.jpg" alt="">
+		</div>
+		<div class="hero--scroll animation">
+			<span>Sroll Down</span>
+			<div class="hero--scroll-line"></div>
+		</div>
+	</article>
+
+	<article class="article__description">
+		<h2>H2 title dey responsibilities of the role:</h2>
+		<p>Attend trade shows across the world</p>
+		<p>Network with other tourism businesses</p>
+		<p>Ensure our clients business is at the forefront of the industry</p>
+		<p>Oversee marketing collateral to ensure it is in line with business goals</p>
+		<p>Provide insight and reports to the wider team on market and competitor performance</p>
+		<p></p>
+		<p></p>
+		<p>
+			<img data-src="./img/article.jpg" alt="">
+		</p>
+		<p></p>
+		<h3>H3 Do you tick the boxes?</h3>
+		<p>The successful applicant will be an enthusiastic, dynamic and forward thinking individual who has a strong knowledge of the UK inbound travel network. You’ll have a detailed understanding of the emerging international markets looking to travel to the UK, and be flexible in travelling oversees to trade shows 10-12 times a year.</p>
+		<p></p>
+		<p></p>
+		<h4>H4 Do you tick the boxes?</h4>
+
+		<ul>
+			<li>UK tourism experience</li>
+			<li>Commercially driven</li>
+			<li>Flexibility in travelling to worldwide events</li>
+			<li>Relationship management</li>
+			<li>Highly motivated and enthusiastic</li>
+		</ul>
+		<p></p>
+		<p></p>
+		<p>The successful applicant will be an enthusiastic, dynamic and forward thinking individual who has a strong knowledge of the UK inbound travel network. You’ll have a detailed understanding of the emerging international markets looking to travel to the UK, and be flexible in travelling oversees to trade shows 10-12 times a year.</p>
+	</article>
+
+	<div class="overview__share">
+		<div class="overview__share_title">
+			<span>Share this post on</span>
+		</div>
+		<a href="">FACEBOOK</a>
+	</div>
+
+	<article class="article__form">
+		<h2>
+			<span>Subscribe to our newsletter</span>
+		</h2>		
+		<div class="expert__form_body">
+			<form action="">
+				<div class="form">
+					<div class="form-control">
+						<input type="email" placeholder="Your Email">
+					</div>
+				</div>				
+				<label class="custom-checkbox">
+					<input type="checkbox">
+					<span>I would like you to use my contact details to contact me directly about potential cooperation opportunities now or in the future. All the details about personal data protection can be found in the Privacy Policy.</span>
+				</label>
+				<div class="form--submit">
+					<button class="btn-skew">
+						<div class="background"><i></i></div>
+						<span>SUBSCRIBE</span>						
+					</button>
+				</div>
+			</form>
+		</div>
+	</article>
+
+	{% set list = [
+		{			
+			date: '12 October',
+			title: 'New opening on MALDIVES '
+		},
+		{			
+			date: '10 October',
+			title: 'Best experience ever'
+		},
+		{			
+			date: '12 October',
+			title: 'New opening on MALDIVES '
+		},
+		{			
+			date: '10 October',
+			title: 'Best experience ever'
+		},
+		{			
+			date: '12 October',
+			title: 'New opening on MALDIVES '
+		},
+		{			
+			date: '10 October',
+			title: 'Best experience ever'
+		}
+	] %}
+
+
+	<article class="catalog__slider">
+		<h2>
+			<span>Related posts</span>
+		</h2>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for i in list %}
+				<div class="swiper-slide">
+					<div class="grid--photo">
+						<a href="">
+							<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
+						</a>
+					</div>
+					<div class="grid--location">{{i.date}}</div>
+					<div class="grid--hotel">{{i.title}}</div>
+				</div>
+				{% endfor %}
+			</div>			
+			<div class="slider-button-prev">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>			
+			<div class="slider-button-next">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>
+		</div>
+		<div class="catalog__list_more">
+			<button class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>ALL POSTS</span>				
+			</button>
+		</div>
+	</article>
+  
+
+	
+
+	
+	
+	
+
+
+
+{% endblock %}

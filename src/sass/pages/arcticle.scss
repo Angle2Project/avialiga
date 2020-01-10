@@ -1,0 +1,453 @@
+body.vacancy {
+  padding-top: 130px;
+  .vacancy__head {
+    margin-top: 90px;
+    margin-left: calc(180px + 15vw);
+    margin-right: calc(180px + 15vw);
+    padding-bottom: 60px;
+    h1 {
+      font: normal 72px/60px "Futura";
+      color: $green;
+    }
+    .vacancy__head_list {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      margin-top: 60px;
+    }
+  }
+  .vacancy__photo {
+    position: relative;
+    line-height: 1;
+    font-size: 0;
+    img {
+      width: 100%;
+      height: 36vw;
+      object-fit: cover;
+    }
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #000;
+      opacity: 0.2;
+      z-index: 0;
+    }
+    .hero--scroll {
+      position: relative;      
+      position: absolute;      
+      right: 85px;
+      top: 50%;
+      padding-right: 20px;
+      color: $white;
+      font-size: 16px;
+      &.animation {
+        .hero--scroll-line {
+          &::before {
+            animation: scrollDown 2s infinite ease;
+          }            
+        }          
+      }
+      .hero--scroll-line {
+        width: 2px;
+        height: 80px;          
+        position: absolute;
+        right: 0;
+        bottom: -30px;
+        overflow: hidden;
+        &::before {
+          content: "";
+          display: block;
+          width: 2px;
+          height: 80px;
+          background-color: #fff;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }          
+      }        
+    }
+  }
+  .vacancy__description {
+    margin-top: 60px;
+    margin-left: calc(180px + 15vw);
+    margin-right: calc(180px + 15vw);
+    padding-bottom: 90px;
+    font: 300 24px/36px "Futura";
+    h4 {
+      font: 300 36px/48px "Futura";
+      text-transform: uppercase;
+      margin-bottom: 0.3em;
+    }
+    ul {
+      margin-left: 20px;
+      li {
+        position: relative;
+        padding-left: 22px;
+        &::before {
+          content: "";
+          display: block;
+          width: 3px;
+          height: 3px;
+          background-color: $red;
+          position: absolute;
+          left: 0;
+          top: 0.7em;
+        }
+      }
+    }
+  }
+
+  .vacancy__form {
+    margin-bottom: -101px;
+    padding: 90px 0 110px 0;
+    background-color: #d3e7e1;
+    padding-left: calc(180px + 15vw);
+    padding-right: calc(180px + 15vw);
+    h2 {
+      font: normal 72px/60px $futura;
+      color: $green;
+      perspective: 400px;
+      span {
+        display: inline-block;
+        transform-origin: bottom;
+      }
+    }          
+    .expert__form_body {
+      margin-top: 20px;
+        .form {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          .form-control {
+            i {
+              background-color: #c0d2cd;
+            }
+            input,
+            textarea {
+                font-size: 14px;
+            }
+            &.name,
+            &.phone {
+                width: calc(50% - 22px);
+            }
+            &.comment {
+                width: 100%;
+                height: initial;
+                line-height: 1;
+                textarea {
+                    height: 70px;
+                    padding: 28px 0 0 0;
+                    font-size: 14px;
+                    transition: all 250ms ease;
+                    &:focus {
+                        height: 90px;
+                    }
+                }
+            }
+          }          
+        }
+        .form-atach {
+          margin-top: 30px;
+          display: flex;
+          height: 60px;
+          border: 1px dashed #bdcfca;
+          justify-content: center;
+          align-items: center;
+          font-size: 14px;
+        }
+        .custom-checkbox {
+          margin-top: 30px;
+          input[type="checkbox"] + span {
+            text-transform: initial;
+            font: 300 14px/18px "Futura";
+          }
+          input[type="checkbox"] + span::before {
+            border-color: #bdcfca;
+            top: 1px;
+          }
+          input[type="checkbox"] + span::after {
+            border: none;
+            top: 3px;
+          }
+        }
+        .form--submit {
+            margin-top: 40px;
+            text-align: center;
+            button {
+                width: 320px;
+            }
+        }
+    }
+  }
+}
+
+body.article {
+  padding-top: 130px;
+  .article__head {
+    margin-top: 40px;
+    margin-left: 180px;
+    margin-right: 180px;
+    padding-bottom: 60px;
+    h1 {
+      font: normal 72px/1 "Futura";
+    }
+    .vacancy__head_list {
+      display: flex;
+      justify-content: space-between;      
+      margin-top: 40px;
+      span {
+        display: block;
+        font: 300 16px/36px "Futura";
+      }
+      b {
+        display: block;
+        font-weight: normal;
+        font: 300 24px/36px "Futura";
+      }
+    }
+  }
+  .article__photo {
+    position: relative;
+    line-height: 1;
+    font-size: 0;
+    img {
+      width: 100%;
+      height: 36vw;
+      object-fit: cover;
+    }
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #000;
+      opacity: 0.2;
+      z-index: 0;
+    }
+    .hero--scroll {
+      position: relative;      
+      position: absolute;      
+      right: 85px;
+      top: 50%;
+      padding-right: 20px;
+      color: $white;
+      font-size: 16px;
+      &.animation {
+        .hero--scroll-line {
+          &::before {
+            animation: scrollDown 2s infinite ease;
+          }            
+        }          
+      }
+      .hero--scroll-line {
+        width: 2px;
+        height: 80px;          
+        position: absolute;
+        right: 0;
+        bottom: -30px;
+        overflow: hidden;
+        &::before {
+          content: "";
+          display: block;
+          width: 2px;
+          height: 80px;
+          background-color: #fff;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }          
+      }        
+    }
+  }
+  .article__description {
+    margin-top: 80px;
+    margin-left: calc(180px + 15vw);
+    margin-right: calc(180px + 15vw);    
+    font: 300 24px/36px "Futura";
+    img {
+      width: 100%;
+    }
+    h2 {
+      font: 300 60px/1 "Futura";
+      text-transform: uppercase;
+      margin-bottom: 0.3em;
+    }
+    h3 {
+      font: 300 48px/1 "Futura";
+      text-transform: uppercase;
+      margin-bottom: 0.3em;
+    }
+    h4 {
+      font: 300 36px/48px "Futura";
+      text-transform: uppercase;
+      margin-bottom: 0.3em;
+    }
+    ul {
+      margin-left: 20px;
+      li {
+        position: relative;
+        padding-left: 22px;
+        &::before {
+          content: "";
+          display: block;
+          width: 3px;
+          height: 3px;
+          background-color: $red;
+          position: absolute;
+          left: 0;
+          top: 0.7em;
+        }
+      }
+    }
+  }
+  .article__form {    
+    margin-top: 120px;
+    padding: 90px 0 110px 0;
+    background-color: #f5faf8;
+    padding-left: calc(180px + 15vw);
+    padding-right: calc(180px + 15vw);
+    h2 {
+      font: normal 72px/60px $futura;
+      color: $green;
+      perspective: 400px;
+      span {
+        display: inline-block;
+        transform-origin: bottom;
+      }
+    }          
+    .expert__form_body {
+      margin-top: 20px;
+        .form {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          .form-control {
+            width: 100%;
+            i {
+              background-color: #c0d2cd;
+            }
+            input,
+            textarea {
+                font-size: 14px;
+            }
+            &.name,
+            &.phone {
+                width: calc(50% - 22px);
+            }
+            &.comment {
+                width: 100%;
+                height: initial;
+                line-height: 1;
+                textarea {
+                    height: 70px;
+                    padding: 28px 0 0 0;
+                    font-size: 14px;
+                    transition: all 250ms ease;
+                    &:focus {
+                        height: 90px;
+                    }
+                }
+            }
+          }          
+        }
+        .form-atach {
+          margin-top: 30px;
+          display: flex;
+          height: 60px;
+          border: 1px dashed #bdcfca;
+          justify-content: center;
+          align-items: center;
+          font-size: 14px;
+        }
+        .custom-checkbox {
+          margin-top: 30px;
+          input[type="checkbox"] + span {
+            text-transform: initial;
+            font: 300 14px/18px "Futura";
+          }
+          input[type="checkbox"] + span::before {
+            border-color: #bdcfca;
+            top: 1px;
+          }
+          input[type="checkbox"] + span::after {
+            border: none;
+            top: 3px;
+          }
+        }
+        .form--submit {
+            margin-top: 40px;
+            text-align: center;
+            button {
+                width: 320px;
+            }
+        }
+    }
+  }
+  .overview__share {      
+    margin: 100px 90px 0 90px;
+    margin-left: calc(180px + 15vw);
+    margin-right: calc(180px + 15vw);
+    font: 300 24px/30px "Futura";
+    text-align: center;
+    .overview__share_title {
+      border-top: 1px solid #d3e7e1;                
+      span {
+        display: inline-block;
+        background-color: $white;
+        padding: 0 50px;
+        transform: translateY(-50%);
+      }
+    }
+    a {        
+      color: $red;
+      text-transform: uppercase;        
+      margin-top: -0.5em;
+      position: relative;
+      transform-origin: bottom;
+      position: relative;
+      top: -0.4em;
+      &::after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background: $red;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+      &:hover {
+        &::after {
+          animation: linkHover 1.5s ease;
+        }           
+      }
+    }
+  }
+  .catalog__slider {
+    min-height: auto;
+    h2 {
+      color: $black;
+    }  
+    .swiper-slide {      
+      .grid--photo {
+        padding-top: 68%;
+      }      
+    }
+    .catalog__list_more {
+      border-color: #eaeaea;
+    }
+  }
+  footer {
+    border: none;
+  }
+}
+
+
+

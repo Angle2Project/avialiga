@@ -1,0 +1,131 @@
+.about {
+  .homepage__tabs {
+    .wrapper {
+      margin-right: 180px;
+      .homepage__tabs_list {
+        text-transform: uppercase;
+      }
+    }
+  }
+  .single-slider {
+    .swiper-container {
+      .swiper-slide {
+        h2 {
+          font: 300 72px/60px "Futura";
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  .catalog__list {
+    padding-top: 100px;
+    h2 {
+      font: 300 72px/60px "Futura";
+      color: #5ac0b0;
+      text-transform: uppercase;
+      margin-bottom: 60px;
+    }
+    .catalog__list_grid {
+      li {
+        .grid--location {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+  .about__join {
+    display: flex;
+    padding: 0 90px 90px 90px;
+    h2 {
+      color: #9bcad6;
+      font: normal 72px/60px "Futura";
+      width: calc(((100vw - 180px - 120px) / 3) + 55px);
+      flex-shrink: 0;
+      padding-right: 20px;
+    }
+    .about__join_list {
+      flex-grow: 1;
+      li {
+        padding: 30px 0;
+        border-top: 1px solid #bde4de;
+        position: relative;
+        a {
+          display: block;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 1;
+        }
+        h3 {
+          font: 300 72px/60px "Futura";
+          color: $red;
+          text-transform: uppercase;
+          position: relative;
+          .icon {
+            fill: $red;
+            transform: rotate(-90deg);
+            width: 20px;
+            height: 20px;
+            top: 18px;
+            right: 25px;
+            position: absolute;
+          }
+        }
+        .list--info {
+          margin-top: 10px;
+          display: flex;
+          font-size: 16px;
+          .location {
+            margin-right: 23%;
+          }
+        }
+      }
+    }
+  }
+  .catalog__slider .swiper-slide .grid--photo {
+    padding-top: 68%;
+  }
+  .homepage__insta section.business .homepage__insta_title h2 {
+    color: #9bcad6;
+  }
+  .expert__form .expert__form_title h2 {
+    color: #5ac0b0;
+  }
+}
+
+.abuot__mission {
+  padding: 0 90px 140px 90px;
+  display: flex;
+  .abuot__mission_left {
+    width: 50%;
+    flex-shrink: 0;
+    h2 {
+      color: #5ac0b0;
+    }
+  }
+  .abuot__mission_right {
+    width: 50%;
+    flex-shrink: 0;    
+    padding-top: 104px;
+    h2 {
+      color: #9bcad6;
+    }
+  }
+  h2 {
+    font: 300 72px/60px "Futura";
+    text-transform: uppercase;
+    perspective: 500px;
+    span {
+      display: inline-block;
+      transform-origin: bottom;
+    }
+  }
+  .abuot__mission_text {
+    font: 300 24px/36px "Futura";
+    margin-top: 40px;
+    padding: 0 90px;
+  }
+}
+

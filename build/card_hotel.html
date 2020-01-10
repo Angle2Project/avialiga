@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" media="all" href="css/app.css" />
   </head>
-  <body class="card product h-white">
+  <body class="card hotel h-white">
     <!-- BEGIN content -->
     <main>
       <header>
@@ -224,25 +224,16 @@
         <div class="blind-right"></div>
       </div>
       <!-- /LOADER -->
-      <div class="modal modal__weather">
-        <div class="modal__wrapper">
-          <a href="" class="close">
-            <svg class="icon icon-icon_close">
-              <use xlink:href="img/sprite.svg#icon-icon_close"></use>
-            </svg>
-          </a>
-          <h2>
-            <span>ClIMATE CHARTS</span>
-          </h2>
-          <div id="container" style="width:100%; height:500px;"></div>
-        </div>
-      </div>
       <article class="single-slider card__hero">
         <div class="breadcrumb">
           <a href="">MAIN</a>
-          <a href="">TOURS</a>
-          <span>VAKKARU TOUR Beach Bungalow</span>
+          <a href="">ALL HOTELS</a>
+          <span>NAME HOTEL 5*</span>
         </div>
+        <a href="" class="btn-skew card__heroe_link">
+          <div class="background"><i></i></div>
+          <span>BOOK A hotel</span>
+        </a>
         <!-- Slider main container -->
         <div class="swiper-container">
           <!-- Additional required wrapper -->
@@ -254,8 +245,8 @@
               </div>
               <!-- <div class="photo--mask"></div> -->
               <div class="slide--content">
-                <h2>Maldives</h2>
-                <div class="slide--text">VAKKARU TOUR Beach Bungalow</div>
+                <h2>MAVRITIUS. Port Louiss</h2>
+                <div class="slide--text">Name Hotel 5*</div>
               </div>
             </div>
             <div class="swiper-slide">
@@ -264,8 +255,8 @@
               </div>
               <!-- <div class="photo--mask"></div> -->
               <div class="slide--content">
-                <h2>Seychelles</h2>
-                <div class="slide--text">VAKKARU TOUR Beach Bungalow</div>
+                <h2>SEYCHELLES Grand Anse</h2>
+                <div class="slide--text">Name Hotel 5*</div>
               </div>
             </div>
             <div class="swiper-slide">
@@ -274,8 +265,8 @@
               </div>
               <!-- <div class="photo--mask"></div> -->
               <div class="slide--content">
-                <h2>Mauritius</h2>
-                <div class="slide--text">VAKKARU TOUR Beach Bungalow</div>
+                <h2>MAURITIUS Thinadhoo</h2>
+                <div class="slide--text">Name Hotel 5*</div>
               </div>
             </div>
           </div>
@@ -296,80 +287,39 @@
           </div>
         </div>
       </article>
-      <div class="product__aside">
-        <div class="product__aside_info">
-          <div class="info--date">
-            <span class="name">Date:</span>
-            <span class="duration">10 days</span>
-            <time>09.10.2019 - 19.19.2019</time>
-          </div>
-          <div class="info-price">
-            <span class="name">Price:</span>
-            <span class="price">9 112 USD</span>
-          </div>
-        </div>
-        <div class="product__aside_button">
-          <a href="" class="btn-skew">
-            <div class="background"><i></i></div>
-            <span>view tours</span>
-          </a>
-        </div>
-      </div>
       <article class="card__includes">
-        <div class="card__includes_left">
-          <h2>
-            <span>This tour includes</span>
-          </h2>
-          <ul class="left--list">
-            <li>
-              <svg class="icon icon-icon_card_01">
-                <use xlink:href="img/sprite.svg#icon-icon_card_01"></use>
-              </svg>
-              <span>Питание: завтраки и ужины</span>
-            </li>
-            <li>
-              <svg class="icon icon-icon_card_02">
-                <use xlink:href="img/sprite.svg#icon-icon_card_02"></use>
-              </svg>
-              <span>Страховка: входит в стоимость</span>
-            </li>
-            <li>
-              <svg class="icon icon-icon_card_03">
-                <use xlink:href="img/sprite.svg#icon-icon_card_03"></use>
-              </svg>
-              <span>Проживание в отелях: 10 ночей</span>
-            </li>
-            <li>
-              <svg class="icon icon-icon_card_04">
-                <use xlink:href="img/sprite.svg#icon-icon_card_04"></use>
-              </svg>
-              <span>Перелёт: входит в стоимость</span>
-            </li>
-            <li>
-              <svg class="icon icon-icon_card_05">
-                <use xlink:href="img/sprite.svg#icon-icon_card_05"></use>
-              </svg>
-              <span>Трансфер: входит в стоимость</span>
-            </li>
-          </ul>
-        </div>
-        <div class="card__includes_right">
-          <h2>
-            <span>Best time to visit</span>
-          </h2>
-          <ul class="right--list">
-            <li>Winter</li>
-            <li>Spring</li>
-            <li>Summer</li>
-            <li class="disabled">Autumn</li>
-          </ul>
-          <div class="climate-modal">
-            <a href="" data-action="climate-modal">CLIMATE CHARTS</a>
-          </div>
-        </div>
+        <h2>
+          <span>This HOTEL includes</span>
+        </h2>
+        <ul class="hotel__includes_list">
+          <li>
+            <svg class="icon icon-icon_card_02">
+              <use xlink:href="img/sprite.svg#icon-icon_card_02"></use>
+            </svg>
+            <span>Расположение: ужины</span>
+          </li>
+          <li>
+            <svg class="icon icon-icon_card_02">
+              <use xlink:href="img/sprite.svg#icon-icon_card_02"></use>
+            </svg>
+            <span>Концепция отеля</span>
+          </li>
+          <li>
+            <svg class="icon icon-icon_card_02">
+              <use xlink:href="img/sprite.svg#icon-icon_card_02"></use>
+            </svg>
+            <span>Расстояние до ближайшего аэропорта:</span>
+          </li>
+          <li>
+            <svg class="icon icon-icon_card_02">
+              <use xlink:href="img/sprite.svg#icon-icon_card_02"></use>
+            </svg>
+            <span>Количество номеров</span>
+          </li>
+        </ul>
       </article>
       <article class="single-slider product__features">
-        <h2>TOUR FEATURES</h2>
+        <h2>TOP FEATURES</h2>
         <!-- Slider main container -->
         <div class="swiper-container">
           <!-- Additional required wrapper -->
@@ -382,7 +332,7 @@
               <!-- <div class="photo--mask"></div> -->
               <div class="slide--content">
                 <h3>1.</h3>
-                <div class="slide--text">Посетим места съемок «Игры престолов». Три сцены 7-го сезона снимали как раз в Эстрамадуре.</div>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s. when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
               </div>
             </div>
             <div class="swiper-slide">
@@ -392,7 +342,7 @@
               <!-- <div class="photo--mask"></div> -->
               <div class="slide--content">
                 <h3>2.</h3>
-                <div class="slide--text">Посетим места съемок «Игры престолов». Три сцены 7-го сезона снимали как раз в Эстрамадуре.</div>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s. when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
               </div>
             </div>
             <div class="swiper-slide">
@@ -402,7 +352,7 @@
               <!-- <div class="photo--mask"></div> -->
               <div class="slide--content">
                 <h3>3.</h3>
-                <div class="slide--text">Посетим места съемок «Игры престолов». Три сцены 7-го сезона снимали как раз в Эстрамадуре.</div>
+                <div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s. when an unknown printer took a galley of type and scrambled it to make a type specimen book. </div>
               </div>
             </div>
           </div>
@@ -425,141 +375,148 @@
       </article>
       <nav class="nav__tabs">
         <ul>
-          <li class="btn-skew" data-target="overview">
+          <li class="btn-skew" data-target="about">
             <div class="background"><i></i></div>
-            <span>OVERVIEW</span>
+            <span>ОБ ОТЕЛЕ</span>
           </li>
-          <li class="btn-skew" data-target="itinerary">
+          <li class="btn-skew" data-target="bars">
             <div class="background"><i></i></div>
-            <span>ITINERARY</span>
+            <span>БАРЫ</span>
           </li>
-          <li class="btn-skew" data-target="services">
+          <li class="btn-skew" data-target="spa">
             <div class="background"><i></i></div>
-            <span>ADD SERVICES</span>
+            <span>WELNESS &amp; SPA</span>
+          </li>
+          <li class="btn-skew" data-target="child">
+            <div class="background"><i></i></div>
+            <span>ДЕТЯМ</span>
+          </li>
+          <li class="btn-skew" data-target="mice">
+            <div class="background"><i></i></div>
+            <span>MICE</span>
           </li>
         </ul>
       </nav>
       <ul class="tabs__list">
-        <li id="overview">
-          <article class="overview__description">
-            <section class="overview__description_text">
-              <div class="text">Предлагаем вам отправиться с нами в Эстремадуру. Этот регион на западе Испании мало известен туристам, так что каждый почувствует себя здесь первооткрывателем римско-мавританской истории, колоритных традиций и знаменитой на всю Испанию хамонно-винно-сырной гастрономии.</div>
-              <div class="link">
-                <svg class="icon icon-icon_download">
-                  <use xlink:href="img/sprite.svg#icon-icon_download"></use>
-                </svg>
-                <a href="">
-                  <span>DOWNLOAD TOUR PDF</span>
-                </a>
-              </div>
-            </section>
-            <section class="overview__itinerary">
-              <div class="overview__itinerary_list">
-                <h2>Itinerary</h2>
-                <ul>
-                  <li>
-                    <span class="day">DAY 1</span>
-                    <span class="place">МАДРИД</span>
-                  </li>
-                  <li>
-                    <span class="day">DAY 2</span>
-                    <span class="place">САЛАМАНКА</span>
-                  </li>
-                  <li>
-                    <span class="day">DAY 3</span>
-                    <span class="place">КАСЕРЕС</span>
-                  </li>
-                  <li>
-                    <span class="day">DAY 4</span>
-                    <span class="place">МЕРИДА</span>
-                  </li>
-                </ul>
-                <div class="link">
-                  <a href="" data-action="full-itinerary">VIEW FULL ITINERARY</a>
-                </div>
-              </div>
-              <div class="overview__itinerary_map">
-                <h2>YOUR JOURNEY</h2>
-                <div class="map" id="map"></div>
-              </div>
-            </section>
-            <div class="overview__share">
-              <div class="overview__share_title">
-                <span>Share tour with your friends on</span>
-              </div>
-              <a href="">FACEBOOK</a>
-            </div>
-          </article>
-        </li>
-        <li id="itinerary">
-          <article class="itinerary__list">
+        <li id="about">
+          <article class="hotel__overview_description">
             <section>
-              <div class="itinerary__list_title">
-                <span class="day">DAY 1</span>
-                <span class="place">МАДРИД</span>
-              </div>
-              <div class="itinerary__list_photo">
+              <div class="photo">
                 <img data-src="./img/madrid.jpg" alt="">
               </div>
-              <div class="itinerary__list_description">
-                <h4>Прилет в Мадрид</h4>
-                <h4>Трансфер на жд вокзал</h4>
-                <h4>Отправление на поезде в Саламанку</h4>
-                <h4>Размещение в отеле в Саламанке</h4>
-              </div>
+              <ul>
+                <li>Дата открытия/последней реновации</li>
+              </ul>
             </section>
             <section>
-              <div class="itinerary__list_title">
-                <span class="day">DAY 2</span>
-                <span class="place">САЛАМАНКА</span>
-              </div>
-              <div class="itinerary__list_photo">
+              <div class="photo">
                 <img data-src="./img/salamanka.jpg" alt="">
               </div>
-              <div class="itinerary__list_description">
-                <h4>Завтрак в отеле</h4>
-                <h4>Знакомство с городом</h4>
-                <p>Саламанка – один из самых мистических и загадочных городов Испании, ведет счет своих лет с 220 г. до н.э. В городе буквально каждый квадратный метр — истори- ческая реликвия, а что ни дом — то место рождения ве- ликого человека. Действительно, испанские короли ис- пытывали самые трогательные чувства по отношению к Саламанке, и, наверное, поэтому ей многое прощалось. Давайте вместе отправимся на прогулку по местам со старинными домами и красивыми площадями, интерес- ными храмами и знаменитым университетом.</p>
-                <h4>Обед</h4>
-                <h4>Посещение фермы по производству хамона</h4>
-              </div>
-            </section>
-            <section>
-              <div class="itinerary__list_title">
-                <span class="day">DAY 3</span>
-                <span class="place">КАСЕРЕС</span>
-              </div>
-              <div class="itinerary__list_photo">
-                <img data-src="./img/kaseres.jpg" alt="">
-              </div>
-              <div class="itinerary__list_description">
-                <h4>Завтрак в отеле</h4>
-                <h4>Знакомство с г. Касерес</h4>
-              </div>
+              <ul>
+                <li>Наличие пляжа</li>
+                <li>Расстояние до пляжа/подъемника</li>
+                <li>Паркинг</li>
+                <li>Территория отеля (площадь)</li>
+              </ul>
             </section>
           </article>
-          <div class="link itinerary__link">
-            <svg class="icon icon-icon_download">
-              <use xlink:href="img/sprite.svg#icon-icon_download"></use>
-            </svg>
-            <a href="">
-              <span>DOWNLOAD TOUR PDF</span>
-            </a>
-          </div>
-          <div class="overview__share">
-            <div class="overview__share_title">
-              <span>Share tour with your friends on</span>
-            </div>
-            <a href="">FACEBOOK</a>
-          </div>
         </li>
-        <li id="services">
-          <h2>SERVICES</h2>
+        <li id="bars">
+          <article class="hotel__overview_description">
+            <section>
+              <div class="photo">
+                <img data-src="./img/salamanka.jpg" alt="">
+              </div>
+              <ul>
+                <li>Наличие пляжа</li>
+                <li>Расстояние до пляжа/подъемника</li>
+                <li>Паркинг</li>
+                <li>Территория отеля (площадь)</li>
+              </ul>
+            </section>
+            <section>
+              <div class="photo">
+                <img data-src="./img/madrid.jpg" alt="">
+              </div>
+              <ul>
+                <li>Дата открытия/последней реновации</li>
+              </ul>
+            </section>
+          </article>
+        </li>
+        <li id="spa">
+          <article class="hotel__overview_description">
+            <section>
+              <div class="photo">
+                <img data-src="./img/madrid.jpg" alt="">
+              </div>
+              <ul>
+                <li>Дата открытия/последней реновации</li>
+              </ul>
+            </section>
+            <section>
+              <div class="photo">
+                <img data-src="./img/salamanka.jpg" alt="">
+              </div>
+              <ul>
+                <li>Наличие пляжа</li>
+                <li>Расстояние до пляжа/подъемника</li>
+                <li>Паркинг</li>
+                <li>Территория отеля (площадь)</li>
+              </ul>
+            </section>
+          </article>
+        </li>
+        <li id="child">
+          <article class="hotel__overview_description">
+            <section>
+              <div class="photo">
+                <img data-src="./img/salamanka.jpg" alt="">
+              </div>
+              <ul>
+                <li>Наличие пляжа</li>
+                <li>Расстояние до пляжа/подъемника</li>
+                <li>Паркинг</li>
+                <li>Территория отеля (площадь)</li>
+              </ul>
+            </section>
+            <section>
+              <div class="photo">
+                <img data-src="./img/madrid.jpg" alt="">
+              </div>
+              <ul>
+                <li>Дата открытия/последней реновации</li>
+              </ul>
+            </section>
+          </article>
+        </li>
+        <li id="mice">
+          <article class="hotel__overview_description">
+            <section>
+              <div class="photo">
+                <img data-src="./img/madrid.jpg" alt="">
+              </div>
+              <ul>
+                <li>Дата открытия/последней реновации</li>
+              </ul>
+            </section>
+            <section>
+              <div class="photo">
+                <img data-src="./img/salamanka.jpg" alt="">
+              </div>
+              <ul>
+                <li>Наличие пляжа</li>
+                <li>Расстояние до пляжа/подъемника</li>
+                <li>Паркинг</li>
+                <li>Территория отеля (площадь)</li>
+              </ul>
+            </section>
+          </article>
         </li>
       </ul>
-      <article class="catalog__slider tours aos-init" data-aos="fade-up">
+      <article class="catalog__slider hotels aos-init" data-aos="fade-up">
         <h2>
-          <span>Editorial tours</span>
+          <span>Editorial hotels</span>
         </h2>
         <div class="swiper-container">
           <div class="swiper-wrapper">

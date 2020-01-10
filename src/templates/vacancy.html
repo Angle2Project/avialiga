@@ -1,0 +1,127 @@
+---
+title: Index page,
+class: vacancy h-black
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+	<div class="breadcrumb">
+		<a href="">MAIN</a>
+		<a href="">ABOUT US</a>
+    <span>TOUR MANAGER</span>
+	</div>
+	
+	<article class="vacancy__head">
+		<h1>
+			<span>Tour manager</span>
+		</h1>
+		<ul class="vacancy__head_list">
+			<li>Kiev</li>
+			<li>Full time</li>
+			<li>Open vacancy</li>
+		</ul>
+	</article>
+	<article class="vacancy__photo">
+		<div class="vacancy__photo_wrapper">
+			<img data-src="./img/about-1.jpg" alt="">
+		</div>
+		<div class="hero--scroll animation">
+			<span>Sroll Down</span>
+			<div class="hero--scroll-line"></div>
+		</div>
+	</article>
+
+	<article class="vacancy__description">
+		<p>Commercial sensitivities preclude us from disclosing further details about our client at this stage.</p>
+		<p></p>
+		<p></p>
+		<h4>Key responsibilities of the role:</h4>
+		<ul>
+			<li>Attend trade shows across the world</li>
+			<li>Network with other tourism businesses</li>
+			<li>Ensure our clients business is at the forefront of the industry</li>
+			<li>Oversee marketing collateral to ensure it is in line with business goals</li>
+			<li>Provide insight and reports to the wider team on market and competitor performance</li>
+		</ul>
+		<P></P>
+		<p></p>
+		<h4>Do you tick the boxes?</h4>
+		<ul>
+			<li>UK tourism experience</li>
+			<li>Commercially driven</li>
+			<li>Flexibility in travelling to worldwide events</li>
+			<li>Relationship management</li>
+			<li>Highly motivated and enthusiastic</li>
+		</ul>
+		<p></p>
+		<p></p>
+		<p>The successful applicant will be an enthusiastic, dynamic and forward thinking individual who has a strong knowledge of the UK inbound travel network. You’ll have a detailed understanding of the emerging international markets looking to travel to the UK, and be flexible in travelling oversees to trade shows 10-12 times a year.</p>
+	</article>
+
+	<article class="vacancy__form aos-init" data-aos="fade-up">		
+		<h2>
+			<span>Apply now!</span>
+		</h2>		
+		<div class="expert__form_body">
+			<form action="">
+				<div class="form">
+					<div class="form-control name">
+						<input type="text" placeholder="Your Name">
+					</div>
+					<div class="form-control phone">
+						<input type="text" placeholder="Your Phone">
+					</div>
+					<div class="form-control comment">
+						<textarea name="" placeholder="Your comment"></textarea>
+					</div>
+				</div>
+				<div class="form-atach">
+					<span>Atach your CV*</span>
+				</div>
+				<label class="custom-checkbox">
+					<input type="checkbox">
+					<span>I would like you to use my contact details to contact me directly about potential cooperation opportunities now or in the future. All the details about personal data protection can be found in the Privacy Policy.</span>
+				</label>
+				<div class="form--submit">
+					<button class="btn-skew">
+						<div class="background"><i></i></div>
+						<span>Submit</span>						
+					</button>
+				</div>
+			</form>
+		</div>
+	</article>
+  
+
+	
+
+	
+	
+	
+
+
+
+{% endblock %}

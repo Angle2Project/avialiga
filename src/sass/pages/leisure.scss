@@ -41,7 +41,7 @@
     }
     h1 {
       width: 55vw;
-      font: normal 9.9vw/1 "Futura";
+      font: normal 140px/1 "Futura";
       color: #ffffff;
       position: absolute;
       top: 50%;
@@ -968,5 +968,19 @@
         }
       }
     }
+  }
+}
+
+
+.leisure-questionaire {
+
+}
+.leisure-questionaire__hero {
+  min-height: calc(var(--vh, 1vh) * 100);
+  .hero--questions {
+    visibility: hidden;
+    position: absolute;
+    left: -10000px;
+    top: -10000px;
   }
 }

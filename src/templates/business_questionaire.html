@@ -1,0 +1,196 @@
+---
+title: Index page,
+class: business-questionaire h-blue
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">		
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+</div>
+	<!-- /LOADER -->
+
+	
+
+	<article class="business__select">
+		<div class="breadcrumb">
+			<a href="">MAIN</a>
+			<a href="">BUSINESS</a>
+			<span>Questionnaire</span>			
+		</div>
+		<form action="">
+			<div class="business__select_description">
+				<h2>
+					<span>Business Questionnaire</span>
+				</h2>
+				<div class="description--text">
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing. 
+					And typesetting industry. 
+
+					ype and scrambled it to make a type specimen book.
+				</div>			
+			</div>
+			<div class="business__select_slider">
+				<div class="pagination"></div>
+
+				<!-- Questions -->
+				<div class="slide" data-slide="1">
+					<div class="question">Purpose of travel arrangements?</div>
+					<section class="custom-select">
+						<div class="select--label">
+							<span>Select an answer</span>
+							<i>{{mixins.icon('icon_arrow_menu')}}</i>
+						</div>
+						<ul class="select--options">
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+						</ul>
+					</section>	
+				</div>
+				
+				<div class="slide" data-slide="2">
+					<div class="question">Purpose of travel arrangements?</div>
+					<section class="custom-select">
+						<div class="select--label">
+							<span>Select an answer</span>
+							<i>{{mixins.icon('icon_arrow_menu')}}</i>
+						</div>
+						<ul class="select--options">
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+						</ul>
+					</section>	
+				</div>
+				
+				<div class="slide" data-slide="3">
+					<div class="question">Purpose of travel arrangements?</div>
+					<section class="custom-select">
+						<div class="select--label">
+							<span>Select an answer</span>
+							<i>{{mixins.icon('icon_arrow_menu')}}</i>
+						</div>
+						<ul class="select--options">
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+						</ul>
+					</section>	
+				</div>
+			
+				<div class="slide" data-slide="4">
+					<div class="question">Purpose of travel arrangements?</div>
+					<section class="custom-select">
+						<div class="select--label">
+							<span>Select an answer</span>
+							<i>{{mixins.icon('icon_arrow_menu')}}</i>
+						</div>
+						<ul class="select--options">
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+							<li>
+								<label class="custom-radio">
+									<input type="radio" name="question-1">									
+									<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+								</label>
+							</li>
+						</ul>
+					</section>	
+				</div>
+			<!-- /Questions -->
+
+				<div class="thank">
+					<h2>Thank you!</h2>
+				</div>
+
+			</div>
+			<button class="btn-skew" type="button" data-action="next">
+				<div class="background"><i></i></div>
+				<span>Next</span>
+			</button>
+		</form>
+	</article>	
+	
+	
+
+	{% include "partials/_expert.html" %}
+	
+	
+
+
+
+{% endblock %}

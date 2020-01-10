@@ -4,6 +4,10 @@
 @import  'business';
 @import  'blogs';
 @import  'cards';
+@import  'about';
+@import  'arcticle';
+@import  'tickets';
+
 
 
 .spa {
@@ -139,7 +143,7 @@
     .wrapper {
       h1 {
         margin-bottom: 50px;
-        font-size: 140px;
+        font-size: 72px;
       }
     }    
     .hero__description_info {
@@ -256,6 +260,109 @@
     .expert__form_title {
       h2 {
         color: #bfbdce;
+      }
+    }
+  }
+}
+
+body.agents {
+  .agents__hero {
+    min-height: calc(var(--vh, 1vh) * 100);
+    padding: 130px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .breadcrumb {
+      color: #5bbcad;
+      position: absolute;
+      top: 130px;
+      a {
+        color: #5bbcad;
+      }
+    }
+    h1 {
+      font: normal 72px/60px "Futura";
+      color: #5bbcad;
+      margin: 0 auto;
+      width: 370px;
+    }
+    .agents__hero_text {
+      font: 300 18px/30px "Futura";
+      width: 370px;
+      margin: 30px auto 0 auto;
+    }
+    .agents__hero_form {
+      width: 370px;
+      margin: 30px auto 0 auto;
+      input {
+        font-size: 14px;
+        font-family: "Proxima";
+      }
+      .submit {
+        margin-top: 45px;
+        padding-left: 22px;
+        .btn-skew {
+          width: calc(100% - 22px); 
+          font: 300 14px/24px "Proxima";
+        }
+      }
+      .forgot {
+        text-align: right;
+        margin-top: 40px;
+        font: 300 14px/24px "Proxima";
+      }
+    }
+  }
+  .agents__values {
+    padding: 120px 90px;
+    h2 {
+      font: normal 72px/60px "Futura";
+      color: #5ac0b0;
+    }
+    ul {
+      display: flex;
+      margin-top: 60px;
+      li {
+        width: 50%;
+        flex-shrink: 0;
+        padding-left: 90px;
+        font: 300 18px/30px "Futura";
+      }
+    }
+  }
+  .expert__form {
+    background-color: #d7ebe7;
+    margin: 0;
+    padding: 80px 90px 120px 90px;
+    .expert__form_title {
+      h2 {
+        color: #5ac0b0;
+      }
+    }
+  }
+  .agents__subscribe {
+    padding: 90px;
+    h2 {
+      font: normal 72px/60px "Futura";
+      color: #5ac0b0;
+    }
+    .agents__subscribe_form {
+      margin-top: 30px;
+      display: flex;
+      padding-left: 90px;
+      .form-control {
+        flex-grow: 1;
+        margin-right: 112px;
+        input {
+          font-size: 14px;
+        }
+      }
+      .submit {
+        width: 320px;
+        .btn-skew {
+          width: 100%;
+        }
       }
     }
   }

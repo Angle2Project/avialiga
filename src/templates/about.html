@@ -1,0 +1,353 @@
+---
+title: Index page,
+class: about h-white
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+
+<article class="leisure__hero">
+	<div class="breadcrumb">
+		<a href="">MAIN</a>
+		<span>ABOUT US</span>
+	</div>
+	<div class="leisure__hero_backgrounds">
+		<img data-src="./img/about-1.jpg" alt="">
+		<img data-src="./img/about-2.jpg" alt="">
+		<img data-src="./img/about-3.jpg" alt="">
+	</div>
+	<h1>
+		<span>Focus on</span>		
+		<span class="switch" data-slide="1">your family</span>
+		<span class="switch" data-slide="2">your friends</span>
+		<span class="switch" data-slide="3">your yourself</span>
+	</h1>
+	<div class="leisure__hero_pagination">
+		<div class="pagination--slide">
+			<span class="current"></span>
+			/
+			<span class="all"></span>
+		</div>
+		<div class="pagination--bar">
+			<i></i>
+		</div>
+	</div>
+	<div class="hero--scroll animation">
+		<span>Sroll Down</span>
+		<div class="hero--scroll-line"></div>
+	</div>
+</article>
+
+<article class="homepage__tabs aos-init" data-aos="fade-up">
+	<div class="homepage__tabs_disk">
+			<div class="disk--text">TIME SAVING + COST SAVINGS + RISK MINIMAZATION + LEGAL SUPPORT + EXPERIENCE + DEVELOPMENT + REAL EXPECTATIONS</div>				
+			<img data-src="./img/advantages-1.svg" class="disk--arrow-1" alt="">
+			<img data-src="./img/advantages-2.svg" class="disk--arrow-2" alt="">
+	</div>
+	<div class="wrapper">
+		<h3>Get with us</h3>
+		<div class="homepage__tabs_list">
+			<span data-target="employees">employees</span>
+			<span data-target="partners">PARTNERS</span>
+			<span data-target="knowledge">knowledge</span>
+			<span data-target="service">SERVICE</span>
+			<span data-target="reputation">REPUTATION</span>
+		</div>
+		<div class="homepage__tabs_content">
+			{% for i in [
+				{
+					title: 'employees',
+					data: 'employees'
+				},
+				{
+					title: 'PARTNERS',
+					data: 'partners'
+				},
+				{
+					title: 'knowledge',
+					data: 'knowledge'
+				},
+				{
+					title: 'SERVICE',
+					data: 'service'
+				},
+				{
+					title: 'REPUTATION',
+					data: 'reputation'
+				}
+			] %}
+			<section class="tab--body" data-tab="{{i.data}}">
+				<h3>
+					<div class="title">{{i.title}}</div>
+				</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</section>
+			{% endfor %}
+		</div>
+	</div>			
+</article>
+
+
+<article class="abuot__mission aos-init" data-aos="fade-up">
+	<div class="abuot__mission_left">
+		<h2>
+			<span>Our MISSION</span>
+		</h2>
+		<div class="abuot__mission_text">Specializes in organizing events, group trips and individual tours. While you are developing your business and concentrating on the tasks that are important to you, Avialiga takes care of all the arrangements for the tour.</div>
+	</div>
+	<div class="abuot__mission_right">
+		<h2>
+			<span>Our VISION</span>
+		</h2>
+		<div class="abuot__mission_text">Specializes in organizing events, group trips and individual tours. While you are developing your business and concentrating on the tasks that are important to you, Avialiga takes care of all the arrangements for the tour.</div>
+	</div>
+</article>
+	
+	<article class="single-slider aos-init" data-aos="fade-up">
+		<!-- Slider main container -->
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					{% set singleSlider = [
+						{
+							title: "Facts and Achievments",
+							src: "./img/about-3.jpg"
+						},
+						{
+							title: "Corporate citizenship",
+							src: "./img/about-2.jpg"
+						},
+						{
+							title: "Culture",
+							src: "./img/about-1.jpg"
+						}
+					] %}
+					{% for i in singleSlider %}
+					<div class="swiper-slide">
+						<div class="slide--photo">
+							<img data-src="{{i.src}}" alt="">
+						</div>
+						<!-- <div class="photo--mask"></div> -->
+						<div class="slide--content">
+							<h2>{{i.title}}</h2>
+							<div class="slide--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>							
+						</div>
+					</div>
+					{% endfor %}
+			</div>
+			<div class="slider-control">
+				<div class="slider-button-prev">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+				<div class="slider-pagination"></div>
+				<div class="slider-button-next">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
+				</div>
+			</div>
+		</div>		
+	</article>
+
+	{% set team = [
+		{			
+			position: 'Director of Leisure Department',
+			name: 'Оксана Молодецкая',
+			src: './img/feedback-img-1.jpg'
+		},
+		{
+			position: 'Director of Business Department',
+			name: 'Ольга Бродская',
+			src: './img/feedback-img-2.jpg'
+		},
+		{
+			position: 'Director of Mice Department',
+			name: 'Мария Рок',
+			src: './img/feedback-img-3.jpg'
+		},
+		{
+			position: 'Director of Mice Department',
+			name: 'Мария Рок',
+			src: './img/feedback-img-2.jpg'
+		},
+		{			
+			position: 'Director of Leisure Department',
+			name: 'Оксана Молодецкая',
+			src: './img/feedback-img-3.jpg'
+		},
+		{
+			position: 'Director of Business Department',
+			name: 'Ольга Бродская',
+			src: './img/feedback-img-1.jpg'
+		}
+	] %}
+
+
+	<article class="catalog__list">
+		<h2>Our team</h2>
+		<ul class="catalog__list_grid">
+			{% for i in team %}
+			<li>
+				<div class="grid--photo">
+					<a href="">
+						<img data-src="{{i.src}}" alt="">
+					</a>
+				</div>
+				<div class="grid--location">{{i.position}}</div>
+				<div class="grid--hotel">{{i.name}}</div>				
+			</li>
+			{% endfor %}
+		</ul>		
+	</article>
+
+
+	<article class="about__join">
+		<h2>Join to OUR TEAM</h2>
+		<ul class="about__join_list">
+			{% for i in range(0, 3) %}
+			<li>
+				<a href=""></a>
+				<h3>
+					<span>TOUR MANAGER</span>
+					{{mixins.icon('icon_arrow_menu')}}
+				</h3>
+				<div class="list--info">
+					<span class="location">Kiev</span>
+					<span class="type">Full time</span>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</article>
+
+
+	{% set list = [
+		{			
+			date: '12 October',
+			title: 'New opening on MALDIVES '
+		},
+		{			
+			date: '10 October',
+			title: 'Best experience ever'
+		},
+		{			
+			date: '12 October',
+			title: 'New opening on MALDIVES '
+		},
+		{			
+			date: '10 October',
+			title: 'Best experience ever'
+		},
+		{			
+			date: '12 October',
+			title: 'New opening on MALDIVES '
+		},
+		{			
+			date: '10 October',
+			title: 'Best experience ever'
+		}
+	] %}
+
+
+	<article class="catalog__slider tours aos-init" data-aos="fade-up">
+		<h2>
+			<span>AVIALIGA INSIDERS</span>
+		</h2>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for i in list %}
+				<div class="swiper-slide">
+					<div class="grid--photo">
+						<a href="">
+							<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
+						</a>
+					</div>
+					<div class="grid--location">{{i.date}}</div>
+					<div class="grid--hotel">{{i.title}}</div>
+				</div>
+				{% endfor %}
+			</div>			
+			<div class="slider-button-prev">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>			
+			<div class="slider-button-next">
+				{{mixins.icon('icon_arrow_menu')}}
+				<i></i>
+			</div>
+		</div>
+		<div class="catalog__list_more">
+			<button class="btn-skew">
+				<div class="background"><i></i></div>
+				<span>ALL POSTS</span>				
+			</button>
+		</div>
+	</article>
+
+	<article class="homepage__insta aos-init" data-aos="fade-up">
+		<section class="leisure" data-aos="fade-up">
+			<div class="homepage__insta_title">
+				<h2>
+					<span>Leisure insta</span>
+				</h2>
+				<a href="">@avialiga_leisure</a>
+			</div>
+			<div class="homepage__insta_gallery">
+				<img data-src="./img/insta-leisure-1.jpg" alt="">
+				<img data-src="./img/insta-leisure-2.jpg" alt="">
+				<img data-src="./img/insta-leisure-3.jpg" alt="">
+			</div>
+		</section>
+		<section class="business" data-aos="fade-up">
+			<div class="homepage__insta_title">
+				<h2>
+					<span>Business insta</span>
+				</h2>
+				<a href="">@avialiga_business</a>
+			</div>
+			<div class="homepage__insta_gallery">
+				<img data-src="./img/insta-business-1.jpg" alt="">
+				<img data-src="./img/insta-business-2.jpg" alt="">
+				<img data-src="./img/insta-business-3.jpg" alt="">
+			</div>
+		</section>
+	</article>
+	
+	{% include "partials/_expert.html" %}
+
+
+
+
+
+	
+
+
+
+
+
+
+{% endblock %}

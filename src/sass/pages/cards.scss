@@ -8,7 +8,15 @@
     a {
       color: currentColor;
     }
-  }  
+  }
+  .card__heroe_link {
+    height: 80px;
+    width: 240px;
+    position: fixed;
+    bottom: 90px;
+    right: 235px;
+    z-index: 10;
+  }
   .card__hero {
     .swiper-container {      
       .swiper-slide {        
@@ -19,7 +27,7 @@
         .slide--text {
           font: normal 72px/1 "Futura";
           margin-top: 10px;
-        }
+        }        
       }
       .slider-control {        
         span {
@@ -119,7 +127,7 @@
         li {
           font: 300 24px/1.3 "Futura";
           margin-bottom: 34px;
-          display: inline-flex;
+          display: flex;
           align-items: center;
           .icon {
             fill: $red;            
@@ -176,6 +184,30 @@
               animation: linkHover 1.5s ease;
             }           
           }
+        }
+      }
+    }
+    .hotel__includes_list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      li {
+        width: 50%;
+        padding-left: 90px;
+        margin-bottom: 34px;
+        font: 300 24px/1.3 "Futura";        
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        .icon {
+          flex-shrink: 0;
+          fill: #ee412a;
+          margin-right: 30px;
+          width: 34px;
+          height: 30px;
         }
       }
     }
@@ -468,6 +500,61 @@
     .expert__form_title {
       h2 {
         color: #5ac0b0;
+      }
+    }
+  }
+  &.hotel {
+    .card__hero {
+      .swiper-container {
+        .swiper-slide {
+          h2 {
+            text-transform: initial;
+          }
+        }
+      }
+    }
+    .card__includes {
+      display: block;
+    }
+  }
+  .nav__tabs {
+    padding-left: 180px;
+    padding-right: 180px;
+  }
+  .hotel__overview_description {
+    padding: 60px 180px;
+    .photo {
+      position: relative;
+      padding-top: 32%;
+      img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -o-object-fit: cover;
+        object-fit: cover;
+      }
+    }
+    ul {
+      margin-top: 30px;
+      margin-bottom: 50px;
+      margin: 30px 0 50px 40px;
+      li {
+        font: 300 18px/30px "Futura";
+        padding-left: 25px;
+        position: relative;
+        &::before {
+          content: "";
+          display: block;
+          width: 6px;
+          height: 6px;
+          background-color: $red;
+          position: absolute;
+          top: 0.65em;
+          left: 0;
+          border-radius: 50%;
+        }
       }
     }
   }

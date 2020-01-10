@@ -1,0 +1,272 @@
+---
+title: Index page,
+class: mice h-white
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+	</div>
+	<!-- /LOADER -->
+
+
+<article class="mice__hero">
+	<div class="breadcrumb">
+		<a href="">MAIN</a>
+		<a href="">BUSINESS</a>		
+		<span>MICE</span>
+	</div>
+	<div class="leisure__hero_backgrounds">
+		<img data-src="./img/mice.jpg" alt="">
+		<img data-src="./img/madrid.jpg" alt="">
+		<img data-src="./img/meetings-2.jpg" alt="">
+	</div>
+	<div class="mice__hero_wrapper">
+		<h1>
+			<span>MICE</span>
+		</h1>
+		<div class="mice__hero_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+	</div>	
+	<div class="hero--scroll animation">
+		<span>Sroll Down</span>
+		<div class="hero--scroll-line"></div>
+	</div>
+</article>
+
+<article class="mice__section meetings">
+	<h2>MEETINGS</h2>
+	<div class="mice__section_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+	<a href="" class="btn-skew">
+		<div class="background"><i></i></div>
+		<span>VIEW MEETINGS</span>
+	</a>
+</article>
+<article class="mice__section incentives">
+	<h2>INCENTIVES</h2>
+	<div class="mice__section_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+	<a href="" class="btn-skew">
+		<div class="background"><i></i></div>
+		<span>VIEW INCENTIVES</span>
+	</a>
+</article>
+<article class="mice__section conferences">
+	<h2>CONFERENCES</h2>
+	<div class="mice__section_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+	<a href="" class="btn-skew">
+		<div class="background"><i></i></div>
+		<span>VIEW CONFERENCES</span>
+	</a>
+</article>
+<article class="mice__section exhibitions">
+	<h2>EXHIBITIONS</h2>
+	<div class="mice__section_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+	<a href="" class="btn-skew">
+		<div class="background"><i></i></div>
+		<span>VIEW EXHIBITIONS</span>
+	</a>
+</article>
+
+<article class="business__select">
+	<form action="">
+		<div class="business__select_description">
+			<h2>
+				<span>Business Questinaire</span>
+			</h2>
+			<div class="description--text">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+
+				ype and scrambled it to make a type specimen book. 
+
+				It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+			</div>			
+		</div>
+		<div class="business__select_slider">
+			<div class="pagination"></div>
+
+			<!-- Questions -->
+			<div class="slide" data-slide="1">
+				<div class="question">Purpose of travel arrangements?</div>
+				<section class="custom-select">
+					<div class="select--label">
+						<span>Select an answer</span>
+						<i>{{mixins.icon('icon_arrow_menu')}}</i>
+					</div>
+					<ul class="select--options">
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+					</ul>
+				</section>	
+			</div>
+			
+			<div class="slide" data-slide="2">
+				<div class="question">Purpose of travel arrangements?</div>
+				<section class="custom-select">
+					<div class="select--label">
+						<span>Select an answer</span>
+						<i>{{mixins.icon('icon_arrow_menu')}}</i>
+					</div>
+					<ul class="select--options">
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+					</ul>
+				</section>	
+			</div>
+			
+			<div class="slide" data-slide="3">
+				<div class="question">Purpose of travel arrangements?</div>
+				<section class="custom-select">
+					<div class="select--label">
+						<span>Select an answer</span>
+						<i>{{mixins.icon('icon_arrow_menu')}}</i>
+					</div>
+					<ul class="select--options">
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+					</ul>
+				</section>	
+			</div>
+		
+			<div class="slide" data-slide="4">
+				<div class="question">Purpose of travel arrangements?</div>
+				<section class="custom-select">
+					<div class="select--label">
+						<span>Select an answer</span>
+						<i>{{mixins.icon('icon_arrow_menu')}}</i>
+					</div>
+					<ul class="select--options">
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-radio">
+								<input type="radio" name="question-1">									
+								<span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+							</label>
+						</li>
+					</ul>
+				</section>	
+			</div>
+		<!-- /Questions -->
+
+			<div class="thank">
+				<h2>Thank you!</h2>
+			</div>
+
+		</div>
+		<button class="btn-skew" type="button" data-action="next">
+			<div class="background"><i></i></div>
+			<span>Next</span>
+		</button>
+	</form>
+</article>
+
+
+	
+
+	<article class="homepage__insta aos-init" data-aos="fade-up">
+		<section class="business" data-aos="fade-up">
+			<div class="homepage__insta_title">
+				<h2>
+					<span>Business facebook</span>
+				</h2>
+				<a href="">@avialiga_business</a>
+			</div>
+			<div class="homepage__insta_gallery">
+				<img data-src="./img/insta-business-1.jpg" alt="">
+				<img data-src="./img/insta-business-2.jpg" alt="">
+				<img data-src="./img/insta-business-3.jpg" alt="">
+			</div>
+		</section>
+	</article>
+	
+	{% include "partials/_expert.html" %}
+
+
+
+
+
+	
+
+
+
+
+
+
+{% endblock %}

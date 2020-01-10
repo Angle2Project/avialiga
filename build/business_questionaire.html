@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" media="all" href="css/app.css" />
   </head>
-  <body class="leisure-questionaire h-green">
+  <body class="business-questionaire h-blue">
     <!-- BEGIN content -->
     <main>
       <header>
@@ -205,97 +205,213 @@
         </div>
       </header>
       <div class="header__bg"></div>
-      <!-- <div class="cursor">
-	<span></span>
-	<i class="circle"></i>
-	<i class="play"></i>
-	<i class="pause"></i>	
-</div> -->
-      <!-- LOADER -->
-      <!-- <div class="loader">
-			<div class="loader-logo">
-				<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
-					<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
-					<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
-				</svg>
-				<div class="brand">avialiga</div>
-			</div>			
-			<div class="blind-left"></div>
-			<div class="blind-right"></div>
-	</div> -->
-      <!-- /LOADER -->
-      <div class="breadcrumb">
-        <a href="">MAIN</a>
-        <a href="">LEISURE</a>
-        <a href="">RELAX</a>
-        <span>SPA</span>
+      <div class="cursor">
+        <span></span>
+        <i class="circle"></i>
+        <i class="play"></i>
+        <i class="pause"></i>
       </div>
-      <article class="leisure-questionaire__hero">
-        <ul class="hero--questions">
-          <li data-question="1">
-            <img data-src="leisure-hero-2.jpg" data-answer="answer-1" alt="">
-            <img data-src="madrid.jpg" data-answer="answer-2" alt="">
-          </li>
-          <li data-question="2">
-            <img data-src="meetings-2.jpg" data-answer="answer-1" alt="">
-            <img data-src="leisure-hero-1.png" data-answer="answer-2" alt="">
-          </li>
-          <li data-question="3">
-            <img data-src="mice.jpg" data-answer="answer-1" alt="">
-            <img data-src="maldives.jpg" data-answer="answer-2" alt="">
-          </li>
-        </ul>
+      <!-- LOADER -->
+      <div class="loader">
+        <div class="loader-logo">
+          <svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">
+            <path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z" />
+            <path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z" />
+          </svg>
+          <div class="brand">avialiga</div>
+        </div>
+        <div class="blind-left"></div>
+        <div class="blind-right"></div>
+      </div>
+      <!-- /LOADER -->
+      <article class="business__select">
+        <div class="breadcrumb">
+          <a href="">MAIN</a>
+          <a href="">BUSINESS</a>
+          <span>Questionnaire</span>
+        </div>
+        <form action="">
+          <div class="business__select_description">
+            <h2>
+              <span>Business Questionnaire</span>
+            </h2>
+            <div class="description--text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing. And typesetting industry. ype and scrambled it to make a type specimen book. </div>
+          </div>
+          <div class="business__select_slider">
+            <div class="pagination"></div>
+            <!-- Questions -->
+            <div class="slide" data-slide="1">
+              <div class="question">Purpose of travel arrangements?</div>
+              <section class="custom-select">
+                <div class="select--label">
+                  <span>Select an answer</span>
+                  <i>
+                    <svg class="icon icon-icon_arrow_menu">
+                      <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+                    </svg>
+                  </i>
+                </div>
+                <ul class="select--options">
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <div class="slide" data-slide="2">
+              <div class="question">Purpose of travel arrangements?</div>
+              <section class="custom-select">
+                <div class="select--label">
+                  <span>Select an answer</span>
+                  <i>
+                    <svg class="icon icon-icon_arrow_menu">
+                      <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+                    </svg>
+                  </i>
+                </div>
+                <ul class="select--options">
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <div class="slide" data-slide="3">
+              <div class="question">Purpose of travel arrangements?</div>
+              <section class="custom-select">
+                <div class="select--label">
+                  <span>Select an answer</span>
+                  <i>
+                    <svg class="icon icon-icon_arrow_menu">
+                      <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+                    </svg>
+                  </i>
+                </div>
+                <ul class="select--options">
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <div class="slide" data-slide="4">
+              <div class="question">Purpose of travel arrangements?</div>
+              <section class="custom-select">
+                <div class="select--label">
+                  <span>Select an answer</span>
+                  <i>
+                    <svg class="icon icon-icon_arrow_menu">
+                      <use xlink:href="img/sprite.svg#icon-icon_arrow_menu"></use>
+                    </svg>
+                  </i>
+                </div>
+                <ul class="select--options">
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 111, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 222, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="custom-radio">
+                      <input type="radio" name="question-1">
+                      <span>Lorem ipsum 333, dolor sit amet consectetur adipisicing elit.</span>
+                    </label>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <!-- /Questions -->
+            <div class="thank">
+              <h2>Thank you!</h2>
+            </div>
+          </div>
+          <button class="btn-skew" type="button" data-action="next">
+            <div class="background"><i></i></div>
+            <span>Next</span>
+          </button>
+        </form>
       </article>
-      <!-- 
-
-
-	<article class="catalog__list">
-		<ul class="catalog__list_grid">
-			
-			<li >
-				<div class="grid--photo">
-					<a href="">
-						<img data-src="./img/hotels/1.jpg" alt="">
-					</a>
-				</div>
-				<div class="grid--location">Maldives</div>
-				<div class="grid--hotel">JOALI MALDIVES 5*</div>
-				<div class="grid--info">
-					<div class="date">20.09.2019 – 30.09.2019</div>
-					<div class="price">9 112 USD</div>
-				</div>
-			</li>
-			
-			<li >
-				<div class="grid--photo">
-					<a href="">
-						<img data-src="./img/hotels/2.jpg" alt="">
-					</a>
-				</div>
-				<div class="grid--location">Mexico</div>
-				<div class="grid--hotel">PLAYACAR PALACE</div>
-				<div class="grid--info">
-					<div class="date">20.09.2019 – 30.09.2019</div>
-					<div class="price">2 654 USD</div>
-				</div>
-			</li>
-			
-			<li >
-				<div class="grid--photo">
-					<a href="">
-						<img data-src="./img/hotels/3.jpg" alt="">
-					</a>
-				</div>
-				<div class="grid--location">Sofitel Dubai</div>
-				<div class="grid--hotel">The Palm Resort &amp; Spa 5*</div>
-				<div class="grid--info">
-					<div class="date">20.09.2019 – 30.09.2019</div>
-					<div class="price">1 430 USD</div>
-				</div>
-			</li>
-			
-		</ul>		
-	</article> -->
+      <article class="expert__form aos-init" data-aos="fade-up">
+        <div class="expert__form_title">
+          <h2>
+            <span>Your travel expert</span>
+          </h2>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        </div>
+        <div class="expert__form_body">
+          <form action="">
+            <div class="form">
+              <div class="form-control name">
+                <input type="text" placeholder="Your Name">
+              </div>
+              <div class="form-control phone">
+                <input type="text" placeholder="Your Phone">
+              </div>
+              <div class="form-control comment">
+                <textarea name="" placeholder="Your comment"></textarea>
+              </div>
+            </div>
+            <div class="form--submit">
+              <button class="btn-skew">
+                <div class="background"><i></i></div>
+                <span>Submit</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </article>
       <footer>
         <div class="footer__links">
           <div class="footer__links_left">
