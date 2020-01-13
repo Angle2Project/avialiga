@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" media="all" href="css/app.css" />
   </head>
-  <body class="leisure-questionaire h-green">
+  <body class="leisure-questionaire h-white">
     <!-- BEGIN content -->
     <main>
       <header>
@@ -224,27 +224,54 @@
 			<div class="blind-right"></div>
 	</div> -->
       <!-- /LOADER -->
-      <div class="breadcrumb">
-        <a href="">MAIN</a>
-        <a href="">LEISURE</a>
-        <a href="">RELAX</a>
-        <span>SPA</span>
-      </div>
       <article class="leisure-questionaire__hero">
+        <div class="breadcrumb">
+          <a href="">MAIN</a>
+          <a href="">LEISURE</a>
+          <span>QUESTIONAIRE</span>
+        </div>
         <ul class="hero--questions">
           <li data-question="1">
-            <img data-src="leisure-hero-2.jpg" data-answer="answer-1" alt="">
-            <img data-src="madrid.jpg" data-answer="answer-2" alt="">
+            <img data-src="./img/leisure-hero-2.jpg" data-value="answer-1" alt="">
+            <img data-src="./img/madrid.jpg" data-value="answer-2" alt="">
           </li>
           <li data-question="2">
-            <img data-src="meetings-2.jpg" data-answer="answer-1" alt="">
-            <img data-src="leisure-hero-1.png" data-answer="answer-2" alt="">
+            <img data-src="./img/meetings-2.jpg" data-value="answer-1" alt="">
+            <img data-src="./img/leisure-hero-1.png" data-value="answer-2" alt="">
           </li>
           <li data-question="3">
-            <img data-src="mice.jpg" data-answer="answer-1" alt="">
-            <img data-src="maldives.jpg" data-answer="answer-2" alt="">
+            <img data-src="./img/mice.jpg" data-value="answer-1" alt="">
+            <img data-src="./img/maldives.jpg" data-value="answer-2" alt="">
           </li>
         </ul>
+        <div class="hero--wrapper">
+          <section class="intro">
+            <h1>
+              <p>Trust your</p>
+              <p>instincts</p>
+            </h1>
+            <p>It’s our questionaire that will help us to define true choise</p>
+            <button name="start" class="btn-skew" data-action="start">
+              <div class="background"><i></i></div>
+              <span>CONTINUE</span>
+            </button>
+          </section>
+          <section class="start">
+            <h1>
+              <p>Make a choice</p>
+              <p>in <span>3</span> sec</p>
+            </h1>
+          </section>
+        </div>
+        <div class="leisure__hero_pagination">
+          <div class="pagination--slide">
+            <span class="current"></span> / <span class="all"></span>
+          </div>
+          <div class="pagination--bar">
+            <i></i>
+          </div>
+        </div>
+        <div class="hero-timer"><span>3</span> sec</div>
       </article>
       <!-- 
 

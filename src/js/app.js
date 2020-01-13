@@ -1824,7 +1824,7 @@ const _leisure = function () {
         next = that['slide1'];
         pS = (100 - ((100 / that.slides)));
         pE = 100 / that.slides;
-      }      
+      }
       new TimelineMax().to(that.heroFilter, 1.3, { innerRadius: r, ease: Power4.easeIn })
         .set(that.heroFilter, { innerRadius: 0, strength: 0 })
         .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition')
@@ -9092,6 +9092,16 @@ const _tickets = function () {
             that.loading();
           }
         });
+        function filters() {
+          let src = './js/lib/pixi-filters.js';
+          var script = document.createElement('script');
+          script.src = src;
+          document.head.appendChild(script);
+          script.onload = function () {
+            that.resourcesDone++;
+            that.loading();
+          }
+        } 
 
       },
       loading: function () {
@@ -9125,10 +9135,15 @@ const _tickets = function () {
       loaded: function () {
         const that = this;
         
+        root.questionaire.init();
         root.eventsInit();          
         //root.cursor.init();
-        app.globalEvents();
+        app.globalEvents();        
         return
+
+        for(i in root.questionaire.questions){
+          if(i > 0)root.questionaire.questions[i].container.visible = false;
+        }
 
         new TimelineMax()
         .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
@@ -9140,19 +9155,49 @@ const _tickets = function () {
     };
 
     this.questionaire = {
-      init: function(){
-        let that = this;
-        that.questions = [];
-        that.total = document.querySelectorAll('.leisure-questionaire__hero .hero--questions li').length;
-        that.current = 1;
-        document.querySelectorAll('.leisure-questionaire__hero .hero--questions li').forEach(function(el, i){
-          
-          let question = {
-            
+      questions: [],
+      total: document.querySelectorAll('.leisure-questionaire__hero .hero--questions li').length,
+      current: 0,
+      transition: true,
+      side: null,
+      click: false,
+      timerTween: null,
+      heroBgCover: function (el) {
+        let ratio = el.width / el.height;        
+        if (document.body.clientWidth / window.innerHeight > ratio) {        
+          return {          
+            width: window.innerWidth,
+            height: window.innerWidth / ratio,
+            x: 0,
+            y: (window.innerHeight - window.innerWidth / ratio) / 2
           }
+        } else {        
+          return {
+            width: window.innerHeight * ratio,
+            height: window.innerHeight,
+            x: (window.innerWidth - (window.innerHeight * ratio)) / 2,
+            y: 0
+          }
+        }
+      },
+      init: function(){
+        let that = this;        
+        document.querySelector('.leisure__hero_pagination .pagination--slide .current').innerHTML = (that.current + 1) < 10 ? '0' + (that.current + 1) : (that.current + 1);
+        document.querySelector('.leisure__hero_pagination .pagination--slide .all').innerHTML = that.total < 10 ? '0' + that.total : that.total;
+        TweenMax.set('.leisure__hero_pagination .pagination--bar i', {width: (100 / that.total)+'%'})
+        TweenMax.set('.leisure__hero_pagination, .hero-timer', {visibility: 'hidden'});
+
+        that.click = true;
+        const loader = PIXI.Loader.shared;
+        document.querySelectorAll('.leisure-questionaire__hero .hero--questions li').forEach(function(el, i){            
+          let question = {};
+          el.querySelectorAll('[data-value]').forEach(function(elem, n){
+            loader.add('src-'+i+'-'+n, elem.getAttribute('src'));            
+            question['value'+n] = elem.getAttribute('data-value');
+          });          
+          that.questions.push(question);
         });
-
-
+        
         that.el = document.querySelector('.leisure-questionaire__hero');
         that.hero = new PIXI.Application({
           width: that.el.clientWidth,
@@ -9160,6 +9205,221 @@ const _tickets = function () {
           transparent: true,
           //forceCanvas: true
         });
+        that.hero.stage.interactive = true;
+        that.el.appendChild(that.hero.view);        
+
+        loader.load(function (loader, resources) {
+          that.filter0 = new PIXI.filters.ZoomBlurFilter();
+          that.filter0.strength = 0;
+          that.filter0.center = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2
+          }
+          that.filter0.innerRadius = 0;
+          that.filter1 = new PIXI.filters.ZoomBlurFilter();
+          that.filter1.strength = 0;
+          that.filter1.center = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2
+          }
+          that.filter1.innerRadius = 0;
+          for(i in that.questions){
+            let slide = that.questions[i];
+            that.questions[i].container = new PIXI.Container();            
+            that.questions[i].img0 =  new PIXI.Sprite(resources['src-'+i+'-0'].texture);
+            that.questions[i].img1 =  new PIXI.Sprite(resources['src-'+i+'-1'].texture);
+            that.questions[i].img0.index = 0;
+            that.questions[i].img1.index = 1;
+            let params0 = that.heroBgCover(resources['src-'+i+'-0'].data);
+            let params1 = that.heroBgCover(resources['src-'+i+'-1'].data);            
+            that.questions[i].img0.width = params0.width;
+            that.questions[i].img0.height = params0.height;
+            that.questions[i].img0.x = params0.x;
+            that.questions[i].img0.y = params0.y;
+            that.questions[i].img1.width = params1.width;
+            that.questions[i].img1.height = params1.height;
+            that.questions[i].img1.x = params1.x;
+            that.questions[i].img1.y = params1.y;            
+            
+            that.questions[i].container.addChild(that.questions[i].img0);
+            that.questions[i].container.addChild(that.questions[i].img1);
+            const mask0 = new PIXI.Graphics();            
+            mask0.lineStyle(0);
+            mask0.beginFill(0xFFFFFF, 1);
+            mask0.drawPolygon([0, 0, ((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight, 0, that.el.clientHeight]);
+            mask0.endFill();
+            const mask1 = new PIXI.Graphics();            
+            mask1.lineStyle(0);
+            mask1.beginFill(0xFFFFFF, 1);
+            mask1.drawPolygon([((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, that.el.clientWidth, 0, that.el.clientWidth, that.el.clientHeight, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight]);
+            mask1.endFill();
+            
+            that.questions[i].img0.mask = mask0;
+            that.questions[i].img1.mask = mask1;
+
+            that.questions[i].img0.interactive = true;
+            that.questions[i].img1.interactive = true;
+            that.questions[i].img0.on('mouseover', mouseEnter);
+            that.questions[i].img1.on('mouseover', mouseEnter);
+            that.questions[i].img0.on('mouseout', mouseLeave);
+            that.questions[i].img1.on('mouseout', mouseLeave);
+            that.questions[i].img0.on('click', click);
+            that.questions[i].img1.on('click', click);
+
+            that.questions[i].img0.filters = [that.filter0];
+            that.questions[i].img1.filters = [that.filter1];            
+            that.hero.stage.addChild(that.questions[i].container);
+
+            //if(i > 0)that.questions[i].container.visible = false;
+          }
+
+          setTimeout(function(){
+            for(i in that.questions){
+              if(i > 0)that.questions[i].container.visible = false;
+            }
+          }, 2000)
+          
+
+          function mouseEnter(e){
+            let i = e.currentTarget.index;
+            that.side = i;
+            if(that.transition)return;            
+            TweenMax.to(that['filter'+i], 0.8, {strength: 0});
+          }
+          function mouseLeave(e){
+            let i = e.currentTarget.index;
+            that.side = i;
+            if(that.transition)return;            
+            TweenMax.to(that['filter'+i], 0.8, {strength: 0.15});
+          }
+          function click(e){
+            let i = e.currentTarget.index;
+            that.side = i;
+            if(!that.click)return;
+            that.transition = true;
+            that.click = false;
+            let c = that.current;
+            let n = that.current+1;
+            let f = i == 0 ? that.filter0 : that.filter1;
+            let x = e.data.global.x;
+            let y = e.data.global.y;           
+            console.log(f);
+            
+            
+            let tl = new TimelineMax()
+              .set(that.questions[n].container, {visible: true, alpha: 0})              
+               .to('.hero-timer', 1, {opacity: 0, y: -50, ease: Power4.easeIn}, 'transition')
+              .to([that.filter0, that.filter1], 1, {strength: 2, ease: Power3.easeIn}, 'transition')
+              .to(that.questions[c].container, 1, {alpha: 0, ease: Power3.easeIn }, 'transition')
+              .to(that.questions[n].container, 1, {alpha: 1, ease: Power3.easeIn }, 'transition')
+              .set(that.questions[c].container, {visible: false})
+              .set('.hero-timer span', {clearProps: 'all'})
+              .set('.hero-timer', {opacity: 0, y: 50})
+              .add(function(){
+                that.transition = false;
+                that.timerTween.kill();
+                document.querySelector('.hero-timer span').innerHTML = 3;
+              })
+              .to('.hero-timer', 1, {opacity: 1, y: 0, ease: Power4.easeOut}, 'end')
+              .to(that.filter0, 1, { strength: function(){
+                if(that.side == 0){
+                  return 0;
+                }else{
+                  return 0.15;
+                }
+              }, ease: Power3.easeOut }, 'end')
+              .to(that.filter1, 1, { strength: function(){
+                if(that.side == 1){
+                  return 0;
+                }else{
+                  return 0.15;
+                }
+              }, ease: Power3.easeOut }, 'end')
+              .add(function(){                
+                that.current++;
+                that.click = true;                
+              })
+              .add(function(){
+                that.timer();
+              }, '+=0.5')
+          }          
+        });
+        document.querySelector('[data-action="start"]').addEventListener('click', that.start);
+      },
+      start: function(e){
+        const that = root.questionaire;        
+        new TimelineMax()
+          .staggerTo(document.querySelectorAll('.leisure-questionaire__hero .intro h1, .leisure-questionaire__hero .intro > p, .leisure-questionaire__hero .intro button'), 0.6, {y: -50, opacity: 0, ease: Power3.easeIn}, 0.18)
+          .set('.leisure-questionaire__hero .intro', {display: 'none'})
+          .set('.leisure-questionaire__hero .start', {display: 'block'})          
+          .staggerFrom(document.querySelectorAll('.leisure-questionaire__hero .start h1 p'), 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut}, 0.18)
+          //.to([that.filter0, that.filter1], 4, {strength: 0.15})
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn}, '-=0.3')
+          .set('.leisure-questionaire__hero .start h1 span', {y: 50})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .start h1 span').innerHTML = 2;
+          })
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn})
+          .set('.leisure-questionaire__hero .start h1 span', {y: 50})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .start h1 span').innerHTML = 1;
+          })
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn})
+          .set('.leisure-questionaire__hero .start h1 span', {y: 90})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .start h1 span').innerHTML = 0;
+          })
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .staggerTo(document.querySelectorAll('.leisure-questionaire__hero .start h1 p'), 0.6, {y: -50, opacity: 0, ease: Power3.easeIn}, 0.18)          
+          .set('.leisure__hero_pagination, .hero-timer', {visibility: 'visible'})
+          .from('.leisure__hero_pagination, .hero-timer', 2, {opacity: 0}, 'start')
+          .to(that.filter0, 2, { strength: function(){
+            if(that.side == 0){
+              return 0;
+            }else{
+              return 0.15;
+            }
+          }, ease: Power3.easeOut }, 'start')
+          .to(that.filter1, 2, { strength: function(){
+            if(that.side == 1){
+              return 0;
+            }else{
+              return 0.15;
+            }
+          }, ease: Power3.easeOut }, 'start')
+          .add(function(){
+            that.transition = false;
+            that.click = true;            
+          }, '-=1')
+          .set('.hero--wrapper', {display: 'none'}, '-=1')
+          .add(function(){            
+            that.timer();
+          })
+        e.preventDefault();
+      },
+      timer: function(){
+        const that = this;
+        that.timerTween = new TimelineMax()
+          .to('.leisure-questionaire__hero .hero-timer span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn})
+          .set('.leisure-questionaire__hero .hero-timer span', {y: 50})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .hero-timer span').innerHTML = 2;
+          })
+          .to('.leisure-questionaire__hero .hero-timer span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .to('.leisure-questionaire__hero .hero-timer span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn})
+          .set('.leisure-questionaire__hero .hero-timer span', {y: 50})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .hero-timer span').innerHTML = 1;
+          })
+          .to('.leisure-questionaire__hero .hero-timer span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .to('.leisure-questionaire__hero .hero-timer span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn})
+          .set('.leisure-questionaire__hero .hero-timer span', {y: 50})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .hero-timer span').innerHTML = 0;
+          })
+          .to('.leisure-questionaire__hero .hero-timer span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
       }
     };
   
