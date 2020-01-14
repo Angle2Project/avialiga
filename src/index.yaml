@@ -25,8 +25,6 @@ PageList:
   ready: 90
 - file: business_travel.html
   ready: 90
-- file: leisure_questionaire.html
-  ready: 20
 - file: single_country.html
   ready: 90
 - file: countries.html
@@ -43,6 +41,10 @@ PageList:
   ready: 90
 - file: mice.html
   ready: 90
+- file: leisure_questionaire.html
+  ready: 20
+- file: leisure_questionaire-results.html
+  ready: 20
 - file: business_questionaire.html
   ready: 90
 - file: agents.html
@@ -55,5 +57,7 @@ PageList:
   ready: 90
 - file: tickets.html
   ready: 40
+
+  
 
   

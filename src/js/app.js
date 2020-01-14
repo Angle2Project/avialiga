@@ -9058,13 +9058,13 @@ const _tickets = function () {
       init: function () {
         let that = this;
   
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
   
-        // TweenMax.set('#loader-logo .m', { x: -55, y: -31 });
-        // TweenMax.set('#loader-logo .h', { x: -55, y: -30 });
-        // TweenMax.to('#loader-logo .h', 20, { rotation: 360, transformOrigin: "88% 95%", ease: Power0.easeNone, repeat: -1 });
-        // TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
-        // TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
+        TweenMax.set('#loader-logo .m', { x: -55, y: -31 });
+        TweenMax.set('#loader-logo .h', { x: -55, y: -30 });
+        TweenMax.to('#loader-logo .h', 20, { rotation: 360, transformOrigin: "88% 95%", ease: Power0.easeNone, repeat: -1 });
+        TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
+        TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
         this.resources += document.querySelectorAll('img').length        
           + this.scripts.length;
@@ -9107,10 +9107,6 @@ const _tickets = function () {
       loading: function () {
         const that = this;      
         if (this.resources == this.resourcesDone) {
-
-          that.loaded();
-          return;
-
           let tl = new TimelineMax();
           tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
           .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
@@ -9120,9 +9116,10 @@ const _tickets = function () {
           .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')
           .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')
           .add(function(){          
+            root.questionaire.init();
             root.eventsInit();          
             root.cursor.init();
-            app.globalEvents();
+            app.globalEvents();        
           })
           .to('#loader-logo', 0.5, { opacity: 0 }, '+=1')
           .to('.loader-logo .brand', 0.5, { opacity: 0 }, '-=0.3')
@@ -9134,13 +9131,6 @@ const _tickets = function () {
       },
       loaded: function () {
         const that = this;
-        
-        root.questionaire.init();
-        root.eventsInit();          
-        //root.cursor.init();
-        app.globalEvents();        
-        return
-
         for(i in root.questionaire.questions){
           if(i > 0)root.questionaire.questions[i].container.visible = false;
         }
@@ -9150,12 +9140,15 @@ const _tickets = function () {
         .add(function(){        
           document.querySelector('.loader').remove();
           TweenMax.set('body', { overflow: 'auto' });        
-        })      
+        })
+        .staggerFrom(document.querySelectorAll('.hero--wrapper h1 p'), 1, { rotationX: 90, opacity: 0, ease: Power2.easeOut }, 0.1, '+=0.3')
+        .staggerFrom(document.querySelectorAll('.hero--wrapper .intro > p, .hero--wrapper .intro .btn-skew'), 1, {y: 50, opacity: 0, ease: Power3.easeOut}, 0.18, '-=0.5')
       },
     };
 
     this.questionaire = {
       questions: [],
+      data: [],
       total: document.querySelectorAll('.leisure-questionaire__hero .hero--questions li').length,
       current: 0,
       transition: true,
@@ -9230,8 +9223,10 @@ const _tickets = function () {
             that.questions[i].img1 =  new PIXI.Sprite(resources['src-'+i+'-1'].texture);
             that.questions[i].img0.index = 0;
             that.questions[i].img1.index = 1;
+            that.questions[i].img0.value = that.questions[i].value0;
+            that.questions[i].img1.value = that.questions[i].value1;
             let params0 = that.heroBgCover(resources['src-'+i+'-0'].data);
-            let params1 = that.heroBgCover(resources['src-'+i+'-1'].data);            
+            let params1 = that.heroBgCover(resources['src-'+i+'-1'].data);
             that.questions[i].img0.width = params0.width;
             that.questions[i].img0.height = params0.height;
             that.questions[i].img0.x = params0.x;
@@ -9239,23 +9234,25 @@ const _tickets = function () {
             that.questions[i].img1.width = params1.width;
             that.questions[i].img1.height = params1.height;
             that.questions[i].img1.x = params1.x;
-            that.questions[i].img1.y = params1.y;            
+            that.questions[i].img1.y = params1.y;
             
             that.questions[i].container.addChild(that.questions[i].img0);
             that.questions[i].container.addChild(that.questions[i].img1);
-            const mask0 = new PIXI.Graphics();            
-            mask0.lineStyle(0);
-            mask0.beginFill(0xFFFFFF, 1);
-            mask0.drawPolygon([0, 0, ((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight, 0, that.el.clientHeight]);
-            mask0.endFill();
-            const mask1 = new PIXI.Graphics();            
-            mask1.lineStyle(0);
-            mask1.beginFill(0xFFFFFF, 1);
-            mask1.drawPolygon([((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, that.el.clientWidth, 0, that.el.clientWidth, that.el.clientHeight, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight]);
-            mask1.endFill();
+            that.questions[i].mask0 = new PIXI.Graphics();
+            that.questions[i].mask0.lineStyle(0);
+            that.questions[i].mask0.beginFill(0xFFFFFF, 1);
+            that.questions[i].mask0.drawPolygon([0, 0, ((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight, 0, that.el.clientHeight]);
+            that.questions[i].mask0.endFill();
+            that.questions[i].mask1 = new PIXI.Graphics();            
+            that.questions[i].mask1.lineStyle(0);
+            that.questions[i].mask1.beginFill(0xFFFFFF, 1);
+            that.questions[i].mask1.drawPolygon([((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, that.el.clientWidth, 0, that.el.clientWidth, that.el.clientHeight, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight]);
+            that.questions[i].mask1.endFill();
+            // that.questions[i].container.addChild(that.questions[i].mask0);
+            // that.questions[i].container.addChild(that.questions[i].mask1);
             
-            that.questions[i].img0.mask = mask0;
-            that.questions[i].img1.mask = mask1;
+            that.questions[i].img0.mask = that.questions[i].mask0;
+            that.questions[i].img1.mask = that.questions[i].mask1;
 
             that.questions[i].img0.interactive = true;
             that.questions[i].img1.interactive = true;
@@ -9271,13 +9268,7 @@ const _tickets = function () {
             that.hero.stage.addChild(that.questions[i].container);
 
             //if(i > 0)that.questions[i].container.visible = false;
-          }
-
-          setTimeout(function(){
-            for(i in that.questions){
-              if(i > 0)that.questions[i].container.visible = false;
-            }
-          }, 2000)
+          }         
           
 
           function mouseEnter(e){
@@ -9295,16 +9286,26 @@ const _tickets = function () {
           function click(e){
             let i = e.currentTarget.index;
             that.side = i;
-            if(!that.click)return;
+            if(!that.click)return;            
             that.transition = true;
             that.click = false;
-            let c = that.current;
+            let value = e.currentTarget.value;
+            that.data.push(value);
+
+            if((that.current+1) < that.total){
+              let c = that.current;
             let n = that.current+1;
             let f = i == 0 ? that.filter0 : that.filter1;
             let x = e.data.global.x;
             let y = e.data.global.y;           
-            console.log(f);
-            
+            let pS, pE;
+            if ((that.current+1) < that.total) {
+              pS = ((100 / that.total) * (that.current + 2)) - ((100 / that.total) / 2);
+              pE = ((100 / that.total) * (that.current + 2));
+            } else {
+              pS = (100 - ((100 / that.total)));
+              pE = 100 / that.total;
+            }
             
             let tl = new TimelineMax()
               .set(that.questions[n].container, {visible: true, alpha: 0})              
@@ -9312,6 +9313,7 @@ const _tickets = function () {
               .to([that.filter0, that.filter1], 1, {strength: 2, ease: Power3.easeIn}, 'transition')
               .to(that.questions[c].container, 1, {alpha: 0, ease: Power3.easeIn }, 'transition')
               .to(that.questions[n].container, 1, {alpha: 1, ease: Power3.easeIn }, 'transition')
+              .to('.pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition')
               .set(that.questions[c].container, {visible: false})
               .set('.hero-timer span', {clearProps: 'all'})
               .set('.hero-timer', {opacity: 0, y: 50})
@@ -9319,7 +9321,9 @@ const _tickets = function () {
                 that.transition = false;
                 that.timerTween.kill();
                 document.querySelector('.hero-timer span').innerHTML = 3;
+                document.querySelector('.pagination--slide .current').innerHTML = (that.current+2) < 10 ? '0'+(that.current+2) : (that.current+2);
               })
+              .to('.pagination--bar i', 1, { width: pE + '%', ease: Power3.easeOut }, 'end')
               .to('.hero-timer', 1, {opacity: 1, y: 0, ease: Power4.easeOut}, 'end')
               .to(that.filter0, 1, { strength: function(){
                 if(that.side == 0){
@@ -9342,9 +9346,13 @@ const _tickets = function () {
               .add(function(){
                 that.timer();
               }, '+=0.5')
+            }else{
+              // Тут редирект на результаты
+            }            
           }          
         });
         document.querySelector('[data-action="start"]').addEventListener('click', that.start);
+        document.querySelector('[data-action="restart"]').addEventListener('click', that.restart);
       },
       start: function(e){
         const that = root.questionaire;        
@@ -9420,6 +9428,146 @@ const _tickets = function () {
             document.querySelector('.leisure-questionaire__hero .hero-timer span').innerHTML = 0;
           })
           .to('.leisure-questionaire__hero .hero-timer span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .add(function(){
+            if(!that.transition)that.ooops();
+          })
+      },
+      ooops: function(){
+        const that = this;        
+        new TimelineMax()          
+          .set('.hero--blinder', {visibility: 'visible'})
+          .set(document.querySelectorAll('header a'), {clearProps: 'all'})
+          .to(document.querySelectorAll('.header__nav_link > a, .take-button'), 1.7, {color: '#5ac0b0', ease: Power3.easeIn}, 'start')
+          .to(document.querySelectorAll('.header__nav_link > a .icon'), 1.7, {fill: '#5ac0b0', ease: Power3.easeIn}, 'start')
+          .to('.logo--white', 1.7, {opacity: 0, ease: Power3.easeIn}, 'start')
+          .to('.logo--green', 1.7, {opacity: 1, ease: Power3.easeIn}, 'start')
+          .to(document.querySelectorAll('.breadcrumb a, .breadcrumb span'), 1.7, {color: '#2f2f2f', ease: Power3.easeIn}, 'start')
+          .to(['.hero--blinder .blind-left', '.hero--blinder .blind-right'], 1.7, {scaleX: 1, ease: Power3.easeIn}, 'start')
+          .add(function(){
+            document.body.classList.replace('h-white', 'h-green')
+          })
+          .from('.hero--blinder h1 span', 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut}, '+=0.2')
+          .staggerFrom(document.querySelectorAll('.hero--blinder p, .hero--blinder .btn-skew'), 1, {y: 50, opacity: 0, ease: Power4.easeOut}, 0.18, '-=0.8')
+          .add(function(){
+            that.filter0.strength = 0;
+            that.filter1.strength = 0;
+            that.current = 0;
+            for(i in that.questions){
+              if(i == 0){
+                that.questions[i].container.alpha = 1;
+                that.questions[i].container.visible = true;
+              }else{
+                that.questions[i].container.alpha = 0;
+                that.questions[i].container.visible = false;
+              }
+            }
+            TweenMax.set('.hero--wrapper, .hero--wrapper .start p, .hero--wrapper .start p span', {clearProps: 'all'});            
+            TweenMax.set('.leisure__hero_pagination, .hero-timer', {clearProps: 'all'})
+            TweenMax.set('.leisure__hero_pagination, .hero-timer', {visibility: 'hidden'})
+            document.querySelector('.hero-timer span').innerHTML = 3;
+            document.querySelector('.hero--wrapper .start p span').innerHTML = 3;
+            document.querySelector('.leisure__hero_pagination .pagination--slide .current').innerHTML = (that.current + 1) < 10 ? '0' + (that.current + 1) : (that.current + 1);
+            document.querySelector('.leisure__hero_pagination .pagination--slide .all').innerHTML = that.total < 10 ? '0' + that.total : that.total;
+            TweenMax.set('.leisure__hero_pagination .pagination--bar i', {width: (100 / that.total)+'%'})
+          })
+      },
+      restart: function(){
+        const that = root.questionaire;        
+        new TimelineMax()
+          .staggerTo(document.querySelectorAll('.hero--blinder h1, .hero--blinder p, .hero--blinder .btn-skew'), 0.6, {y: -50, opacity: 0, ease: Power3.easeIn}, 0.18)
+          .to(['.hero--blinder .blind-left', '.hero--blinder .blind-right'], 0.8, {scaleX: 0, ease: Power3.easeIn}, 'start')
+          .to(document.querySelectorAll('.header__nav_link > a, .take-button'), 0.8, {color: '#ffffff', ease: Power3.easeIn}, 'start')
+          .to(document.querySelectorAll('.header__nav_link > a .icon'), 0.8, {fill: '#ffffff', ease: Power3.easeIn}, 'start')
+          .to('.logo--white', 0.8, {opacity: 1, ease: Power3.easeIn}, 'start')
+          .to('.logo--green', 0.8, {opacity: 0, ease: Power3.easeIn}, 'start')
+          .to(document.querySelectorAll('.breadcrumb a, .breadcrumb span'), 0.8, {color: '#ffffff', ease: Power3.easeIn}, 'start')
+          .add(function(){
+            document.body.classList.replace('h-green', 'h-white')
+          })
+          .set(document.querySelectorAll('header a'), {clearProps: 'all'})
+          .set('.hero--blinder', {visibility: 'hidden'})
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn}, '+=0.3')
+          .set('.leisure-questionaire__hero .start h1 span', {y: 50})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .start h1 span').innerHTML = 2;
+          })
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn})
+          .set('.leisure-questionaire__hero .start h1 span', {y: 50})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .start h1 span').innerHTML = 1;
+          })
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: -50, opacity: 0, ease: Power4.easeIn})
+          .set('.leisure-questionaire__hero .start h1 span', {y: 90})
+          .add(function(){
+            document.querySelector('.leisure-questionaire__hero .start h1 span').innerHTML = 0;
+          })
+          .to('.leisure-questionaire__hero .start h1 span', 0.5, {y: 0, opacity: 1, ease: Power4.easeOut})
+          .staggerTo(document.querySelectorAll('.leisure-questionaire__hero .start h1 p'), 0.6, {y: -50, opacity: 0, ease: Power3.easeIn}, 0.18)          
+          .set('.leisure__hero_pagination, .hero-timer', {visibility: 'visible'})
+          .from('.leisure__hero_pagination, .hero-timer', 2, {opacity: 0}, 'end')
+          .to(that.filter0, 2, { strength: function(){
+            return 0.15;
+            // if(that.side == 0){
+            //   return 0;
+            // }else{
+            //   return 0.15;
+            // }
+          }, ease: Power3.easeOut }, 'end')
+          .to(that.filter1, 2, { strength: function(){
+            return 0.15;
+            // if(that.side == 1){
+            //   return 0;
+            // }else{
+            //   return 0.15;
+            // }
+          }, ease: Power3.easeOut }, 'end')
+          .add(function(){
+            that.transition = false;
+            that.click = true;
+          }, '-=1')
+          .set('.hero--wrapper', {display: 'none'}, '-=1')
+          .set(document.querySelectorAll('.hero--blinder h1, .hero--blinder h1 span, .hero--blinder p, .hero--blinder .btn-skew'), {clearProps: 'all'})
+          .add(function(){            
+            that.timer();
+          })
+      },
+      resize: function(){
+        const that = this;
+        this.hero.renderer.resize(this.el.clientWidth, window.innerHeight);
+        for(i in that.questions){
+          let params0 = that.heroBgCover(that.questions[i].img0.texture);
+          let params1 = that.heroBgCover(that.questions[i].img0.texture);  
+          that.questions[i].img0.width = params0.width;
+          that.questions[i].img0.height = params0.height;
+          that.questions[i].img0.x = params0.x;
+          that.questions[i].img0.y = params0.y;
+          that.questions[i].img1.width = params1.width;
+          that.questions[i].img1.height = params1.height;
+          that.questions[i].img1.x = params1.x;
+          that.questions[i].img1.y = params1.y;
+          that.questions[i].mask0.clear();
+          that.questions[i].mask1.clear();          
+          that.questions[i].mask0.lineStyle(0);
+          that.questions[i].mask0.beginFill(0xFFFFFF, 1);
+          that.questions[i].mask0.drawPolygon([0, 0, ((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight, 0, that.el.clientHeight]);
+          that.questions[i].mask0.endFill();          
+          that.questions[i].mask1.lineStyle(0);
+          that.questions[i].mask1.beginFill(0xFFFFFF, 1);
+          that.questions[i].mask1.drawPolygon([((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, that.el.clientWidth, 0, that.el.clientWidth, that.el.clientHeight, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight]);
+          that.questions[i].mask1.endFill();
+          that.filter0.center = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2
+          }
+          that.filter1.center = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2
+          }
+          //console.log([0, 0, ((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0, ((that.el.clientWidth / 2) - (that.el.clientWidth / 2) / 2.92), that.el.clientHeight, 0, that.el.clientHeight]);
+        }
+        
       }
     };
   
@@ -9439,15 +9587,13 @@ const _tickets = function () {
         header(e);      
       });
       window.addEventListener('resize', function(){
-        heightUpdate();      
+        heightUpdate();
+        root.questionaire.resize();
       });
     }
   
     this.loader.init(); 
-  };
-
-
-
+  }; 
 
 
 window.onload = function () {

@@ -28,6 +28,9 @@ header {
     display: flex;
     align-items: center;
   }
+  .header__left {
+    flex-grow: 1;
+  }
   .header__logo {
     width: 95px;
     height: 50px;
@@ -62,8 +65,13 @@ header {
   .header__nav {
     display: flex;
     margin-top: 37px;
+    flex-grow: 1;
     .header__nav_link {
-      margin-right: 55px;            
+      margin-right: 55px;
+      &.lng {
+        margin-left: auto;
+        margin-right: 55px;
+      }
       &>a {
         position: relative;
         &::after {
