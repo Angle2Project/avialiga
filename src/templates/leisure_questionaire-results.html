@@ -1,6 +1,6 @@
 ---
 title: Index page,
-class: leisure-questionaire h-white
+class: catalog questionaire h-green
 ---
 {% extends "layouts/_layout.html" %}
 
@@ -16,87 +16,110 @@ class: leisure-questionaire h-white
 
 	<!-- LOADER -->
 	<div class="loader">
-			<div class="loader-logo">
-				<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
-					<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
-					<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
-				</svg>
-				<div class="brand">avialiga</div>
-			</div>			
-			<div class="blind-left"></div>
-			<div class="blind-right"></div>
-	</div>
-	<!-- /LOADER -->
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+</div>
+<!-- /LOADER -->
 
 
-	
 
 
-	<article class="leisure-questionaire__hero">		
-		<div class="hero--blinder">
-			<div class="blind-left"></div>
-			<div class="blind-right"></div>
-			<h1>
-				<span>Ooops!</span>
-			</h1>
-			<p>In order to get truth results yoy should taking choice for 3 seconds</p>
-			<button name="restart" class="btn-skew" data-action="restart">
-				<div class="background"><i></i></div>
-				<span>TO TRY AGAIN</span>
-			</button>
-		</div>
+	<div class="catalog__title">
 		<div class="breadcrumb">			
-			<a href="">MAIN</a>
+			<a href="">MAIN</a>			
 			<a href="">LEISURE</a>			
 			<span>QUESTIONAIRE</span>
 		</div>
-		<ul class="hero--questions">
-			<li data-question="1">
-				<img data-src="./img/leisure-hero-2.jpg" data-value="answer-1" alt="">
-				<img data-src="./img/madrid.jpg" data-value="answer-2" alt="">
+		<h1>
+			Regarding the test passed, <br>
+			we recommend that you
+		</h1>
+	</div>
+
+
+
+	{% set filters = [
+		{
+			title: 'MOOD',
+			target: 'mood'
+		},
+		{
+			title: 'THEMATIC',
+			target: 'thematic'
+		},
+		{
+			title: 'COUNTRIES',
+			target: 'countries'
+		},
+		{
+			title: 'DATE DEPARTURE',
+			target: 'date'
+		},
+		{
+			title: 'SORT BY PRICE',
+			target: 'price'
+		}
+	] %}
+
+
+	<div class="catalog__filter">
+		<ul class="catalog__filter_nav">
+			{% for i in filters %}
+			<li data-target="{{i.target}}">
+				<i>+</i>
+				<span>{{i.title}}</span>
 			</li>
-			<li data-question="2">
-				<img data-src="./img/meetings-2.jpg" data-value="answer-1" alt="">
-				<img data-src="./img/leisure-hero-1.png" data-value="answer-2" alt="">
-			</li>
-			<li data-question="3">
-				<img data-src="./img/mice.jpg" data-value="answer-1" alt="">
-				<img data-src="./img/maldives.jpg" data-value="answer-2" alt="">
-			</li>
+			{% endfor %}
 		</ul>
-		<div class="hero--wrapper">
-			<section class="intro">
-				<h1>
-					<p>Trust your</p>
-					<p>instincts</p>
-				</h1>
-				<p>It’s our questionaire that will help us to define true choise</p>
-				<button name="start" class="btn-skew" data-action="start">
-					<div class="background"><i></i></div>
-					<span>CONTINUE</span>
-				</button>
-			</section>
-			<section class="start">
-				<h1>
-					<p>Make a choice</p>
-					<p>in <span>3</span> sec</p>
-				</h1>
-			</section>
+
+		<div class="catalog__filter_list">
+			{% for i in filters %}
+				<section class="list--item" id="{{i.target}}">
+					<ul>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 1</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 2</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 3</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 4</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 5</span>
+							</label>
+						</li>
+					</ul>
+				</section>
+			{% endfor %}
 		</div>
-		<div class="leisure__hero_pagination">
-			<div class="pagination--slide">
-				<span class="current"></span>
-				/
-				<span class="all"></span>
-			</div>
-			<div class="pagination--bar">
-				<i></i>
-			</div>
-		</div>
-		<div class="hero-timer"><span>3</span> sec</div>
-	</article>
-	
-	<!-- {% set list = [
+	</div>
+
+	{% set list = [
 		{
 			sell: false,
 			location: 'Maldives',
@@ -138,11 +161,7 @@ class: leisure-questionaire h-white
 				</div>
 			</li>
 			{% endfor %}
-		</ul>		
-	</article> -->
-
-
-
-	
+		</ul>
+	</article>
 
 {% endblock %}

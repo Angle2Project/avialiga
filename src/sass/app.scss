@@ -8,10 +8,18 @@
 @import "components/index";
 @import "pages/index";
 @import "pages/contacts";
-@import "mobile";
+
+main {
+    // position: absolute;
+    // top: 0;
+    // right: 0;
+    // bottom: 0;
+    // left: 0;
+    // overflow: auto;
+}
 
 body {
-    //overflow: hidden;
+    //position: absolute;
 }
 
 p {
@@ -464,7 +472,7 @@ color: $black;
             width: 20px;
             height: 20px;
             position: absolute;
-            top: 40;
+            top: 40px;
             left: 3px;
             transition: transform 250ms ease;
             transform: scale(0);
@@ -723,3 +731,179 @@ color: $black;
     }
 }
 
+.get-in-touch {
+    position: fixed;    
+    top: 0;
+    right: 0;  
+    bottom: 0;
+    left: 0;   
+    min-height: calc(var(--vh, 1vh) * 100);
+    z-index: 20;
+    display: none;
+    .close {
+        position: absolute;
+        top: 65px;
+        right: 65px;
+        display: flex;
+        width: 50px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 10;
+        .icon {
+            fill: $red;
+        }
+    }
+    .logo--black {
+        position: absolute;
+        top: 40px;
+        left: 48px;
+    }
+    .blind-left {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 49%;
+        background-color: $white;
+        transform: skewX(-35deg) scaleX(0);
+        transform-origin: left;
+        z-index: 0;
+    }
+    .blind-right {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 49%;
+    background-color: $white;
+    transform: skewX(-35deg) scaleX(0);
+    transform-origin: right;      
+    }
+    .wrapper {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .thank {
+        display: none;
+        h2 {
+            font: normal 72px/60px "Futura";
+            perspective: 500px;
+            span {
+                display: inline-block;
+                transform-origin: bottom;
+            }
+        }
+    }
+    .form {
+        padding-left: calc(90px + 15vw);
+        padding-right: calc(90px + 15vw);
+        position: relative;
+        z-index: 1;
+        h2 {
+            font: normal 72px/60px "Futura";
+            perspective: 500px;
+            span {
+                display: inline-block;
+                transform-origin: bottom;
+            }
+        }
+        .form--text {
+            font: 300 18px/30px "Futura";
+            margin: 30px 0;
+        }
+        input,
+        textarea {
+            font-size: 14px;
+        }
+        textarea {
+            height: 70px;
+            padding: 28px 0 0 0;
+            transition: all 250ms ease;
+            &:focus {
+                height: 90px;
+            }
+        }
+        .form-control {
+            width: calc(50% - 15px);            
+            flex-shrink: 0;
+            &.comment {
+                width: 100%;
+                height: initial;
+            }
+        }
+        .form--row {
+            display: flex;
+            justify-content: space-between;
+            
+        }
+        .custom-select {
+            width: calc(50% - 15px);
+            box-shadow: none;            
+            &::after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 1px;
+                background-color: #d1d1d1;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                z-index: 3;
+            }
+            * {
+                font-family: $proxima;
+                font-size: 14px;
+            }
+            .select--label {
+                height: 70px;
+                padding: 0 20px 0 0;
+                &:hover {
+                    background-color: $white;
+                }
+                span {
+                    color: #a0a0a0;
+                }
+                i {
+                    right: 0;
+                    .icon {
+                        width: 13px;
+                        fill: $black;
+                    }
+                }                
+            }
+            .select--options {
+                li {
+                    padding: 0 20px;
+                }
+            }
+            .custom-radio {
+                min-height: 70px;
+                input[type="radio"] + span {
+                    text-transform: initial;
+                    &::before {
+                        top: 24px;
+                    }
+                    &::after {
+                        top: 24px;
+                    }
+                }
+            }
+        }
+        .form--submit {
+            margin-top: 30px;
+            text-align: center;
+            .btn-skew {
+                width: 320px;
+            }
+        }
+    }
+}
+
+
+@import "mobile";

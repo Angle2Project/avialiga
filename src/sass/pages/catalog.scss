@@ -19,6 +19,18 @@
       background-color: #f9d4e4;
     }  
   }
+  &.questionaire {
+    .catalog__title,
+    .catalog__list {
+      background-color: #d3e7e1;
+    }
+    footer {
+      background-color: #d3e7e1;
+      margin: 0;
+      padding: 0px 90px 0 90px;
+      overflow: hidden;
+    }    
+  }
 }
 .catalog__title {  
   padding: 38px 0 40px 0;

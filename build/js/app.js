@@ -24,7 +24,14 @@ const app = {
     map: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDe4WeeWQ8_mWVwzL0Z9j3S4MpM6Of17wo'
     
   },
+  mode: '',
+  touch: false,
   globalEvents: function () {
+    document.addEventListener('touchstart', function(e){
+      app.touch = true;
+      TweenMax.to('.cursor', 0.6, {scale: 0, ease: Power3.easeOut});
+      e.currentTarget.removeEventListener(e.type, arguments.callee);
+    });
     document.querySelectorAll('a').forEach(function(el, i){
       el.addEventListener('mouseenter', function(){
         TweenMax.to('.cursor span', 0.5, { scale: 1.2});
@@ -36,7 +43,10 @@ const app = {
     // Start header
     document.querySelectorAll('[data-action="submenu"]').forEach(function (el, i) {
       el.addEventListener('mouseenter', header);
-      el.addEventListener('mouseleave', header);
+      el.addEventListener('mouseleave', header);      
+    });
+    document.querySelectorAll('[data-action="submenu"] > a').forEach(function (el, i) {
+      el.addEventListener('click', header);
     });
     document.querySelectorAll('.take-button').forEach(function (el, i) {
       el.addEventListener('mouseenter', function (e) {
@@ -62,6 +72,68 @@ const app = {
         TweenMax.to(this.querySelector('i'), 0.5, { y: 0, height: '1px', skewX: -31, ease: Power2.easeOut });
       });
     });
+    document.querySelector('header [data-action="menu-toggle"]').addEventListener('click', function(e){
+      let active = document.querySelector('header').classList.contains('active');
+      if(active){
+        new TimelineMax()
+        .staggerTo(document.querySelectorAll('.header__wrapper > h2, .header__nav_link, .header__right'), 0.6, {y: -90, opacity: 0, ease: Power3.easeIn}, 0.16)
+        .to(['header .blind-left', 'header .blind-right'], 1.4, {scaleX: 0, ease: Power3.easeOut})
+        .add(function(){
+          document.querySelector('header').classList.remove('active');
+        }, '-=1')
+        .set('.header__wrapper, .header__wrapper h2', {clearProps: 'all'})
+        .set('body', {overflow: 'auto'})
+        .set(document.querySelectorAll('.header__nav_link, .header__right'), {clearProps: 'all'})
+
+      }else{
+        new TimelineMax()
+          .set('.header__wrapper', {display: 'flex', overflow: 'hidden'})
+          .to(['header .blind-left', 'header .blind-right'], 1.2, {scaleX: 1, ease: Power3.easeIn})
+          .add(function(){
+            document.querySelector('header').classList.add('active');
+          }, '-=0.4')
+          .set('body', {overflow: 'hidden'})
+          .from('.header__wrapper > h2 span', 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut}, '+=0.1')
+          .staggerFrom(document.querySelectorAll('.header__nav_link, .header__right'), 1, {y: 90, opacity: 0, ease: Power3.easeOut}, 0.16, '-=1')
+          .set(document.querySelectorAll('.header__nav_link, .header__right'), {clearProps: 'all'})
+          .set('.header__wrapper', {overflow: 'initial'})
+      }      
+
+      e.preventDefault();
+    });
+    document.querySelectorAll('header [data-action="back"]').forEach(function(el, i){
+      el.addEventListener('click', function(e){
+        let submenu = e.currentTarget.closest('.submenu');
+        new TimelineMax()
+          .to(e.currentTarget.closest('.submenu'), 1, {y: -100, opacity: 0, ease: Power3.easeOut})
+          .set(e.currentTarget.closest('.submenu'), {clearProps: 'all'})          
+        e.preventDefault();
+      });
+    });    
+
+    document.querySelector('[data-action="menu-toggle"]').addEventListener('mouseenter', function(e){
+      TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut });
+    });
+    document.querySelector('[data-action="menu-toggle"]').addEventListener('mouseleave', function(e){
+      TweenMax.to('.cursor span', 0.5, { scale: 1, ease: Power3.easeOut });
+    });
+    document.querySelectorAll('[data-action="back"]').forEach(function(el, i){
+      el.addEventListener('mouseenter', function(e){
+        TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut });
+      });
+      el.addEventListener('mouseleave', function(e){
+        TweenMax.to('.cursor span', 0.5, { scale: 1, ease: Power3.easeOut });
+      });
+    });    
+    document.querySelector('[data-action="get-in-touch"]').addEventListener('mouseenter', function(e){
+      TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut });
+      TweenMax.to('.cursor .circle', 0.5, {backgroundColor: '#fff', ease: Power3.easeOut });
+    });
+    document.querySelector('[data-action="get-in-touch"]').addEventListener('mouseleave', function(e){
+      TweenMax.to('.cursor span', 0.5, { scale: 1, ease: Power3.easeOut });
+      TweenMax.to('.cursor .circle', 0.5, {backgroundColor: '#ee412a', ease: Power3.easeOut });
+    });
+    
     // =================================================================================
 
     // Start buttons
@@ -101,6 +173,9 @@ const app = {
 
 function header(e) {
   if (e.type == 'mouseenter') {
+
+    if(app.mode == 'tablet')return;
+
     this.classList.add('active');
     let tl = new TimelineMax();
     tl.to(this.querySelector('a'), 0.6, { color: '#ee412a' }, 'start')
@@ -156,7 +231,8 @@ function header(e) {
       }}, 'start')
       .to(this.querySelector('.submenu'), 0.5, { autoAlpha: 1, ease: Power0.easeNone }, 'start')
       .fromTo(this.querySelectorAll('.submenu .row'), 0.8, { opacity: 0, y: -20, }, { opacity: 1, y: 0, ease: Power2.easeOut }, 'start')
-  } else if (e.type == 'mouseleave') {    
+  } else if (e.type == 'mouseleave') { 
+    if(app.mode == 'tablet')return;
     this.classList.remove('active');
     let tl = new TimelineMax();
     tl.to(document.querySelectorAll('.header__nav_link > a, .header__right a'), 0.6, {
@@ -216,6 +292,7 @@ function header(e) {
       .to(this.querySelector('.submenu'), 0.5, { autoAlpha: 0, ease: Power0.easeNone }, 'start')
       .to(this.querySelectorAll('.submenu .row'), 0.5, { opacity: 0, y: 20, ease: Power2.easeOut }, '-=0.5')
   } else if (e.type == 'scroll') {
+    if(app.mode == 'tablet')return;
     let scrollTop = window.pageYOffset;    
     if (scrollTop > (window.innerHeight / 2)) {
       document.querySelector('header').classList.add('fixed');
@@ -241,6 +318,21 @@ function header(e) {
     } else {
       document.querySelector('header').classList.remove('fixed');
     }
+  } else if (e.type == 'click') {
+    if(app.mode == 'descktop')return;
+    let submenu = e.currentTarget.closest('.header__nav_link').querySelector('.submenu')    
+    let tl = new TimelineMax()
+      .set('header', {overflow: 'hidden'})
+      .set(submenu, {display: 'block'})
+      .from(submenu, 0.8, {opacity: 0, y: 100, ease: Power3.easeOut})
+      .set('header', {clearProps: 'all'})
+      .from(submenu.querySelector('.submenu__title h2 span'), 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut}, '-=0.3');
+      if(!submenu.classList.contains('more')){
+        tl.from(submenu.querySelector('.submenu__title a'), 1, {y: 50, opacity: 0, ease: Power3.easeOut}, '-=1.2');
+      }      
+      tl.from(submenu.querySelectorAll('.row section'), 1, {opacity: 0, ease: Power3.easeOut}, '-=0.4')
+      .from(submenu.querySelectorAll('.back'), 1, {opacity: 0, ease: Power3.easeOut}, '-=1')
+    e.preventDefault();
   }
 
 }
@@ -248,7 +340,157 @@ function header(e) {
 function heightUpdate(){  
   let vh = window.innerHeight * 0.01;  
   document.documentElement.style.setProperty('--vh', `${vh}px`);
+  // Screen mode refresh
+  if(window.innerWidth > 992){
+    app.mode = 'descktop'
+  }else if(window.innerWidth < 992){
+    app.mode = 'tablet'
+  }
 };
+
+const _getInTouch = function(){
+  const root = this;
+
+  this.submited = false;
+
+  this.init = function(){
+    const that = this;
+    this.inquirer.init();
+    document.querySelector('[data-action="get-in-touch"]').addEventListener('click', that.active);
+    document.querySelector('.get-in-touch .close').addEventListener('click', that.close);
+    document.querySelector('.get-in-touch .form').addEventListener('submit', that.submit);
+  }
+
+  this.active = function(e){
+    new TimelineMax()
+      .set('.get-in-touch', {display: 'block'})      
+      .to(document.querySelectorAll('.get-in-touch .blind-left, .get-in-touch .blind-right'), 1.3, {scaleX: 1, ease: Power3.easeIn}, 'start')      
+      .from('.get-in-touch .logo--black', 1.3, {opacity: 0, ease: Power3.easeIn}, 'start')
+      .set('body', {overflow: 'hidden'})
+      .from('.get-in-touch .form h2 span', 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut}, '+=0.3')
+      .staggerFrom(document.querySelectorAll('.get-in-touch .form .form--text, .get-in-touch .form .form--row, .get-in-touch .form .form-control.comment, .get-in-touch .form .form--submit'), 1, {y: 50, opacity: 0, ease: Power3.easeOut}, 0.16, '-=0.8')
+      .from('.get-in-touch .close', 0.6, {scale: 0})      
+      .set(document.querySelectorAll('.get-in-touch .form .form--text, .get-in-touch .form .form--row, .get-in-touch .form .form-control.comment, .get-in-touch .form .form--submit'), {clearProps: 'all'})
+    e.preventDefault();
+  }
+
+  this.close = function(e){
+    if(root.submited){
+      new TimelineMax()
+        .to(document.querySelectorAll('.get-in-touch .thank h2'), 0.6, {y: -100, opacity: 0, ease: Power3.easeIn})
+        .to('.get-in-touch .close', 1.4, {scale: 0, ease: Power2.easeOut}, '+=0.5')
+        .to('.get-in-touch .logo--black', 1.4, {opacity: 0, ease: Power2.easeOut}, '-=1.4')
+        .to(document.querySelectorAll('.get-in-touch .blind-left, .get-in-touch .blind-right'), 1.4, {scaleX: 0, ease: Power2.easeOut}, '-=1.4')
+        .set('body', {overflow: 'visible'})
+        .set('.get-in-touch', {display: 'none'})
+        .set(document.querySelectorAll('.get-in-touch .form, .get-in-touch .thank, .get-in-touch .logo--black, .get-in-touch .close, .get-in-touch h2, .get-in-touch .form .form--text, .get-in-touch .form .form--row, .get-in-touch .form .form-control.comment, .get-in-touch .form .form--submit'), {clearProps: 'all'})
+        root.submited = false;
+    }else{
+      new TimelineMax()
+        .staggerTo(document.querySelectorAll('.get-in-touch .form h2, .get-in-touch .form .form--text, .get-in-touch .form .form--row, .get-in-touch .form .form-control.comment, .get-in-touch .form .form--submit'), 0.6, {y: -50, opacity: 0, ease: Power3.easeIn}, 0.16)
+        .to('.get-in-touch .close', 1.4, {scale: 0, ease: Power2.easeOut}, 'start')
+        .to(document.querySelectorAll('.get-in-touch .blind-left, .get-in-touch .blind-right'), 1.4, {scaleX: 0, ease: Power2.easeOut}, 'start')
+        .set('body', {overflow: 'visible'})
+        .to('.get-in-touch .logo--black', 1.4, {opacity: 0, ease: Power2.easeOut}, 'start')
+        .set('.get-in-touch', {display: 'none'})
+        .set(document.querySelectorAll('.get-in-touch .form, .get-in-touch .thank, .get-in-touch .logo--black, .get-in-touch .close, .get-in-touch h2, .get-in-touch .form .form--text, .get-in-touch .form .form--row, .get-in-touch .form .form-control.comment, .get-in-touch .form .form--submit'), {clearProps: 'all'})
+    }
+    
+    e.preventDefault();
+  };
+
+  this.submit = function(e){
+    root.submited = true;
+    new TimelineMax()
+      .staggerTo(document.querySelectorAll('.get-in-touch .form h2, .get-in-touch .form .form--text, .get-in-touch .form .form--row, .get-in-touch .form .form-control.comment, .get-in-touch .form .form--submit'), 0.6, {y: -50, opacity: 0, ease: Power3.easeIn}, 0.16)      
+      .set('.get-in-touch .form', {display: 'none'})
+      .set('.get-in-touch .thank', {display: 'block'})
+      .from('.get-in-touch .thank h2 span', 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut}, '+=0.3')      
+    e.preventDefault();
+  };
+
+  this.inquirer = {
+    slides: null,
+    current: 1,
+    init: function(){
+      let that = this;      
+      document.querySelectorAll('.get-in-touch .custom-select .select--label').forEach(function(el, i){
+        el.addEventListener('click', that.onActive);
+      });
+      document.querySelectorAll('.get-in-touch  .custom-select .select--options input[type="radio"]').forEach(function(el, i){
+        el.addEventListener('change', that.onChange);        
+      });    
+      document.addEventListener('click', function(e){
+        if(!e.target.closest('.custom-select') && document.querySelectorAll('.custom-select.active').length){
+          new TimelineMax().to(document.querySelector('.custom-select.active .select--options'), 0.4, {height: 0, ease: Power2.easeInOut})
+            .set(document.querySelectorAll('.custom-select.active .select--options'), {clearProps: 'all'});
+            document.querySelector('.custom-select.active').classList.remove('active');
+        }
+      });  
+
+    },
+    onActive: function(e){
+      let target = e.currentTarget.closest('.custom-select');
+      let active = target.classList.contains('active');
+      if(active){
+        new TimelineMax().to(target.querySelector('.select--options'), 0.4, {height: 0, ease: Power2.easeInOut})
+          .set(target.querySelector('.select--options'), {clearProps: 'all'});
+        target.classList.remove('active');
+      }else{        
+        new TimelineMax().set(target.querySelector('.select--options'), {display: 'block'})
+          .from(target.querySelector('.select--options'), 0.4, {height: 0, ease: Power2.easeInOut});
+        target.classList.add('active');          
+      }      
+    },
+    onChange: function(e){
+      let that = this;
+      let target = e.target.closest('.custom-select');
+      let text = e.target.closest('li').querySelector('span').innerText;
+      target.querySelector('.select--label span').innerText = text;
+      TweenMax.to('.business__select [data-action="next"]', 0.6, {opacity: 1});
+      new TimelineMax().to(target.querySelector('.select--options'), 0.4, {height: 0, ease: Power2.easeInOut})
+          .set(target.querySelector('.select--options'), {clearProps: 'all'});
+        target.classList.remove('active');
+      
+    },
+    onNext: function(e){
+      const that = app.businessQuestionaire.inquirer;
+      let next = (that.current+1);      
+      if(that.current < that.slides){
+        if(!document.querySelectorAll('.business__select_slider [data-slide="'+that.current+'"] input[type="radio"]:checked').length)return;
+        new TimelineMax()
+        .set('.business__select_slider', {overflow: 'hidden'})
+        .to('.business__select_slider [data-slide="'+that.current+'"]', 0.6, {x: '-100%', opacity: 0, ease: Power3.easeIn})
+        .set('.business__select_slider [data-slide="'+that.current+'"]', {clearProps: 'all'})
+        .add(function(){          
+          that.current++;
+          document.querySelector('.business__select_slider .pagination').innerText = that.current+'/'+that.slides;
+          TweenMax.to('.business__select [data-action="next"]', 0.6, {opacity: 0});
+        })
+        .set('.business__select_slider [data-slide="'+next+'"]', {display: 'block'})
+        .from('.business__select_slider [data-slide="'+next+'"]', 0.6, {x: '100%', opacity: 0, ease: Power3.easeOut})
+        .set('.business__select_slider', {clearProps: 'all'})
+        .add(function(){
+          if(that.current == that.slides){
+            document.querySelector('.business__select [data-action] span').innerText = 'Submit';
+          }
+        })
+      }else{
+        let h = document.querySelector('.business__select_slider [data-slide="'+that.current+'"]').clientHeight;        
+        new TimelineMax()
+          .set('.business__select_slider .thank', {height: h})
+          .set('.business__select_slider', {overflow: 'hidden'})
+          .to('.business__select_slider [data-slide="'+that.current+'"]', 0.6, {x: '-100%', opacity: 0, ease: Power3.easeIn})
+          .to('.business__select_slider .pagination, .business__select [data-action]', 0.6, {opacity: 0}, '-=0.6')
+          .set('.business__select_slider [data-slide="'+that.current+'"]', {clearProps: 'all'})
+          .set('.business__select_slider .thank', {display: 'flex'})
+          .from('.business__select_slider .thank', 0.6, {x: '100%', opacity: 0, ease: Power3.easeOut})
+          .set('.business__select_slider', {clearProps: 'all'})
+      }
+    }
+  };
+  this.init();
+}
 
 
 
@@ -574,10 +816,15 @@ const _homepage = function (page) {
         app.homepage.hero = new heroRender();
         app.homepage.drag = new dragRender();
         app.homepage.eventsInit();
+        this.sts = 0;
+        this.stm = 0;
+        this.ste = 0;
         this.mySwiper = new Swiper('.swiper-container', {
           // Optional parameters    
           speed: 800,
           simulateTouch: false,
+          //followFinger: false,
+          touchRatio: 2,          
           // If we need pagination
           pagination: {
             el: '.slider-pagination',
@@ -597,21 +844,22 @@ const _homepage = function (page) {
             if (this.realIndex > this.previousIndex) {
               let tl = new TimelineMax();
               tl//.to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 0.7, {opacity: 0}, 'start')
+                
                 .to(this.el.querySelector('.swiper-slide-prev .slide--photo img'), 1.4, { scale: 1.5 }, 'start')
-                .to(this.el.querySelector('.swiper-slide-prev'), 0.4, { skewX: -30, scale: 1.2, ease: Power1.easeIn, yoyo: true, repeat: 1 }, 'start')
+                .to(this.el.querySelectorAll('.swiper-slide'), 0.4, { skewX: -30, scale: 1.2, ease: Power1.easeIn, yoyo: true, repeat: 1 }, 'start')
                 //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
                 .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, { scale: 1.5 }, { scale: 1 }, 'start')
-                .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, { skewX: 0, scale: 1 }, { skewX: -30, scale: 1.2, ease: Power1.easeIn, yoyo: true, repeat: 1 }, 'start')
+                .fromTo(this.el.querySelectorAll('.swiper-slide'), 0.4, { skewX: 0, scale: 1 }, { skewX: -30, scale: 1.2, ease: Power1.easeIn, yoyo: true, repeat: 1 }, 'start')
             } else {
               let tl = new TimelineMax();
               tl//.to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 0.7, {opacity: 0}, 'start')
                 .to(this.el.querySelector('.swiper-slide-next .slide--photo img'), 1.4, { scale: 1.5 }, 'start')
-                .to(this.el.querySelector('.swiper-slide-next'), 0.4, { skewX: 30, scale: 1.2, ease: Power1.easeIn, yoyo: true, repeat: 1 }, 'start')
+                .to(this.el.querySelectorAll('.swiper-slide'), 0.4, { skewX: 30, scale: 1.2, ease: Power1.easeIn, yoyo: true, repeat: 1 }, 'start')
                 //.fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.6, {opacity: 0}, {opacity: 1, scale: 1, ease:Power4.easeOut}, 'start')
                 .fromTo(this.el.querySelector('.swiper-slide-active .slide--photo img'), 1.4, { scale: 1.5 }, { scale: 1 }, 'start')
-                .fromTo(this.el.querySelector('.swiper-slide-active'), 0.4, { skewX: 0, scale: 1 }, { skewX: 30, scale: 1.2, ease: Power1.easeIn, yoyo: true, repeat: 1 }, 'start')
+                .fromTo(this.el.querySelectorAll('.swiper-slide'), 0.4, { skewX: 0, scale: 1 }, { skewX: 30, scale: 1.2, ease: Power1.easeIn, yoyo: true, repeat: 1 }, 'start')
             }
-          });
+          });          
         });
         document.querySelector('.homepage__hero .hero--bg').src = document.querySelector('[data-background]').getAttribute('data-background');
         that.loaded();
@@ -648,29 +896,37 @@ const _homepage = function (page) {
             document.querySelector('.loader').remove();
             TweenMax.set('body', { overflow: 'auto' });
 
-            let fs = (window.innerWidth / 100) * 9.9;
+            let ff, fm;
+            if(app.mode == 'descktop'){
+              ff = 9.9;
+              fm = 42;
+            }else if(app.mode == 'tablet'){
+              ff = 15.9;
+              fm = 22;
+            }
+            let fs = (window.innerWidth / 100) * ff;
             app.homepage.hero.smart.style.fontSize = fs;
             app.homepage.hero.choise.style.fontSize = fs;
             app.homepage.hero.save.style.fontSize = fs;
             app.homepage.hero.time.style.fontSize = fs;
             //that.hero.heroBgCover();
             app.homepage.hero.hero.renderer.resize(app.homepage.hero.el.clientWidth, app.homepage.hero.el.clientHeight);
-            app.homepage.hero.smart.x = ((app.homepage.hero.el.clientWidth / 100) * 42);
+            app.homepage.hero.smart.x = ((app.homepage.hero.el.clientWidth / 100) * fm);
             app.homepage.hero.smart.y = 140 - ((Math.floor(fs) / 100) * 7.563724377883669);
-            app.homepage.hero.choise.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 6);
+            app.homepage.hero.choise.x = ((app.homepage.hero.el.clientWidth / 100) * fm) + ((app.homepage.hero.el.clientWidth / 100) * 6);
             app.homepage.hero.choise.y = (140 - ((fs / 100) * 7.563724377883669)) + Math.floor(fs);
-            app.homepage.hero.save.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 12.1);
+            app.homepage.hero.save.x = ((app.homepage.hero.el.clientWidth / 100) * fm) + ((app.homepage.hero.el.clientWidth / 100) * 12.1);
             app.homepage.hero.save.y = (140 - ((Math.floor(fs) / 100) * 7.563724377883669)) + (Math.floor(fs) * 2);
-            app.homepage.hero.time.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 18.2);
+            app.homepage.hero.time.x = ((app.homepage.hero.el.clientWidth / 100) * fm) + ((app.homepage.hero.el.clientWidth / 100) * 18.2);
             app.homepage.hero.time.y = (140 - ((Math.floor(fs) / 100) * 7.563724377883669)) + (Math.floor(fs) * 3);
 
-            app.homepage.hero.smart2.x = ((app.homepage.hero.el.clientWidth / 100) * 42);
+            app.homepage.hero.smart2.x = ((app.homepage.hero.el.clientWidth / 100) * fm);
             app.homepage.hero.smart2.y = 140 - ((Math.floor(fs) / 100) * 7.563724377883669);
-            app.homepage.hero.choise2.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 6);
+            app.homepage.hero.choise2.x = ((app.homepage.hero.el.clientWidth / 100) * fm) + ((app.homepage.hero.el.clientWidth / 100) * 6);
             app.homepage.hero.choise2.y = (140 - ((fs / 100) * 7.563724377883669)) + Math.floor(fs);
-            app.homepage.hero.save2.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 12.1);
+            app.homepage.hero.save2.x = ((app.homepage.hero.el.clientWidth / 100) * fm) + ((app.homepage.hero.el.clientWidth / 100) * 12.1);
             app.homepage.hero.save2.y = (140 - ((Math.floor(fs) / 100) * 7.563724377883669)) + (Math.floor(fs) * 2);
-            app.homepage.hero.time2.x = ((app.homepage.hero.el.clientWidth / 100) * 42) + ((app.homepage.hero.el.clientWidth / 100) * 18.2);
+            app.homepage.hero.time2.x = ((app.homepage.hero.el.clientWidth / 100) * fm) + ((app.homepage.hero.el.clientWidth / 100) * 18.2);
             app.homepage.hero.time2.y = (140 - ((Math.floor(fs) / 100) * 7.563724377883669)) + (Math.floor(fs) * 3);
 
             // app.homepage.hero.displacementSprite.width = app.homepage.hero.hero.renderer.width / 3;
@@ -756,7 +1012,14 @@ const _homepage = function (page) {
     loader.add('displacementSprite', './img/displacement.png')
     loader.load(function (loader, resources) {
 
-      let fs = (window.innerWidth / 100) * 9.9;
+      let factor;
+      if(app.mode == 'descktop'){
+        factor = 9.9;
+      }else if(app.mode == 'tablet'){
+        factor = 15.9;
+      }
+      console.log(app.mode, factor);
+      let fs = (window.innerWidth / 100) * factor;
 
       const style = new PIXI.TextStyle({
         fontFamily: 'Futura',
@@ -889,6 +1152,25 @@ const _homepage = function (page) {
     let that = this;
     let ratio;
 
+    this.heroBgCover = function (el) {
+      let ratio = el.width / el.height;
+      if (document.body.clientWidth / window.innerHeight > ratio) {        
+        return {          
+          width: window.innerWidth,
+          height: window.innerWidth / ratio,
+          x: 0,
+          y: (window.innerHeight - window.innerWidth / ratio) / 2
+        }
+      } else {        
+        return {
+          width: window.innerHeight * ratio,
+          height: window.innerHeight,
+          x: (window.innerWidth - (window.innerHeight * ratio)) / 2,
+          y: 0
+        }
+      }
+    };
+
     this.show = false;
     this.el = document.querySelector('.homepage__drag');
 
@@ -937,7 +1219,7 @@ const _homepage = function (page) {
     this.pat1.onload = function () {
       ratio = this.width / this.height;
       that.canv1.width = that.el.clientWidth;
-      that.canv1.height = that.el.clientWidth / ratio;
+      that.canv1.height = (app.mode == 'descktop' ? that.el.clientWidth / ratio : that.el.clientHeight);
       that.ctx1.save();
       that.ctx1.beginPath();
       that.ctx1.moveTo(0, 0);
@@ -948,7 +1230,8 @@ const _homepage = function (page) {
       that.ctx1.closePath();
       // Clip to the current path
       that.ctx1.clip();
-      that.ctx1.drawImage(that.pat1, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      let param = that.heroBgCover(that.pat1);
+      that.ctx1.drawImage(that.pat1, param.x, param.y, param.width, param.height);
       that.ctx1.restore();
     }
     this.pat2 = new Image();
@@ -964,7 +1247,8 @@ const _homepage = function (page) {
       that.ctx1.closePath();
       // Clip to the current path
       that.ctx1.clip();
-      that.ctx1.drawImage(that.pat2, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      let param = that.heroBgCover(that.pat2);
+      that.ctx1.drawImage(that.pat2, param.x, param.y, param.width, param.height);      
       that.ctx1.restore();
     }
 
@@ -973,7 +1257,7 @@ const _homepage = function (page) {
     this.img1.onload = function () {
       ratio = this.width / this.height;
       that.canv2.width = that.el.clientWidth;
-      that.canv2.height = that.el.clientWidth / ratio;
+      that.canv2.height = (app.mode == 'descktop' ? that.el.clientWidth / ratio : that.el.clientHeight);
       that.ctx2.save();
       that.ctx2.beginPath();
       that.ctx2.moveTo(0, 0);
@@ -984,7 +1268,8 @@ const _homepage = function (page) {
       that.ctx2.closePath();
       // Clip to the current path
       that.ctx2.clip();
-      that.ctx2.drawImage(that.img1, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      let param = that.heroBgCover(that.img1);
+      that.ctx2.drawImage(that.img1, param.x, param.y, param.width, param.height);
       that.ctx2.restore();
     }
     this.img2 = new Image();
@@ -992,7 +1277,7 @@ const _homepage = function (page) {
     this.img2.onload = function () {
       ratio = this.width / this.height;
       that.canv3.width = that.el.clientWidth;
-      that.canv3.height = that.el.clientWidth / ratio;
+      that.canv3.height = (app.mode == 'descktop' ? that.el.clientWidth / ratio : that.el.clientHeight);
       that.ctx3.save();
       that.ctx3.beginPath();
       that.ctx3.moveTo(((that.el.clientWidth / 2) + (that.el.clientWidth / 2) / 2.92), 0);
@@ -1003,7 +1288,8 @@ const _homepage = function (page) {
       that.ctx3.closePath();
       // Clip to the current path
       that.ctx3.clip();
-      that.ctx3.drawImage(that.img2, 0, 0, that.el.clientWidth, that.el.clientHeight);
+      let param = that.heroBgCover(that.img2);
+      that.ctx3.drawImage(that.img2, param.x, param.y, param.width, param.height);      
       that.ctx3.restore();
     }
 
@@ -1016,9 +1302,10 @@ const _homepage = function (page) {
     this.dragDone = false;
 
     this.dragControl = function (e) {
+      let eX = e.clientX || e.touches[0].clientX;
       if (that.dragMove) {
         let limit = (that.el.clientWidth / 2) / 3;
-        let x = e.clientX - that.dragx;
+        let x = eX - that.dragx;        
         if (x < 0 && x > -limit) {
           TweenMax.to(document.querySelector('canvas.leisure'), 0, { x: x });
           TweenMax.to(document.querySelector('canvas.business'), 0, { x: 0 });
@@ -1061,29 +1348,56 @@ const _homepage = function (page) {
   this.resizeHomepage = function (e) {
     heightUpdate();
     app.homepage.heroBgCover();
-    let fs = (window.innerWidth / 100) * 9.9;
+    if(app.mode == 'descktop'){
+      ff = 9.9;
+      fm = 42;
+    }else if(app.mode == 'tablet'){
+      ff = 15.9;
+      fm = 22;
+    }
+    function resizeBg(el) {
+      let ratio = el.width / el.height;
+      if (document.body.clientWidth / window.innerHeight > ratio) {        
+        return {          
+          width: window.innerWidth,
+          height: window.innerWidth / ratio,
+          x: 0,
+          y: (window.innerHeight - window.innerWidth / ratio) / 2
+        }
+      } else {        
+        return {
+          width: window.innerHeight * ratio,
+          height: window.innerHeight,
+          x: (window.innerWidth - (window.innerHeight * ratio)) / 2,
+          y: 0
+        }
+      }
+    };
+    let fs = (window.innerWidth / 100) * ff;
     that.hero.smart.style.fontSize = fs;
     that.hero.choise.style.fontSize = fs;
     that.hero.save.style.fontSize = fs;
     that.hero.time.style.fontSize = fs;
     //that.hero.heroBgCover();
     that.hero.hero.renderer.resize(that.hero.el.clientWidth, that.hero.el.clientHeight);
-    that.hero.smart.x = ((that.hero.el.clientWidth / 100) * 42);
+
+
+    that.hero.smart.x = ((that.hero.el.clientWidth / 100) * fm);
     that.hero.smart.y = 140 - ((Math.floor(fs) / 100) * 7.563724377883669);
-    that.hero.choise.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 6);
+    that.hero.choise.x = ((that.hero.el.clientWidth / 100) * fm) + ((that.hero.el.clientWidth / 100) * 6);
     that.hero.choise.y = (140 - ((fs / 100) * 7.563724377883669)) + Math.floor(fs);
-    that.hero.save.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 12.1);
+    that.hero.save.x = ((that.hero.el.clientWidth / 100) * fm) + ((that.hero.el.clientWidth / 100) * 12.1);
     that.hero.save.y = (140 - ((Math.floor(fs) / 100) * 7.563724377883669)) + (Math.floor(fs) * 2);
-    that.hero.time.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 18.2);
+    that.hero.time.x = ((that.hero.el.clientWidth / 100) * fm) + ((that.hero.el.clientWidth / 100) * 18.2);
     that.hero.time.y = (140 - ((Math.floor(fs) / 100) * 7.563724377883669)) + (Math.floor(fs) * 3);
 
-    that.hero.smart2.x = ((that.hero.el.clientWidth / 100) * 42);
+    that.hero.smart2.x = ((that.hero.el.clientWidth / 100) * fm);
     that.hero.smart2.y = 140 - ((Math.floor(fs) / 100) * 7.563724377883669);
-    that.hero.choise2.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 6);
+    that.hero.choise2.x = ((that.hero.el.clientWidth / 100) * fm) + ((that.hero.el.clientWidth / 100) * 6);
     that.hero.choise2.y = (140 - ((fs / 100) * 7.563724377883669)) + Math.floor(fs);
-    that.hero.save2.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 12.1);
+    that.hero.save2.x = ((that.hero.el.clientWidth / 100) * fm) + ((that.hero.el.clientWidth / 100) * 12.1);
     that.hero.save2.y = (140 - ((Math.floor(fs) / 100) * 7.563724377883669)) + (Math.floor(fs) * 2);
-    that.hero.time2.x = ((that.hero.el.clientWidth / 100) * 42) + ((that.hero.el.clientWidth / 100) * 18.2);
+    that.hero.time2.x = ((that.hero.el.clientWidth / 100) * fm) + ((that.hero.el.clientWidth / 100) * 18.2);
     that.hero.time2.y = (140 - ((Math.floor(fs) / 100) * 7.563724377883669)) + (Math.floor(fs) * 3);
     // that.hero.bg.width = that.hero.heroBgWidth;
     // that.hero.bg.height = that.hero.heroBgHeight;
@@ -1094,11 +1408,11 @@ const _homepage = function (page) {
 
     let ratio = that.drag.pat1.width / that.drag.pat1.height;
     that.drag.canv1.width = that.drag.el.clientWidth;
-    that.drag.canv1.height = that.drag.el.clientWidth / ratio;
+    that.drag.canv1.height = (app.mode == 'descktop' ? that.hero.el.clientWidth / ratio : that.hero.el.clientHeight);
     that.drag.canv2.width = that.drag.el.clientWidth;
-    that.drag.canv2.height = that.drag.el.clientWidth / ratio;
+    that.drag.canv2.height = (app.mode == 'descktop' ? that.hero.el.clientWidth / ratio : that.hero.el.clientHeight);
     that.drag.canv3.width = that.drag.el.clientWidth;
-    that.drag.canv3.height = that.drag.el.clientWidth / ratio;
+    that.drag.canv3.height = (app.mode == 'descktop' ? that.hero.el.clientWidth / ratio : that.hero.el.clientHeight);
 
     that.drag.ctx1.save();
     that.drag.ctx1.beginPath();
@@ -1110,7 +1424,8 @@ const _homepage = function (page) {
     that.drag.ctx1.closePath();
     // Clip to the current path
     that.drag.ctx1.clip();
-    that.drag.ctx1.drawImage(that.drag.pat1, 0, 0, that.drag.el.clientWidth, that.drag.el.clientHeight);
+    let param = resizeBg(that.drag.pat1);    
+    that.drag.ctx1.drawImage(that.drag.pat1, param.x, param.y, param.width, param.height);
     that.drag.ctx1.restore();
 
     that.drag.ctx1.save();
@@ -1123,7 +1438,8 @@ const _homepage = function (page) {
     that.drag.ctx1.closePath();
     // Clip to the current path
     that.drag.ctx1.clip();
-    that.drag.ctx1.drawImage(that.drag.pat2, 0, 0, that.drag.el.clientWidth, that.drag.el.clientHeight);
+    let param2 = resizeBg(that.drag.pat2);
+    that.drag.ctx1.drawImage(that.drag.pat2, param2.x, param2.y, param2.width, param2.height);
     that.drag.ctx1.restore();
 
     that.drag.ctx2.save();
@@ -1136,7 +1452,8 @@ const _homepage = function (page) {
     that.drag.ctx2.closePath();
     // Clip to the current path
     that.drag.ctx2.clip();
-    that.drag.ctx2.drawImage(that.drag.img1, 0, 0, that.drag.el.clientWidth, that.drag.el.clientHeight);
+    let param3 = resizeBg(that.drag.img1);
+    that.drag.ctx2.drawImage(that.drag.img1, param2.x, param2.y, param2.width, param2.height);    
     that.drag.ctx2.restore();
 
     that.drag.ctx3.save();
@@ -1149,7 +1466,8 @@ const _homepage = function (page) {
     that.drag.ctx3.closePath();
     // Clip to the current path
     that.drag.ctx3.clip();
-    that.drag.ctx3.drawImage(that.drag.img2, 0, 0, that.drag.el.clientWidth, that.drag.el.clientHeight);
+    let param4 = resizeBg(that.drag.img2);
+    that.drag.ctx3.drawImage(that.drag.img2, param2.x, param2.y, param2.width, param2.height);
     that.drag.ctx3.restore();
 
   }
@@ -1176,6 +1494,7 @@ const _homepage = function (page) {
     });
 
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mousedown', function (e) {
+      if(app.touch)return;
       if (app.homepage.drag.show) {
         that.drag.dragMove = true;
         that.drag.dragx = e.clientX;
@@ -1186,6 +1505,7 @@ const _homepage = function (page) {
       }
     });
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mouseup', function (e) {
+      if(app.touch)return;
       if (!that.drag.dragDone) {
         that.drag.dragMove = false;
         that.drag.dragx = 0;
@@ -1194,6 +1514,44 @@ const _homepage = function (page) {
       }
     });
     document.querySelector('.homepage__drag').addEventListener('mousemove', that.drag.dragControl);
+
+    let dotsTween;
+    document.querySelector('[data-action="homepage-drag"]').addEventListener('touchstart', function (e) {
+      if (app.homepage.drag.show) {
+        that.drag.dragMove = true;
+        that.drag.dragx = e.touches[0].clientX;
+        TweenMax.to(this.querySelector('i'), 0.5, { scale: 1, ease: Power3.easeOut });
+        TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut })
+        TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.8, { scaleX: 1, ease: Power4.easeOut });
+        TweenMax.to('.cursor i.circle', 0.6, { backgroundColor: '#ee412a' });        
+        TweenMax.to(this.querySelector('i'), 0.5, { scale: 1, ease: Power3.easeOut });
+        dotsTween = TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.8, { scaleX: 1, ease: Power4.easeOut });
+        TweenMax.to('.cursor i.circle', 0.6, { backgroundColor: '#ee412a' });
+        TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut })
+        
+      }
+    });
+    document.querySelector('[data-action="homepage-drag"]').addEventListener('touchend', function (e) {
+      if (!that.drag.dragDone) {
+        that.drag.dragMove = false;
+        that.drag.dragx = 0;
+        TweenMax.to('[data-action="homepage-drag"]', 0.5, { x: 0, ease: Power2.easeOut });
+        TweenMax.to([document.querySelector('canvas.leisure'), document.querySelector('canvas.business')], 0.5, { x: 0, ease: Power2.easeOut });
+        that.drag.dragMove = false;
+        that.drag.dragx = 0;
+        TweenMax.to('[data-action="homepage-drag"]', 0.5, { x: 0, ease: Power2.easeOut });
+        TweenMax.to([document.querySelector('canvas.leisure'), document.querySelector('canvas.business')], 0.5, { x: 0, ease: Power2.easeOut });        
+      }
+      dotsTween.kill();
+      TweenMax.to(this.querySelector('i'), 0.6, { scale: 0, ease: Power4.easeIn });
+      TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.4, { scaleX: 0, ease: Power3.easeIn });
+      TweenMax.to('.cursor span', 0.6, { scale: 1, ease: Power4.easeIn })
+      TweenMax.to('.cursor i.circle', 0.6, { backgroundColor: '#fff' });
+    });
+    document.querySelector('.homepage__drag').addEventListener('touchmove', that.drag.dragControl);
+
+
+
     document.querySelector('[data-action="homepage-hero-play"]').addEventListener('mouseenter', function (e) {
       TweenMax.to(this.querySelector('i'), 0.5, { scale: 1, ease: Power3.easeOut });
       TweenMax.to(this.querySelector('.icon'), 0.5, { fill: '#fff', ease: Power3.easeOut });
@@ -1228,6 +1586,7 @@ const _homepage = function (page) {
     });
 
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mouseenter', function (e) {
+      if(app.touch)return;      
       if (app.homepage.drag.show) {
         TweenMax.to(this.querySelector('i'), 0.5, { scale: 1, ease: Power3.easeOut });
         TweenMax.to(document.querySelector('.homepage__drag_dots'), 0.8, { scaleX: 1, ease: Power4.easeOut });
@@ -1236,6 +1595,7 @@ const _homepage = function (page) {
       }
     });
     document.querySelector('[data-action="homepage-drag"]').addEventListener('mouseleave', function (e) {
+      if(app.touch)return;      
       if (!that.drag.dragDone) {
         that.drag.dragMove = false;
         that.drag.dragx = 0;
@@ -1249,16 +1609,18 @@ const _homepage = function (page) {
     });
     window.addEventListener('resize', this.resizeHomepage);
 
-    document.querySelector('[data-action="learn-more"]').addEventListener('mouseenter', function (e) {
-      TweenMax.to(this.querySelector('i'), 0.5, { scale: 1, ease: Power3.easeOut });
-      TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut });
-      TweenMax.to('.cursor i.circle', 0.6, { backgroundColor: '#fff' });
-    });
-    document.querySelector('[data-action="learn-more"]').addEventListener('mouseleave', function (e) {
-      TweenMax.to(this.querySelector('i'), 0.5, { scale: 0, ease: Power3.easeIn });
-      TweenMax.to('.cursor span', 0.5, { scale: 1, ease: Power3.easeIn });
-      TweenMax.to('.cursor i.circle', 0.6, { backgroundColor: '#ee412a' });
-    });
+    document.querySelectorAll('[data-action="learn-more"]').forEach(function(el, i){
+      el.addEventListener('mouseenter', function (e) {        
+        TweenMax.to(this.querySelector('i'), 0.5, { scale: 1, ease: Power3.easeOut });
+        TweenMax.to('.cursor span', 0.5, { scale: 0, ease: Power3.easeOut });
+        TweenMax.to('.cursor i.circle', 0.6, { backgroundColor: '#fff' });
+      });
+      el.addEventListener('mouseleave', function (e) {
+        TweenMax.to(this.querySelector('i'), 0.5, { scale: 0, ease: Power3.easeOut });
+        TweenMax.to('.cursor span', 0.5, { scale: 1, ease: Power3.easeIn });
+        TweenMax.to('.cursor i.circle', 0.6, { backgroundColor: '#ee412a' });
+      });
+    });    
     document.querySelectorAll('.slider-button-prev, .slider-button-next').forEach(function (el, i) {
       el.addEventListener('mouseenter', function (e) {
         if (this.classList.contains('swiper-button-disabled')) return;
@@ -1480,9 +1842,9 @@ const _homepage = function (page) {
 
 
   function aosInit() {
-    AOS.init({
+    app.aos = AOS.init({
       offset: 100,
-      once: true
+      once: true      
     });
     //TweenMax.set('.homepage__drag canvas.leisure, .homepage__drag canvas.business', {scale: 1.5});
     document.addEventListener('aos:in', function (e) {
@@ -1545,8 +1907,7 @@ const _homepage = function (page) {
                           CATALOG INIT
    ============================================================== */
 const _catalog = function () {
-  const root = this;
-
+  const root = this;  
   this.eventsInit = function () {
     window.addEventListener('scroll', function (e) {
       header(e);
@@ -1596,7 +1957,7 @@ const _catalog = function () {
   this.loader = {
     init: function () {
       let that = this;
-      app.globalEvents();
+      //app.globalEvents();
 
       document.querySelectorAll('img').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
@@ -1827,11 +2188,11 @@ const _leisure = function () {
       }
       new TimelineMax().to(that.heroFilter, 1.3, { innerRadius: r, ease: Power4.easeIn })
         .set(that.heroFilter, { innerRadius: 0, strength: 0 })
-        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition')
-        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition')
-        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition')
-        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition')
-        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition')
+        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition +=1')
+        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition +=1')
+        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition +=1')
+        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition +=1')
+        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition +=1')
         .set('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', { display: 'none' })
         .set('.leisure__hero h1 .switch[data-slide="' + (that.slide < that.slides ? (that.slide + 1) : 1) + '"]', { display: 'block' })
         .add(function () {
@@ -2747,11 +3108,11 @@ const _business = function () {
       }      
       new TimelineMax().to(that.heroFilter, 1.3, { innerRadius: r, ease: Power4.easeIn })
         .set(that.heroFilter, { innerRadius: 0, strength: 0 })
-        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition')
-        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition')
-        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition')
-        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition')
-        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition')
+        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition +=1')
+        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition +=1')
+        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition +=1')
+        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition +=1')
+        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition +=1')
         .set('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', { display: 'none' })
         .set('.leisure__hero h1 .switch[data-slide="' + (that.slide < that.slides ? (that.slide + 1) : 1) + '"]', { display: 'block' })
         .add(function () {
@@ -3527,7 +3888,7 @@ const _business = function () {
       that.hero.resize();
       that.sliders.resize();
     });
-    document.addEventListener('click', function(e){      
+    document.addEventListener('click', function(e){
       if(!e.target.closest('.custom-select') && document.querySelectorAll('.custom-select.active').length){
         new TimelineMax().to(document.querySelector('.custom-select.active .select--options'), 0.4, {height: 0, ease: Power2.easeInOut})
           .set(document.querySelectorAll('.custom-select.active .select--options'), {clearProps: 'all'});
@@ -6075,7 +6436,7 @@ const _product = function () {
               labels: {
                 formatter: function() {
                     return this.value + '°C';
-                }                    
+                }
             },
             title: ''
           },
@@ -7124,11 +7485,11 @@ const _mice = function () {
       }      
       new TimelineMax().to(that.heroFilter, 1.3, { innerRadius: r, ease: Power4.easeIn })
         .set(that.heroFilter, { innerRadius: 0, strength: 0 })
-        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition')
-        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition')
-        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition')
-        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition')
-        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition')
+        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition +=1')
+        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition +=1')
+        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition +=1')
+        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition +=1')
+        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition +=1')
         .set('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', { display: 'none' })
         .set('.leisure__hero h1 .switch[data-slide="' + (that.slide < that.slides ? (that.slide + 1) : 1) + '"]', { display: 'block' })
         .add(function () {
@@ -7190,14 +7551,6 @@ const _mice = function () {
       document.querySelector('.business__select [data-action]').addEventListener('click', this.onNext);
       TweenMax.set('.business__select_slider [data-slide="1"]', {display: 'block'});
       TweenMax.set('.business__select [data-action="next"]', {opacity: 0});
-      document.addEventListener('click', function(e){      
-        if(!e.target.closest('.custom-select') && document.querySelectorAll('.custom-select.active').length){
-          new TimelineMax().to(document.querySelector('.custom-select.active .select--options'), 0.4, {height: 0, ease: Power2.easeInOut})
-            .set(document.querySelectorAll('.custom-select.active .select--options'), {clearProps: 'all'});
-            document.querySelector('.custom-select.active').classList.remove('active');
-        }
-      });
-
     },
     onActive: function(e){
       let target = e.currentTarget.closest('.custom-select');
@@ -7820,11 +8173,11 @@ const _about = function () {
       }      
       new TimelineMax().to(that.heroFilter, 1.3, { innerRadius: r, ease: Power4.easeIn })
         .set(that.heroFilter, { innerRadius: 0, strength: 0 })
-        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition')
-        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition')
-        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition')
-        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition')
-        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition')
+        .to('.leisure__hero_pagination .pagination--bar i', 1, { width: pS + '%', ease: Power3.easeIn }, 'transition +=1')
+        .to(that.heroFilter, 1, { strength: 2, ease: Power3.easeIn }, 'transition +=1')
+        .to(current, 1, { alpha: 0, ease: Power3.easeIn }, 'transition +=1')
+        .to(next, 1, { alpha: 1, ease: Power3.easeIn }, 'transition +=1')
+        .fromTo('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', 1, { rotationX: 0, opacity: 1, y: 0 }, { rotationX: 90, opacity: 0, y: 30, ease: Power3.easeIn }, 'transition +=1')
         .set('.leisure__hero h1 .switch[data-slide="' + that.slide + '"]', { display: 'none' })
         .set('.leisure__hero h1 .switch[data-slide="' + (that.slide < that.slides ? (that.slide + 1) : 1) + '"]', { display: 'block' })
         .add(function () {
@@ -8675,6 +9028,7 @@ const _about = function () {
           .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')
           .add(function(){          
             root.cursor.init();
+            root.form.init();
             root.eventsInit();
             app.globalEvents();
           })
@@ -8696,28 +9050,51 @@ const _about = function () {
         })      
       },
     };
-
-    this.map = {      
+    
+    this.form = {
       init: function(){
-          var myLatLong = { lat: 49.839683, lng: 24.029717 };
-          map = new google.maps.Map(document.getElementById("map"), {
-            center: myLatLong,
-            zoom: 15,
-            marker: true,
-            scrollwheel: false,
-            mapTypeControl: false,
-            streetViewControl: false
-          });
-          const marker = new google.maps.Marker({
-            position: myLatLong,
-            map,
-            title: "Avialiga",
-            icon: {
-              url:"./img/icon_map-marker.svg"
-            }
-          });
+        document.querySelector('.vacancy__form #cv').addEventListener('change', this.change)
+        document.querySelector('.vacancy__form [data-target="remove"]').addEventListener('click', this.remove)
+      },
+      change: function(e){
+        var fullPath = this.value
+        if (fullPath) {
+          var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+          var filename = fullPath.substring(startIndex);
+          if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+              filename = filename.substring(1);
+          }
+          var _size = this.files[0].size;
+          var fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+          i=0;while(_size>900){_size/=1024;i++;}
+          var exactSize = (Math.round(_size*100)/100)+' '+fSExt[i];
+
+          if(fullPath){
+            document.querySelector('.expert__form_body .form-atach .value .name').innerHTML = filename;
+            document.querySelector('.expert__form_body .form-atach .value .size').innerHTML = exactSize;            
+            new TimelineMax()
+              .set('.expert__form_body .form-atach .value', {display: 'flex'}, 'start')
+              .to('.expert__form_body .form-atach .placeholder', 1, {y: -30, opacity: 0, ease: Power3.easeInOut}, 'start')
+              .from('.expert__form_body .form-atach .value', 1, {y: 30, opacity: 0, ease: Power3.easeInOut}, 'start')
+              .set('.expert__form_body .form-atach .placeholder, #cv', {display: 'none'})
+          }          
+        }
+      },
+      remove: function(e){
+        new TimelineMax()
+          .set('.expert__form_body .form-atach .placeholder', {y: 30, display: 'flex'})
+          .to('.expert__form_body .form-atach .placeholder', 1, {y: 0, opacity: 1, ease: Power3.easeInOut}, 'start')
+          .to('.expert__form_body .form-atach .value', 1, {y: -30, opacity: 0, ease: Power3.easeInOut}, 'start')
+          .set('.expert__form_body .form-atach .value', {clearProps: 'all'})
+          .set('#cv', {display: 'block'})
+          .add(function(){
+            document.querySelector('.expert__form_body .form-atach #cv').value = '';
+            document.querySelector('.expert__form_body .form-atach .value .name').innerHTML = '';
+            document.querySelector('.expert__form_body .form-atach .value .size').innerHTML = '';
+          })
+        e.preventDefault();
       }
-    }
+    };
   
     this.cursor = {
       init: function () {
@@ -8933,110 +9310,110 @@ const _about = function () {
   /* ==============================================================
                           TICKETS INIT
    ============================================================== */
-const _tickets = function () {
-  const root = this;
+  const _tickets = function () {
+    const root = this;
 
-  this.loader = {
-    progress: 0,
-    resources: 0,
-    resourcesDone: 0,
-    loaderReady: false,
-    scripts:
-      [         
-        //'pixiFilters'
-      ],    
-    resourcesDone: 0,
-    init: function () {
-      let that = this;
+    this.loader = {
+      progress: 0,
+      resources: 0,
+      resourcesDone: 0,
+      loaderReady: false,
+      scripts:
+        [         
+          //'pixiFilters'
+        ],    
+      resourcesDone: 0,
+      init: function () {
+        let that = this;
 
-      // window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
 
-      // TweenMax.set('#loader-logo .m', { x: -55, y: -31 });
-      // TweenMax.set('#loader-logo .h', { x: -55, y: -30 });
-      // TweenMax.to('#loader-logo .h', 20, { rotation: 360, transformOrigin: "88% 95%", ease: Power0.easeNone, repeat: -1 });
-      // TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
-      // TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
-      
-      this.resources += document.querySelectorAll('img').length        
-        + this.scripts.length;
-
-      document.querySelectorAll('img').forEach(function (el, i) {
-        let src = el.getAttribute('data-src');
-        var img = new Image();
-        img.src = src;
-        img.onload = function () {
-          el.src = src;
-          that.resourcesDone++;
-          that.loading();
-        }
-      });      
-    },
-    loading: function () {
-      const that = this;      
-      if (this.resources == this.resourcesDone) {
-
-        that.loaded();
-        return;
-        let tl = new TimelineMax();
-        tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
-        .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
-        .to('#loader-logo .m', 0.8, { rotation: 360, transformOrigin: "96% 50%", ease: Power3.easeInOut }, 'arrows')        
-        .to('#loader-logo .m', 0.8, { x: 0, y: 0, opacity: 0, ease: Power3.easeInOut }, 'morph')
-        .to('#loader-logo .h', 0.8, { x: 0, y: 0, ease: Power3.easeInOut }, 'morph')
-        .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')
-        .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')
-        .add(function(){          
-          root.eventsInit();          
-          root.cursor.init();
-          app.globalEvents();
-        })
-        .to('#loader-logo', 0.5, { opacity: 0 }, '+=1')
-        .to('.loader-logo .brand', 0.5, { opacity: 0 }, '-=0.3')
-        .add(function(){
-          that.loaded();
-        });
+        // TweenMax.set('#loader-logo .m', { x: -55, y: -31 });
+        // TweenMax.set('#loader-logo .h', { x: -55, y: -30 });
+        // TweenMax.to('#loader-logo .h', 20, { rotation: 360, transformOrigin: "88% 95%", ease: Power0.easeNone, repeat: -1 });
+        // TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
+        // TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
+        this.resources += document.querySelectorAll('img').length        
+          + this.scripts.length;
+
+        document.querySelectorAll('img').forEach(function (el, i) {
+          let src = el.getAttribute('data-src');
+          var img = new Image();
+          img.src = src;
+          img.onload = function () {
+            el.src = src;
+            that.resourcesDone++;
+            that.loading();
+          }
+        });      
+      },
+      loading: function () {
+        const that = this;      
+        if (this.resources == this.resourcesDone) {
+
+          that.loaded();
+          return;
+          let tl = new TimelineMax();
+          tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
+          .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
+          .to('#loader-logo .m', 0.8, { rotation: 360, transformOrigin: "96% 50%", ease: Power3.easeInOut }, 'arrows')        
+          .to('#loader-logo .m', 0.8, { x: 0, y: 0, opacity: 0, ease: Power3.easeInOut }, 'morph')
+          .to('#loader-logo .h', 0.8, { x: 0, y: 0, ease: Power3.easeInOut }, 'morph')
+          .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')
+          .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')
+          .add(function(){          
+            root.eventsInit();          
+            root.cursor.init();
+            app.globalEvents();
+          })
+          .to('#loader-logo', 0.5, { opacity: 0 }, '+=1')
+          .to('.loader-logo .brand', 0.5, { opacity: 0 }, '-=0.3')
+          .add(function(){
+            that.loaded();
+          });
+          
+        }
+      },
+      loaded: function () {
+        const that = this;
+
+        root.eventsInit();          
+        //root.cursor.init();
+        app.globalEvents();
+        return;
+
+        new TimelineMax()
+        .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
+        .add(function(){        
+          document.querySelector('.loader').remove();
+          TweenMax.set('body', { overflow: 'auto' });        
+        })      
+      },
+    };
+
+    this.cursor = {
+      init: function () {
+        TweenMax.set('.cursor', { x: (document.body.clientWidth / 2) - 35, y: (window.innerHeight / 2) - 35 });
+        document.body.addEventListener('mousemove', function (e) {
+          TweenMax.set('.cursor', { x: (e.clientX - 35), y: (e.clientY - 35) });
+        });      
       }
-    },
-    loaded: function () {
-      const that = this;
+    };
 
-      root.eventsInit();          
-      //root.cursor.init();
-      app.globalEvents();
-      return;
-
-      new TimelineMax()
-      .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
-      .add(function(){        
-        document.querySelector('.loader').remove();
-        TweenMax.set('body', { overflow: 'auto' });        
-      })      
-    },
-  };
-
-  this.cursor = {
-    init: function () {
-      TweenMax.set('.cursor', { x: (document.body.clientWidth / 2) - 35, y: (window.innerHeight / 2) - 35 });
-      document.body.addEventListener('mousemove', function (e) {
-        TweenMax.set('.cursor', { x: (e.clientX - 35), y: (e.clientY - 35) });
-      });      
+    this.eventsInit = function () {
+      const that = this;    
+      window.addEventListener('scroll', function (e) {
+        let scrollTop = window.pageYOffset;
+        header(e);      
+      });
+      window.addEventListener('resize', function(){
+        heightUpdate();      
+      });
     }
+
+    this.loader.init(); 
   };
-
-  this.eventsInit = function () {
-    const that = this;    
-    window.addEventListener('scroll', function (e) {
-      let scrollTop = window.pageYOffset;
-      header(e);      
-    });
-    window.addEventListener('resize', function(){
-      heightUpdate();      
-    });
-  }
-
-  this.loader.init(); 
-};
 
 /* ==============================================================
                           LEISURE QUESTIONAIRE INIT
@@ -9348,6 +9725,13 @@ const _tickets = function () {
               }, '+=0.5')
             }else{
               // Тут редирект на результаты
+              new TimelineMax()
+                .set('.hero--blinder', {visibility: 'visible', zIndex: 20})
+                .set(document.querySelectorAll('.hero--blinder h1, .hero--blinder p, .hero--blinder .btn-skew'), {visibility: 'hidden'})
+                .to(['.hero--blinder .blind-left', '.hero--blinder .blind-right'], 1.7, {scaleX: 1, ease: Power3.easeIn}, 'start')
+                .add(function(){
+                  window.location.replace("/leisure_questionaire-results.html");
+                })              
             }            
           }          
         });
@@ -9596,10 +9980,23 @@ const _tickets = function () {
   }; 
 
 
+
+
+
 window.onload = function () {
   setTimeout(function () {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    // Screen mode init
+    
+    if(window.innerWidth > 992){
+      app.mode = 'descktop'
+    }else if(window.innerWidth < 992){      
+      app.mode = 'tablet'
+    }
+
+    app.getInTouch = new _getInTouch();
     if (
       document.body.classList.contains('blogs') ||      
       document.body.classList.contains('countries') || 
@@ -9673,10 +10070,9 @@ window.onload = function () {
     if (document.body.classList.contains('leisure-questionaire')) {
       app.leisureQuestionaire = new _leisureQuestionaire();
     }
-    
-    
-    
-    
+    if (document.body.classList.contains('leisure-questionaire-results')) {
+      app.leisureQuestionaireResults = new _leisureQuestionaireResults();
+    }    
   }, 100);
 }
 

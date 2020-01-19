@@ -99,7 +99,15 @@ class: vacancy h-black
 					</div>
 				</div>
 				<div class="form-atach">
-					<span>Atach your CV*</span>
+					<input type="file" name="cv" id="cv">
+					<span class="placeholder">Atach your CV*</span>
+					<div class="value">
+						<span class="name"></span>
+						<span class="size"></span>
+						<a href="" data-target="remove" class="remove">
+							{{mixins.icon('icon_close')}}
+						</a>
+					</div>
 				</div>
 				<label class="custom-checkbox">
 					<input type="checkbox">
