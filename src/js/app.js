@@ -83,12 +83,12 @@ const app = {
         .to(['.header__blind .blind-left', '.header__blind .blind-right'], 1.4, {scaleX: 0, ease: Power3.easeOut})
         .add(function(){
           document.querySelector('header').classList.remove('active');
+          document.body.classList.remove('menu-active');
         }, '-=1')
-        .set('.header__wrapper, .header__wrapper h2', {clearProps: 'all'})
-        .set('body', {overflow: 'auto'})
+        .set('.header__wrapper, .header__wrapper h2', {clearProps: 'all'})        
         .set(document.querySelectorAll('.header__nav_link, .header__right'), {clearProps: 'all'})
         .set('.header__blind', {display: 'none'})
-        .add(function(){
+        .add(function(){          
           app.menuTransition = false;
         });
 
@@ -99,8 +99,8 @@ const app = {
           .to(['.header__blind .blind-left', '.header__blind .blind-right'], 1.2, {scaleX: 1, ease: Power3.easeIn})
           .add(function(){
             document.querySelector('header').classList.add('active');
-          }, '-=0.4')
-          .set('body', {overflow: 'hidden'})
+            document.body.classList.add('menu-active');
+          }, '-=0.4')          
           .from('.header__wrapper > h2 span', 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut}, '+=0.1')
           .staggerFrom(document.querySelectorAll('.header__nav_link, .header__right'), 1, {y: 90, opacity: 0, ease: Power3.easeOut}, 0.16, '-=1')
           .set(document.querySelectorAll('.header__nav_link, .header__right'), {clearProps: 'all'})
@@ -3055,9 +3055,9 @@ const _leisure = function () {
       }
     },
     loaded: function () {
-      const that = this;
-      new TimelineMax()
-      .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})
+      const that = this;      
+      new TimelineMax()      
+      .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {scaleX: 0, ease: Power4.easeIn})      
       .add(function(){
         root.hero.startTimer();
         document.querySelector('.loader').remove();
@@ -3362,7 +3362,7 @@ const _leisure = function () {
       this.typesSlider = new Swiper('.tour-types .swiper-container', {
         // Optional parameters
         //init: false,
-        speed: 1000,
+        speed: 800,
         simulateTouch: false,
         followFinger: false,
         slidesPerView: 3,
@@ -3423,6 +3423,22 @@ const _leisure = function () {
       
     },
     events: function(){
+      this.typesSlider.on('slideChangeTransitionStart', function(){        
+        if (this.realIndex > this.previousIndex) {          
+          new TimelineMax()
+            .to(this.el.querySelectorAll('.tour-types__section h2'), 0.4, { skewX: 0, ease: Power2.easeIn }, 'start')
+            .to(this.el.querySelectorAll('.tour-types__section .btn-skew'), 0.4, {scaleY: 0.7, ease: Power2.easeIn }, 'start')
+            .to(this.el.querySelectorAll('.tour-types__section h2'), 0.4, { skewX: 34, x: 0, ease: Power2.easeOut }, 'end')
+            .to(this.el.querySelectorAll('.tour-types__section .btn-skew'), 0.4, {scaleY: 1, ease: Power2.easeOut }, 'end')
+            
+        } else {          
+          new TimelineMax()
+          .to(this.el.querySelectorAll('.tour-types__section h2'), 0.4, { skewX: 48, ease: Power2.easeIn }, 'start')
+          .to(this.el.querySelectorAll('.tour-types__section .btn-skew'), 0.4, { scaleY: 0.7, ease: Power2.easeIn }, 'start')
+          .to(this.el.querySelectorAll('.tour-types__section h2'), 0.4, { skewX: 34, x: 0, ease: Power2.easeOut }, 'end')
+          .to(this.el.querySelectorAll('.tour-types__section .btn-skew'), 0.4, { scaleY: 1, ease: Power2.easeOut }, 'end')
+        }
+      });
       this.singleSlider.on('init', function () {        
         const that = this;
         function heroBgCover(el) {
@@ -3533,7 +3549,7 @@ const _leisure = function () {
         });
       });
       this.singleSlider.on('slideChangeTransitionStart', function () {
-        let that = this;        
+        let that = this;
         let x = this.el.clientWidth * this.realIndex;
         if (this.realIndex > this.previousIndex) {
           this.images.forEach(function (el, i) {
@@ -3837,6 +3853,7 @@ const _leisure = function () {
     TweenMax.set('.homepage__insta');
     TweenMax.set('.homepage__insta h2 span', {rotationX: 90, opacity: 0});
     TweenMax.set('.expert__form h2 span', { rotationX: 90, opacity: 0});
+    if(app.mode != 'descktop')TweenMax.set('.tour-types', {opacity: 0});
     
     
 
@@ -3848,9 +3865,10 @@ const _leisure = function () {
           });
       }
       if (e.detail.classList.contains('tour-types')) {
-        new TimelineMax()
+        new TimelineMax()          
           .set(document.querySelectorAll('.leisure .tour-types h2 span, .leisure .tour-types .btn-skew'), {visibility: 'visible'})
-          .staggerFrom(document.querySelectorAll('.leisure .tour-types h2 span'), 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut }, 0.25)
+          .to('.tour-types', 2, {opacity: 1})
+          .staggerFrom(document.querySelectorAll('.leisure .tour-types h2 span'), 1.5, {rotationX: 90, opacity: 0, ease: Power3.easeOut }, 0.25, '-=1')
           .staggerFrom(document.querySelectorAll('.leisure .tour-types .btn-skew'), 1.5, {opacity: 0}, 0.3, '-=1')
       }
       if (e.detail.classList.contains('single-slider')) {                

@@ -10,6 +10,9 @@
 }
 
 @media screen and (max-width: 992px){
+	.menu-active {
+		overflow: hidden!important;
+	}
 	.homepage .homepage__feedback section {
 		margin-bottom: 0;
 		.swiper-container {
@@ -526,6 +529,13 @@
 				left: 0;
 			}
 		}
+	}
+	.tour-types .tour-types__section h2 {
+		font-size: 72px;
+		left: 120px;
+	}
+	.tour-types .swiper-container .slider-control {
+		display: flex;
 	}
 }
 

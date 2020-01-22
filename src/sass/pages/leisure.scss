@@ -357,7 +357,7 @@
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  will-change: transform;
+  will-change: transform;  
   &::before {
     content: "";
     display: block;
@@ -373,7 +373,7 @@
     left: 0;
     z-index: 1;
   }
-  .tour-types__bg {
+  .tour-types__bg {    
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -395,10 +395,10 @@
     bottom: 0;
     left: 0;
     .slider-control {          
-      display: flex;
+      display: none;
       position: absolute;
-      bottom: 100px;
-      right: 90px;
+      top: calc(50% + 72px);
+      left: 120px;
       align-items: center;
       z-index: 2;
       .slider-pagination {
@@ -487,8 +487,7 @@
       top: 0;
       left: 50%;
       height: 100%;     
-      transform: translateX(-50%);
-      
+      transform: translateX(-50%);      
     }
     &.relax {
       
@@ -548,8 +547,8 @@
     }
     .btn-skew {
       position: absolute;
-      right: 147px;
-      top: 70%;
+      left: calc(100% - 332px);
+      bottom: calc(50% - 260px);
       width: 178px;
       i {
         bottom: 0;

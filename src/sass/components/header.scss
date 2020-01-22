@@ -581,8 +581,11 @@ header {
         }
       }
       .submenu {
-        top: 100px;
+        top: 100px!important;
       }
-    }
+    }    
+  }
+  .header__blind {
+    display: none!important;
   }
 }
