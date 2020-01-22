@@ -8,6 +8,37 @@
   opacity: 0;
   z-index: 1;
 }
+.header__blind {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 2;
+  display: none;
+  .blind-left {
+    width: 130%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 49%;
+    background-color: $white;
+    transform: skewX(-35deg) scaleX(0);
+    transform-origin: left;
+    z-index: 0;
+  }
+  .blind-right {
+    width: 130%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 49%;
+    background-color: $white;
+    transform: skewX(-35deg) scaleX(0);
+    transform-origin: right;      
+  }
+}
 header {
   height: 130px;
   display: flex;
@@ -20,37 +51,7 @@ header {
   left: 0;
   padding: 0 48px;
   z-index: 10;  
-  font: 300 16px/1 $futura;
-  .header__blind {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    z-index: 0;
-    .blind-left {
-      width: 130%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      right: 49%;
-      background-color: $white;
-      transform: skewX(-35deg) scaleX(0);
-      transform-origin: left;
-      z-index: 0;
-    }
-    .blind-right {
-      width: 130%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 49%;
-      background-color: $white;
-      transform: skewX(-35deg) scaleX(0);
-      transform-origin: right;      
-    }
-  }  
+  font: 300 16px/1 $futura;  
   .header__menu_button {
     width: 100px;
     height: 100px;    
@@ -538,6 +539,12 @@ header {
     background-color: #fff;
   }
 }
+.h-green {
+  .header__menu_button {
+    background-color: #fff;
+  }
+}
+
 
 
 @media screen and (min-width: 992px){

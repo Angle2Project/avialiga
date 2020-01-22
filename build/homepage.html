@@ -12,11 +12,11 @@
   <body class="homepage h-white">
     <!-- BEGIN content -->
     <main class="scroller">
+      <div class="header__blind">
+        <div class="blind-left"></div>
+        <div class="blind-right"></div>
+      </div>
       <header>
-        <div class="header__blind">
-          <div class="blind-left"></div>
-          <div class="blind-right"></div>
-        </div>
         <div class="header__logo">
           <a href="./" class="logo--white">
             <img data-src="./img/logo_avialiga-w.svg" alt="">
@@ -272,7 +272,7 @@
       </div>
       <!-- /LOADER -->
       <article class="homepage__hero" data-background="./img/home.mp4" data-displacement="./img/displacement.png">
-        <video class="hero--bg" src="" autoplay muted loop></video>
+        <video class="hero--bg" src="" playsinline loop muted autoplay></video>
         <div class="wrapper">
           <div class="button-circle play" data-action="homepage-hero-play" data-text="play video">
             <svg class="icon icon-icon_play">
@@ -446,9 +446,6 @@
                 </div>
               </div>
             </div>
-            <div class="button-circle more mobile" data-action="learn-more" data-text="learn more">
-              <a href=""></a>
-            </div>
             <div class="slider-control">
               <div class="slider-button-prev">
                 <svg class="icon icon-icon_arrow_menu">
@@ -463,6 +460,9 @@
                 </svg>
                 <i></i>
               </div>
+            </div>
+            <div class="button-circle more mobile" data-action="learn-more" data-text="learn more">
+              <a href=""></a>
             </div>
           </div>
         </section>

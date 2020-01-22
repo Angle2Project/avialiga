@@ -21,14 +21,15 @@ const app = {
     swiper: 'swiper.min.js',
     aos: 'aos.js',
     highcharts: 'highcharts.js',
-    map: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDe4WeeWQ8_mWVwzL0Z9j3S4MpM6Of17wo'
-    
+    map: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDe4WeeWQ8_mWVwzL0Z9j3S4MpM6Of17wo'    
   },
   mode: '',
   touch: false,
+  menuTransition: false,
   globalEvents: function () {
     document.addEventListener('touchstart', function(e){
       app.touch = true;
+      document.body.classList.add('touch');
       TweenMax.to('.cursor', 0.6, {scale: 0, ease: Power3.easeOut});
       e.currentTarget.removeEventListener(e.type, arguments.callee);
     });
@@ -73,22 +74,29 @@ const app = {
       });
     });
     document.querySelector('header [data-action="menu-toggle"]').addEventListener('click', function(e){
+      if(app.menuTransition)return;
+      app.menuTransition = true;
       let active = document.querySelector('header').classList.contains('active');
       if(active){
         new TimelineMax()
         .staggerTo(document.querySelectorAll('.header__wrapper > h2, .header__nav_link, .header__right'), 0.6, {y: -90, opacity: 0, ease: Power3.easeIn}, 0.16)
-        .to(['header .blind-left', 'header .blind-right'], 1.4, {scaleX: 0, ease: Power3.easeOut})
+        .to(['.header__blind .blind-left', '.header__blind .blind-right'], 1.4, {scaleX: 0, ease: Power3.easeOut})
         .add(function(){
           document.querySelector('header').classList.remove('active');
         }, '-=1')
         .set('.header__wrapper, .header__wrapper h2', {clearProps: 'all'})
         .set('body', {overflow: 'auto'})
         .set(document.querySelectorAll('.header__nav_link, .header__right'), {clearProps: 'all'})
+        .set('.header__blind', {display: 'none'})
+        .add(function(){
+          app.menuTransition = false;
+        });
 
       }else{
         new TimelineMax()
+          .set('.header__blind', {display: 'block'})
           .set('.header__wrapper', {display: 'flex', overflow: 'hidden'})
-          .to(['header .blind-left', 'header .blind-right'], 1.2, {scaleX: 1, ease: Power3.easeIn})
+          .to(['.header__blind .blind-left', '.header__blind .blind-right'], 1.2, {scaleX: 1, ease: Power3.easeIn})
           .add(function(){
             document.querySelector('header').classList.add('active');
           }, '-=0.4')
@@ -97,6 +105,9 @@ const app = {
           .staggerFrom(document.querySelectorAll('.header__nav_link, .header__right'), 1, {y: 90, opacity: 0, ease: Power3.easeOut}, 0.16, '-=1')
           .set(document.querySelectorAll('.header__nav_link, .header__right'), {clearProps: 'all'})
           .set('.header__wrapper', {overflow: 'initial'})
+          .add(function(){
+            app.menuTransition = false;
+          });
       }      
 
       e.preventDefault();
@@ -174,7 +185,7 @@ const app = {
 function header(e) {
   if (e.type == 'mouseenter') {
 
-    if(app.mode == 'tablet')return;
+    if(app.touch)return;
 
     this.classList.add('active');
     let tl = new TimelineMax();
@@ -232,7 +243,7 @@ function header(e) {
       .to(this.querySelector('.submenu'), 0.5, { autoAlpha: 1, ease: Power0.easeNone }, 'start')
       .fromTo(this.querySelectorAll('.submenu .row'), 0.8, { opacity: 0, y: -20, }, { opacity: 1, y: 0, ease: Power2.easeOut }, 'start')
   } else if (e.type == 'mouseleave') { 
-    if(app.mode == 'tablet')return;
+    if(app.touch)return;
     this.classList.remove('active');
     let tl = new TimelineMax();
     tl.to(document.querySelectorAll('.header__nav_link > a, .header__right a'), 0.6, {
@@ -551,7 +562,7 @@ const _homepage = function (page) {
     init: function () {
       let video = this
       let src = document.querySelector('.hero--player video').getAttribute('data-src');      
-      //document.querySelector('.hero--player video').src = app.homepage.blobs.heroVideo || src;
+      document.querySelector('.hero--player video').src = app.homepage.blobs.heroVideo || src;
       
 
       //this.controls.querySelector('[data-time="all"]').innerText = this.time().duration;      
@@ -801,16 +812,9 @@ const _homepage = function (page) {
           app.globalEvents();
           buttonsRender();
           app.homepage.cursor.init();
-          app.homepage.tabs.init();
-          app.homepage.heroVideo.init();
-          app.homepage.hero = new heroRender();
-          app.homepage.drag = new dragRender();
-          app.homepage.eventsInit();          
-          that.sts = 0;
-          that.stm = 0;
-          that.ste = 0;        
-          // LEISURE SWIPER  START//
-          that.leisureSwiper = new Swiper('.homepage__feedback_slider.leisure .swiper-container', {
+          document.querySelector('.homepage__hero .hero--bg').src = document.querySelector('[data-background]').getAttribute('data-background');
+           // LEISURE SWIPER  START//
+           that.leisureSwiper = new Swiper('.homepage__feedback_slider.leisure .swiper-container', {
             // Optional parameters
             speed: 800,
             init: false,
@@ -945,7 +949,7 @@ const _homepage = function (page) {
               that.containers[i].x = rootX;
               that.containers[i].y = 0;
               that.masks[i] = mask.clone();
-              that.containers[i].addChild(that.masks[i]);            
+              that.containers[i].addChild(that.masks[i]);
               that.containers[i].mask = that.masks[i];
               that.images[i].anchor.x = 0.5;
               that.images[i].anchor.y = 0.5;  
@@ -967,7 +971,7 @@ const _homepage = function (page) {
             TweenMax.to(that.rootContainer, 0.8, {x: -(that.el.clientWidth * that.realIndex), ease: Power2.easeInOut})
             if (that.realIndex > that.previousIndex) {
               for(i in that.images){
-                let scale = that.images[i].scale;
+                let scale = that.images[i].currentScale;
                 new TimelineMax()
                   .to([that.images[i].skew, that.masks[i].skew], 0.4, {x: -0.35, ease: Power2.easeIn}, 'start')
                   .to([that.images[i].scale], 0.4, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn}, 'start')
@@ -976,10 +980,9 @@ const _homepage = function (page) {
                   .to([that.images[i].scale], 0.5, {x: scale.x, y: scale.y, ease: Power2.easeOut}, 'end')
                   .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 0, ease: Power2.easeOut}, 'end')
               }
-            }else{
-              let scale = that.images[i].scale;
+            }else{              
               for(i in that.images){
-                let scale = that.images[i].scale;
+                let scale = that.images[i].currentScale;
                 new TimelineMax()
                   .to([that.images[i].skew, that.masks[i].skew], 0.4, {x: 0.35, ease: Power2.easeIn}, 'start')
                   .to([that.images[i].scale], 0.4, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn}, 'start')
@@ -989,11 +992,8 @@ const _homepage = function (page) {
                   .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 0, ease: Power2.easeOut}, 'end')
               }
             }
-          });
-  
-          
+          });         
           // LEISURE SWIPER  END//
-  
           // BUSINESS SWIPER  START//
           that.businessSwiper = new Swiper('.homepage__feedback_slider.business .swiper-container', {
             // Optional parameters
@@ -1151,24 +1151,56 @@ const _homepage = function (page) {
             TweenMax.to(that.rootContainer, 0.8, {x: -(that.el.clientWidth * that.realIndex), ease: Power2.easeInOut})
             if (that.realIndex > that.previousIndex) {
               for(i in that.images){
-                let scale = that.images[i].scale;
+                let scale = that.images[i].currentScale;
                 new TimelineMax()
-                  .to([that.images[i].skew, that.masks[i].skew], 0.4, {x: -0.35, ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')                
-                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: -35, ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')
+                  .to([that.images[i].skew, that.masks[i].skew], 0.4, {x: -0.35, ease: Power2.easeIn}, 'start')
+                  .to([that.images[i].scale], 0.4, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn}, 'start')
+                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: -35, ease: Power2.easeIn}, 'start')
+                  .to([that.images[i].skew, that.masks[i].skew], 0.4, {x: 0, ease: Power2.easeOut}, 'end')
+                  .to([that.images[i].scale], 0.5, {x: scale.x, y: scale.y, ease: Power2.easeOut}, 'end')
+                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 0, ease: Power2.easeOut}, 'end')
               }
-            }else{
-              let scale = that.images[i].scale;
+            }else{              
               for(i in that.images){
-                let scale = that.images[i].scale;
+                let scale = that.images[i].currentScale;
                 new TimelineMax()
-                  .to([that.images[i].skew, that.masks[i].skew], 0.4, {x: 0.35, ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')                
+                  .to([that.images[i].skew, that.masks[i].skew], 0.4, {x: 0.35, ease: Power2.easeIn}, 'start')
+                  .to([that.images[i].scale], 0.4, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn}, 'start')
+                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 35, ease: Power2.easeIn}, 'start')
+                  .to([that.images[i].skew, that.masks[i].skew], 0.4, {x: 0, ease: Power2.easeOut}, 'end')
+                  .to([that.images[i].scale], 0.5, {x: scale.x, y: scale.y, ease: Power2.easeOut}, 'end')
+                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 0, ease: Power2.easeOut}, 'end')
               }
             }
-          });
-          
+          });          
           // BUSINESS SWIPER  END//
+          app.homepage.heroVideo.init();
+          app.homepage.tabs.init();
+          that.loaded();
+      } else {
+        
+      }
+    },
+    loaded: function () {
+      let that = this;
+      window.scroll(0, 0);
+      that.colorsAnim.remove();      
+      let tl = new TimelineMax({ delay: 0.5 });
+      tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
+        .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
+        .to('#loader-logo .m', 0.8, { rotation: 360, transformOrigin: "96% 50%", ease: Power3.easeInOut }, 'arrows')
+        .to('#loader-logo .m', 0.8, { x: 0, y: 0, opacity: 0, ease: Power3.easeInOut }, 'morph')
+        .to('#loader-logo .h', 0.8, { x: 0, y: 0, ease: Power3.easeInOut }, 'morph')
+        .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')        
+        .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')        
+        
+        .add(function () {          
+          app.homepage.hero = new heroRender();
+          app.homepage.drag = new dragRender();
+          app.homepage.eventsInit();
+          that.sts = 0;
+          that.stm = 0;
+          that.ste = 0;          
   
           // SERVICES LEISURE SWIPER  START//
           that.servicesLeisureSwiper = new Swiper('.homepage__services .leisure .swiper-container', {
@@ -1267,22 +1299,29 @@ const _homepage = function (page) {
             TweenMax.to(that.rootContainer, 0.8, {x: -(that.el.clientWidth * that.realIndex), ease: Power2.easeInOut})
             if (that.realIndex > that.previousIndex) {
               for(i in that.images){
-                let scale = that.images[i].scale;
+                let scale = that.images[i].currentScale;
                 new TimelineMax()
-                  .to(that.containers[i].skew, 0.4, {x: -0.35, ease: Power3.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to(that.containers[i].scale, 0.4, {y: 1.1, ease: Power3.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')                
-                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: -35, ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')
+                .to(that.containers[i].skew, 0.4, {x: -0.35, ease: Power3.easeIn}, 'start')
+                .to(that.containers[i].scale, 0.4, {y: 1.1, ease: Power3.easeIn}, 'start')
+                .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn}, 'start')                
+                .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: -35, ease: Power2.easeIn}, 'start')
+                .to(that.containers[i].skew, 0.4, {x: 0, ease: Power3.easeOut}, 'end')
+                .to(that.containers[i].scale, 0.4, {y: 1, ease: Power3.easeOut}, 'end')
+                .to([that.images[i].scale], 0.5, {x: (scale.x), y: (scale.y), ease: Power2.easeOut}, 'end')
+                .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 0, ease: Power2.easeOut}, 'end')
               }
-            }else{
-              let scale = that.images[i].scale;
+            }else{              
               for(i in that.images){
-                let scale = that.images[i].scale;
+                let scale = that.images[i].currentScale;
                 new TimelineMax()
-                  .to(that.containers[i].skew, 0.4, {x: 0.35, ease: Power3.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to(that.containers[i].scale, 0.4, {y: 1.1, ease: Power3.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')                
-                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 35, ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')
+                  .to(that.containers[i].skew, 0.4, {x: 0.35, ease: Power3.easeIn}, 'start')
+                  .to(that.containers[i].scale, 0.4, {y: 1.1, ease: Power3.easeIn}, 'start')
+                  .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn}, 'start')                
+                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 35, ease: Power2.easeIn}, 'start')
+                  .to(that.containers[i].skew, 0.4, {x: 0, ease: Power3.easeOut}, 'end')
+                  .to(that.containers[i].scale, 0.4, {y: 1, ease: Power3.easeOut}, 'end')
+                  .to([that.images[i].scale], 0.5, {x: (scale.x), y: (scale.y), ease: Power2.easeOut}, 'end')
+                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 0, ease: Power2.easeOut}, 'end')
               }
             }
           });               
@@ -1386,52 +1425,39 @@ const _homepage = function (page) {
             TweenMax.to(that.rootContainer, 0.8, {x: -(that.el.clientWidth * that.realIndex), ease: Power2.easeInOut})
             if (that.realIndex > that.previousIndex) {
               for(i in that.images){
-                let scale = that.images[i].scale;
+                let scale = that.images[i].currentScale;
                 new TimelineMax()
-                  .to(that.containers[i].skew, 0.4, {x: -0.35, ease: Power3.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to(that.containers[i].scale, 0.4, {y: 1.1, ease: Power3.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')                
-                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: -35, ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')
+                .to(that.containers[i].skew, 0.4, {x: -0.35, ease: Power3.easeIn}, 'start')
+                .to(that.containers[i].scale, 0.4, {y: 1.1, ease: Power3.easeIn}, 'start')
+                .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn}, 'start')                
+                .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: -35, ease: Power2.easeIn}, 'start')
+                .to(that.containers[i].skew, 0.4, {x: 0, ease: Power3.easeOut}, 'end')
+                .to(that.containers[i].scale, 0.4, {y: 1, ease: Power3.easeOut}, 'end')
+                .to([that.images[i].scale], 0.5, {x: (scale.x), y: (scale.y), ease: Power2.easeOut}, 'end')
+                .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 0, ease: Power2.easeOut}, 'end')
               }
-            }else{
-              let scale = that.images[i].scale;
+            }else{              
               for(i in that.images){
-                let scale = that.images[i].scale;
+                let scale = that.images[i].currentScale;
                 new TimelineMax()
-                  .to(that.containers[i].skew, 0.4, {x: 0.35, ease: Power3.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to(that.containers[i].scale, 0.4, {y: 1.1, ease: Power3.easeIn, repeat: 1, yoyo: true}, 'start')
-                  .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')                
-                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 35, ease: Power2.easeIn, repeat: 1, yoyo: true}, 'start')
+                  .to(that.containers[i].skew, 0.4, {x: 0.35, ease: Power3.easeIn}, 'start')
+                  .to(that.containers[i].scale, 0.4, {y: 1.1, ease: Power3.easeIn}, 'start')
+                  .to([that.images[i].scale], 0.5, {x: (scale.x * 1.5), y: (scale.y * 1.5), ease: Power2.easeIn}, 'start')                
+                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 35, ease: Power2.easeIn}, 'start')
+                  .to(that.containers[i].skew, 0.4, {x: 0, ease: Power3.easeOut}, 'end')
+                  .to(that.containers[i].scale, 0.4, {y: 1, ease: Power3.easeOut}, 'end')
+                  .to([that.images[i].scale], 0.5, {x: (scale.x), y: (scale.y), ease: Power2.easeOut}, 'end')
+                  .to(that.el.querySelectorAll('.slide--text'), 0.4, {skewX: 0, ease: Power2.easeOut}, 'end')
               }
             }
           });               
           
-          // SERVICES LEISURE SWIPER END //      
-          document.querySelector('.homepage__hero .hero--bg').src = document.querySelector('[data-background]').getAttribute('data-background');    
-        that.loaded();        
-      } else {
-        
-      }
-    },
-    loaded: function () {
-      let that = this;
-      window.scroll(0, 0);
-      that.colorsAnim.remove();
-      let tl = new TimelineMax({ delay: 0.5 });
-      tl.to('#loader-logo .h, #loader-logo .m', 0.8, { fill: '#2f2f2f', ease: Power3.easeInOut }, 'arrows')
-        .to('#loader-logo .h', 0.8, { rotation: 360, transformOrigin: "88% 95%", ease: Power3.easeInOut }, 'arrows')
-        .to('#loader-logo .m', 0.8, { rotation: 360, transformOrigin: "96% 50%", ease: Power3.easeInOut }, 'arrows')
-        .to('#loader-logo .m', 0.8, { x: 0, y: 0, opacity: 0, ease: Power3.easeInOut }, 'morph')
-        .to('#loader-logo .h', 0.8, { x: 0, y: 0, ease: Power3.easeInOut }, 'morph')
-        .to('#loader-logo .h', 0.8, { morphSVG: 'M113.5,133.7l-14.3-47h15.7c0,0,10-1.3,19.6,10.4s45.7,56.1,45.7,56.1l-120-2.6l110.9-1.3l-43-52.2c0,0-5.7-6.5-13-6.5s-11.7,0-11.7,0L113.5,133.7z', ease: Power3.easeInOut }, 'morph')        
-        .fromTo('.loader-logo .brand', 0.8, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, ease: Power3.easeInOut }, '-=0.6')        
-        .add(function () {
-         
+          // SERVICES LEISURE SWIPER END //
           
           
           aosInit();          
         })
-        .to('#loader-logo', 0.5, { opacity: 0}, '+=0.5')
+        .to('#loader-logo', 0.5, { opacity: 0}, '+=1')
         .to('.loader-logo .brand', 0.5, { opacity: 0 }, '-=0.3')
         .to(['.loader .blind-left', '.loader .blind-right'], 0.8, {
           scaleX: 0, ease: Power4.easeIn, onStart: function(){
@@ -1439,11 +1465,7 @@ const _homepage = function (page) {
           }, onComplete: function () {
             document.querySelector('.loader').remove();
             TweenMax.set('body', { overflow: 'auto' });
-            app.homepage.heroBgCover();
-            // root.slidersResize.leisureSwiper();
-            // root.slidersResize.businessSwiper();
-            // root.slidersResize.servicesLeisureSwiper();
-            // root.slidersResize.servicesBusinessSwiper();
+            app.homepage.heroBgCover();            
             let ff, fm;
             if(app.mode == 'descktop'){
               ff = 9.9;
@@ -1511,13 +1533,21 @@ const _homepage = function (page) {
         .from('[data-action="homepage-hero-play"]', 0.5, { scale: 1.4, opacity: 0 }, '-=0.4')
         .add(function () {          
           TweenMax.set(document.querySelectorAll('.homepage__insta h2 span, .expert__form_title h2 span'), { opacity: 0 });
+          root.slidersResize.leisureSwiper();
+          root.slidersResize.businessSwiper();
+          root.slidersResize.servicesLeisureSwiper();
+          root.slidersResize.servicesBusinessSwiper();
+          root.slidersResize.leisureSwiper();
+          root.slidersResize.businessSwiper();
+          root.slidersResize.servicesLeisureSwiper();
+          root.slidersResize.servicesBusinessSwiper();
         });
       function swichText() {
         //TweenMax.set(document.querySelectorAll('.homepage__hero h1 span'), {opacity: 0});
         new TimelineMax()
           .to([app.homepage.hero.container, app.homepage.hero.container2], 0.2, { alpha: 1 })
           .to(document.querySelectorAll('.homepage__hero h1 span'), 0.2, { opacity: 0 })
-          .to(app.homepage.hero.blur, 1, { blur: 16 })
+          .to(app.homepage.hero.blur, 1, { blur: app.mode == 'mobile' ? 10 : 16 })
         //.to(app.homepage.hero.displacementFilter.scale, 5 , {x: 30, y: 30});
         // TweenMax.set(app.homepage.hero.choise, 0.5, {alpha: 1});
         // TweenMax.set(app.homepage.hero.save, 0.5, {alpha: 1});
@@ -1541,8 +1571,8 @@ const _homepage = function (page) {
       width: this.el.clientWidth,
       height: this.el.clientHeight,
       transparent: true,
-      forceFXAA: true,
-      clearBeforeRender: false
+      //forceFXAA: true,
+      //clearBeforeRender: false
       //forceCanvas: true
     });
     this.el.appendChild(this.hero.view);
@@ -1600,7 +1630,7 @@ const _homepage = function (page) {
       that.container2.addChild(that.time2);
       that.blur = new PIXI.filters.BlurFilter();
       that.blur.blur = 0;
-      that.blur.quality = 8;
+      that.blur.quality = app.mode == 'mobile' ? 4 : 8;
       that.container2.filters = [that.blur];
 
 
@@ -1966,7 +1996,7 @@ const _homepage = function (page) {
           }
         }
       }
-      that.hero.renderer.resize(that.el.clientWidth, that.el.clientHeight);
+      that.hero.renderer.resize(that.el.clientWidth, that.el.clientWidth);
       that.el.querySelectorAll('.slide--photo img').forEach(function(el, i){
         let size;
         let rootX;
@@ -2001,6 +2031,10 @@ const _homepage = function (page) {
         that.images[i].height = params.height;
         that.images[i].x = params.x;
         that.images[i].y = params.y;
+        that.images[i].currentScale = {
+          x: that.images[i].scale.x,
+          y: that.images[i].scale.y
+        }
         TweenMax.set(that.rootContainer, {x: -(that.el.clientWidth * that.realIndex)});
       });
     },
@@ -2076,7 +2110,7 @@ const _homepage = function (page) {
           }
         }
       }
-      that.hero.renderer.resize(that.el.clientWidth, that.el.clientHeight);
+      that.hero.renderer.resize(that.el.clientWidth, that.el.clientWidth);
       that.el.querySelectorAll('.slide--photo img').forEach(function(el, i){
         let size;
         let rootX;
@@ -2110,7 +2144,10 @@ const _homepage = function (page) {
         that.images[i].height = params.height;
         that.images[i].x = params.x;
         that.images[i].y = params.y;
-        that.containers[i].addChild(that.images[i]);
+        that.images[i].currentScale = {
+          x: that.images[i].scale.x,
+          y: that.images[i].scale.y
+        }
         TweenMax.set(that.rootContainer, {x: -(that.el.clientWidth * that.realIndex)});
       }); 
     },
@@ -2118,6 +2155,7 @@ const _homepage = function (page) {
       let that = root.loader.servicesLeisureSwiper;
       function heroBgCover(el) {
         let ratio = el.width / el.height;            
+        console.log(that.el.clientWidth);
         if (ratio < 1) {
           return {
             width: that.el.clientWidth,
@@ -2158,13 +2196,17 @@ const _homepage = function (page) {
         that.images[i].height = params.height;
         that.images[i].x = params.x;
         that.images[i].y = params.y;
+        that.images[i].currentScale = {
+          x: that.images[i].scale.x,
+          y: that.images[i].scale.y
+        }
         TweenMax.set(that.rootContainer, {x: -(that.el.clientWidth * that.realIndex)});
       }); 
     },
     servicesBusinessSwiper: function(){
       let that = root.loader.servicesBusinessSwiper;
       function heroBgCover(el) {
-        let ratio = el.width / el.height;            
+        let ratio = el.width / el.height;        
         if (ratio < 1) {
           return {
             width: that.el.clientWidth,
@@ -2188,7 +2230,7 @@ const _homepage = function (page) {
           }
         }
       };
-      that.hero.renderer.resize(that.el.clientWidth, that.el.clientHeight);
+      that.hero.renderer.resize(that.el.clientWidth, that.el.clientWidth);
       that.el.querySelectorAll('.slide--photo img').forEach(function(el, i){        
         that.containers[i].width = that.el.clientWidth;
         that.containers[i].height = that.el.clientWidth;        
@@ -2205,6 +2247,10 @@ const _homepage = function (page) {
         that.images[i].height = params.height;
         that.images[i].x = params.x;
         that.images[i].y = params.y;
+        that.images[i].currentScale = {
+          x: that.images[i].scale.x,
+          y: that.images[i].scale.y
+        }
         TweenMax.set(that.rootContainer, {x: -(that.el.clientWidth * that.realIndex)});
       }); 
     }
@@ -2816,30 +2862,66 @@ const _catalog = function () {
       el.addEventListener('mouseenter', header);
       el.addEventListener('mouseleave', header);
     });
+    document.querySelector('.catalog__filter .mobile--title').addEventListener('click', function(e){
+      let target = e.currentTarget;
+      let active = target.classList.contains('active');      
+      if(active){
+        TweenMax.to('.catalog__filter_nav', 0.3, {height: 0, onComplete: function(){
+          TweenMax.set('.catalog__filter_nav', {clearProps: 'all'});
+          target.classList.remove('active');
+          document.querySelector('.catalog__filter_nav').classList.remove('show');
+        }});
+        TweenMax.to(document.querySelectorAll('.catalog__filter_nav li i'), 0.3, {rotation: 0, scale: 1})
+        if(document.querySelectorAll('.catalog__filter_list .active').length){
+          TweenMax.to(document.querySelector('.catalog__filter_list .active'), 0.3, {height: 0})
+        }        
+      }else{
+        TweenMax.set('.catalog__filter_nav', {display: 'flex'});
+        TweenMax.from('.catalog__filter_nav', 0.3, {height: 0, onComplete: function(){
+          target.classList.add('active');
+        }});
+      }
+    });
     document.querySelectorAll('.catalog__filter_nav li').forEach(function (el, i) {
       el.addEventListener('click', function (e) {
         let target = document.querySelector('.catalog__filter_list #' + e.currentTarget.getAttribute('data-target'));
         if (document.querySelectorAll('.catalog__filter_list .active').length) {
-          let current = document.querySelector('.catalog__filter_list .active').id == e.currentTarget.getAttribute('data-target');
+          TweenMax.to(document.querySelectorAll('.catalog__filter .catalog__filter_nav li i '), 0.3, {rotation: 90, scale: 1})
+          let current = document.querySelector('.catalog__filter_list .active').id == e.currentTarget.getAttribute('data-target');          
+          if(app.mode == 'descktop'){
+            document.querySelector('.catalog__filter .mobile--title').classList.remove('active');            
+            TweenMax.set('.catalog__filter_nav', {clearProps: 'all'});
+            document.querySelector('.catalog__filter_nav').classList.remove('show');
+          }
           TweenMax.to(document.querySelector('.catalog__filter_list .active'), 0.3, {
             height: 0, opacity: 0, onComplete: function () {
               TweenMax.set(document.querySelector('.catalog__filter_list .active'), { clearProps: "all" });
-              document.querySelector('.catalog__filter_list .active').classList.remove('active');
+              document.querySelector('.catalog__filter_list .active').classList.remove('active');              
               if (!current) {
-                TweenMax.set(target, { display: 'block' });
+                TweenMax.set(target, {display: 'block' });
+                TweenMax.to(el.querySelector('i'), 0.3, {rotation: -45, scale: 1.2})
                 TweenMax.from(target, 0.3, {
                   height: 0, opacity: 0, onComplete: function () {
                     target.classList.add('active');
+                    if(app.mode == 'descktop'){
+                      document.querySelector('.catalog__filter_nav').classList.add('show');
+                    }                    
+                    document.querySelector('.catalog__filter .mobile--title').classList.add('active');
                   }
                 });
               }
             }
           });
-        } else {
+        } else {          
+          TweenMax.to(el.querySelector('i'), 0.3, {rotation: -45, scale: 1.2})
           TweenMax.set(target, { display: 'block' });
           TweenMax.from(target, 0.3, {
             height: 0, opacity: 0, onComplete: function () {
               target.classList.add('active');
+                if(app.mode == 'descktop'){
+                  document.querySelector('.catalog__filter_nav').classList.add('show');
+                }              
+              document.querySelector('.catalog__filter .mobile--title').classList.add('active');
             }
           });
         }
@@ -3273,9 +3355,34 @@ const _leisure = function () {
   };
 
   this.sliders = {
+    typesSlider: null,
     singleSlider: null,
     catalogSlider: null,
     init: function(){
+      this.typesSlider = new Swiper('.tour-types .swiper-container', {
+        // Optional parameters
+        //init: false,
+        speed: 1000,
+        simulateTouch: false,
+        followFinger: false,
+        slidesPerView: 3,
+        //simulateTouch: false,        
+        // If we need pagination
+        pagination: {
+          el: '.slider-pagination',
+          type: 'fraction'
+        },
+        // Navigation arrows
+        navigation: {
+          nextEl: '.slider-button-next',
+          prevEl: '.slider-button-prev',
+        },
+        breakpoints: {          
+          992: {
+            slidesPerView: 1            
+          }
+        }
+      });
       this.singleSlider = new Swiper('.single-slider .swiper-container', {
         // Optional parameters
         init: false,
@@ -3291,7 +3398,7 @@ const _leisure = function () {
           nextEl: '.slider-button-next',
           prevEl: '.slider-button-prev',
         }
-      });      
+      });
       this.catalogSlider = new Swiper('.catalog__slider .swiper-container', {
         // Optional parameters    
         speed: 800,

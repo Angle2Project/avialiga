@@ -30,7 +30,7 @@ class: homepage h-white
 	<!-- /LOADER -->
 
 	<article class="homepage__hero" data-background="./img/home.mp4" data-displacement="./img/displacement.png">
-		<video class="hero--bg" src="" autoplay muted loop></video>
+		<video class="hero--bg" src="" playsinline loop muted autoplay></video>
 		<div class="wrapper">
 			<div class="button-circle play" data-action="homepage-hero-play" data-text="play video">
 				{{mixins.icon('icon_play')}}
@@ -119,7 +119,7 @@ class: homepage h-white
 								<p>Lorem Ipsum is simply dummy text of the printing and typesetting.</p>									
 							</div>
 							<div class="slide--photo">
-								<img data-src="./img/feedback-img-{{i+1}}.jpg" alt="">								
+								<img data-src="./img/feedback-img-{{i+1}}.jpg" alt="">
 							</div>
 						</div>
 						{% endfor %}
@@ -156,10 +156,7 @@ class: homepage h-white
 								<img data-src="./img/feedback-img-{{i+1}}.jpg" alt="">
 							</div>
 						</div>
-						{% endfor %}						
-				</div>
-				<div class="button-circle more mobile" data-action="learn-more" data-text="learn more">
-					<a href=""></a>
+						{% endfor %}
 				</div>
 				<div class="slider-control">
 					<div class="slider-button-prev">
@@ -171,6 +168,9 @@ class: homepage h-white
 						{{mixins.icon('icon_arrow_menu')}}
 						<i></i>
 					</div>
+				</div>
+				<div class="button-circle more mobile" data-action="learn-more" data-text="learn more">
+					<a href=""></a>
 				</div>
 			</div>
 		</section>

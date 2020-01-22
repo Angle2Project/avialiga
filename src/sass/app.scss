@@ -26,6 +26,10 @@ p {
     min-height: 1em;
 }
 
+.touch a {
+    cursor: default;
+}
+
 a.link-hover {
     display: inline-flex;
     align-items: center;
@@ -53,6 +57,7 @@ a.link-hover {
       }
     }    
   }
+
 a.link-hover-reverse {
 display: inline-flex;
 align-items: center;
