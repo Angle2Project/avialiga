@@ -7901,6 +7901,10 @@ body.contacts #map {
   color: #2f2f2f;
 }
 
+body {
+  overflow: auto !important;
+}
+
 p {
   min-height: 1em;
 }

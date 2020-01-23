@@ -3443,18 +3443,24 @@ const _leisure = function () {
         const that = this;
         function heroBgCover(el) {
           let ratio = el.width / el.height;
-          if ((that.el.clientWidth + (325 * 2)) / that.el.clientHeight > ratio) {
+          let size;
+          if(app.mode == 'descktop'){
+            size = (325 * 2);
+          }else if(app.mode == 'tablet'){
+            size = (600 * 2)
+          }
+          if ((that.el.clientWidth + size) / that.el.clientHeight > ratio) {
             return {
-              width: (that.el.clientWidth + (325 * 2)),
-              height: (that.el.clientWidth + (325 * 2)) / ratio,
+              width: (that.el.clientWidth + size),
+              height: (that.el.clientWidth + size) / ratio,
               x: 0,
-              y: (window.innerHeight - (that.el.clientWidth + (325 * 2)) / ratio) / 2
+              y: (window.innerHeight - (that.el.clientWidth + size) / ratio) / 2
             }
           } else {
             return {
               width: that.el.clientHeight * ratio,
               height: that.el.clientHeight,
-              x: ((that.el.clientWidth + (325 * 2)) - that.el.clientHeight * ratio) / 2,
+              x: ((that.el.clientWidth + size) - that.el.clientHeight * ratio) / 2,
               y: 0
             }
           }
@@ -3478,19 +3484,20 @@ const _leisure = function () {
 
         this.mask = new PIXI.Graphics();
         this.mask.lineStyle(0);
-        this.mask.beginFill(0xffffff, 0.5);
-        //this.mask.drawPolygon([0, 0, 100, 0, window.innerWidth, window.innerHeight, (325*2), window.innerHeight, 0, 0]);          
-        this.mask.drawPolygon([-325, 0, galleryEl.clientWidth - 325, 0, (galleryEl.clientWidth + (325)), window.innerHeight, 325, window.innerHeight]);
+        this.mask.beginFill(0xff0000, 1);
+        if(app.mode == 'descktop'){
+          this.mask.drawPolygon([0, 0, (galleryEl.clientWidth + 1200) - 800, 0, (galleryEl.clientWidth + 1200), window.innerHeight, 200, window.innerHeight]);
+        }else if(app.mode == 'tablet'){
+          this.mask.drawPolygon([0, 0, galleryEl.clientWidth, 0, (galleryEl.clientWidth + 650), window.innerHeight, 650, window.innerHeight]);
+        }
         this.mask.endFill();
 
         this.el.querySelectorAll('.swiper-slide .slide--photo img').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           let container = new PIXI.Container();
           let image = PIXI.Sprite.from(src);
-          let mask = that.mask.clone();
-          mask.x = galleryEl.clientWidth * i;
-          that.rootContainer.addChild(mask);
-          container.mask = mask;
+          let mask = that.mask.clone();          
+          container.addChild(mask);          
           image.anchor.x = 0.5;
           image.anchor.y = 0.5;          
           image.width = heroBgCover(el).width;
@@ -3498,56 +3505,63 @@ const _leisure = function () {
           image.x = heroBgCover(el).x + (image.width / 2);
           image.y = heroBgCover(el).y + (image.height / 2);
           image.alpha = (i == 0 ? 0.7 : 0.5);
-          container.width = galleryEl.clientWidth + (325 * 2);
-          container.x = (galleryEl.clientWidth * i) - 325;
+          if(app.mode == 'descktop'){
+            container.width = galleryEl.clientWidth + (325 * 2);
+            container.x = (galleryEl.clientWidth * i) - 325;
+          }else if(app.mode == 'tablet'){
+            container.width = galleryEl.clientWidth + (600 * 2);
+            container.x = ((galleryEl.clientWidth) * i) - 600 - (200 * i);
+          }          
           that.rootContainer.addChild(container);
           container.addChild(image);
+          image.mask = mask;
 
-          if (i == (that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 1)) {
-            let cloneImage = PIXI.Sprite.from(src);
-            cloneImage.width = heroBgCover(el).width;
-            cloneImage.height = heroBgCover(el).height;
-            cloneImage.x = heroBgCover(el).x;
-            cloneImage.y = heroBgCover(el).y;
-            cloneImage.alpha = 0.5;
-            let cloneContaner = new PIXI.Container();
-            cloneContaner.width = galleryEl.clientWidth + (325 * 2);
-            that.rootContainer.addChild(cloneContaner);
-            cloneContaner.x = -galleryEl.clientWidth;
-            let cloneMask = that.mask.clone();
-            cloneMask.x = -galleryEl.clientWidth;
-            that.rootContainer.addChild(cloneMask);
-            cloneContaner.mask = cloneMask;
-            cloneContaner.addChild(cloneImage);
-            that.cloneMasks.push(cloneMask);
-            that.cloneContainers.push(cloneContaner);
-            that.cloneImages.push(cloneImage);
-          } else if (i == 0) {
-            let cloneImage = PIXI.Sprite.from(src);
-            cloneImage.width = heroBgCover(el).width;
-            cloneImage.height = heroBgCover(el).height;
-            cloneImage.x = heroBgCover(el).x;
-            cloneImage.y = heroBgCover(el).y;
-            cloneImage.alpha = 0.5;
-            let cloneContaner = new PIXI.Container();
-            cloneContaner.width = galleryEl.clientWidth + (325 * 2);
-            that.rootContainer.addChild(cloneContaner);
-            cloneContaner.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 325;
-            let cloneMask = that.mask.clone();
-            cloneMask.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length;
-            that.rootContainer.addChild(cloneMask);
-            cloneContaner.mask = cloneMask;
-            cloneContaner.addChild(cloneImage);
-            that.cloneMasks.push(cloneMask);            
-            that.cloneContainers.push(cloneContaner);
-            that.cloneImages.push(cloneImage);
-          }
+          // if (i == (that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 1)) {
+          //   let cloneImage = PIXI.Sprite.from(src);
+          //   cloneImage.width = heroBgCover(el).width;
+          //   cloneImage.height = heroBgCover(el).height;
+          //   cloneImage.x = heroBgCover(el).x;
+          //   cloneImage.y = heroBgCover(el).y;
+          //   cloneImage.alpha = 0.5;
+          //   let cloneContaner = new PIXI.Container();
+          //   cloneContaner.width = galleryEl.clientWidth + (325 * 2);
+          //   that.rootContainer.addChild(cloneContaner);
+          //   cloneContaner.x = -galleryEl.clientWidth - 325;
+          //   let cloneMask = that.mask.clone();
+          //   //cloneMask.x = -galleryEl.clientWidth;
+          //   cloneContaner.addChild(cloneMask);            
+          //   cloneContaner.addChild(cloneImage);
+          //   cloneImage.mask = cloneMask;
+          //   that.cloneMasks.push(cloneMask);
+          //   that.cloneContainers.push(cloneContaner);
+          //   that.cloneImages.push(cloneImage);
+          // } else if (i == 0) {
+          //   let cloneImage = PIXI.Sprite.from(src);
+          //   cloneImage.width = heroBgCover(el).width;
+          //   cloneImage.height = heroBgCover(el).height;
+          //   cloneImage.x = heroBgCover(el).x;
+          //   cloneImage.y = heroBgCover(el).y;
+          //   cloneImage.alpha = 0.5;
+          //   let cloneContaner = new PIXI.Container();
+          //   cloneContaner.width = galleryEl.clientWidth + (325 * 2);
+          //   that.rootContainer.addChild(cloneContaner);
+          //   cloneContaner.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length - 325;
+          //   let cloneMask = that.mask.clone();
+          //   //cloneMask.x = galleryEl.clientWidth * that.el.querySelectorAll('.swiper-slide .slide--photo img').length;
+          //   cloneContaner.addChild(cloneMask);            
+          //   cloneContaner.addChild(cloneImage);
+          //   cloneImage.mask = cloneMask;
+          //   that.cloneMasks.push(cloneMask);            
+          //   that.cloneContainers.push(cloneContaner);
+          //   that.cloneImages.push(cloneImage);
+          // }
           that.containers.push(container);
           that.images.push(image);
           that.masks.push(mask);
 
         });
       });
+
       this.singleSlider.on('slideChangeTransitionStart', function () {
         let that = this;
         let x = this.el.clientWidth * this.realIndex;
@@ -3606,6 +3620,7 @@ const _leisure = function () {
       
     },    
     resize: function(){
+      return
       const that = this.singleSlider;
       function heroBgCover(el) {
         let ratio = el.width / el.height;
