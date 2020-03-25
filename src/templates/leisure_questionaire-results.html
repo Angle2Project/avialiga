@@ -70,6 +70,10 @@ class: catalog questionaire h-green
 
 
 	<div class="catalog__filter">
+		<div class="mobile--title">
+			<span>FILTERS</span>
+			{{mixins.icon('icon_arrow_menu')}}
+		</div>
 		<ul class="catalog__filter_nav">
 			{% for i in filters %}
 			<li data-target="{{i.target}}">

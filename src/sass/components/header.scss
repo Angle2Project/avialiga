@@ -244,7 +244,7 @@ header {
         }
         &.more {          
           background-color: $white;
-          padding: 0 90px 90px 90px;
+          padding: 0 90px 90px 90px;          
           .row {
             margin-bottom: 0;
             justify-content: space-between;
@@ -312,6 +312,7 @@ header {
                 }
               }
               &.more {
+                text-transform: uppercase;
                 &::after {
                   background-color: $black;
                   height: 1px;
@@ -544,6 +545,12 @@ header {
     background-color: #fff;
   }
 }
+.h-blue {
+  .header__menu_button {
+    background-color: #fff;
+  }
+}
+
 
 
 
