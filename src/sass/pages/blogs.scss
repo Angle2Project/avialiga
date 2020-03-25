@@ -288,5 +288,34 @@
   }
 }
 
+.nav__tabs_title {
+  width: 100%;
+  display: none;
+  align-items: center;
+  height: 80px;
+  position: relative;
+  color: #fff;
+  padding: 0 60px;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: #577082;
+  &::after {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 6px;
+    background: url(../img/icon_arrow_tabs.svg) no-repeat center;
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    transition: transform 400ms ease-in-out;
+  }
+  &.active {    
+    &::after {
+      transform: translateY(-50%) scale(-1);
+    } 
+  }
+}
 
 

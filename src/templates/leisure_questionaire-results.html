@@ -1,0 +1,171 @@
+---
+title: Index page,
+class: catalog questionaire h-green
+---
+{% extends "layouts/_layout.html" %}
+
+{% block content %}
+
+<div class="cursor">
+	<span></span>
+	<i class="circle"></i>
+	<i class="play"></i>
+	<i class="pause"></i>	
+</div>
+
+
+	<!-- LOADER -->
+	<div class="loader">
+		<div class="loader-logo">
+			<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
+				<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
+				<path class="m" d="M180,153.3c0,0-2-1.9-3.8-3.9h-8.7L60,150.7L180,153.3z"/>				
+			</svg>
+			<div class="brand">avialiga</div>
+		</div>			
+		<div class="blind-left"></div>
+		<div class="blind-right"></div>
+</div>
+<!-- /LOADER -->
+
+
+
+
+	<div class="catalog__title">
+		<div class="breadcrumb">			
+			<a href="">MAIN</a>			
+			<a href="">LEISURE</a>			
+			<span>QUESTIONAIRE</span>
+		</div>
+		<h1>
+			Regarding the test passed, <br>
+			we recommend that you
+		</h1>
+	</div>
+
+
+
+	{% set filters = [
+		{
+			title: 'MOOD',
+			target: 'mood'
+		},
+		{
+			title: 'THEMATIC',
+			target: 'thematic'
+		},
+		{
+			title: 'COUNTRIES',
+			target: 'countries'
+		},
+		{
+			title: 'DATE DEPARTURE',
+			target: 'date'
+		},
+		{
+			title: 'SORT BY PRICE',
+			target: 'price'
+		}
+	] %}
+
+
+	<div class="catalog__filter">
+		<div class="mobile--title">
+			<span>FILTERS</span>
+			{{mixins.icon('icon_arrow_menu')}}
+		</div>
+		<ul class="catalog__filter_nav">
+			{% for i in filters %}
+			<li data-target="{{i.target}}">
+				<i>+</i>
+				<span>{{i.title}}</span>
+			</li>
+			{% endfor %}
+		</ul>
+
+		<div class="catalog__filter_list">
+			{% for i in filters %}
+				<section class="list--item" id="{{i.target}}">
+					<ul>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 1</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 2</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 3</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 4</span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox">
+								<span>filter 5</span>
+							</label>
+						</li>
+					</ul>
+				</section>
+			{% endfor %}
+		</div>
+	</div>
+
+	{% set list = [
+		{
+			sell: false,
+			location: 'Maldives',
+			hotel: 'JOALI MALDIVES 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: false,
+			location: 'Mexico',
+			hotel: 'PLAYACAR PALACE',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: false,
+			location: 'Sofitel Dubai',
+			hotel: 'The Palm Resort & Spa 5*',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		}
+	] %}
+
+
+	<article class="catalog__list">
+		<ul class="catalog__list_grid">
+			{% for i in list %}
+			<li {%if i.sell%}class="sell"{%endif%}>
+				<div class="grid--photo">
+					<a href="">
+						<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
+					</a>
+				</div>
+				<div class="grid--location">{{i.location}}</div>
+				<div class="grid--hotel">{{i.hotel}}</div>
+				<div class="grid--info">
+					<div class="date">{{i.date}}</div>
+					<div class="price">{{i.price}}</div>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</article>
+
+{% endblock %}

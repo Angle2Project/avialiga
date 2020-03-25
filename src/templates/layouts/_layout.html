@@ -16,10 +16,12 @@
   </head>
   <body class="{{class}}">
     <!-- BEGIN content -->
-    <main>
-      {% include "partials/_header.html" %} {% block content %}{% endblock %} {%
-      include "partials/_footer.html" %}
-    </main>
+    <main class="scroller">
+      {% include "partials/_header.html" %}
+      {% block content %}{% endblock %}
+      {% include "partials/_footer.html" %}
+    </main>    
+    {% include "partials/_get-in-touch.html" %}
     <!-- END content -->
 
     <!-- BEGIN scripts -->
@@ -29,6 +31,8 @@
     <script type="text/javascript" src="js/lib/swiper.min.js"></script> 
     <script type="text/javascript" src="js/lib/aos.js"></script> -->
 
+    
+    
     <script type="text/javascript" src="js/lib/TweenMax.min.js"></script>
     <script type="text/javascript" src="js/lib/MorphSVGPlugin.min.js"></script>
     <!-- <script

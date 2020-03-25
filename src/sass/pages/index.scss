@@ -138,6 +138,15 @@
 }
 
 .single-country {
+  .breadcrumb {
+    position: absolute;
+    z-index: 1;
+    top: 130px;
+    color: #fff;
+    a {
+      color: currentColor;
+    }
+  }
   overflow: hidden;
   .photo__hero {
     .wrapper {
@@ -229,6 +238,15 @@
 
 .meetings {
   overflow: hidden;
+  .breadcrumb {
+    position: absolute;
+    top: 130px;
+    z-index: 1;
+    color: #fff;
+    a {
+      color: currentColor;
+    }
+  }
   .photo__hero {
     .wrapper {
       h1 {
@@ -351,6 +369,7 @@ body.agents {
       margin-top: 30px;
       display: flex;
       padding-left: 90px;
+      align-items: flex-end;
       .form-control {
         flex-grow: 1;
         margin-right: 112px;
@@ -368,3 +387,32 @@ body.agents {
   }
 }
 
+
+.tickets {
+  .tickets__hero {
+    min-height: calc((var(--vh, 1vh) * 100) - 130px);
+    background: url('../img/preloader_bus.png') repeat top;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .breadcrumb {
+      position: absolute;
+      top: 35px;
+      left: 0px;
+      z-index: 1;
+      color: $white;
+      a {
+        color: currentColor;
+      }
+    }
+  }
+  .catalog__list {
+    padding-top: 80px;
+    h2 {
+      font: normal 72px/60px "Futura";
+      color: #577082;
+      margin-bottom: 50px;
+    }
+  }  
+}

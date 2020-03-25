@@ -129,56 +129,85 @@ class: leisure h-white
 
 	<article class="tour-types aos-init" data-aos="fade-up">
 		<div class="tour-types__bg left" style="background-image: url('./img/bg-tour-types-1.jpg');"></div>
-		<div class="tour-types__bg right" style="background-image: url('./img/bg-tour-types-2.jpg');"></div>		
-		<section class="tour-types__section">
-			<div class="wrapper">
-				<div class="section--bg relax">
-					<img data-src="./img/tour-types-relax.jpg" alt="">
+		<div class="tour-types__bg right" style="background-image: url('./img/bg-tour-types-2.jpg');"></div>
+
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+					<!-- Slides -->
+					<div class="swiper-slide">
+						<section class="tour-types__section">
+							<div class="wrapper">
+								<div class="section--bg relax">
+									<img data-src="./img/tour-types-relax.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">
+										<span>Relax</span>
+									</a>				
+								</h2>
+							</div>
+							<a href="" class="btn-skew">
+								<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
+								<span style="color: rgb(255, 255, 255);">view tours</span>
+							</a>
+						</section>
+					</div>
+					<div class="swiper-slide">
+						<section class="tour-types__section">
+							<div class="wrapper">
+								<div class="section--bg adventure">
+									<img data-src="./img/tour-types-adventure.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">
+										<span>Adventure</span>
+									</a>				
+								</h2>
+							</div>
+							<a href="" class="btn-skew">
+								<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
+								<span style="color: rgb(255, 255, 255);">view tours</span>
+							</a>
+						</section>
+					</div>
+					<div class="swiper-slide">
+						<section class="tour-types__section">
+							<div class="wrapper">
+								<div class="section--bg discover">
+									<img data-src="./img/tour-types-discover.jpg" alt="">
+								</div>
+								<h2>
+									<a href="">
+										<span>Discover &</span>
+										<span>Upgrade</span>
+									</a>				
+								</h2>
+							</div>
+							<a href="" class="btn-skew">
+								<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
+								<span style="color: rgb(255, 255, 255);">view tours</span>
+							</a>
+						</section>
+					</div>		
+			</div>			
+			<div class="slider-control">
+				<div class="slider-button-prev">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
 				</div>
-				<h2>
-					<a href="">
-						<span>Relax</span>
-					</a>				
-				</h2>
-			</div>
-			<a href="" class="btn-skew">
-				<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
-				<span style="color: rgb(255, 255, 255);">view tours</span>
-			</a>
-		</section>
-		<section class="tour-types__section">
-			<div class="wrapper">
-				<div class="section--bg adventure">
-					<img data-src="./img/tour-types-adventure.jpg" alt="">
+				<div class="slider-pagination"></div>
+				<div class="slider-button-next">
+					{{mixins.icon('icon_arrow_menu')}}
+					<i></i>
 				</div>
-				<h2>
-					<a href="">
-						<span>Adventure</span>
-					</a>				
-				</h2>
 			</div>
-			<a href="" class="btn-skew">
-				<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
-				<span style="color: rgb(255, 255, 255);">view tours</span>
-			</a>
-		</section>
-		<section class="tour-types__section">
-			<div class="wrapper">
-				<div class="section--bg discover">
-					<img data-src="./img/tour-types-discover.jpg" alt="">
-				</div>
-				<h2>
-					<a href="">
-						<span>Discover &</span>
-						<span>Upgrade</span>
-					</a>				
-				</h2>
-			</div>
-			<a href="" class="btn-skew">
-				<div class="background"><i style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 0, 0, 0);"></i></div>
-				<span style="color: rgb(255, 255, 255);">view tours</span>
-			</a>
-		</section>
+			
+	</div>
+
+		
+		
+		
 	</article>
 
 	<article class="single-slider aos-init" data-aos="fade-up">
@@ -335,10 +364,6 @@ class: leisure h-white
 					</div>
 					<div class="grid--location">{{i.location}}</div>
 					<div class="grid--hotel">{{i.hotel}}</div>
-					<div class="grid--info">
-						<div class="date">{{i.date}}</div>
-						<div class="price">{{i.price}}</div>
-					</div>
 				</div>
 				{% endfor %}
 			</div>			
@@ -371,7 +396,12 @@ class: leisure h-white
 			</button>
 		</div>
 		<div class="leisure__calendar_bg">
-			<img data-src="./img/leisure-calendar.png" alt="">
+			<img class="descktop" data-src="./img/leisure-calendar.png" alt="">
+
+			<!-- ДОБАВИТЬ ФОН ДЛЯ МОБИЛКИ И В ОСНОВНОЙ ФОН ДОБАВИТЬ КЛАСС "descktop"-->
+			<img class="tablet" data-src="./img/calendar-mibile.png" alt="">
+			<!-- / ДОБАВИТЬ ФОН ДЛЯ МОБИЛКИ -->
+			
 			<div class="date date-3">
 				<img data-src="./img/leisure-calendar-3.jpg" alt="">
 				<span>3</span>

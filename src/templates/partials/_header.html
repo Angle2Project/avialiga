@@ -1,225 +1,265 @@
+<div class="header__blind">
+  <div class="blind-left"></div>
+  <div class="blind-right"></div>
+</div>
 <header>  
-  <div class="header__left">
-    <div class="header__logo">
-      <a href="./" class="logo--white">
-        <img data-src="./img/logo_avialiga-w.svg" alt="">
-      </a>
-      <a href="" class="logo--black">
-        <img data-src="./img/logo_avialiga-b.svg" alt="">
-      </a>
-      <a href="./" class="logo--green">
-        <img data-src="./img/logo_avialiga-g.svg" alt="">
-      </a>
-      <a href="./" class="logo--blue">
-        <img data-src="./img/logo_avialiga-bl.svg" alt="">
-      </a>
-    </div>
-    <nav class="header__nav">
-      <div class="header__nav_link" data-action="submenu">
-        <a href="">
-          <span>LEISURE</span>
-          {{mixins.icon('icon_arrow_menu')}}
-        </a>
-        <!-- Sub menu -->
-        <div class="submenu leisure">
-          <div class="row">
-            <section>
-              {% for i in [
-                'RELAX',
-                'Retreat',
-                'SPA',
-                'Lazy'                
-              ] %}
-              <a href="">{{i}}</a>
-              {% endfor %}
-            </section>
-            <section>                
-              {% for i in [
-                'ADVENTURES',
-                'Экскурсионные туры',
-                'Горнолыжка',
-                'Ивенты',
-                'Шопинг',
-                'More'
-              ] %}
-              <a href="" {%if loop.index==loop.length%}class="more"{%endif%}>{{i}}</a>
-              {% endfor %}
-            </section>
-            <section>
-              {% for i in [
-                'DISCOVER & UPGRADE',
-                'Гастротуры',
-                'Менеджмент туры',
-                'Дегустационные туры',
-                'Архитектурные туры'                
-              ] %}
-              <a href="" {%if loop.index==loop.length%}class="more"{%endif%}>{{i}}</a>
-              {% endfor %}
-            </section>
-            <section>
-              {% for i in [
-                'COUNTRIES',
-                'Маврикий',
-                'Сейшелы',
-                'Бали',
-                'ОАЭ',
-                'More'
-              ] %}
-              <a href="" {%if loop.index==loop.length%}class="more"{%endif%}>{{i}}</a>
-              {% endfor %}
-            </section>
-          </div>
-          <div class="row">
-            <section>
-              <a href="">ALL TOURS</a>
-            </section>
-            <section>
-              <a href="">ALL HOTELS</a>
-            </section>
-            <section>
-              <a href="">CALENDAR OF EVENTS</a>
-            </section>            
-          </div>
-        </div>
-        <!-- /Sub menu -->
-      </div>
-      <div class="header__nav_link" data-action="submenu">
-        <a href="">
-          <span>BUSINESS</span>
-          {{mixins.icon('icon_arrow_menu')}}
-        </a>
-        <!-- Sub menu -->
-        <div class="submenu business">
-          <div class="row">
-            <section>
-              {% for i in [
-                'MEETINGS',
-                'Деловые встречи',
-                'Круглый стол',
-                'Бизнес завтраки',
-                'Переговоры'                
-              ] %}
-              <a href="">{{i}}</a>
-              {% endfor %}
-            </section>
-            <section>                
-              {% for i in [
-                'INCENTIVES',
-                'Поощрительные поездки',
-                'Образовательные туры',
-                'Менеджмент туры',
-                'Пресс туры',                
-                'More'
-              ] %}
-              <a href="" {%if loop.index==loop.length%}class="more"{%endif%}>{{i}}</a>
-              {% endfor %}
-            </section>
-            <section>
-              {% for i in [
-                'CONFERENCES',
-                'Конференции',
-                'Конгрессы',
-                'Цикловые конференции',
-                'Симпозиум',                
-                'More'
-              ] %}
-              <a href="" {%if loop.index==loop.length%}class="more"{%endif%}>{{i}}</a>
-              {% endfor %}
-            </section>
-            <section>
-              {% for i in [
-                'EXHIBITIONS/EVENTS',
-                'Ивент',
-                'Lounch продукта',
-                'Корпоратив',
-                'Праздник',                
-                'More'
-              ] %}
-              <a href="" {%if loop.index==loop.length%}class="more"{%endif%}>{{i}}</a>
-              {% endfor %}
-            </section>
-          </div>
-          <div class="row">
-            <section>
-              <a href="">MICE</a>
-            </section>
-            <section>
-              <a href="">BUSINESS TRAVEL</a>
-            </section>
-            <section>
-              <a href="">CASES</a>
-            </section>
-            <section>
-              <a href="">QUESTIONAIRE</a>
-            </section>
-          </div>
-        </div>
-        <!-- /Sub menu -->
-      </div>
-      <div class="header__nav_link" data-action="submenu">
-        <a href="">
-          <span>MORE</span>
-          {{mixins.icon('icon_arrow_menu')}}
-        </a>
-        <!-- Sub menu -->
-        <div class="submenu more">
-          <div class="row">
-            <section>
-              <a href="" class="more">AVIA</a>
-            </section>
-            <section>
-              <a href="" class="more">AGENTS</a>
-            </section>
-            <section>
-              <a href="" class="more">ABOUT US</a>
-            </section>
-            <section>
-              <a href="" class="more">OUR BLOG</a>
-            </section>
-            <section>
-              <a href="" class="more">AIRPORTS</a>
-            </section>
-            <section>
-              <a href="" class="more">ADDITIONAL SERVICES</a>
-            </section>
-            <section>
-              <a href="" class="more">OUR NEWS</a>
-            </section>
-            <section>
-              <a href="" class="more">CONTACTS</a>
-            </section>            
-          </div>
-          <div class="row contacts">
-            <section>
-              Adress
-              <br>
-              Украина, Киев, 01135 
-              <br>
-              ул. Павловская 29, 2 этаж
-            </p>
-            </section>
-            <section>
-              Contact Us              
-              <a href="tel:+380443039553" class="tel">+38 (044) 303 95 53</a>              
-              <a href="mailto:hello@avialiga.ua" class="mail">hello@avialiga.ua</a>
-            </section>
-          </div>
-        </div>
-        <!-- /Sub menu -->
-      </div>      
-    </nav>
+  <div class="header__logo">
+    <a href="./" class="logo--white">
+      <img data-src="./img/logo_avialiga-w.svg" alt="">
+    </a>
+    <a href="" class="logo--black">
+      <img data-src="./img/logo_avialiga-b.svg" alt="">
+    </a>
+    <a href="./" class="logo--green">
+      <img data-src="./img/logo_avialiga-g.svg" alt="">
+    </a>
+    <a href="./" class="logo--blue">
+      <img data-src="./img/logo_avialiga-bl.svg" alt="">
+    </a>
   </div>
-  <div class="header__right">
-    <section class="header__sub_nav">
-      <a href="">
-        <span>ENG</span>
-        {{mixins.icon('icon_arrow_menu')}}
-      </a>
-      <a href="" class="take-button">
-        <span>TAKE THE TOUR</span>
-        <i></i>
-      </a>
-    </section>
+  <div class="header__menu_button" data-action="menu-toggle"></div>
+  <div class="header__wrapper">    
+    <h2>
+      <span>Menu</span>
+    </h2>
+    <div class="header__left">      
+      <nav class="header__nav">
+        <div class="header__nav_link" data-action="submenu">
+          <a href="">
+            <span>LEISURE</span>
+            {{mixins.icon('icon_arrow_menu')}}
+          </a>
+          <!-- Sub menu -->
+          <div class="submenu leisure">
+            <div class="submenu__title">
+              <div class="back" data-action="back">
+                {{mixins.icon('icon_arrow_menu')}}
+              </div>
+              <h2>
+                <span>LEISURE</span>
+              </h2>
+              <a href="" class="more">ABOUT LEISURE</a>
+            </div>
+            <div class="row">
+              <section>
+                {% for i in [
+                  'RELAX',
+                  'Retreat',
+                  'SPA',
+                  'Lazy'                
+                ] %}
+                <a href="" {%if loop.index==1%}class="more"{%endif%}>{{i}}</a>
+                {% endfor %}
+              </section>
+              <section>                
+                {% for i in [
+                  'ADVENTURES',
+                  'Экскурсионные туры',
+                  'Горнолыжка',
+                  'Ивенты',
+                  'Шопинг',
+                  'More'
+                ] %}
+                <a href="" {%if loop.index==loop.length or loop.index == 1%}class="more"{%endif%}>{{i}}</a>
+                {% endfor %}
+              </section>
+              <section>
+                {% for i in [
+                  'DISCOVER & UPGRADE',
+                  'Гастротуры',
+                  'Менеджмент туры',
+                  'Дегустационные туры',
+                  'Архитектурные туры'                
+                ] %}
+                <a href="" {%if loop.index==loop.length or loop.index == 1%}class="more"{%endif%}>{{i}}</a>
+                {% endfor %}
+              </section>
+              <section>
+                {% for i in [
+                  'COUNTRIES',
+                  'Маврикий',
+                  'Сейшелы',
+                  'Бали',
+                  'ОАЭ',
+                  'More'
+                ] %}
+                <a href="" {%if loop.index==loop.length or loop.index == 1%}class="more"{%endif%}>{{i}}</a>
+                {% endfor %}
+              </section>
+            </div>
+            <div class="row bottom">
+              <section>
+                <a href="">ALL TOURS</a>
+              </section>
+              <section>
+                <a href="">ALL HOTELS</a>
+              </section>
+              <section>
+                <a href="">CALENDAR OF EVENTS</a>
+              </section>            
+            </div>
+          </div>
+          <!-- /Sub menu -->
+        </div>
+        <div class="header__nav_link" data-action="submenu">
+          <a href="">
+            <span>BUSINESS</span>
+            {{mixins.icon('icon_arrow_menu')}}
+          </a>
+          <!-- Sub menu -->
+          <div class="submenu business">
+            <div class="submenu__title">
+              <div class="back" data-action="back">
+                {{mixins.icon('icon_arrow_menu')}}
+              </div>
+              <h2>
+                <span>BUSINESS</span>
+              </h2>
+              <a href="" class="more">ABOUT BUSINESS</a>
+            </div>
+            <div class="row">
+              <section>
+                {% for i in [
+                  'MEETINGS',
+                  'Деловые встречи',
+                  'Круглый стол',
+                  'Бизнес завтраки',
+                  'Переговоры'                
+                ] %}
+                <a href="" {%if loop.index == 1%}class="more"{%endif%}>{{i}}</a>
+                {% endfor %}
+              </section>
+              <section>                
+                {% for i in [
+                  'INCENTIVES',
+                  'Поощрительные поездки',
+                  'Образовательные туры',
+                  'Менеджмент туры',
+                  'Пресс туры',                
+                  'More'
+                ] %}
+                <a href="" {%if loop.index==loop.length or loop.index == 1%}class="more"{%endif%}>{{i}}</a>
+                {% endfor %}
+              </section>
+              <section>
+                {% for i in [
+                  'CONFERENCES',
+                  'Конференции',
+                  'Конгрессы',
+                  'Цикловые конференции',
+                  'Симпозиум',                
+                  'More'
+                ] %}
+                <a href="" {%if loop.index==loop.length or loop.index == 1%}class="more"{%endif%}>{{i}}</a>
+                {% endfor %}
+              </section>
+              <section>
+                {% for i in [
+                  'EXHIBITIONS/EVENTS',
+                  'Ивент',
+                  'Lounch продукта',
+                  'Корпоратив',
+                  'Праздник',                
+                  'More'
+                ] %}
+                <a href="" {%if loop.index==loop.length or loop.index == 1%}class="more"{%endif%}>{{i}}</a>
+                {% endfor %}
+              </section>
+            </div>
+            <div class="row bottom">
+              <section>
+                <a href="">MICE</a>
+              </section>
+              <section>
+                <a href="">BUSINESS TRAVEL</a>
+              </section>
+              <section>
+                <a href="">CASES</a>
+              </section>
+              <section>
+                <a href="">QUESTIONAIRE</a>
+              </section>
+            </div>
+          </div>
+          <!-- /Sub menu -->
+        </div>
+        <div class="header__nav_link" data-action="submenu">
+          <a href="">
+            <span>MORE</span>
+            {{mixins.icon('icon_arrow_menu')}}
+          </a>
+          <!-- Sub menu -->
+          <div class="submenu more">
+            <div class="submenu__title">
+              <div class="back" data-action="back">
+                {{mixins.icon('icon_arrow_menu')}}
+              </div>
+              <h2>
+                <span>MORE</span>
+              </h2>
+            </div>
+            <div class="row">
+              <section>
+                <a href="" class="more">AVIA</a>
+              </section>
+              <section>
+                <a href="" class="more">AGENTS</a>
+              </section>
+              <section>
+                <a href="" class="more">ABOUT US</a>
+              </section>
+              <section>
+                <a href="" class="more">OUR BLOG</a>
+              </section>
+              <section>
+                <a href="" class="more">AIRPORTS</a>
+              </section>
+              <section>
+                <a href="" class="more">ADDITIONAL SERVICES</a>
+              </section>
+              <section>
+                <a href="" class="more">OUR NEWS</a>
+              </section>
+              <section>
+                <a href="" class="more">CONTACTS</a>
+              </section>            
+            </div>
+            <div class="row contacts">
+              <section>
+                Adress
+                <br>
+                Украина, Киев, 01135 
+                <br>
+                ул. Павловская 29, 2 этаж
+              </p>
+              </section>
+              <section>
+                Contact Us              
+                <a href="tel:+380443039553" class="tel">+38 (044) 303 95 53</a>              
+                <a href="mailto:hello@avialiga.ua" class="mail">hello@avialiga.ua</a>
+              </section>
+            </div>
+          </div>
+          <!-- /Sub menu -->
+        </div>
+        <div class="header__nav_link lng">
+          <a href="">
+            <span>ENG</span>
+            {{mixins.icon('icon_arrow_menu')}}
+          </a>
+        </div>      
+      </nav>
+    </div>
+    <div class="header__right">
+      <a href="" class="social">Instagram</a>
+      <a href="" class="social">Facebook</a>
+      <section class="header__sub_nav">      
+        <a href="" class="take-button" data-action="get-in-touch">
+          <span>TAKE THE TOUR</span>
+          <i></i>
+        </a>
+      </section>
+    </div>
   </div>
 </header>
 <div class="header__bg"></div>

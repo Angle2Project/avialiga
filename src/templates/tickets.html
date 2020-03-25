@@ -1,6 +1,6 @@
 ---
 title: Index page,
-class: tickets h-black
+class: tickets h-blue
 ---
 {% extends "layouts/_layout.html" %}
 
@@ -31,103 +31,64 @@ class: tickets h-black
 	
 
 	
-	<div class="catalog__title">
+	<div class="tickets__hero">
 		<div class="breadcrumb">
 			<a href="">MAIN</a>			
 			<span>OUR BLOG</span>
 		</div>
-		<h1>OUR BLOG</h1>
+		<h1>Тут будет iframe</h1>
 	</div>
 
+	{% set list = [
+		{
+			sell: false,
+			location: '20 September',
+			hotel: 'Супер цена на авиабилеты от МАУ!',
+			date: '20.09.2019 – 30.09.2019',
+			price: '9 112 USD'
+		},
+		{
+			sell: false,
+			location: '20 September',
+			hotel: 'Билеты Киев-Пула (Хорватия) по невероятной цене!',
+			date: '20.09.2019 – 30.09.2019',
+			price: '2 654 USD'
+		},
+		{
+			sell: false,
+			location: '20 September',
+			hotel: 'Специальные тарифы для детей в Дубай от flydubai',
+			date: '20.09.2019 – 30.09.2019',
+			price: '1 430 USD'
+		}
+	] %}
 
-	<article>
-		<div class="grid">
-			{% set grid = [
-				{
-					src: './img/tour-types-adventure.jpg',
-					date: '12 October',
-					title: 'New opening on MALDIVES '
-				},
-				{
-					src: './img/tour-types-discover.jpg',
-					date: '10 October',
-					title: 'Best experience ever'
-				},
-				{
-					src: './img/tour-types-relax.jpg',
-					date: '29 September',
-					title: 'Sanding lorem ipsum'
-				},
-				{
-					src: './img/leisure-hero-1.jpg',
-					date: '27 September',
-					title: 'New opening on MALDIVES '
-				},
-				{
-					src: './img/leisure-hero-2.jpg',
-					date: '23 September',
-					title: 'Best experience ever'
-				},
-				{
-					src: './img/leisure-hero-1.png',
-					date: '20 September',
-					title: 'Sanding lorem ipsum'
-				}
-			] %}
-	
-			{% for i in grid%}
-			<section class="grid__item">
-				<div class="item--photo">
+
+	<article class="catalog__list">
+		<h2>Stocks</h2>
+		<ul class="catalog__list_grid">
+			{% for i in list %}
+			<li {%if i.sell%}class="sell"{%endif%}>
+				<div class="grid--photo">
 					<a href="">
-						<img data-src="{{i.src}}" alt="">
-					</a>					
+						<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
+					</a>
 				</div>
-				<time class="item--date">{{i.date}}</time>
-				<h3>
-					<a href="">{{i.title}}</a>
-				</h3>
-			</section>
+				<div class="grid--location">{{i.location}}</div>
+				<div class="grid--hotel">{{i.hotel}}</div>				
+			</li>
 			{% endfor %}
-		</div>		
-
+		</ul>
 		<div class="catalog__list_more">
 			<button class="btn-skew">
 				<div class="background"><i></i></div>
-				<span>More</span>
+				<span>More</span>				
 			</button>
 		</div>
 	</article>
-	
-	
 
-	<article class="homepage__insta">
-		<section class="leisure" data-aos="fade-up">
-			<div class="homepage__insta_title">
-				<h2>
-					<span>Leisure insta</span>
-				</h2>
-				<a href="">@avialiga_leisure</a>
-			</div>
-			<div class="homepage__insta_gallery">
-				<img data-src="./img/insta-leisure-1.jpg" alt="">
-				<img data-src="./img/insta-leisure-2.jpg" alt="">
-				<img data-src="./img/insta-leisure-3.jpg" alt="">
-			</div>
-		</section>
-		<section class="business" data-aos="fade-up">
-			<div class="homepage__insta_title">
-				<h2>
-					<span>Business insta</span>
-				</h2>
-				<a href="">@avialiga_business</a>
-			</div>
-			<div class="homepage__insta_gallery">
-				<img data-src="./img/insta-business-1.jpg" alt="">
-				<img data-src="./img/insta-business-2.jpg" alt="">
-				<img data-src="./img/insta-business-3.jpg" alt="">
-			</div>
-		</section>
-	</article>
+
+	
 	
 	
 

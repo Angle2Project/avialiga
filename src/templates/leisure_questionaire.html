@@ -1,21 +1,21 @@
 ---
 title: Index page,
-class: leisure-questionaire h-green
+class: leisure-questionaire h-white
 ---
 {% extends "layouts/_layout.html" %}
 
 {% block content %}
 
-<!-- <div class="cursor">
+<div class="cursor">
 	<span></span>
 	<i class="circle"></i>
 	<i class="play"></i>
 	<i class="pause"></i>	
-</div> -->
+</div>
 
 
 	<!-- LOADER -->
-	<!-- <div class="loader">
+	<div class="loader">
 			<div class="loader-logo">
 				<svg version="1.1" id="loader-logo" class="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px" height="240px" viewBox="0 0 240 240" style="enable-background:new 0 0 240 240;" xml:space="preserve">			
 					<path class="h" d="M141,110.2c10.9,13.4,32.5,35,39,43.1l-7.9-2.5L141,110.2z"/>
@@ -25,82 +25,76 @@ class: leisure-questionaire h-green
 			</div>			
 			<div class="blind-left"></div>
 			<div class="blind-right"></div>
-	</div> -->
+	</div>
 	<!-- /LOADER -->
 
 
-	<div class="breadcrumb">
-		<a href="">MAIN</a>
-		<a href="">LEISURE</a>
-		<a href="">RELAX</a>
-		<span>SPA</span>
-	</div>
+	
 
 
-	<article class="leisure-questionaire__hero">
+	<article class="leisure-questionaire__hero" data-base="http://localhost:8080/leisure_questionaire-results.html">		
+		<div class="hero--blinder">
+			<div class="blind-left"></div>
+			<div class="blind-right"></div>
+			<h1>
+				<span>Ooops!</span>
+			</h1>
+			<p>In order to get truth results yoy should taking choice for 3 seconds</p>
+			<button name="restart" class="btn-skew" data-action="restart">
+				<div class="background"><i></i></div>
+				<span>TO TRY AGAIN</span>
+			</button>
+		</div>
+		<div class="breadcrumb">			
+			<a href="">MAIN</a>
+			<a href="">LEISURE</a>			
+			<span>QUESTIONAIRE</span>
+		</div>
 		<ul class="hero--questions">
-			<li data-question="1">
-				<img data-src="leisure-hero-2.jpg" data-value="answer-1" alt="">
-				<img data-src="madrid.jpg" data-value="answer-2" alt="">
+			<li data-question="key-1">
+				<img data-src="./img/leisure-hero-2.jpg" data-value="value-1-1" alt="">
+				<img data-src="./img/madrid.jpg" data-value="value-1-2" alt="">
 			</li>
-			<li data-question="2">
-				<img data-src="meetings-2.jpg" data-value="answer-1" alt="">
-				<img data-src="leisure-hero-1.png" data-value="answer-2" alt="">
+			<li data-question="key-2">
+				<img data-src="./img/meetings-2.jpg" data-value="value-2-1" alt="">
+				<img data-src="./img/leisure-hero-1.png" data-value="value-2-2" alt="">
 			</li>
-			<li data-question="3">
-				<img data-src="mice.jpg" data-value="answer-1" alt="">
-				<img data-src="maldives.jpg" data-value="answer-2" alt="">
+			<li data-question="key-3">
+				<img data-src="./img/mice.jpg" data-value="value-3-1" alt="">
+				<img data-src="./img/maldives.jpg" data-value="value-3-2" alt="">
 			</li>
 		</ul>
+		<div class="hero--wrapper">
+			<section class="intro">
+				<h1>
+					<p>Trust your</p>
+					<p>instincts</p>
+				</h1>
+				<p>It’s our questionaire that will help us to define true choise</p>
+				<button name="start" class="btn-skew" data-action="start">
+					<div class="background"><i></i></div>
+					<span>CONTINUE</span>
+				</button>
+			</section>
+			<section class="start">
+				<h1>
+					<p>Make a choice</p>
+					<p>in <span>3</span> sec</p>
+				</h1>
+			</section>
+		</div>
+		<div class="leisure__hero_pagination">
+			<div class="pagination--slide">
+				<span class="current"></span>
+				/
+				<span class="all"></span>
+			</div>
+			<div class="pagination--bar">
+				<i></i>
+			</div>
+		</div>
+		<div class="hero-timer"><span>3</span> sec</div>
 	</article>
-	
-	<!-- {% set list = [
-		{
-			sell: false,
-			location: 'Maldives',
-			hotel: 'JOALI MALDIVES 5*',
-			date: '20.09.2019 – 30.09.2019',
-			price: '9 112 USD'
-		},
-		{
-			sell: false,
-			location: 'Mexico',
-			hotel: 'PLAYACAR PALACE',
-			date: '20.09.2019 – 30.09.2019',
-			price: '2 654 USD'
-		},
-		{
-			sell: false,
-			location: 'Sofitel Dubai',
-			hotel: 'The Palm Resort & Spa 5*',
-			date: '20.09.2019 – 30.09.2019',
-			price: '1 430 USD'
-		}
-	] %}
-
-
-	<article class="catalog__list">
-		<ul class="catalog__list_grid">
-			{% for i in list %}
-			<li {%if i.sell%}class="sell"{%endif%}>
-				<div class="grid--photo">
-					<a href="">
-						<img data-src="./img/hotels/{{loop.index}}.jpg" alt="">
-					</a>
-				</div>
-				<div class="grid--location">{{i.location}}</div>
-				<div class="grid--hotel">{{i.hotel}}</div>
-				<div class="grid--info">
-					<div class="date">{{i.date}}</div>
-					<div class="price">{{i.price}}</div>
-				</div>
-			</li>
-			{% endfor %}
-		</ul>		
-	</article> -->
-
-
-
 	
 
 {% endblock %}
