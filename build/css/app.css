@@ -4747,7 +4747,7 @@ footer .footer__copyright img {
   width: 100%;
 }
 
-.leisure__calendar .leisure__calendar_bg > img .tablet {
+.leisure__calendar .leisure__calendar_bg > img.tablet {
   display: none;
 }
 
@@ -10540,7 +10540,7 @@ a.link-hover-reverse:hover::after {
     display: none;
   }
   .leisure__calendar .leisure__calendar_bg .tablet {
-    display: block;
+    display: block !important;
   }
   .leisure__calendar .leisure__calendar_bg .date span {
     font-size: 1vw;
