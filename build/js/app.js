@@ -707,7 +707,7 @@ const _homepage = function (page) {
       TweenMax.to('#loader-logo', 1, { autoAlpha: 1 })
 
       this.resources += this.scripts.length
-        + document.querySelectorAll('img').length
+        + document.querySelectorAll('img[data-src]').length
         //+ document.querySelectorAll('[data-background]').length
         + document.querySelectorAll('[data-displacement]').length
         + document.querySelectorAll('[data-pat-left]').length
@@ -731,7 +731,7 @@ const _homepage = function (page) {
       document.querySelectorAll('script[data-src]').forEach(function (el, i) {
 
       });
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -2947,7 +2947,7 @@ const _catalog = function () {
       let that = this;
       //app.globalEvents();
 
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -2996,10 +2996,10 @@ const _leisure = function () {
       TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
       TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
       
-      this.resources += document.querySelectorAll('img').length        
+      this.resources += document.querySelectorAll('img[data-src]').length        
         + this.scripts.length;
 
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -4080,10 +4080,10 @@ const _business = function () {
       TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
       TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
       
-      this.resources += document.querySelectorAll('img').length        
+      this.resources += document.querySelectorAll('img[data-src]').length        
         + this.scripts.length;
 
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -5335,10 +5335,10 @@ const _default = function () {
       TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
       TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
       
-      this.resources += document.querySelectorAll('img').length        
+      this.resources += document.querySelectorAll('img[data-src]').length        
         + this.scripts.length;
 
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -5434,10 +5434,10 @@ const _default = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -5566,10 +5566,10 @@ const _cases = function () {
       TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
       TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
       
-      this.resources += document.querySelectorAll('img').length        
+      this.resources += document.querySelectorAll('img[data-src]').length        
         + this.scripts.length;
 
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -5737,10 +5737,10 @@ const _cases = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -5888,10 +5888,10 @@ const _spa = function () {
       TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
       TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
       
-      this.resources += document.querySelectorAll('img').length        
+      this.resources += document.querySelectorAll('img[data-src]').length        
         + this.scripts.length;
 
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -6069,10 +6069,10 @@ const _spa = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -6249,10 +6249,10 @@ const _spa = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
 
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -6391,10 +6391,10 @@ const _spa = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
 
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -6922,10 +6922,10 @@ const _spa = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
 
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -7417,10 +7417,10 @@ const _product = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -8476,10 +8476,10 @@ const _product = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -9478,10 +9478,10 @@ const _mice = function () {
       TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
       TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
       
-      this.resources += document.querySelectorAll('img').length        
+      this.resources += document.querySelectorAll('img[data-src]').length        
         + this.scripts.length;
 
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -9832,10 +9832,10 @@ const _mice = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -10026,10 +10026,10 @@ const _mice = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -10162,10 +10162,10 @@ const _about = function () {
       TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
       TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
       
-      this.resources += document.querySelectorAll('img').length        
+      this.resources += document.querySelectorAll('img[data-src]').length        
         + this.scripts.length;
 
-      document.querySelectorAll('img').forEach(function (el, i) {
+      document.querySelectorAll('img[data-src]').forEach(function (el, i) {
         let src = el.getAttribute('data-src');
         var img = new Image();
         img.src = src;
@@ -11385,10 +11385,10 @@ const _about = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -11529,10 +11529,10 @@ const _about = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -11734,10 +11734,10 @@ const _about = function () {
         // TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         // TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
 
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -11843,10 +11843,10 @@ const _about = function () {
         TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;
   
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
@@ -12430,10 +12430,10 @@ const _about = function () {
         // TweenMax.to('#loader-logo .m', 2, { rotation: 360, transformOrigin: "96% 50%", ease: Power0.easeNone, repeat: -1 });
         // TweenMax.to('#loader-logo', 2, { autoAlpha: 1});
         
-        this.resources += document.querySelectorAll('img').length        
+        this.resources += document.querySelectorAll('img[data-src]').length        
           + this.scripts.length;         
 
-        document.querySelectorAll('img').forEach(function (el, i) {
+        document.querySelectorAll('img[data-src]').forEach(function (el, i) {
           let src = el.getAttribute('data-src');
           var img = new Image();
           img.src = src;
